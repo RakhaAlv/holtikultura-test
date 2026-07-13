@@ -6,15 +6,20 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
         Schema::create('provinsi', function (Blueprint $table) {
-            $table->string('id', 2)->primary(); // Maksimal 2 digit (contoh: 33)
-            $table->string('nama_provinsi');
-            $table->timestamps();
-        });
+            $table->string('id_prov', 2)->primary();
+            $table->string('nama_prov');
+        }); 
     }
 
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
         Schema::dropIfExists('provinsi');

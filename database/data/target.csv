@@ -1,0 +1,1000 @@
+tahun;kegiatan;komoditas;kode_provinsi;kode_kabupaten;nama_provinsi;nama_kabupaten;target_output;satuan_output
+2026;Kawasan;Durian;11;1114;Aceh;Aceh Jaya;50;Ha
+2026;Kawasan;Durian;51;5102;Bali;Tabanan;50;Ha
+2026;Kawasan;Durian;19;1903;Bangka Belitung;Bangka Selatan;45;Ha
+2026;Kawasan;Durian;19;1902;Bangka Belitung;Belitung;40;Ha
+2026;Kawasan;Durian;36;3601;Banten;Pandeglang;50;Ha
+2026;Kawasan;Durian;34;3403;DI Yogyakarta;GunungKidul;25;Ha
+2026;Kawasan;Durian;75;7503;Gorontalo;Bone Bolango;100;Ha
+2026;Kawasan;Durian;75;7505;Gorontalo;Gorontalo Utara;40;Ha
+2026;Kawasan;Durian;75;7504;Gorontalo;Pohuwato;40;Ha
+2026;Kawasan;Durian;32;3207;Jawa Barat;Ciamis;90;Ha
+2026;Kawasan;Durian;32;3202;Jawa Barat;Sukabumi;50;Ha
+2026;Kawasan;Durian;33;3304;Jawa Tengah;Banjarnegara;80;Ha
+2026;Kawasan;Durian;33;3302;Jawa Tengah;Banyumas;50;Ha
+2026;Kawasan;Durian;33;3329;Jawa Tengah;Brebes;57;Ha
+2026;Kawasan;Durian;33;3315;Jawa Tengah;Grobogan;50;Ha
+2026;Kawasan;Durian;33;3318;Jawa Tengah;Pati;20;Ha
+2026;Kawasan;Durian;35;3507;Jawa Timur;Malang;70;Ha
+2026;Kawasan;Durian;35;3521;Jawa Timur;Ngawi;50;Ha
+2026;Kawasan;Durian;18;1801;Lampung;Lampung Selatan;20;Ha
+2026;Kawasan;Durian;18;1806;Lampung;Tanggamus;10;Ha
+2026;Kawasan;Durian;53;5314;Nusa Tenggara Timur;Rote Ndao;20;Ha
+2026;Kawasan;Durian;53;5302;Nusa Tenggara Timur;Timor Tengah Selatan;20;Ha
+2026;Kawasan;Durian;14;1472;Riau;Kota Dumai;10;Ha
+2026;Kawasan;Durian;14;1406;Riau;Rokan Hulu;10;Ha
+2026;Kawasan;Durian;76;7605;Sulawesi Barat;Majene;75;Ha
+2026;Kawasan;Durian;76;7602;Sulawesi Barat;Mamuju;25;Ha
+2026;Kawasan;Durian;76;7604;Sulawesi Barat;Polewali Mandar;45;Ha
+2026;Kawasan;Durian;73;7303;Sulawesi Selatan;Bantaeng;15;Ha
+2026;Kawasan;Durian;73;7311;Sulawesi Selatan;Barru;30;Ha
+2026;Kawasan;Durian;73;7308;Sulawesi Selatan;Bone;150;Ha
+2026;Kawasan;Durian;73;7302;Sulawesi Selatan;Bulukumba;50;Ha
+2026;Kawasan;Durian;73;7373;Sulawesi Selatan;Kota Palopo;50;Ha
+2026;Kawasan;Durian;73;7317;Sulawesi Selatan;Luwu;50;Ha
+2026;Kawasan;Durian;73;7324;Sulawesi Selatan;Luwu Timur;90;Ha
+2026;Kawasan;Durian;73;7322;Sulawesi Selatan;Luwu Utara;130;Ha
+2026;Kawasan;Durian;73;7310;Sulawesi Selatan;Pangkajene Kepulauan;20;Ha
+2026;Kawasan;Durian;73;7315;Sulawesi Selatan;Pinrang;30;Ha
+2026;Kawasan;Durian;73;7314;Sulawesi Selatan;Sidenreng Rappang;20;Ha
+2026;Kawasan;Durian;73;7307;Sulawesi Selatan;Sinjai;15;Ha
+2026;Kawasan;Durian;72;7203;Sulawesi Tengah;Donggala;100;Ha
+2026;Kawasan;Durian;72;7208;Sulawesi Tengah;Parigi Moutong;50;Ha
+2026;Kawasan;Durian;72;7202;Sulawesi Tengah;Poso;50;Ha
+2026;Kawasan;Durian;72;7210;Sulawesi Tengah;Sigi;80;Ha
+2026;Kawasan;Durian;72;7209;Sulawesi Tengah;Tojo Una Una;100;Ha
+2026;Kawasan;Durian;72;7204;Sulawesi Tengah;Toli Toli;20;Ha
+2026;Kawasan;Durian;74;7401;Sulawesi Tenggara;Kolaka;20;Ha
+2026;Kawasan;Durian;13;1302;Sumatera Barat;Solok;50;Ha
+2026;Kawasan;Durian;12;1211;Sumatera Utara;Dairi;25;Ha
+2026;Benih;Bawang Putih;11;1104;Aceh;Aceh Tengah;20;Ha
+2026;Benih;Bawang Putih;51;5106;Bali;Bangli;45;Ha
+2026;Benih;Bawang Putih;51;5108;Bali;Buleleng;40;Ha
+2026;Benih;Bawang Putih;51;5107;Bali;Karangasem;10;Ha
+2026;Benih;Bawang Putih;17;1708;Bengkulu;Kepahiang;25;Ha
+2026;Benih;Bawang Putih;34;3402;DI Yogyakarta;Bantul;100;Ha
+2026;Benih;Bawang Putih;34;3403;DI Yogyakarta;Gunungkidul;50;Ha
+2026;Benih;Bawang Putih;15;1501;Jambi;Kerinci;100;Ha
+2026;Benih;Bawang Putih;32;3204;Jawa Barat;Bandung;60;Ha
+2026;Benih;Bawang Putih;32;3203;Jawa Barat;Cianjur;150;Ha
+2026;Benih;Bawang Putih;32;3205;Jawa Barat;Garut;20;Ha
+2026;Benih;Bawang Putih;33;3304;Jawa Tengah;Banjarnegara;100;Ha
+2026;Benih;Bawang Putih;33;3325;Jawa Tengah;Batang;120;Ha
+2026;Benih;Bawang Putih;33;3309;Jawa Tengah;Boyolali;80;Ha
+2026;Benih;Bawang Putih;33;3313;Jawa Tengah;Karanganyar;10;Ha
+2026;Benih;Bawang Putih;33;3324;Jawa Tengah;Kendal;165;Ha
+2026;Benih;Bawang Putih;33;3308;Jawa Tengah;Magelang;220;Ha
+2026;Benih;Bawang Putih;33;3326;Jawa Tengah;Pekalongan;90;Ha
+2026;Benih;Bawang Putih;33;3327;Jawa Tengah;Pemalang;60;Ha
+2026;Benih;Bawang Putih;33;3328;Jawa Tengah;Tegal;40;Ha
+2026;Benih;Bawang Putih;33;3323;Jawa Tengah;Temanggung;650;Ha
+2026;Benih;Bawang Putih;33;3307;Jawa Tengah;Wonosobo;307;Ha
+2026;Benih;Bawang Putih;35;3519;Jawa Timur;Madiun;40;Ha
+2026;Benih;Bawang Putih;35;3520;Jawa Timur;Magetan;20;Ha
+2026;Benih;Bawang Putih;35;3507;Jawa Timur;Malang;70;Ha
+2026;Benih;Bawang Putih;35;3513;Jawa Timur;Probolinggo;75;Ha
+2026;Benih;Bawang Putih;52;5206;Nusa Tenggara Barat;Bima;125;Ha
+2026;Benih;Bawang Putih;52;5203;Nusa Tenggara Barat;Lombok Timur;288;Ha
+2026;Benih;Bawang Putih;76;7603;Sulawesi Barat;Mamasa;10;Ha
+2026;Benih;Bawang Putih;73;7306;Sulawesi Selatan;Gowa;200;Ha
+2026;Benih;Bawang Putih;73;7322;Sulawesi Selatan;Luwu Utara;10;Ha
+2026;Benih;Bawang Putih;73;7309;Sulawesi Selatan;Maros;10;Ha
+2026;Benih;Bawang Putih;73;7318;Sulawesi Selatan;Tana Toraja;25;Ha
+2026;Benih;Bawang Putih;72;7208;Sulawesi Tengah;Parigi MoUtong;20;Ha
+2026;Benih;Bawang Putih;71;7101;Sulawesi Utara;Bolaang Mongondow;10;Ha
+2026;Benih;Bawang Putih;71;7110;Sulawesi Utara;Bolaang Mongondow Timur;30;Ha
+2026;Benih;Bawang Putih;71;7173;Sulawesi Utara;Kota Tomohon;10;Ha
+2026;Benih;Bawang Putih;13;1306;Sumatera Barat;Agam;30;Ha
+2026;Benih;Bawang Putih;13;1302;Sumatera Barat;Solok;100;Ha
+2026;Benih;Bawang Putih;16;1672;Sumatera Selatan;Kota Pagar Alam;20;Ha
+2026;Benih;Bawang Putih;16;1604;Sumatera Selatan;Lahat;20;Ha
+2026;Benih;Bawang Putih;16;1603;Sumatera Selatan;Muara Enim;20;Ha
+2026;Benih;Bawang Putih;12;1211;Sumatera Utara;Dairi;50;Ha
+2026;Benih;Bawang Putih;12;1216;Sumatera Utara;Humbang Hasundutan;55;Ha
+2026;Benih;Bawang Putih;12;1217;Sumatera Utara;Samosir;255;Ha
+2026;Benih;Bawang Putih;12;1212;Sumatera Utara;Toba;45;Ha
+2026;Kawasan;Bawang Putih;11;1117;Aceh;Bener Meriah;10;Ha
+2026;Kawasan;Bawang Putih;11;1113;Aceh;GAYO LUES;10;Ha
+2026;Kawasan;Bawang Putih;51;5106;Bali;Bangli;20;Ha
+2026;Kawasan;Bawang Putih;51;5107;Bali;Karangasem;10;Ha
+2026;Kawasan;Bawang Putih;17;1708;Bengkulu;Kepahiang;10;Ha
+2026;Kawasan;Bawang Putih;17;1702;Bengkulu;Rejang Lebong;20;Ha
+2026;Kawasan;Bawang Putih;75;7505;Gorontalo;Gorontalo Utara;10;Ha
+2026;Kawasan;Bawang Putih;15;1502;Jambi;Merangin;10;Ha
+2026;Kawasan;Bawang Putih;32;3210;Jawa Barat;Majalengka;10;Ha
+2026;Kawasan;Bawang Putih;33;3304;Jawa Tengah;Banjarnegara;50;Ha
+2026;Kawasan;Bawang Putih;33;3325;Jawa Tengah;Batang;20;Ha
+2026;Kawasan;Bawang Putih;33;3309;Jawa Tengah;Boyolali;50;Ha
+2026;Kawasan;Bawang Putih;33;3313;Jawa Tengah;Karanganyar;90;Ha
+2026;Kawasan;Bawang Putih;33;3308;Jawa Tengah;Magelang;50;Ha
+2026;Kawasan;Bawang Putih;33;3327;Jawa Tengah;Pemalang;20;Ha
+2026;Kawasan;Bawang Putih;33;3303;Jawa Tengah;Purbalingga;10;Ha
+2026;Kawasan;Bawang Putih;33;3322;Jawa Tengah;Semarang;45;Ha
+2026;Kawasan;Bawang Putih;33;3328;Jawa Tengah;Tegal;20;Ha
+2026;Kawasan;Bawang Putih;33;3312;Jawa Tengah;Wonogiri;10;Ha
+2026;Kawasan;Bawang Putih;33;3307;Jawa Tengah;Wonosobo;50;Ha
+2026;Kawasan;Bawang Putih;35;3579;Jawa Timur;Kota Batu;20;Ha
+2026;Kawasan;Bawang Putih;35;3514;Jawa Timur;Pasuruan;20;Ha
+2026;Kawasan;Bawang Putih;35;3513;Jawa Timur;Probolinggo;15;Ha
+2026;Kawasan;Bawang Putih;18;1804;Lampung;Lampung Barat;40;Ha
+2026;Kawasan;Bawang Putih;52;5203;Nusa Tenggara Barat;Lombok Timur;50;Ha
+2026;Kawasan;Bawang Putih;53;5302;Nusa Tenggara Timur;Timor Tengah Selatan;20;Ha
+2026;Kawasan;Bawang Putih;76;7603;Sulawesi Barat;Mamasa;10;Ha
+2026;Kawasan;Bawang Putih;73;7303;Sulawesi Selatan;Bantaeng;10;Ha
+2026;Kawasan;Bawang Putih;73;7316;Sulawesi Selatan;Enrekang;30;Ha
+2026;Kawasan;Bawang Putih;73;7318;Sulawesi Selatan;Tana Toraja;20;Ha
+2026;Kawasan;Bawang Putih;73;7326;Sulawesi Selatan;Toraja Utara;10;Ha
+2026;Kawasan;Bawang Putih;72;7208;Sulawesi Tengah;PARIGI MOUTONG;30;Ha
+2026;Kawasan;Bawang Putih;13;1302;Sumatera Barat;Solok;15;Ha
+2026;Kawasan;Bawang Putih;13;1311;Sumatera Barat;Solok Selatan;15;Ha
+2026;Kawasan;Bawang Putih;13;1304;Sumatera Barat;Tanah Datar;10;Ha
+2026;Kawasan;Bawang Putih;16;1672;Sumatera Selatan;Kota Pagar Alam;20;Ha
+2026;Kawasan;Bawang Putih;16;1603;Sumatera Selatan;Muara Enim;20;Ha
+2026;Kawasan;Bawang Putih;12;1216;Sumatera Utara;Humbang Hasundutan;10;Ha
+2026;Kawasan;Bawang Putih;12;1206;Sumatera Utara;Karo;60;Ha
+2026;Kawasan;Bawang Putih;12;1217;Sumatera Utara;Samosir;10;Ha
+2026;Kawasan;Bawang Putih;12;1208;Sumatera Utara;Simalungun;30;Ha
+2026;Kawasan;Bawang Putih;12;1202;Sumatera Utara;Tapanuli Utara;10;Ha
+2026;Kawasan;Cabai;11;1109;Aceh;Simeulue;0;Ha
+2026;Kawasan;Cabai;11;1110;Aceh;Aceh Singkil;0;Ha
+2026;Kawasan;Cabai;11;1101;Aceh;Aceh Selatan;5;Ha
+2026;Kawasan;Cabai;11;1102;Aceh;Aceh Tenggara;0;Ha
+2026;Kawasan;Cabai;11;1103;Aceh;Aceh Timur;5;Ha
+2026;Kawasan;Cabai;11;1104;Aceh;Aceh Tengah;30;Ha
+2026;Kawasan;Cabai;11;1105;Aceh;Aceh Barat;5;Ha
+2026;Kawasan;Cabai;11;1106;Aceh;Aceh Besar;0;Ha
+2026;Kawasan;Cabai;11;1107;Aceh;Pidie;10;Ha
+2026;Kawasan;Cabai;11;1111;Aceh;Bireuen;5;Ha
+2026;Kawasan;Cabai;11;1108;Aceh;Aceh Utara;5;Ha
+2026;Kawasan;Cabai;11;1112;Aceh;Aceh Barat Daya;5;Ha
+2026;Kawasan;Cabai;11;1113;Aceh;Gayo Lues;10;Ha
+2026;Kawasan;Cabai;11;1116;Aceh;Aceh Tamiang;5;Ha
+2026;Kawasan;Cabai;11;1115;Aceh;Nagan Raya;5;Ha
+2026;Kawasan;Cabai;11;1114;Aceh;Aceh Jaya;0;Ha
+2026;Kawasan;Cabai;11;1117;Aceh;Bener Meriah;10;Ha
+2026;Kawasan;Cabai;11;1118;Aceh;Pidie Jaya;10;Ha
+2026;Kawasan;Cabai;11;1171;Aceh;Kota Banda Aceh;0;Ha
+2026;Kawasan;Cabai;11;1172;Aceh;Kota Sabang;0;Ha
+2026;Kawasan;Cabai;11;1174;Aceh;Kota Langsa;0;Ha
+2026;Kawasan;Cabai;11;1173;Aceh;Kota Lhokseumawe;0;Ha
+2026;Kawasan;Cabai;11;1175;Aceh;Kota Subulussalam;0;Ha
+2026;Kawasan;Cabai;12;1204;Sumatera Utara;Nias;5;Ha
+2026;Kawasan;Cabai;12;1213;Sumatera Utara;Mandailing Natal;5;Ha
+2026;Kawasan;Cabai;12;1203;Sumatera Utara;Tapanuli Selatan;5;Ha
+2026;Kawasan;Cabai;12;1201;Sumatera Utara;Tapanuli Tengah;5;Ha
+2026;Kawasan;Cabai;12;1202;Sumatera Utara;Tapanuli Utara;10;Ha
+2026;Kawasan;Cabai;12;1212;Sumatera Utara;Toba;5;Ha
+2026;Kawasan;Cabai;12;1210;Sumatera Utara;Labuhanbatu;5;Ha
+2026;Kawasan;Cabai;12;1209;Sumatera Utara;Asahan;5;Ha
+2026;Kawasan;Cabai;12;1208;Sumatera Utara;Simalungun;5;Ha
+2026;Kawasan;Cabai;12;1211;Sumatera Utara;Dairi;0;Ha
+2026;Kawasan;Cabai;12;1206;Sumatera Utara;Karo;10;Ha
+2026;Kawasan;Cabai;12;1207;Sumatera Utara;Deli Serdang;0;Ha
+2026;Kawasan;Cabai;12;1205;Sumatera Utara;Langkat;5;Ha
+2026;Kawasan;Cabai;12;1214;Sumatera Utara;Nias Selatan;5;Ha
+2026;Kawasan;Cabai;12;1216;Sumatera Utara;Humbang Hasundutan;0;Ha
+2026;Kawasan;Cabai;12;1215;Sumatera Utara;Pakpak Bharat;0;Ha
+2026;Kawasan;Cabai;12;1217;Sumatera Utara;Samosir;0;Ha
+2026;Kawasan;Cabai;12;1218;Sumatera Utara;Serdang Bedagai;10;Ha
+2026;Kawasan;Cabai;12;1219;Sumatera Utara;Batu Bara;10;Ha
+2026;Kawasan;Cabai;12;1220;Sumatera Utara;Padang Lawas Utara;5;Ha
+2026;Kawasan;Cabai;12;1221;Sumatera Utara;Padang Lawas;5;Ha
+2026;Kawasan;Cabai;12;1222;Sumatera Utara;Labuhanbatu Selatan;5;Ha
+2026;Kawasan;Cabai;12;1223;Sumatera Utara;Labuhanbatu Utara;5;Ha
+2026;Kawasan;Cabai;12;1224;Sumatera Utara;Nias Utara;5;Ha
+2026;Kawasan;Cabai;12;1225;Sumatera Utara;Nias Barat;5;Ha
+2026;Kawasan;Cabai;12;1273;Sumatera Utara;Kota Sibolga;0;Ha
+2026;Kawasan;Cabai;12;1274;Sumatera Utara;Kota Tanjung Balai;0;Ha
+2026;Kawasan;Cabai;12;1272;Sumatera Utara;Kota PematangSiantar;0;Ha
+2026;Kawasan;Cabai;12;1276;Sumatera Utara;Kota Tebing Tinggi;0;Ha
+2026;Kawasan;Cabai;12;1271;Sumatera Utara;Kota Medan;0;Ha
+2026;Kawasan;Cabai;12;1275;Sumatera Utara;Kota Binjai;0;Ha
+2026;Kawasan;Cabai;12;1277;Sumatera Utara;Kota Padangsidimpuan;0;Ha
+2026;Kawasan;Cabai;12;1278;Sumatera Utara;Kota Gunungsitoli;5;Ha
+2026;Kawasan;Cabai;13;1309;Sumatera Barat;Kepulauan Mentawai;10;Ha
+2026;Kawasan;Cabai;13;1301;Sumatera Barat;Pesisir Selatan;10;Ha
+2026;Kawasan;Cabai;13;1302;Sumatera Barat;Solok;30;Ha
+2026;Kawasan;Cabai;13;1303;Sumatera Barat;Sijunjung;5;Ha
+2026;Kawasan;Cabai;13;1304;Sumatera Barat;Tanah Datar;10;Ha
+2026;Kawasan;Cabai;13;1305;Sumatera Barat;Padang Pariaman;5;Ha
+2026;Kawasan;Cabai;13;1306;Sumatera Barat;Agam;10;Ha
+2026;Kawasan;Cabai;13;1307;Sumatera Barat;Lima Puluh Kota;10;Ha
+2026;Kawasan;Cabai;13;1308;Sumatera Barat;Pasaman;5;Ha
+2026;Kawasan;Cabai;13;1311;Sumatera Barat;Solok Selatan;10;Ha
+2026;Kawasan;Cabai;13;1310;Sumatera Barat;Dharmasraya;5;Ha
+2026;Kawasan;Cabai;13;1312;Sumatera Barat;Pasaman Barat;10;Ha
+2026;Kawasan;Cabai;13;1371;Sumatera Barat;Kota Padang;5;Ha
+2026;Kawasan;Cabai;13;1372;Sumatera Barat;Kota Solok;0;Ha
+2026;Kawasan;Cabai;13;1373;Sumatera Barat;Kota SawahLunto;0;Ha
+2026;Kawasan;Cabai;13;1374;Sumatera Barat;Kota Padang Panjang;0;Ha
+2026;Kawasan;Cabai;13;1375;Sumatera Barat;Kota Bukittinggi;0;Ha
+2026;Kawasan;Cabai;13;1376;Sumatera Barat;Kota Payakumbuh;0;Ha
+2026;Kawasan;Cabai;13;1377;Sumatera Barat;Kota Pariaman;0;Ha
+2026;Kawasan;Cabai;14;1409;Riau ;Kuantan Singingi;5;Ha
+2026;Kawasan;Cabai;14;1402;Riau ;Indragiri Hulu;5;Ha
+2026;Kawasan;Cabai;14;1404;Riau ;Indragiri Hilir;5;Ha
+2026;Kawasan;Cabai;14;1405;Riau ;Pelalawan;0;Ha
+2026;Kawasan;Cabai;14;1408;Riau ;Siak;5;Ha
+2026;Kawasan;Cabai;14;1401;Riau ;Kampar;10;Ha
+2026;Kawasan;Cabai;14;1406;Riau ;Rokan Hulu;5;Ha
+2026;Kawasan;Cabai;14;1403;Riau ;Bengkalis;5;Ha
+2026;Kawasan;Cabai;14;1407;Riau ;Rokan Hilir;5;Ha
+2026;Kawasan;Cabai;14;1410;Riau ;Kepulauan Meranti;0;Ha
+2026;Kawasan;Cabai;14;1471;Riau ;Kota Pekanbaru;0;Ha
+2026;Kawasan;Cabai;14;1472;Riau ;Kota Dumai;0;Ha
+2026;Kawasan;Cabai;15;1501;Jambi;Kerinci;10;Ha
+2026;Kawasan;Cabai;15;1502;Jambi;Merangin;10;Ha
+2026;Kawasan;Cabai;15;1503;Jambi;Sarolangun;5;Ha
+2026;Kawasan;Cabai;15;1504;Jambi;BatangHari;5;Ha
+2026;Kawasan;Cabai;15;1505;Jambi;Muaro Jambi;10;Ha
+2026;Kawasan;Cabai;15;1507;Jambi;Tanjung Jabung Timur;5;Ha
+2026;Kawasan;Cabai;15;1506;Jambi;Tanjung Jabung Barat;0;Ha
+2026;Kawasan;Cabai;15;1509;Jambi;Tebo;5;Ha
+2026;Kawasan;Cabai;15;1508;Jambi;Bungo;10;Ha
+2026;Kawasan;Cabai;15;1571;Jambi;Kota Jambi;0;Ha
+2026;Kawasan;Cabai;15;1572;Jambi;Kota Sungai Penuh;0;Ha
+2026;Kawasan;Cabai;16;1601;Sumatera Selatan;Ogan Komering Ulu;10;Ha
+2026;Kawasan;Cabai;16;1602;Sumatera Selatan;Ogan Komering Ilir;10;Ha
+2026;Kawasan;Cabai;16;1603;Sumatera Selatan;Muara Enim;10;Ha
+2026;Kawasan;Cabai;16;1604;Sumatera Selatan;Lahat;5;Ha
+2026;Kawasan;Cabai;16;1605;Sumatera Selatan;Musi Rawas;5;Ha
+2026;Kawasan;Cabai;16;1606;Sumatera Selatan;Musi Banyuasin;10;Ha
+2026;Kawasan;Cabai;16;1607;Sumatera Selatan;Banyuasin;5;Ha
+2026;Kawasan;Cabai;16;1609;Sumatera Selatan;Ogan Komering Ulu Selatan;5;Ha
+2026;Kawasan;Cabai;16;1608;Sumatera Selatan;Ogan Komering Ulu Timur;5;Ha
+2026;Kawasan;Cabai;16;1610;Sumatera Selatan;Ogan Ilir;5;Ha
+2026;Kawasan;Cabai;16;1611;Sumatera Selatan;Empat Lawang;5;Ha
+2026;Kawasan;Cabai;16;1612;Sumatera Selatan;Penukal Abab Lematang Ilir;5;Ha
+2026;Kawasan;Cabai;16;1613;Sumatera Selatan;Musi Rawas Utara;10;Ha
+2026;Kawasan;Cabai;16;1671;Sumatera Selatan;Kota Palembang;0;Ha
+2026;Kawasan;Cabai;16;1674;Sumatera Selatan;Kota Prabumulih;5;Ha
+2026;Kawasan;Cabai;16;1672;Sumatera Selatan;Kota Pagar Alam;5;Ha
+2026;Kawasan;Cabai;16;1673;Sumatera Selatan;Kota Lubuk linggau;0;Ha
+2026;Kawasan;Cabai;17;1701;Bengkulu;Bengkulu Selatan;10;Ha
+2026;Kawasan;Cabai;17;1702;Bengkulu;Rejang Lebong;10;Ha
+2026;Kawasan;Cabai;17;1703;Bengkulu;Bengkulu Utara;5;Ha
+2026;Kawasan;Cabai;17;1704;Bengkulu;Kaur;5;Ha
+2026;Kawasan;Cabai;17;1705;Bengkulu;Seluma;5;Ha
+2026;Kawasan;Cabai;17;1706;Bengkulu;Muko muko;5;Ha
+2026;Kawasan;Cabai;17;1707;Bengkulu;Lebong;5;Ha
+2026;Kawasan;Cabai;17;1708;Bengkulu;Kepahiang;10;Ha
+2026;Kawasan;Cabai;17;1709;Bengkulu;Bengkulu Tengah;5;Ha
+2026;Kawasan;Cabai;17;1771;Bengkulu;Kota Bengkulu;0;Ha
+2026;Kawasan;Cabai;18;1804;Lampung;Lampung Barat;10;Ha
+2026;Kawasan;Cabai;18;1806;Lampung;Tanggamus;5;Ha
+2026;Kawasan;Cabai;18;1801;Lampung;Lampung Selatan;10;Ha
+2026;Kawasan;Cabai;18;1807;Lampung;Lampung Timur;10;Ha
+2026;Kawasan;Cabai;18;1802;Lampung;Lampung Tengah;5;Ha
+2026;Kawasan;Cabai;18;1803;Lampung;Lampung Utara;10;Ha
+2026;Kawasan;Cabai;18;1808;Lampung;Way Kanan;10;Ha
+2026;Kawasan;Cabai;18;1805;Lampung;Tulang Bawang;5;Ha
+2026;Kawasan;Cabai;18;1809;Lampung;Pesawaran;10;Ha
+2026;Kawasan;Cabai;18;1810;Lampung;Pringsewu;5;Ha
+2026;Kawasan;Cabai;18;1811;Lampung;Mesuji;0;Ha
+2026;Kawasan;Cabai;18;1812;Lampung;Tulang Bawang Barat;5;Ha
+2026;Kawasan;Cabai;18;1813;Lampung;Pesisir Barat;5;Ha
+2026;Kawasan;Cabai;18;1871;Lampung;Kota Bandar Lampung;5;Ha
+2026;Kawasan;Cabai;18;1872;Lampung;Kota Metro;0;Ha
+2026;Kawasan;Cabai;19;1901;Kepulauan Bangka Belitung;Bangka;5;Ha
+2026;Kawasan;Cabai;19;1902;Kepulauan Bangka Belitung;Belitung;5;Ha
+2026;Kawasan;Cabai;19;1905;Kepulauan Bangka Belitung;Bangka Barat;5;Ha
+2026;Kawasan;Cabai;19;1904;Kepulauan Bangka Belitung;Bangka Tengah;10;Ha
+2026;Kawasan;Cabai;19;1903;Kepulauan Bangka Belitung;Bangka Selatan;5;Ha
+2026;Kawasan;Cabai;19;1906;Kepulauan Bangka Belitung;Belitung Timur;0;Ha
+2026;Kawasan;Cabai;19;1971;Kepulauan Bangka Belitung;Kota Pangkal pinang;0;Ha
+2026;Kawasan;Cabai;21;2102;Kepulauan Riau;Karimun;5;Ha
+2026;Kawasan;Cabai;21;2101;Kepulauan Riau;Bintan;10;Ha
+2026;Kawasan;Cabai;21;2103;Kepulauan Riau;Natuna;0;Ha
+2026;Kawasan;Cabai;21;2104;Kepulauan Riau;Lingga;0;Ha
+2026;Kawasan;Cabai;21;2105;Kepulauan Riau;Kepulauan Anambas;0;Ha
+2026;Kawasan;Cabai;21;2171;Kepulauan Riau;Kota Batam;5;Ha
+2026;Kawasan;Cabai;21;2172;Kepulauan Riau;Kota Tanjung Pinang;6;Ha
+2026;Kawasan;Cabai;31;3101;DKI Jakarta;ADM. KEP. SERIBU;0;Ha
+2026;Kawasan;Cabai;31;3174;DKI Jakarta;KOTA ADM. JAKARTA SELATAN;0;Ha
+2026;Kawasan;Cabai;31;3175;DKI Jakarta;KOTA ADM. JAKARTA TIMUR;0;Ha
+2026;Kawasan;Cabai;31;3171;DKI Jakarta;KOTA ADM. JAKARTA PUSAT;0;Ha
+2026;Kawasan;Cabai;31;3173;DKI Jakarta;KOTA ADM. JAKARTA BARAT;0;Ha
+2026;Kawasan;Cabai;31;3172;DKI Jakarta;KOTA ADM. JAKARTA UTARA;0;Ha
+2026;Kawasan;Cabai;32;3201;Jawa Barat;Bogor;10;Ha
+2026;Kawasan;Cabai;32;3202;Jawa Barat;Sukabumi;30;Ha
+2026;Kawasan;Cabai;32;3203;Jawa Barat;Cianjur;30;Ha
+2026;Kawasan;Cabai;32;3204;Jawa Barat;Bandung;50;Ha
+2026;Kawasan;Cabai;32;3205;Jawa Barat;Garut;35;Ha
+2026;Kawasan;Cabai;32;3206;Jawa Barat;Tasikmalaya;10;Ha
+2026;Kawasan;Cabai;32;3207;Jawa Barat;Ciamis;10;Ha
+2026;Kawasan;Cabai;32;3208;Jawa Barat;Kuningan;10;Ha
+2026;Kawasan;Cabai;32;3209;Jawa Barat;Cirebon;5;Ha
+2026;Kawasan;Cabai;32;3210;Jawa Barat;Majalengka;10;Ha
+2026;Kawasan;Cabai;32;3211;Jawa Barat;Sumedang;30;Ha
+2026;Kawasan;Cabai;32;3212;Jawa Barat;Indramayu;5;Ha
+2026;Kawasan;Cabai;32;3213;Jawa Barat;Subang;10;Ha
+2026;Kawasan;Cabai;32;3214;Jawa Barat;Purwakarta;0;Ha
+2026;Kawasan;Cabai;32;3215;Jawa Barat;Karawang;5;Ha
+2026;Kawasan;Cabai;32;3216;Jawa Barat;Bekasi;5;Ha
+2026;Kawasan;Cabai;32;3217;Jawa Barat;Bandung Barat;10;Ha
+2026;Kawasan;Cabai;32;3218;Jawa Barat;Pangandaran;10;Ha
+2026;Kawasan;Cabai;32;3271;Jawa Barat;Kota Bogor;0;Ha
+2026;Kawasan;Cabai;32;3272;Jawa Barat;Kota Sukabumi;0;Ha
+2026;Kawasan;Cabai;32;3273;Jawa Barat;Kota Bandung;0;Ha
+2026;Kawasan;Cabai;32;3274;Jawa Barat;Kota Cirebon;0;Ha
+2026;Kawasan;Cabai;32;3275;Jawa Barat;Kota Bekasi;0;Ha
+2026;Kawasan;Cabai;32;3276;Jawa Barat;Kota Depok;0;Ha
+2026;Kawasan;Cabai;32;3277;Jawa Barat;Kota Cimahi;0;Ha
+2026;Kawasan;Cabai;32;3278;Jawa Barat;Kota Tasikmalaya;0;Ha
+2026;Kawasan;Cabai;32;3279;Jawa Barat;Kota Banjar;0;Ha
+2026;Kawasan;Cabai;33;3301;Jawa Tengah;Cilacap;10;Ha
+2026;Kawasan;Cabai;33;3302;Jawa Tengah;Banyumas;10;Ha
+2026;Kawasan;Cabai;33;3303;Jawa Tengah;Purbalingga;0;Ha
+2026;Kawasan;Cabai;33;3304;Jawa Tengah;Banjarnegara;10;Ha
+2026;Kawasan;Cabai;33;3305;Jawa Tengah;Kebumen;30;Ha
+2026;Kawasan;Cabai;33;3306;Jawa Tengah;Purworejo;10;Ha
+2026;Kawasan;Cabai;33;3307;Jawa Tengah;Wonosobo;40;Ha
+2026;Kawasan;Cabai;33;3308;Jawa Tengah;Magelang;60;Ha
+2026;Kawasan;Cabai;33;3309;Jawa Tengah;Boyolali;10;Ha
+2026;Kawasan;Cabai;33;3310;Jawa Tengah;Klaten;10;Ha
+2026;Kawasan;Cabai;33;3311;Jawa Tengah;Sukoharjo;5;Ha
+2026;Kawasan;Cabai;33;3312;Jawa Tengah;Wonogiri;10;Ha
+2026;Kawasan;Cabai;33;3313;Jawa Tengah;Karanganyar;5;Ha
+2026;Kawasan;Cabai;33;3314;Jawa Tengah;Sragen;10;Ha
+2026;Kawasan;Cabai;33;3315;Jawa Tengah;Grobogan;10;Ha
+2026;Kawasan;Cabai;33;3316;Jawa Tengah;Blora;10;Ha
+2026;Kawasan;Cabai;33;3317;Jawa Tengah;Rembang;10;Ha
+2026;Kawasan;Cabai;33;3318;Jawa Tengah;Pati;5;Ha
+2026;Kawasan;Cabai;33;3319;Jawa Tengah;Kudus;0;Ha
+2026;Kawasan;Cabai;33;3320;Jawa Tengah;Jepara;5;Ha
+2026;Kawasan;Cabai;33;3321;Jawa Tengah;Demak;5;Ha
+2026;Kawasan;Cabai;33;3322;Jawa Tengah;Semarang;30;Ha
+2026;Kawasan;Cabai;33;3323;Jawa Tengah;Temanggung;40;Ha
+2026;Kawasan;Cabai;33;3324;Jawa Tengah;Kendal;10;Ha
+2026;Kawasan;Cabai;33;3325;Jawa Tengah;Batang;5;Ha
+2026;Kawasan;Cabai;33;3326;Jawa Tengah;Pekalongan;5;Ha
+2026;Kawasan;Cabai;33;3327;Jawa Tengah;Pemalang;10;Ha
+2026;Kawasan;Cabai;33;3328;Jawa Tengah;Tegal;5;Ha
+2026;Kawasan;Cabai;33;3329;Jawa Tengah;Brebes;5;Ha
+2026;Kawasan;Cabai;33;3371;Jawa Tengah;Kota Magelang;0;Ha
+2026;Kawasan;Cabai;33;3372;Jawa Tengah;Kota Surakarta;0;Ha
+2026;Kawasan;Cabai;33;3373;Jawa Tengah;Kota Salatiga;0;Ha
+2026;Kawasan;Cabai;33;3374;Jawa Tengah;Kota Semarang;0;Ha
+2026;Kawasan;Cabai;33;3375;Jawa Tengah;Kota Pekalongan;0;Ha
+2026;Kawasan;Cabai;33;3376;Jawa Tengah;Kota Tegal;0;Ha
+2026;Kawasan;Cabai;34;3401;D.I. Yogyakarta;Kulon Progo;30;Ha
+2026;Kawasan;Cabai;34;3402;D.I. Yogyakarta;Bantul;10;Ha
+2026;Kawasan;Cabai;34;3403;D.I. Yogyakarta;Gunungkidul;10;Ha
+2026;Kawasan;Cabai;34;3404;D.I. Yogyakarta;Sleman;30;Ha
+2026;Kawasan;Cabai;34;3471;D.I. Yogyakarta;Kota Yogyakarta;0;Ha
+2026;Kawasan;Cabai;35;3501;Jawa Timur;Pacitan;5;Ha
+2026;Kawasan;Cabai;35;3502;Jawa Timur;Ponorogo;5;Ha
+2026;Kawasan;Cabai;35;3503;Jawa Timur;Trenggalek;5;Ha
+2026;Kawasan;Cabai;35;3504;Jawa Timur;Tulungagung;5;Ha
+2026;Kawasan;Cabai;35;3505;Jawa Timur;Blitar;20;Ha
+2026;Kawasan;Cabai;35;3506;Jawa Timur;Kediri;20;Ha
+2026;Kawasan;Cabai;35;3507;Jawa Timur;Malang;20;Ha
+2026;Kawasan;Cabai;35;3508;Jawa Timur;Lumajang;5;Ha
+2026;Kawasan;Cabai;35;3509;Jawa Timur;Jember;10;Ha
+2026;Kawasan;Cabai;35;3510;Jawa Timur;Banyuwangi;0;Ha
+2026;Kawasan;Cabai;35;3511;Jawa Timur;Bondowoso;0;Ha
+2026;Kawasan;Cabai;35;3512;Jawa Timur;Situbondo;5;Ha
+2026;Kawasan;Cabai;35;3513;Jawa Timur;Probolinggo;10;Ha
+2026;Kawasan;Cabai;35;3514;Jawa Timur;Pasuruan;0;Ha
+2026;Kawasan;Cabai;35;3515;Jawa Timur;Sidoarjo;0;Ha
+2026;Kawasan;Cabai;35;3516;Jawa Timur;Mojokerto;0;Ha
+2026;Kawasan;Cabai;35;3517;Jawa Timur;Jombang;5;Ha
+2026;Kawasan;Cabai;35;3518;Jawa Timur;Nganjuk;0;Ha
+2026;Kawasan;Cabai;35;3519;Jawa Timur;Madiun;0;Ha
+2026;Kawasan;Cabai;35;3520;Jawa Timur;Magetan;5;Ha
+2026;Kawasan;Cabai;35;3521;Jawa Timur;Ngawi;10;Ha
+2026;Kawasan;Cabai;35;3522;Jawa Timur;Bojonegoro;0;Ha
+2026;Kawasan;Cabai;35;3523;Jawa Timur;Tuban;10;Ha
+2026;Kawasan;Cabai;35;3524;Jawa Timur;Lamongan;10;Ha
+2026;Kawasan;Cabai;35;3525;Jawa Timur;Gresik;10;Ha
+2026;Kawasan;Cabai;35;3526;Jawa Timur;Bangkalan;5;Ha
+2026;Kawasan;Cabai;35;3527;Jawa Timur;Sampang;5;Ha
+2026;Kawasan;Cabai;35;3528;Jawa Timur;Pamekasan;0;Ha
+2026;Kawasan;Cabai;35;3529;Jawa Timur;Sumenep;5;Ha
+2026;Kawasan;Cabai;35;3571;Jawa Timur;Kota Kediri;0;Ha
+2026;Kawasan;Cabai;35;3572;Jawa Timur;Kota Blitar;0;Ha
+2026;Kawasan;Cabai;35;3573;Jawa Timur;Kota Malang;0;Ha
+2026;Kawasan;Cabai;35;3574;Jawa Timur;Kota Probolinggo;0;Ha
+2026;Kawasan;Cabai;35;3575;Jawa Timur;Kota Pasuruan;0;Ha
+2026;Kawasan;Cabai;35;3576;Jawa Timur;Kota Mojokerto;0;Ha
+2026;Kawasan;Cabai;35;3577;Jawa Timur;Kota Madiun;0;Ha
+2026;Kawasan;Cabai;35;3578;Jawa Timur;Kota Surabaya;0;Ha
+2026;Kawasan;Cabai;35;3579;Jawa Timur;Kota Batu;0;Ha
+2026;Kawasan;Cabai;36;3601;Banten;Pandeglang;10;Ha
+2026;Kawasan;Cabai;36;3602;Banten;Lebak;7;Ha
+2026;Kawasan;Cabai;36;3603;Banten;Tangerang;5;Ha
+2026;Kawasan;Cabai;36;3604;Banten;Serang;7;Ha
+2026;Kawasan;Cabai;36;3671;Banten;Kota Tangerang;0;Ha
+2026;Kawasan;Cabai;36;3672;Banten;Kota Cilegon;0;Ha
+2026;Kawasan;Cabai;36;3673;Banten;Kota Serang;0;Ha
+2026;Kawasan;Cabai;36;3674;Banten;Kota Tangerang Selatan;0;Ha
+2026;Kawasan;Cabai;51;5101;Bali;Jembrana;5;Ha
+2026;Kawasan;Cabai;51;5102;Bali;Tabanan;5;Ha
+2026;Kawasan;Cabai;51;5103;Bali;Badung;0;Ha
+2026;Kawasan;Cabai;51;5104;Bali;Gianyar;0;Ha
+2026;Kawasan;Cabai;51;5105;Bali;Klungkung;5;Ha
+2026;Kawasan;Cabai;51;5106;Bali;Bangli;10;Ha
+2026;Kawasan;Cabai;51;5107;Bali;Karangasem;10;Ha
+2026;Kawasan;Cabai;51;5108;Bali;Buleleng;10;Ha
+2026;Kawasan;Cabai;51;5171;Bali;Kota Denpasar;0;Ha
+2026;Kawasan;Cabai;52;5201;NTB;Lombok Barat;5;Ha
+2026;Kawasan;Cabai;52;5202;NTB;Lombok Tengah;10;Ha
+2026;Kawasan;Cabai;52;5203;NTB;Lombok Timur;30;Ha
+2026;Kawasan;Cabai;52;5204;NTB;Sumbawa;10;Ha
+2026;Kawasan;Cabai;52;5205;NTB;Dompu;0;Ha
+2026;Kawasan;Cabai;52;5206;NTB;Bima;0;Ha
+2026;Kawasan;Cabai;52;5207;NTB;Sumbawa Barat;0;Ha
+2026;Kawasan;Cabai;52;5208;NTB;Lombok Utara;10;Ha
+2026;Kawasan;Cabai;52;5271;NTB;Kota Mataram;0;Ha
+2026;Kawasan;Cabai;52;5272;NTB;Kota Bima;0;Ha
+2026;Kawasan;Cabai;53;5312;NTT;Sumba Barat;5;Ha
+2026;Kawasan;Cabai;53;5311;NTT;Sumba Timur;5;Ha
+2026;Kawasan;Cabai;53;5301;NTT;Kupang;10;Ha
+2026;Kawasan;Cabai;53;5302;NTT;Timor Tengah Selatan;5;Ha
+2026;Kawasan;Cabai;53;5303;NTT;Timor Tengah Utara;5;Ha
+2026;Kawasan;Cabai;53;5304;NTT;Belu;10;Ha
+2026;Kawasan;Cabai;53;5305;NTT;Alor;0;Ha
+2026;Kawasan;Cabai;53;5313;NTT;Lembata;5;Ha
+2026;Kawasan;Cabai;53;5306;NTT;Flores Timur;5;Ha
+2026;Kawasan;Cabai;53;5307;NTT;Sikka;0;Ha
+2026;Kawasan;Cabai;53;5308;NTT;Ende;10;Ha
+2026;Kawasan;Cabai;53;5309;NTT;Ngada;0;Ha
+2026;Kawasan;Cabai;53;5310;NTT;Manggarai;10;Ha
+2026;Kawasan;Cabai;53;5314;NTT;Rote Ndao;10;Ha
+2026;Kawasan;Cabai;53;5315;NTT;Manggarai Barat;0;Ha
+2026;Kawasan;Cabai;53;5317;NTT;Sumba Tengah;0;Ha
+2026;Kawasan;Cabai;53;5318;NTT;Sumba Barat Daya;5;Ha
+2026;Kawasan;Cabai;53;5316;NTT;Nagekeo;0;Ha
+2026;Kawasan;Cabai;53;5319;NTT;Manggarai Timur;5;Ha
+2026;Kawasan;Cabai;53;5320;NTT;Sabu Raijua;0;Ha
+2026;Kawasan;Cabai;53;5321;NTT;Malaka;0;Ha
+2026;Kawasan;Cabai;53;5371;NTT;Kota Kupang;0;Ha
+2026;Kawasan;Cabai;61;6101;Kalimantan Barat;Sambas;5;Ha
+2026;Kawasan;Cabai;61;6107;Kalimantan Barat;Bengkayang;0;Ha
+2026;Kawasan;Cabai;61;6108;Kalimantan Barat;Landak;10;Ha
+2026;Kawasan;Cabai;61;6102;Kalimantan Barat;Mempawah;10;Ha
+2026;Kawasan;Cabai;61;6103;Kalimantan Barat;Sanggau;5;Ha
+2026;Kawasan;Cabai;61;6104;Kalimantan Barat;Ketapang;10;Ha
+2026;Kawasan;Cabai;61;6105;Kalimantan Barat;Sintang;10;Ha
+2026;Kawasan;Cabai;61;6106;Kalimantan Barat;Kapuas Hulu;5;Ha
+2026;Kawasan;Cabai;61;6109;Kalimantan Barat;Sekadau;5;Ha
+2026;Kawasan;Cabai;61;6110;Kalimantan Barat;Melawi;5;Ha
+2026;Kawasan;Cabai;61;6111;Kalimantan Barat;Kayong Utara;0;Ha
+2026;Kawasan;Cabai;61;6112;Kalimantan Barat;Kubu Raya;10;Ha
+2026;Kawasan;Cabai;61;6171;Kalimantan Barat;Kota Pontianak;0;Ha
+2026;Kawasan;Cabai;61;6172;Kalimantan Barat;Kota Singkawang;0;Ha
+2026;Kawasan;Cabai;62;6201;Kalimantan Tengah;Kotawaringin Barat;10;Ha
+2026;Kawasan;Cabai;62;6202;Kalimantan Tengah;Kotawaringin Timur;10;Ha
+2026;Kawasan;Cabai;62;6203;Kalimantan Tengah;Kapuas;10;Ha
+2026;Kawasan;Cabai;62;6204;Kalimantan Tengah;Barito Selatan;5;Ha
+2026;Kawasan;Cabai;62;6205;Kalimantan Tengah;Barito Utara;5;Ha
+2026;Kawasan;Cabai;62;6208;Kalimantan Tengah;Sukamara;5;Ha
+2026;Kawasan;Cabai;62;6209;Kalimantan Tengah;Lamandau;0;Ha
+2026;Kawasan;Cabai;62;6207;Kalimantan Tengah;Seruyan;5;Ha
+2026;Kawasan;Cabai;62;6206;Kalimantan Tengah;Katingan;5;Ha
+2026;Kawasan;Cabai;62;6211;Kalimantan Tengah;Pulang Pisau;10;Ha
+2026;Kawasan;Cabai;62;6210;Kalimantan Tengah;Gunung Mas;0;Ha
+2026;Kawasan;Cabai;62;6213;Kalimantan Tengah;Barito Timur;5;Ha
+2026;Kawasan;Cabai;62;6212;Kalimantan Tengah;Murung Raya;5;Ha
+2026;Kawasan;Cabai;62;6271;Kalimantan Tengah;Kota Palangka Raya;0;Ha
+2026;Kawasan;Cabai;63;6301;Kalimantan Selatan;Tanah Laut;10;Ha
+2026;Kawasan;Cabai;63;6302;Kalimantan Selatan;Kotabaru;5;Ha
+2026;Kawasan;Cabai;63;6303;Kalimantan Selatan;Banjar;5;Ha
+2026;Kawasan;Cabai;63;6304;Kalimantan Selatan;Barito Kuala;5;Ha
+2026;Kawasan;Cabai;63;6305;Kalimantan Selatan;Tapin;5;Ha
+2026;Kawasan;Cabai;63;6306;Kalimantan Selatan;Hulu Sungai Selatan;10;Ha
+2026;Kawasan;Cabai;63;6307;Kalimantan Selatan;Hulu Sungai Tengah;5;Ha
+2026;Kawasan;Cabai;63;6308;Kalimantan Selatan;Hulu Sungai Utara;5;Ha
+2026;Kawasan;Cabai;63;6309;Kalimantan Selatan;Tabalong;10;Ha
+2026;Kawasan;Cabai;63;6310;Kalimantan Selatan;Tanah Bumbu;10;Ha
+2026;Kawasan;Cabai;63;6311;Kalimantan Selatan;Balangan;10;Ha
+2026;Kawasan;Cabai;63;6371;Kalimantan Selatan;Kota Banjarmasin;0;Ha
+2026;Kawasan;Cabai;63;6372;Kalimantan Selatan;Kota BanjarBaru;0;Ha
+2026;Kawasan;Cabai;64;6401;Kalimantan Timur;Paser;10;Ha
+2026;Kawasan;Cabai;64;6407;Kalimantan Timur;Kutai Barat;5;Ha
+2026;Kawasan;Cabai;64;6402;Kalimantan Timur;Kutai Kartanegara;10;Ha
+2026;Kawasan;Cabai;64;6408;Kalimantan Timur;Kutai Timur;10;Ha
+2026;Kawasan;Cabai;64;6403;Kalimantan Timur;Berau;5;Ha
+2026;Kawasan;Cabai;64;6409;Kalimantan Timur;Penajam Paser Utara;0;Ha
+2026;Kawasan;Cabai;64;6411;Kalimantan Timur;Mahakam Ulu;4;Ha
+2026;Kawasan;Cabai;64;6471;Kalimantan Timur;Kota Balikpapan;0;Ha
+2026;Kawasan;Cabai;64;6472;Kalimantan Timur;Kota Samarinda;0;Ha
+2026;Kawasan;Cabai;64;6474;Kalimantan Timur;Kota Bontang;0;Ha
+2026;Kawasan;Cabai;65;6502;Kalimantan Utara;Malinau;5;Ha
+2026;Kawasan;Cabai;65;6501;Kalimantan Utara;Bulungan;10;Ha
+2026;Kawasan;Cabai;65;6504;Kalimantan Utara;Tana Tidung;5;Ha
+2026;Kawasan;Cabai;65;6503;Kalimantan Utara;Nunukan;0;Ha
+2026;Kawasan;Cabai;65;6571;Kalimantan Utara;Kota Tarakan;5;Ha
+2026;Kawasan;Cabai;71;7101;Sulawesi Utara;Bolaang Mongondow;10;Ha
+2026;Kawasan;Cabai;71;7102;Sulawesi Utara;Minahasa;10;Ha
+2026;Kawasan;Cabai;71;7103;Sulawesi Utara;Kepulauan Sangihe;5;Ha
+2026;Kawasan;Cabai;71;7104;Sulawesi Utara;Kepulauan Talaud;0;Ha
+2026;Kawasan;Cabai;71;7105;Sulawesi Utara;Minahasa Selatan;10;Ha
+2026;Kawasan;Cabai;71;7106;Sulawesi Utara;Minahasa Utara;10;Ha
+2026;Kawasan;Cabai;71;7108;Sulawesi Utara;Bolaang Mongondow Utara;5;Ha
+2026;Kawasan;Cabai;71;7109;Sulawesi Utara;KEP. SIAU TAGULANDANG BIARO;0;Ha
+2026;Kawasan;Cabai;71;7107;Sulawesi Utara;Minahasa Tenggara;5;Ha
+2026;Kawasan;Cabai;71;7111;Sulawesi Utara;Bolaang Mongondow Selatan;10;Ha
+2026;Kawasan;Cabai;71;7110;Sulawesi Utara;Bolaang Mongondow Timur;10;Ha
+2026;Kawasan;Cabai;71;7171;Sulawesi Utara;Kota Manado;0;Ha
+2026;Kawasan;Cabai;71;7172;Sulawesi Utara;Kota Bitung;5;Ha
+2026;Kawasan;Cabai;71;7173;Sulawesi Utara;Kota Tomohon;5;Ha
+2026;Kawasan;Cabai;71;7174;Sulawesi Utara;Kota Kotamobagu;0;Ha
+2026;Kawasan;Cabai;72;7207;Sulawesi Tengah;Banggai Kepulauan;5;Ha
+2026;Kawasan;Cabai;72;7201;Sulawesi Tengah;Banggai;5;Ha
+2026;Kawasan;Cabai;72;7206;Sulawesi Tengah;Morowali;0;Ha
+2026;Kawasan;Cabai;72;7202;Sulawesi Tengah;Poso;10;Ha
+2026;Kawasan;Cabai;72;7203;Sulawesi Tengah;Donggala;10;Ha
+2026;Kawasan;Cabai;72;7204;Sulawesi Tengah;Toli Toli;10;Ha
+2026;Kawasan;Cabai;72;7205;Sulawesi Tengah;Buol;5;Ha
+2026;Kawasan;Cabai;72;7208;Sulawesi Tengah;Parigi Moutong;10;Ha
+2026;Kawasan;Cabai;72;7209;Sulawesi Tengah;Tojo Una Una;10;Ha
+2026;Kawasan;Cabai;72;7210;Sulawesi Tengah;Sigi;10;Ha
+2026;Kawasan;Cabai;72;7211;Sulawesi Tengah;Banggai Laut;0;Ha
+2026;Kawasan;Cabai;72;7212;Sulawesi Tengah;Morowali Utara;5;Ha
+2026;Kawasan;Cabai;72;7271;Sulawesi Tengah;Kota Palu;5;Ha
+2026;Kawasan;Cabai;73;7301;Sulawesi Selatan;Kepulauan Selayar;5;Ha
+2026;Kawasan;Cabai;73;7302;Sulawesi Selatan;Bulukumba;10;Ha
+2026;Kawasan;Cabai;73;7303;Sulawesi Selatan;Bantaeng;10;Ha
+2026;Kawasan;Cabai;73;7304;Sulawesi Selatan;Jeneponto;10;Ha
+2026;Kawasan;Cabai;73;7305;Sulawesi Selatan;Takalar;5;Ha
+2026;Kawasan;Cabai;73;7306;Sulawesi Selatan;Gowa;10;Ha
+2026;Kawasan;Cabai;73;7307;Sulawesi Selatan;Sinjai;5;Ha
+2026;Kawasan;Cabai;73;7309;Sulawesi Selatan;Maros;50;Ha
+2026;Kawasan;Cabai;73;7310;Sulawesi Selatan;Pangkajene Kepulauan;0;Ha
+2026;Kawasan;Cabai;73;7311;Sulawesi Selatan;Barru;5;Ha
+2026;Kawasan;Cabai;73;7308;Sulawesi Selatan;Bone;15;Ha
+2026;Kawasan;Cabai;73;7312;Sulawesi Selatan;Soppeng;5;Ha
+2026;Kawasan;Cabai;73;7313;Sulawesi Selatan;Wajo;10;Ha
+2026;Kawasan;Cabai;73;7314;Sulawesi Selatan;Sidenreng Rappang;10;Ha
+2026;Kawasan;Cabai;73;7315;Sulawesi Selatan;Pinrang;10;Ha
+2026;Kawasan;Cabai;73;7316;Sulawesi Selatan;Enrekang;30;Ha
+2026;Kawasan;Cabai;73;7317;Sulawesi Selatan;Luwu;10;Ha
+2026;Kawasan;Cabai;73;7318;Sulawesi Selatan;Tana Toraja;10;Ha
+2026;Kawasan;Cabai;73;7322;Sulawesi Selatan;Luwu Utara;10;Ha
+2026;Kawasan;Cabai;73;7324;Sulawesi Selatan;Luwu Timur;5;Ha
+2026;Kawasan;Cabai;73;7326;Sulawesi Selatan;Toraja Utara;5;Ha
+2026;Kawasan;Cabai;73;7371;Sulawesi Selatan;Kota Makassar;0;Ha
+2026;Kawasan;Cabai;73;7372;Sulawesi Selatan;Kota Pare pare;0;Ha
+2026;Kawasan;Cabai;73;7373;Sulawesi Selatan;Kota Palopo;0;Ha
+2026;Kawasan;Cabai;74;7404;Sulawesi Tenggara;Buton;0;Ha
+2026;Kawasan;Cabai;74;7403;Sulawesi Tenggara;Muna;5;Ha
+2026;Kawasan;Cabai;74;7402;Sulawesi Tenggara;Konawe;5;Ha
+2026;Kawasan;Cabai;74;7401;Sulawesi Tenggara;Kolaka;10;Ha
+2026;Kawasan;Cabai;74;7405;Sulawesi Tenggara;Konawe Selatan;5;Ha
+2026;Kawasan;Cabai;74;7406;Sulawesi Tenggara;Bombana;10;Ha
+2026;Kawasan;Cabai;74;7407;Sulawesi Tenggara;Wakatobi;0;Ha
+2026;Kawasan;Cabai;74;7408;Sulawesi Tenggara;Kolaka Utara;10;Ha
+2026;Kawasan;Cabai;74;7410;Sulawesi Tenggara;Buton Utara;5;Ha
+2026;Kawasan;Cabai;74;7409;Sulawesi Tenggara;Konawe Utara;0;Ha
+2026;Kawasan;Cabai;74;7411;Sulawesi Tenggara;Kolaka Timur;0;Ha
+2026;Kawasan;Cabai;74;7412;Sulawesi Tenggara;Konawe Kepulauan;5;Ha
+2026;Kawasan;Cabai;74;7413;Sulawesi Tenggara;Muna Barat;0;Ha
+2026;Kawasan;Cabai;74;7414;Sulawesi Tenggara;Buton Tengah;5;Ha
+2026;Kawasan;Cabai;74;7415;Sulawesi Tenggara;Buton Selatan;0;Ha
+2026;Kawasan;Cabai;74;7471;Sulawesi Tenggara;Kota Kendari;5;Ha
+2026;Kawasan;Cabai;74;7472;Sulawesi Tenggara;Kota Bau bau;5;Ha
+2026;Kawasan;Cabai;75;7502;Gorontalo;Boalemo;5;Ha
+2026;Kawasan;Cabai;75;7501;Gorontalo;Gorontalo;10;Ha
+2026;Kawasan;Cabai;75;7504;Gorontalo;Pohuwato;10;Ha
+2026;Kawasan;Cabai;75;7503;Gorontalo;Bone Bolango;5;Ha
+2026;Kawasan;Cabai;75;7505;Gorontalo;Gorontalo Utara;10;Ha
+2026;Kawasan;Cabai;75;7571;Gorontalo;Kota Gorontalo;0;Ha
+2026;Kawasan;Cabai;76;7605;Sulawesi Barat;Majene;5;Ha
+2026;Kawasan;Cabai;76;7604;Sulawesi Barat;Polewali Mandar;10;Ha
+2026;Kawasan;Cabai;76;7603;Sulawesi Barat;Mamasa;5;Ha
+2026;Kawasan;Cabai;76;7602;Sulawesi Barat;Mamuju;10;Ha
+2026;Kawasan;Cabai;76;7601;Sulawesi Barat;Pasangkayu;4;Ha
+2026;Kawasan;Cabai;76;7606;Sulawesi Barat;Mamuju Tengah;5;Ha
+2026;Kawasan;Cabai;81;8103;Maluku;Kepulauan Tanimbar;0;Ha
+2026;Kawasan;Cabai;81;8102;Maluku;Maluku Tenggara;0;Ha
+2026;Kawasan;Cabai;81;8101;Maluku;Maluku Tengah;5;Ha
+2026;Kawasan;Cabai;81;8104;Maluku;Buru;10;Ha
+2026;Kawasan;Cabai;81;8107;Maluku;Kepulauan Aru;0;Ha
+2026;Kawasan;Cabai;81;8106;Maluku;Seram Bagian Barat;10;Ha
+2026;Kawasan;Cabai;81;8105;Maluku;Seram Bagian Timur;10;Ha
+2026;Kawasan;Cabai;81;8108;Maluku;Maluku Barat Daya;0;Ha
+2026;Kawasan;Cabai;81;8109;Maluku;Buru Selatan;5;Ha
+2026;Kawasan;Cabai;81;8171;Maluku;Kota Ambon;0;Ha
+2026;Kawasan;Cabai;81;8172;Maluku;Kota Tual;0;Ha
+2026;Kawasan;Cabai;82;8201;Maluku Utara;Halmahera Barat;10;Ha
+2026;Kawasan;Cabai;82;8202;Maluku Utara;Halmahera Tengah;0;Ha
+2026;Kawasan;Cabai;82;8205;Maluku Utara;Kepulauan Sula;0;Ha
+2026;Kawasan;Cabai;82;8204;Maluku Utara;Halmahera Selatan;10;Ha
+2026;Kawasan;Cabai;82;8203;Maluku Utara;Halmahera Utara;5;Ha
+2026;Kawasan;Cabai;82;8206;Maluku Utara;Halmahera Timur;0;Ha
+2026;Kawasan;Cabai;82;8207;Maluku Utara;Pulau Morotai;0;Ha
+2026;Kawasan;Cabai;82;8208;Maluku Utara;Pulau Taliabu;0;Ha
+2026;Kawasan;Cabai;82;8271;Maluku Utara;Kota Ternate;0;Ha
+2026;Kawasan;Cabai;82;8272;Maluku Utara;Kota Tidore Kepulauan;0;Ha
+2026;Kawasan;Cabai;92;9203;Papua Barat;Fak fak;10;Ha
+2026;Kawasan;Cabai;92;9208;Papua Barat;Kaimana;0;Ha
+2026;Kawasan;Cabai;92;9207;Papua Barat;Teluk Wondama;5;Ha
+2026;Kawasan;Cabai;92;9206;Papua Barat;Teluk Bintuni;5;Ha
+2026;Kawasan;Cabai;92;9202;Papua Barat;Manokwari;10;Ha
+2026;Kawasan;Cabai;92;9211;Papua Barat;Manokwari Selatan;10;Ha
+2026;Kawasan;Cabai;92;9212;Papua Barat;Pegunungan Arfak;5;Ha
+2026;Kawasan;Cabai;92;9205;Papua Barat Daya;Raja Ampat;6;Ha
+2026;Kawasan;Cabai;92;9201;Papua Barat Daya;Sorong;10;Ha
+2026;Kawasan;Cabai;92;9204;Papua Barat Daya;Sorong Selatan;0;Ha
+2026;Kawasan;Cabai;92;9210;Papua Barat Daya;Maybrat;0;Ha
+2026;Kawasan;Cabai;92;9209;Papua Barat Daya;Tambrauw;5;Ha
+2026;Kawasan;Cabai;92;9271;Papua Barat;Kota Sorong;0;Ha
+2026;Kawasan;Cabai;91;9103;Papua;Jayapura;10;Ha
+2026;Kawasan;Cabai;91;9105;Papua;Kepulauan Yapen;0;Ha
+2026;Kawasan;Cabai;91;9106;Papua;Biak Numfor;10;Ha
+2026;Kawasan;Cabai;91;9110;Papua;Sarmi;0;Ha
+2026;Kawasan;Cabai;91;9111;Papua;Keerom;10;Ha
+2026;Kawasan;Cabai;91;9115;Papua;Waropen;10;Ha
+2026;Kawasan;Cabai;91;9119;Papua;Supiori;0;Ha
+2026;Kawasan;Cabai;91;9120;Papua;Mamberamo Raya;5;Ha
+2026;Kawasan;Cabai;91;9171;Papua;Kota Jayapura;0;Ha
+2026;Kawasan;Cabai;93;9301;Papua Selatan;Merauke;9;Ha
+2026;Kawasan;Cabai;93;9302;Papua Selatan;Boven Digoel;0;Ha
+2026;Kawasan;Cabai;93;9303;Papua Selatan;Mappi;0;Ha
+2026;Kawasan;Cabai;93;9304;Papua Selatan;Asmat;0;Ha
+2026;Kawasan;Cabai;94;9404;Papua Tengah;Mimika;5;Ha
+2026;Kawasan;Cabai;94;9406;Papua Tengah;Dogiyai;0;Ha
+2026;Kawasan;Cabai;94;9408;Papua Tengah;Deiyai;0;Ha
+2026;Kawasan;Cabai;94;9401;Papua Tengah;Nabire;5;Ha
+2026;Kawasan;Cabai;94;9403;Papua Tengah;Paniai;0;Ha
+2026;Kawasan;Cabai;94;9407;Papua Tengah;Intan Jaya;0;Ha
+2026;Kawasan;Cabai;94;9405;Papua Tengah;Puncak;0;Ha
+2026;Kawasan;Cabai;94;9402;Papua Tengah;Puncak Jaya;0;Ha
+2026;Kawasan;Cabai;95;9508;Papua Pegunungan;Nduga;0;Ha
+2026;Kawasan;Cabai;95;9501;Papua Pegunungan;Jayawijaya;0;Ha
+2026;Kawasan;Cabai;95;9507;Papua Pegunungan;Lanny Jaya;0;Ha
+2026;Kawasan;Cabai;95;9504;Papua Pegunungan;Tolikara;0;Ha
+2026;Kawasan;Cabai;95;9505;Papua Pegunungan;Mamberamo Tengah;0;Ha
+2026;Kawasan;Cabai;95;9506;Papua Pegunungan;Yalimo;0;Ha
+2026;Kawasan;Cabai;95;9503;Papua Pegunungan;Yahukimo;0;Ha
+2026;Kawasan;Cabai;95;9502;Papua Pegunungan;Pegunungan Bintang;0;Ha
+2026;Kawasan;Bawang Merah;32;3204;Jawa Barat;Bandung;10;Ha
+2026;Kawasan;Bawang Merah;32;3209;Jawa Barat;Cirebon;10;Ha
+2026;Kawasan;Bawang Merah;32;3205;Jawa Barat;Garut;10;Ha
+2026;Kawasan;Bawang Merah;32;3210;Jawa Barat;Majalengka;10;Ha
+2026;Kawasan;Bawang Merah;33;3329;Jawa Tengah;Brebes;20;Ha
+2026;Kawasan;Bawang Merah;33;3324;Jawa Tengah;Kendal;10;Ha
+2026;Kawasan;Bawang Merah;33;3318;Jawa Tengah;Pati;10;Ha
+2026;Kawasan;Bawang Merah;33;3323;Jawa Tengah;Temanggung;10;Ha
+2026;Kawasan;Bawang Merah;35;3518;Jawa Timur;Nganjuk;10;Ha
+2026;Kawasan;Bawang Merah;35;3513;Jawa Timur;Probolinggo;10;Ha
+2026;Kawasan;Bawang Merah;76;7605;Sulawesi Barat;Majene;5;Ha
+2026;Kawasan;Bawang Merah;73;7316;Sulawesi Selatan;Enrekang;10;Ha
+2026;Kawasan;Bawang Merah;73;7312;Sulawesi Selatan;Soppeng;5;Ha
+2026;Kawasan;Bawang Merah;74;7415;Sulawesi Tenggara;Buton Selatan;5;Ha
+2026;Kawasan;Bawang Merah;13;1302;Sumatera Barat;Solok;10;Ha
+2026;Kawasan;Bawang Merah;12;1212;Sumatera Utara;Toba;5;Ha
+2026;Pekarangan Pangan Bergizi;P2B;11;1104;Aceh;Aceh Tengah;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;11;1105;Aceh;Aceh Barat;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;11;1108;Aceh;Aceh Utara;2;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;11;1112;Aceh;Aceh Barat Daya;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;11;1116;Aceh;Aceh Tamiang;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;11;1171;Aceh;Kota Banda Aceh;3;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;13;1302;Sumatera Barat;Solok;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;13;1310;Sumatera Barat;Dharmasraya;1;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;13;1371;Sumatera Barat;Kota Padang;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;15;1501;Jambi;Kerinci;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;15;1502;Jambi;Merangin;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;15;1504;Jambi;BatangHari;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;15;1505;Jambi;Muaro Jambi;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;15;1507;Jambi;Tanjung Jabung Timur;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;15;1509;Jambi;Tebo;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;15;1508;Jambi;Bungo;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;16;1601;Sumatera Selatan;Ogan Komering Ulu;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;18;1801;Lampung;Lampung Selatan;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;18;1802;Lampung;Lampung Tengah;4;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;18;1803;Lampung;Lampung Utara;6;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;18;1872;Lampung;Kota Metro;10;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;19;1901;Kepulauan Bangka Belitung;Bangka;1;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;19;1905;Kepulauan Bangka Belitung;Bangka Barat;1;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;19;1904;Kepulauan Bangka Belitung;Bangka Tengah;1;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;19;1903;Kepulauan Bangka Belitung;Bangka Selatan;1;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;19;1971;Kepulauan Bangka Belitung;Kota Pangkal pinang;1;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;31;3101;DKI Jakarta;ADM. KEP. SERIBU;1;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;31;3174;DKI Jakarta;KOTA ADM. JAKARTA SELATAN;1;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;31;3175;DKI Jakarta;KOTA ADM. JAKARTA TIMUR;2;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;31;3173;DKI Jakarta;KOTA ADM. JAKARTA BARAT;1;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;32;3201;Jawa Barat;Bogor;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;32;3202;Jawa Barat;Sukabumi;10;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;32;3203;Jawa Barat;Cianjur;6;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;32;3204;Jawa Barat;Bandung;8;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;32;3205;Jawa Barat;Garut;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;32;3207;Jawa Barat;Ciamis;10;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;32;3208;Jawa Barat;Kuningan;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;32;3209;Jawa Barat;Cirebon;7;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;32;3211;Jawa Barat;Sumedang;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;32;3212;Jawa Barat;Indramayu;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;32;3213;Jawa Barat;Subang;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;32;3214;Jawa Barat;Purwakarta;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;32;3271;Jawa Barat;Kota Bogor;2;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;32;3274;Jawa Barat;Kota Cirebon;1;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;32;3276;Jawa Barat;Kota Depok;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;32;3279;Jawa Barat;Kota Banjar;4;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;33;3301;Jawa Tengah;Cilacap;3;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;33;3302;Jawa Tengah;Banyumas;3;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;33;3303;Jawa Tengah;Purbalingga;2;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;33;3304;Jawa Tengah;Banjarnegara;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;33;3305;Jawa Tengah;Kebumen;3;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;33;3306;Jawa Tengah;Purworejo;1;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;33;3307;Jawa Tengah;Wonosobo;4;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;33;3308;Jawa Tengah;Magelang;4;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;33;3311;Jawa Tengah;Sukoharjo;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;33;3313;Jawa Tengah;Karanganyar;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;33;3316;Jawa Tengah;Blora;1;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;33;3317;Jawa Tengah;Rembang;1;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;33;3318;Jawa Tengah;Pati;3;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;33;3322;Jawa Tengah;Semarang;3;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;33;3323;Jawa Tengah;Temanggung;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;33;3325;Jawa Tengah;Batang;3;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;33;3326;Jawa Tengah;Pekalongan;3;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;33;3371;Jawa Tengah;Kota Magelang;9;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;33;3372;Jawa Tengah;Kota Surakarta;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;34;3401;D.I. Yogyakarta;Kulon Progo;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;34;3404;D.I. Yogyakarta;Sleman;7;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;35;3509;Jawa Timur;Jember;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;35;3510;Jawa Timur;Banyuwangi;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;35;3511;Jawa Timur;Bondowoso;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;35;3520;Jawa Timur;Magetan;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;35;3521;Jawa Timur;Ngawi;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;35;3529;Jawa Timur;Sumenep;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;36;3601;Banten;Pandeglang;9;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;36;3602;Banten;Lebak;1;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;36;3604;Banten;Serang;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;51;5102;Bali;Tabanan;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;52;5203;NTB;Lombok Timur;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;53;5314;NTT;Rote Ndao;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;61;6101;Kalimantan Barat;Sambas;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;65;6503;Kalimantan Utara;Nunukan;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;72;7202;Sulawesi Tengah;Poso;4;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;73;7307;Sulawesi Selatan;Sinjai;4;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;73;7309;Sulawesi Selatan;Maros;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;73;7311;Sulawesi Selatan;Barru;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;73;7308;Sulawesi Selatan;Bone;10;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;73;7312;Sulawesi Selatan;Soppeng;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;73;7316;Sulawesi Selatan;Enrekang;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;75;7501;Gorontalo;Gorontalo;4;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;76;7604;Sulawesi Barat;Polewali Mandar;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;81;8101;Maluku;Maluku Tengah;5;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;82;8205;Maluku Utara;Kepulauan Sula;3;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;82;8208;Maluku Utara;Pulau Taliabu;2;Kelompok
+2026;Pekarangan Pangan Bergizi;P2B;93;9301;Papua Selatan;Merauke;5;Kelompok
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
