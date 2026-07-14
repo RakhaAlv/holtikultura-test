@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Realisasi extends Model
+class Komoditas extends Model
 {
     //
 }

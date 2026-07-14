@@ -1,26 +1,24 @@
 <?php
-
 namespace Database\Seeders;
-
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
 class ProvinsiSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
         $file = fopen(database_path('data/provinsi.csv'), 'r');
-        $firstline = true;
-        
-        while (($data = fgetcsv($file, 2000, ";")) !== FALSE) {
-            if ($firstline) { $firstline = false; continue; }
-            if (!isset($data[0]) || !isset($data[1])) continue;
-            
-            DB::table('provinsi')->insert([
-                'id_prov' => $data[0],
-                'nama_prov' => $data[1],
-            ]);
+        fgetcsv($file); 
+        $data = [];
+        while (($row = fgetcsv($file, 1000, ";")) !== false) {
+            if (!isset($row[0]) || empty($row[0])) continue;
+            $data[] = [
+                'id' => (int) $row[0],
+                'nama_prov' => $row[1],
+            ];
+            if (count($data) >= 1000) { DB::table('provinsi')->insert($data); $data = []; }
         }
+        if (!empty($data)) DB::table('provinsi')->insert($data);
         fclose($file);
     }
 }
