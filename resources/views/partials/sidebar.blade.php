@@ -1,11 +1,11 @@
 <aside 
     x-data="{ openProfile: false, openKomoditas:true}"
-    class="relative felx h-screen w-[335px] flex-col overflow-hidden bg-[#165C27] text-white">
+    class="relative felx h-screen w-[310px] flex-col overflow-hidden bg-[#165C27] text-white">
 
     <!-- Background Daun -->
      <img
         src="{{ asset('Background-Navigation-Bar.png') }}"
-        class="absolute inset-0 h-full w-full object-cover opacity-60 pointer-events-none select-none z-0">
+        class="absolute inset-0 h-full w-full object-cover opacity-80 pointer-events-none select-none z-0">
 
     <!-- content -->
      <div class="relative z-10 flex h-full flex-col">
@@ -15,7 +15,7 @@
 
         <img
             src="{{ asset('logo-kementrian-pertanian.png')}}"
-            class="h-14 w-14">
+            class="h-12 w-12">
 
         <h1 class="text-[20px] font-bold text-white">
             Ditjen Hortikultura
@@ -30,7 +30,7 @@
 
         <a 
             href="#"
-            class="flex items-center gap-4 rounded-xl bg-[#16B33A] px-5 py-4 shadow-lg">
+            class="flex items-center gap-4 rounded-xl bg-[#16B33A] px-4 py-3 shadow-lg">
 
             <img
                 src="{{ asset('Icon-Dashboard.svg') }}"
