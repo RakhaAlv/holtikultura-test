@@ -8,15 +8,14 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('provinsi', function (Blueprint $table) {
-            $table->string('id', 2)->primary(); // Maksimal 2 digit (contoh: 33)
-            $table->string('nama_provinsi');
-            $table->timestamps();
+        Schema::create('direktorat', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama_direktorat');
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('provinsi');
+        Schema::dropIfExists('direktorat');
     }
 };

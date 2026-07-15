@@ -1,54 +1,48 @@
 <?php
-
 namespace Database\Seeders;
-
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
+use App\Models\Satuan;
 
 class TargetSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
         $file = fopen(database_path('data/target.csv'), 'r');
-        $firstline = true;
-        
-        // Cek ID Kegiatan pertama sebagai fallback
-        $fallbackKegiatan = DB::table('kegiatan')->first();
-        $fallbackIdK = $fallbackKegiatan ? $fallbackKegiatan->id_kegiatan : '1771.QDD.011';
+        fgetcsv($file);
 
-        while (($data = fgetcsv($file, 2000, ";")) !== FALSE) {
-            if ($firstline) { $firstline = false; continue; }
-            
-            // --- KODE PENYELAMAT SUPER KUAT ---
-            // Jika kolom tahun (index 0) tidak ada atau hanya berisi string kosong, lewati baris ini!
-            if (!isset($data[0]) || trim($data[0]) == '') {
-                continue;
+        $komoditasMap = DB::table('komoditas')->get()->mapWithKeys(fn($item) => [strtolower(trim($item->nama)) => $item->id])->toArray();
+        $satuanMap = DB::table('satuan')->get()->mapWithKeys(fn($item) => [strtolower(trim($item->nama_satuan)) => $item->id])->toArray();
+        $kegiatanDefault = DB::table('kegiatan')->first()->id ?? 1;
+
+        $data = [];
+        while (($row = fgetcsv($file, 0, ";")) !== false) {
+            if (!isset($row[0]) || empty($row[0])) continue;
+
+            $namaSatuan = strtolower(trim($row[8]));
+            $namaKomoditas = strtolower(trim($row[2]));
+
+            if (!isset($satuanMap[$namaSatuan])) {
+                $newSatuan = DB::table('satuan')->insertGetId(['nama_satuan' => trim($row[8])]);
+                $satuanMap[$namaSatuan] = $newSatuan;
             }
-            // ----------------------------------
+
+            $data[] = [
+                'tahun'         => (int) $row[0],
+                'kegiatan_id'   => $kegiatanDefault,
+                'komoditas_id'  => $komoditasMap[$namaKomoditas] ?? 1,
+                'satuan_id'     => $satuanMap[$namaSatuan],
+                'provinsi_id'   => (int) $row[3],
+                'kabupaten_id'  => (int) $row[4],
+                'target_output' => (float) $row[7],
+                'created_by'    => 1,
+                'created_at'    => now(),
+                'updated_at'    => now(),
+            ];
             
-            $komoditas = DB::table('komoditas')->where('nama', 'LIKE', '%' . $data[2] . '%')->first();
-            $id_kom = $komoditas ? $komoditas->id_komoditas : 1; 
-
-            // ... (lanjutkan kodenya ke bawah seperti biasa)
-
-            // Cari relasi ID Kegiatan ($data[1] berisi nama kegiatan)
-            $kegiatan = DB::table('kegiatan')->where('nama_kegiatan', 'LIKE', '%' . $data[1] . '%')->first();
-            $id_keg = $kegiatan ? $kegiatan->id_kegiatan : $fallbackIdK; 
-
-            DB::table('target')->insert([
-                'tahun' => $data[0],
-                'id_kegiatan' => $id_keg,
-                'id_komoditas' => $id_kom,
-                'id_prov' => str_pad($data[3], 2, '0', STR_PAD_LEFT), // Format 2 digit (misal 5 jadi 05)
-                'id_kab' => $data[4],
-                'target_output' => $data[7],
-                'created_by' => 1,
-                'updated_by' => 1,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ]);
+            if (count($data) >= 500) { DB::table('target')->insert($data); $data = []; }
         }
+        if (!empty($data)) DB::table('target')->insert($data);
         fclose($file);
     }
 }

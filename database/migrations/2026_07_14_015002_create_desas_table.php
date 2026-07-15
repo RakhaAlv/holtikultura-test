@@ -9,13 +9,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('desa', function (Blueprint $table) {
-            $table->string('id', 10)->primary(); // Maksimal 10 digit
-            $table->string('kecamatan_id', 6); 
+            $table->unsignedBigInteger('id')->primary();
+            $table->unsignedBigInteger('kecamatan_id');
             $table->string('nama_desa');
-            $table->timestamps();
 
-            // Relasi ke tabel kecamatan
-            $table->foreign('kecamatan_id')->references('id')->on('kecamatan')->onDelete('cascade');
+            $table->foreign('kecamatan_id')->references('id')->on('kecamatan')->onDelete('restrict');
         });
     }
 

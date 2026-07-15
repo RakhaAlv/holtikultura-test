@@ -10,19 +10,17 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('role_id')->constrained('roles')->onDelete('restrict');
+            $table->foreignId('direktorat_id')->nullable()->constrained('direktorat')->onDelete('restrict');
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            
-            $table->enum('role', ['admin', 'user']); 
-            
-            $table->string('kode_direktorat')->nullable(); 
-            
             $table->rememberToken();
             $table->timestamps();
         });
 
+        // Tabel Bawaan Laravel untuk reset password & sesi (wajib dipertahankan)
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');

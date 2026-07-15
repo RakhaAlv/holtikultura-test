@@ -41,12 +41,12 @@
             <img
                 src="{{ asset('ilustrasi-petani-login.png') }}"
                 alt="Ilustrasi Login Page"
-                class="absolute bottom-0 -right-25 w-[1100px] max-w-none opacity-70">
+                class="absolute bottom-0 -right-25 w-[1100px] max-w-none opacity-80">
 
         </div>
 
         <!-- ================= RIGHT SIDE ================= -->
-        <div class="relative z-10 w-1/2 bg-green-700 rounded-l-[40px] overflow-hidden">
+        <div class="relative z-10 w-1/2 bg-green-700 rounded-l-[40px] overflow-hidden shadow-[0_0_40px_rgba(0,0,0,0.18)]">
 
             <!-- Dekorasi Lingkarn Login Page -->
                 <div class="absolute -right-24 -bottom-24 h-64 w-64 rounded-full border-[25px] border-green-500 opacity-40"></div>
