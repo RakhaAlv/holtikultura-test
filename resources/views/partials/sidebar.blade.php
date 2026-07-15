@@ -124,6 +124,11 @@
     </a>
 </div>
 
+{{-- Day 2 Progress --}}
+{{-- Menu ini hanya boleh diakses Super Admin dan Admin Direktorat --}}
+
+@if(auth()->user()->isSuperAdmin() || auth()->user()->isAdminDirektorat())
+
 <hr class="mx-5 mt-6 border-green-700">
 
 <div class="mt-8 px-6">
@@ -141,9 +146,15 @@
 </a>
 </div>
 
+@endif
+
+{{-- Day 2 Progress --}}
+{{-- Menu ini hanya boleh diakses Super Admin dan Admin Direktorat --}}
+
 <hr class="mx-5 mt-6 border-green-700">
 
 <!-- User Management -->
+ @if(auth()->user()->isSuperAdmin())
  <div class="mt-6 px-6">
 
     <a
@@ -159,6 +170,8 @@
     </span>
 </a>
 </div>
+
+@endif
 
 
 

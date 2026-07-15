@@ -35,4 +35,12 @@ Route::middleware('auth')->get('/tes-role', function () {
     dd(Auth::User()->role);
 
 });
+
+
+Route::middleware('auth')->get('/tes-helper', function () {
+
+    dd(auth()->user()->isSuperAdmin());
+
+
+});
 require __DIR__.'/auth.php';

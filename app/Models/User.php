@@ -40,5 +40,21 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Direktorat::class);
     }
+//// ganti dengan role_id sesuai dengan role yang ada di tabel roles.
+// jika role_id 1 adalah superadmin, maka method isSuperAdmin akan mengembalikan true jika user memiliki role_id 1.
+    public function isSuperAdmin(): bool
+    {
+        return $this->role_id === 1;
+    }
+
+    public function isAdminDirektorat(): bool
+    {
+        return $this->role_id === 2;
+    }
+
+    public function isUser(): bool
+    {
+        return $this->role_id === 3;
+    }
 }
 
