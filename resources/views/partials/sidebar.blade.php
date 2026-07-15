@@ -105,74 +105,82 @@
 
 </div>
 
-<!-- Rekap wilayah -->
+{{-- ========================================== --}}
+{{-- Rekap Data Wilayah --}}
+{{-- Semua role bisa akses --}}
+{{-- ========================================== --}}
+
+<hr class="mx-5 mt-6 border-green-700">
 
 <div class="mt-8 px-6">
 
-    <a
-        href="#"
-        class="flex items-center gap-4">
+    <a href="#" class="flex items-center gap-4">
 
         <img
             src="{{ asset('Icon-Map.svg') }}"
             class="w-8">
 
-        <span 
-            class="text-lg uppercase text-white">
+        <span class="text-lg uppercase text-white">
             Rekap Data Wilayah
         </span>
+
     </a>
+
 </div>
 
-{{-- Day 2 Progress --}}
-{{-- Menu ini hanya boleh diakses Super Admin dan Admin Direktorat --}}
+{{-- ========================================== --}}
+{{-- Management Data --}}
+{{-- Super Admin & Admin Direktorat --}}
+{{-- ========================================== --}}
 
 @if(auth()->user()->isSuperAdmin() || auth()->user()->isAdminDirektorat())
 
 <hr class="mx-5 mt-6 border-green-700">
 
 <div class="mt-8 px-6">
-    <a
-        href="#"
-        class="flex items-center gap-4">
 
-    <img
-        src="{{ asset('Icon-Management.svg') }}"
-        class="w-8">
+    <a href="#" class="flex items-center gap-4">
 
-    <span class="text-lg uppercase text-white">
-        Management Data
-    </span>
-</a>
+        <img
+            src="{{ asset('Icon-Management.svg') }}"
+            class="w-8">
+
+        <span class="text-lg uppercase text-white">
+            Management Data
+        </span>
+
+    </a>
+
 </div>
 
 @endif
 
-{{-- Day 2 Progress --}}
-{{-- Menu ini hanya boleh diakses Super Admin dan Admin Direktorat --}}
+{{-- ========================================== --}}
+{{-- User Management --}}
+{{-- Super Admin Only --}}
+{{-- ========================================== --}}
+
+@if(auth()->user()->isSuperAdmin())
 
 <hr class="mx-5 mt-6 border-green-700">
 
-<!-- User Management -->
- @if(auth()->user()->isSuperAdmin())
- <div class="mt-6 px-6">
+<div class="mt-6 px-6">
 
-    <a
-       href="#"
-       class="flex items-center gap-4">
+    <a href="#" class="flex items-center gap-4">
 
-    <img
-        src="{{ asset('Icon-Management.svg') }}"
-        class="w-8">
-    
-    <span class="text-lg uppercase text-white">
-        User Management
-    </span>
-</a>
+        <img
+            src="{{ asset('Icon-Management.svg') }}"
+            class="w-8">
+
+        <span class="text-lg uppercase text-white">
+            User Management
+        </span>
+
+    </a>
+
 </div>
 
 @endif
-
 
 
 <!-- Spacer -->
@@ -193,8 +201,8 @@
                 src="{{ asset('Icon-User.svg') }}"
                 class="w-12">
 
-            <span class="text-lg font-medium text-white">
-                Email
+            <span class="text-base font-medium text-white">
+                {{ auth()->user()->email }}
             </span>
 
         </div>
@@ -232,6 +240,3 @@
 </div>
 </div>
 </aside>
-
-
-    
