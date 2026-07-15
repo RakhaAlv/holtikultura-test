@@ -26,7 +26,18 @@ class UserSeeder extends Seeder
                 'role_id' => 2,
                 'direktorat_id' => 4,
                 'created_at' => now(),
+                    ],
+
+            [
+                'id' => 3,
+                'name' => 'User',
+                'email' => 'userkementrian@hortiku.com',
+                'password' => Hash::make('password123'),
+                'role_id' => 3,
+                'direktorat_id' => null,
+                'created_at' => now(),
                     ]
+            
         ]);
     }
 }

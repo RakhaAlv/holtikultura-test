@@ -57,3 +57,10 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
 });
+
+//// day 2 progress
+Route::middleware('auth')->get('/tes-direktorat', function () {
+
+    return Auth::User()->direktorat;
+
+});

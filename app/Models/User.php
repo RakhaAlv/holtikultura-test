@@ -14,12 +14,13 @@ class User extends Authenticatable
     }
     use HasFactory, Notifiable;
 
+
     protected $fillable = [
         'name',
         'email',
         'password',
-        'role',
-        'kode_direktorat',
+        'role_id',
+        'direktorat_id',
     ];
 
     protected $hidden = [
@@ -33,6 +34,11 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+//// day 2 progress
+     public function direktorat()
+    {
+        return $this->belongsTo(Direktorat::class);
     }
 }
 
