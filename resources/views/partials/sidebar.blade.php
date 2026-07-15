@@ -42,7 +42,7 @@
         </a>
 </div>
 
-<hr class="mx-5 mt-4 border-green-700">
+<hr class="mx-5 mt-6 border-green-700">
     <!-- Rekap Komoditas -->
 
     <div class="mt-6">
@@ -51,7 +51,7 @@
             class="flex w-full items-center justify-between px-6">
 
     <span
-        class="text-sm font-semibold uppercase tracking-wide text-white">
+        class="text-lg uppercase tracking-wide text-white">
         Rekap Data Komoditas
     </span>
 
@@ -74,93 +74,113 @@
 <div
     x-show="openKomoditas"
     x-transition
-    class="mx-4 mt-4 rounded-xl bg-[#083E16] p-4 shadow-xl">
+    class="mx-4 mt-4 rounded-xl bg-[#083E16] p-5 shadow-xl">
 
-    <a href="#" class="mb-5 flex items-center gap-4">
-        <img src="{{ asset('Icon-Bawang.svg') }}" class="w-6">
-        <span class="text-base text-white">Bawang Putih</span>
+    <a href="#" class="mb-6 flex items-center gap-4">
+        <img src="{{ asset('Icon-Bawang.svg') }}" class="w-8">
+        <span class="text-[18px] text-white">Bawang Putih</span>
     </a>
 
-    <a href="#" class="mb-5 flex items-center gap-4">
-        <img src="{{ asset('Icon-Bawang.svg') }}" class="w-6">
-        <span class="text-base text-white">Bawang Merah</span>
+    <a href="#" class="mb-6 flex items-center gap-4">
+        <img src="{{ asset('Icon-Bawang.svg') }}" class="w-8">
+        <span class="text-[18px] text-white">Bawang Merah</span>
     </a>
 
-    <a href="#" class="mb-5 flex items-center gap-4">
-        <img src="{{ asset('Icon-Cabai.svg') }}" class="w-6">
-        <span class="text-base text-white ">Cabai</span>
+    <a href="#" class="mb-6 flex items-center gap-4">
+        <img src="{{ asset('Icon-Cabai.svg') }}" class="w-8">
+        <span class="text-[18px] text-white ">Cabai</span>
     </a>
 
-    <a href="#" class="mb-5 flex items-center gap-4">
-        <img src="{{ asset('Buah-Icon.svg') }}" class="w-6">
-        <span class="text-base text-white">Durian</span>
+    <a href="#" class="mb-6 flex items-center gap-4">
+        <img src="{{ asset('Icon-Durian.svg') }}" class="w-8">
+        <span class="text-[18px] text-white">Durian</span>
     </a>
 
     <a href="#" class="flex items-center gap-4">
-        <img src="{{ asset('Icon-tractor.svg') }}" class="w-6">
-        <span class="text-base text-white">P2B</span>
+        <img src="{{ asset('Icon-tractor.svg') }}" class="w-8">
+        <span class="text-[18px] text-white">P2B</span>
     </a>
 
     </div>
 
 </div>
 
-<hr class="mx-5 mt-4 border-green-700">
-<!-- Rekap wilayah -->
+{{-- ========================================== --}}
+{{-- Rekap Data Wilayah --}}
+{{-- Semua role bisa akses --}}
+{{-- ========================================== --}}
 
-<div class="mt-5 px-6">
+<hr class="mx-5 mt-6 border-green-700">
 
-    <a
-        href="#"
-        class="flex items-center gap-4">
+<div class="mt-8 px-6">
+
+    <a href="#" class="flex items-center gap-4">
 
         <img
             src="{{ asset('Icon-Map.svg') }}"
-            class="w-6">
+            class="w-8">
 
-        <span 
-            class="text-base font-medium uppercase text-white">
+        <span class="text-lg uppercase text-white">
             Rekap Data Wilayah
         </span>
+
     </a>
+
 </div>
 
-<hr class="mx-5 mt-4 border-green-700">
+{{-- ========================================== --}}
+{{-- Management Data --}}
+{{-- Super Admin & Admin Direktorat --}}
+{{-- ========================================== --}}
 
-<div class="mt-5 px-6">
-    <a
-        href="#"
-        class="flex items-center gap-4">
+@if(auth()->user()->isSuperAdmin() || auth()->user()->isAdminDirektorat())
 
-    <img
-        src="{{ asset('Icon-Management.svg') }}"
-        class="w-6">
+<hr class="mx-5 mt-6 border-green-700">
 
-    <span class="text-base font-medium uppercase text-white">
-        Management Data
-    </span>
-</a>
+<div class="mt-8 px-6">
+
+    <a href="#" class="flex items-center gap-4">
+
+        <img
+            src="{{ asset('Icon-Management.svg') }}"
+            class="w-8">
+
+        <span class="text-lg uppercase text-white">
+            Management Data
+        </span>
+
+    </a>
+
 </div>
 
-<hr class="mx-5 mt-4 border-green-700">
+@endif
 
-<!-- User Management -->
- <div class="mt-6 px-6">
+{{-- ========================================== --}}
+{{-- User Management --}}
+{{-- Super Admin Only --}}
+{{-- ========================================== --}}
 
-    <a
-       href="#"
-       class="flex items-center gap-4">
+@if(auth()->user()->isSuperAdmin())
 
-    <img
-        src="{{ asset('Icon-Management.svg') }}"
-        class="w-6">
-    
-    <span class="text-base font-medium uppercase text-white">
-        User Management
-    </span>
-</a>
+<hr class="mx-5 mt-6 border-green-700">
+
+<div class="mt-6 px-6">
+
+    <a href="#" class="flex items-center gap-4">
+
+        <img
+            src="{{ asset('Icon-Management.svg') }}"
+            class="w-8">
+
+        <span class="text-lg uppercase text-white">
+            User Management
+        </span>
+
+    </a>
+
 </div>
 
+@endif
 
 
 <!-- Spacer -->
@@ -173,16 +193,16 @@
 
     <button 
         @click="openProfile=!openProfile"
-        class="flex w-full items-center justify-between px-5 py-4 hover:bg-green-800">
+        class="flex w-full items-center justify-between px-5 py-6 hover:bg-green-800">
 
         <div class="flex items-center gap-4">
 
             <img
                 src="{{ asset('Icon-User.svg') }}"
-                class="w-10">
+                class="w-12">
 
             <span class="text-base font-medium text-white">
-                Email
+                {{ auth()->user()->email }}
             </span>
 
         </div>
@@ -212,7 +232,7 @@
 
             <button
                 type="submit"
-                class="flex w-full items-center gap-4 px-4 py-3 hover:bg-green-800 text-white">
+                class="flex w-full items-center gap-4 px-5 py-4 hover:bg-green-800 text-white">
                 Logout
             </button>
         </form>
@@ -220,6 +240,3 @@
 </div>
 </div>
 </aside>
-
-
-    
