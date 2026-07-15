@@ -20,7 +20,7 @@
         <div class="relative w-1/2 bg-white">
 
         <!-- Bagian atas  -->
-         <div class="flex flex-col items-center pt-20">
+         <div class="relative z-10 flex flex-col items-center pt-20">
 
          <!-- Judul -->
 
@@ -33,7 +33,7 @@
             <img
                 src="{{ asset('logo-kementrian-pertanian.png') }}"
                 alt="Logo Kementrian Pertanian"
-                class="mx-auto mt-20 w-44">
+                class="mx-auto mt-[140px] w-44">
 
         </div>  
 
@@ -41,7 +41,7 @@
             <img
                 src="{{ asset('ilustrasi-petani-login.png') }}"
                 alt="Ilustrasi Login Page"
-                class="absolute bottom-0 -right-25 w-[1100px] max-w-none opacity-80">
+                class="absolute bottom-0 -right-25 w-[1000px] max-w-none opacity-80">
 
         </div>
 
@@ -75,14 +75,19 @@
                     </p>
 
                     <!-- Form -->
-                    <form class="mt-8">
+                    <form method="POST" action="{{ route('login') }}" class="mt-8">
+                        @csrf
 
                         <!-- Email -->
                         <div>
                             <input
                                 type="email"
+                                name="email"
                                 placeholder="Email Address"
                                 class="w-full rounded-full border border-gray-300 px-6 py-4 outline-none focus:border-green-700 focus:ring-2 focus:ring-green-700"
+                                value="{{ old('email') }}"
+                                required
+                                autofocus
                             >
                         </div>
 
@@ -90,8 +95,10 @@
                         <div class="mt-5">
                             <input
                                 type="password"
+                                name="password"
                                 placeholder="Password"
                                 class="mt-5 w-full rounded-full border border-gray-300 px-6 py-4 text-sm outline-none transition focus:border-green-700 focus:ring-2 focus:ring-green-700"
+                                required
                             >
                         </div>
 
@@ -99,6 +106,7 @@
                         <div class="mt-5 flex items-center">
                             <input
                                 id="remember"
+                                name="remember"
                                 type="checkbox"
                                 class="h-4 w-4 rounded border-gray-300 text-green-700 focus:ring-green-700"
                             >
@@ -106,6 +114,10 @@
                                 Remember me
                             </label>
                         </div>
+
+                        @error('email')
+                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                         <!-- Button -->
                         <button
                             type="submit"
