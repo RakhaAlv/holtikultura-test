@@ -2,14 +2,20 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+//// day 2 progress
+use illuminate\Support\Facades\Auth;
+
+Route::get('/tes-role', function () {
+    dd(Auth::user());
+});
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    return view('dashboard.index');
+})->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -17,4 +23,24 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
+
+//// day 2 progress ( cek jika user sudah login dan memiliki direktorat )
+Route::middleware('auth')->get('/tes-direktorat', function () {
+    dd(Auth::User()->direktorat);
+
+});
+
+Route::middleware('auth')->get('/tes-role', function () {
+    dd(Auth::User()->role);
+
+});
+
+
+Route::middleware('auth')->get('/tes-helper', function () {
+
+    dd(auth()->user()->isSuperAdmin());
+
+
+});
 require __DIR__.'/auth.php';
