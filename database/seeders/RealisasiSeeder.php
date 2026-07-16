@@ -7,6 +7,17 @@ use Illuminate\Support\Facades\DB;
 
 class RealisasiSeeder extends Seeder
 {
+
+    private array $statusMap = [
+        'usulan cpcl'                   => 'Usulan CPCL',
+        'kontrak/pks'                   => 'Kontrak/PKS',
+        'kontrak / pks'                 => 'Kontrak/PKS',
+        'pemberkasan dokumen pencairan' => 'Pemberkasan Dokumen Pencairan',
+        'distribusi bantuan'            => 'Distribusi Bantuan',
+        'bantuan sudah diterima'        => 'Bantuan Sudah Diterima',
+        'belum ditentukan'              => 'Usulan CPCL',
+    ];
+
     public function run(): void
     {
         $filePath = database_path('data/data_fix.csv');
@@ -17,13 +28,12 @@ class RealisasiSeeder extends Seeder
         }
 
         $file = fopen($filePath, 'r');
-        fgetcsv($file, 0, ";"); // Skip Baris Header
+        fgetcsv($file, 0, ";"); 
 
         $komoditasMap = DB::table('komoditas')->get()->mapWithKeys(fn($item) => [strtolower(trim($item->nama)) => $item->id])->toArray();
         $satuanMap    = DB::table('satuan')->get()->mapWithKeys(fn($item) => [strtolower(trim($item->nama_satuan)) => $item->id])->toArray();
         $kegiatanMap  = DB::table('kegiatan')->get()->mapWithKeys(fn($item) => [strtolower(trim($item->nama_program)) => $item->id])->toArray();
 
-        // Hanya AMBIL data master yang sudah ada. TIDAK ADA AUTO-INSERT wilayah baru lagi.
         $existingDesa = DB::table('desa')->pluck('id')->toArray();
 
         $kegiatanDefault = DB::table('kegiatan')->first()->id ?? 1;
@@ -32,12 +42,11 @@ class RealisasiSeeder extends Seeder
         $data = [];
         $rowCount = 0;
         $skippedCount = 0;
-        $skippedLog = []; // untuk dicatat ke file log biar bisa direview
+        $skippedLog = []; 
 
         while (($row = fgetcsv($file, 0, ";")) !== false) {
             if (!isset($row[8]) || empty(trim($row[8]))) continue;
 
-            // Bersihkan karakter biner cacat bawaan Excel
             $namaKegiatan   = strtolower(trim(preg_replace('/[^\x20-\x7E]/', '', $row[1])));
             $namaKomoditas  = strtolower(trim(preg_replace('/[^\x20-\x7E]/', '', $row[2])));
             $namaSatuan     = strtolower(trim(preg_replace('/[^\x20-\x7E]/', '', $row[11])));
@@ -47,7 +56,6 @@ class RealisasiSeeder extends Seeder
 
             $kodeDesa = (int) preg_replace('/[^0-9]/', '', $row[8]);
 
-            // --- VALIDASI: kode desa harus 10 digit format BPS ---
             if ($kodeDesa < 1000000000) {
                 $skippedCount++;
                 $skippedLog[] = "SKIP (kode desa tidak valid): {$row[7]} | kode: {$row[8]}";
@@ -59,7 +67,6 @@ class RealisasiSeeder extends Seeder
             $kecamatan_id = (int) substr($kodeDesa, 0, 6);
             $desa_id      = $kodeDesa;
 
-            // --- VALIDASI UTAMA: desa harus SUDAH ADA di master, kalau tidak -> SKIP ---
             if (!in_array($desa_id, $existingDesa)) {
                 $skippedCount++;
                 $skippedLog[] = "SKIP (desa tidak ditemukan di master): {$namaDesaBersih} | kode: {$desa_id}";
@@ -82,7 +89,7 @@ class RealisasiSeeder extends Seeder
                 'desa_id'          => $desa_id,
                 'kelompok_tani'    => $kelompokTani ?: '-',
                 'realisasi_output' => (float) str_replace(',', '.', $row[12]),
-                'status'           => empty($statusBersih) ? 'Usulan CPCL' : $statusBersih,
+                'status'           => $this->normalizeStatus($statusBersih),
                 'created_by'       => $userDefault,
                 'created_at'       => now(),
                 'updated_at'       => now(),
@@ -102,7 +109,6 @@ class RealisasiSeeder extends Seeder
 
         fclose($file);
 
-        // Simpan log baris yang di-skip ke file, biar bisa direview nanti tanpa bikin terminal penuh
         if (!empty($skippedLog)) {
             file_put_contents(
                 storage_path('logs/realisasi_skipped_' . now()->format('Ymd_His') . '.log'),
@@ -111,6 +117,13 @@ class RealisasiSeeder extends Seeder
         }
 
         $this->command->info("Berhasil menambahkan {$rowCount} data realisasi ");
-        $this->command->warn("{$skippedCount} baris DILEWATI karena kode desa tidak valid");
+        $this->command->warn("{$skippedCount} baris Dilewati karena kode desa tidak valid");
+    }
+
+    private function normalizeStatus(?string $status): string
+    {
+        $key = strtolower(trim((string) $status));
+
+        return $this->statusMap[$key] ?? 'Usulan CPCL';
     }
 }

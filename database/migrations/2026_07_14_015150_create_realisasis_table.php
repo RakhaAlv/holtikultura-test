@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('realisasi', function (Blueprint $table) {
             $table->id();
-            $table->integer('tahun');
+            $table->year('tahun')->index();
             
             $table->foreignId('kegiatan_id')->constrained('kegiatan')->onDelete('restrict');
             $table->foreignId('komoditas_id')->constrained('komoditas')->onDelete('restrict');
@@ -23,8 +23,14 @@ return new class extends Migration
             
             $table->string('kelompok_tani');
             $table->decimal('realisasi_output', 12, 2);
-            $table->string('status', 30)->default('Draft');
-            
+            $table->enum('status', [
+                'Usulan CPCL',
+                'Kontrak/PKS',
+                'Pemberkasan Dokumen Pencairan',
+                'Distribusi Bantuan',
+                'Bantuan Sudah Diterima'
+            ])->default('Usulan CPCL')->index();       
+
             $table->foreignId('created_by')->constrained('users')->onDelete('restrict');
             $table->foreignId('updated_by')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamps();
