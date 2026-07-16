@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('target', function (Blueprint $table) {
             $table->id();
-            $table->integer('tahun');
+            $table->year('tahun')->index();
             
             $table->foreignId('kegiatan_id')->constrained('kegiatan')->onDelete('restrict');
             $table->foreignId('komoditas_id')->constrained('komoditas')->onDelete('restrict');
