@@ -92,7 +92,7 @@
     </a>
 
     <a href="#" class="mb-6 flex items-center gap-4">
-        <img src="{{ asset('Icon-Durian.svg') }}" class="w-8">
+        <img src="{{ asset('Buah-Icon.svg') }}" class="w-6">
         <span class="text-[18px] text-white">Durian</span>
     </a>
 
