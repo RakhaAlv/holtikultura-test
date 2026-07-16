@@ -1,14 +1,14 @@
 <nav
     x-data="{ openPeriode: false }"
     class="fixed top-0 right-0 z-30 flex h-[80px] items-center justify-between border-b border-gray-200 bg-white px-6 shadow-sm transition-all duration-300"
-    :class="sidebarOpen ? 'left-[280px]' : 'left-0'">
+    :class="sidebarMini ? 'left-[90px]' : 'left-[280px]'">
 
     <!-- Left -->
     <div class="flex items-center gap-4">
 
         <!-- Toggle Sidebar -->
         <button
-            @click="sidebarOpen = !sidebarOpen"
+            @click="sidebarMini = !sidebarMini"
             class="rounded-lg p-2 transition hover:bg-gray-100">
 
             <img
@@ -21,7 +21,7 @@
         <h1 class="text-2xl font-semibold text-gray-800">
             Dashboard Utama<br>
         </h1>
- 
+
 
     </div>
 
