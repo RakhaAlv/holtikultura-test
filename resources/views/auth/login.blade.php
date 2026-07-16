@@ -41,7 +41,7 @@
             <img
                 src="{{ asset('ilustrasi-petani-login.png') }}"
                 alt="Ilustrasi Login Page"
-                class="absolute bottom-0 -right-25 w-[1000px] max-w-none opacity-80">
+                class="absolute bottom-0 -right-23 w-[1000px] max-w-none opacity-80">
 
         </div>
 
@@ -54,7 +54,7 @@
                 <div class="absolute -right-10 -bottom-10 h-40 w-40 rounded-full border-[18px] border-green-400 opacity-30"></div>
 
             <!-- Container Isi -->
-            <div class="flex flex-col items-center pt-28">
+            <div class="flex flex-col items-center pt-24">
 
                 <!-- Judul -->
                 <h1 class="text-center text-white text-2xl font-bold uppercase leading-tight">
