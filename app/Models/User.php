@@ -8,12 +8,9 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    public function role()
-    {
-        return $this->belongsTo(Role::class);
-    }
     use HasFactory, Notifiable;
 
+    protected $table = 'users';
 
     protected $fillable = [
         'name',
@@ -28,6 +25,9 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    // Cegah N+1 Query Problem saat cek otorisasi (role sering diakses di middleware/Blade)
+    protected $with = ['role'];
+
     protected function casts(): array
     {
         return [
@@ -35,13 +35,19 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-//// day 2 progress
-     public function direktorat()
+
+    // --- RELASI ---
+    public function role()
     {
-        return $this->belongsTo(Direktorat::class);
+        return $this->belongsTo(Role::class, 'role_id');
     }
-//// ganti dengan role_id sesuai dengan role yang ada di tabel roles.
-// jika role_id 1 adalah superadmin, maka method isSuperAdmin akan mengembalikan true jika user memiliki role_id 1.
+
+    public function direktorat()
+    {
+        return $this->belongsTo(Direktorat::class, 'direktorat_id');
+    }
+
+    // --- LOGIKA RBAC (sesuai RoleSeeder aktual) ---
     public function isSuperAdmin(): bool
     {
         return $this->role_id === 1;
@@ -57,4 +63,3 @@ class User extends Authenticatable
         return $this->role_id === 3;
     }
 }
-
