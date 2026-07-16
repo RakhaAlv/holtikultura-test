@@ -20,28 +20,26 @@
 <body class="bg-[#F4F4F4] font-['Poppins']">
 
 <div
-    x-data="{ sidebarOpen: true }"
+    x-data="{ sidebarMini: false }"
     class="flex min-h-screen">
 
     {{-- Sidebar --}}
-    <div
-        x-show="sidebarOpen"
-        x-transition:enter="transition duration-300"
-        x-transition:leave="transition duration-300"
-        class="shrink-0">
+    <div class="fixed left-0 top-0 z-40">
 
         @include('partials.sidebar')
 
-    </div> {{-- PENUTUP SIDEBAR --}}
+    </div>
 
     {{-- Content --}}
-    <div class="flex flex-1 flex-col">
+    <div
+        class="flex flex-1 flex-col transition-all duration-300 ease-in-out"
+        :class="sidebarMini ? 'ml-[90px]' : 'ml-[280px]'">
 
         {{-- Navbar --}}
         @include('partials.navbar')
 
-        {{-- Isi halaman --}}
-        <main class="flex-1 p-5">
+        {{-- Main Content --}}
+        <main class="flex-1 p-5 pt-[88px]">
 
             @yield('content')
 

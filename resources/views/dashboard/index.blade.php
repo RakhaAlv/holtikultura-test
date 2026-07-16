@@ -1,12 +1,12 @@
-@extends ('layouts.app')
+@extends('layouts.app')
 
 @section('title', 'Dashboard')
 
 @section('content')
 
-<div class="rounded-xl bg-white p-8 shadow">
-    
-    Dashboard User
+<div class="rounded-[28px] bg-white p-8 shadow-[0_8px_30px_rgba(0,0,0,0.08)]">
+            
+    @include('dashboard.partials.summary-cards')
 
 </div>
 
