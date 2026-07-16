@@ -76,29 +76,29 @@
     x-transition
     class="mx-4 mt-4 rounded-xl bg-[#083E16] p-5 shadow-xl">
 
-    <a href="#" class="mb-6 flex items-center gap-4">
-        <img src="{{ asset('Icon-Bawang.svg') }}" class="w-8">
-        <span class="text-[18px] text-white">Bawang Putih</span>
+    <a href="#" class="mb-5 flex items-center gap-4">
+        <img src="{{ asset('Icon-Bawang.svg') }}" class="w-6">
+        <span class="text-base text-white">Bawang Putih</span>
     </a>
 
-    <a href="#" class="mb-6 flex items-center gap-4">
-        <img src="{{ asset('Icon-Bawang.svg') }}" class="w-8">
-        <span class="text-[18px] text-white">Bawang Merah</span>
+    <a href="#" class="mb-5 flex items-center gap-4">
+        <img src="{{ asset('Icon-Bawang.svg') }}" class="w-6">
+        <span class="text-base text-white">Bawang Merah</span>
     </a>
 
-    <a href="#" class="mb-6 flex items-center gap-4">
-        <img src="{{ asset('Icon-Cabai.svg') }}" class="w-8">
-        <span class="text-[18px] text-white ">Cabai</span>
+    <a href="#" class="mb-5 flex items-center gap-4">
+        <img src="{{ asset('Icon-Cabai.svg') }}" class="w-6">
+        <span class="text-base text-white ">Cabai</span>
     </a>
 
-    <a href="#" class="mb-6 flex items-center gap-4">
-        <img src="{{ asset('Icon-Durian.svg') }}" class="w-8">
-        <span class="text-[18px] text-white">Durian</span>
+    <a href="#" class="mb-5 flex items-center gap-4">
+        <img src="{{ asset('Buah-Icon.svg') }}" class="w-6">
+        <span class="text-base text-white">Durian</span>
     </a>
 
     <a href="#" class="flex items-center gap-4">
-        <img src="{{ asset('Icon-tractor.svg') }}" class="w-8">
-        <span class="text-[18px] text-white">P2B</span>
+        <img src="{{ asset('Icon-tractor.svg') }}" class="w-6">
+        <span class="text-base text-white">P2B</span>
     </a>
 
     </div>
@@ -110,7 +110,8 @@
 {{-- Semua role bisa akses --}}
 {{-- ========================================== --}}
 
-<hr class="mx-5 mt-6 border-green-700">
+<hr class="mx-5 mt-4 border-green-700">
+<!-- Rekap wilayah -->
 
 <div class="mt-8 px-6">
 
@@ -120,7 +121,8 @@
             src="{{ asset('Icon-Map.svg') }}"
             class="w-8">
 
-        <span class="text-lg uppercase text-white">
+        <span 
+            class="text-base font-medium uppercase text-white">
             Rekap Data Wilayah
         </span>
 
@@ -135,23 +137,38 @@
 
 @if(auth()->user()->isSuperAdmin() || auth()->user()->isAdminDirektorat())
 
+{{-- ========================================== --}}
+{{-- Management Data --}}
+{{-- Super Admin & Admin Direktorat --}}
+{{-- ========================================== --}}
+
+@if(auth()->user()->isSuperAdmin() || auth()->user()->isAdminDirektorat())
+
 <hr class="mx-5 mt-6 border-green-700">
 
-<div class="mt-8 px-6">
+<div class="mt-5 px-6">
+    <a
+        href="#"
+        class="flex items-center gap-4">
 
-    <a href="#" class="flex items-center gap-4">
+    <img
+        src="{{ asset('Icon-Management.svg') }}"
+        class="w-6">
 
-        <img
-            src="{{ asset('Icon-Management.svg') }}"
-            class="w-8">
-
-        <span class="text-lg uppercase text-white">
-            Management Data
-        </span>
-
-    </a>
-
+    <span class="text-base font-medium uppercase text-white">
+        Management Data
+    </span>
+</a>
 </div>
+
+@endif
+
+{{-- ========================================== --}}
+{{-- User Management --}}
+{{-- Super Admin Only --}}
+{{-- ========================================== --}}
+
+@if(auth()->user()->isSuperAdmin())
 
 @endif
 
@@ -168,19 +185,16 @@
 
     <a href="#" class="flex items-center gap-4">
 
-        <img
-            src="{{ asset('Icon-Management.svg') }}"
-            class="w-8">
-
-        <span class="text-lg uppercase text-white">
-            User Management
-        </span>
-
-    </a>
-
+    <img
+        src="{{ asset('Icon-Management.svg') }}"
+        class="w-6">
+    
+    <span class="text-base font-medium uppercase text-white">
+        User Management
+    </span>
+</a>
 </div>
 
-@endif
 
 
 <!-- Spacer -->
@@ -202,7 +216,7 @@
                 class="w-12">
 
             <span class="text-base font-medium text-white">
-                {{ auth()->user()->email }}
+                Email
             </span>
 
         </div>
@@ -240,3 +254,6 @@
 </div>
 </div>
 </aside>
+
+
+    

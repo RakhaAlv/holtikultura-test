@@ -13,7 +13,7 @@
             <img
                 src="{{ asset('Icon-Sidebar.svg')}}"
                 alt="Sidebar"
-                class="h-6 w-6">
+                class="h-9 w-9">
         </button>
 
     <!-- Page Title --> 
