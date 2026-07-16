@@ -24,24 +24,24 @@
     class="flex min-h-screen">
 
     {{-- Sidebar --}}
-    <div
-        x-show="sidebarOpen"
-        x-transition:enter="transition duration-300"
-        x-transition:leave="transition duration-300"
-        class="shrink-0">
+<div
+    class="fixed left-0 top-0 z-40 transition-transform duration-300 ease-in-out"
+    :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'">
 
-        @include('partials.sidebar')
+    @include('partials.sidebar')
 
-    </div> {{-- PENUTUP SIDEBAR --}}
+</div> {{-- PENUTUP SIDEBAR --}}
 
     {{-- Content --}}
-    <div class="flex flex-1 flex-col">
+    <div
+        class="flex flex-1 flex-col transition-all duration-300"
+        :class="sidebarOpen ? 'ml-[280px]' : 'ml-0'">
 
         {{-- Navbar --}}
         @include('partials.navbar')
 
         {{-- Isi halaman --}}
-        <main class="flex-1 p-5">
+        <main class="flex-1 p-5 pt-[88px]">
 
             @yield('content')
 

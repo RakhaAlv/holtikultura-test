@@ -1,6 +1,6 @@
 <aside 
     x-data="{ openProfile: false, openKomoditas:true}"
-    class="relative felx h-screen w-[310px] flex-col overflow-hidden bg-[#165C27] text-white">
+    class="flex h-screen w-[280px] flex-col overflow-hidden bg-[#165C27] text-white">
 
     <!-- Background Daun -->
      <img
@@ -15,9 +15,9 @@
 
         <img
             src="{{ asset('logo-kementrian-pertanian.png')}}"
-            class="h-12 w-12">
+            class="h-10 w-10">
 
-        <h1 class="text-[20px] font-bold text-white">
+        <h1 class="text-[18px] font-bold text-white">
             Ditjen Hortikultura
         </h1>
     
@@ -30,13 +30,13 @@
 
         <a 
             href="#"
-            class="flex items-center gap-4 rounded-xl bg-[#16B33A] px-4 py-3 shadow-lg">
+            class="flex items-center gap-4 rounded-xl bg-[#16B33A] px-3 py-2.5 shadow-lg">
 
             <img
                 src="{{ asset('Icon-Dashboard.svg') }}"
-                class="h-6 w-6">
+                class="h-5 w-5">
 
-            <span class="font-medium text-white">
+            <span class="text-[15px] font-medium text-white">
                 Dashboard Utama
             </span>
         </a>
@@ -45,7 +45,7 @@
 <hr class="mx-5 mt-4 border-green-700">
     <!-- Rekap Komoditas -->
 
-    <div class="mt-6">
+    <div class="mt-4">
         <button
             @click="openKomoditas = !openKomoditas"
             class="flex w-full items-center justify-between px-6">
@@ -112,7 +112,7 @@
 
 <hr class="mx-5 mt-4 border-green-700">
 
-<div class="mt-5 px-6">
+<div class="mt-4 px-6">
 
     <a href="#" class="flex items-center gap-4">
 
@@ -137,7 +137,7 @@
 
 <hr class="mx-5 mt-4 border-green-700">
 
-<div class="mt-5 px-6">
+<div class="mt-4 px-6">
 
     <a href="#" class="flex items-center gap-4">
 
@@ -164,7 +164,7 @@
 
 <hr class="mx-5 mt-4 border-green-700">
 
-<div class="mt-6 px-6">
+<div class="mt-4 px-6">
 
     <a href="#" class="flex items-center gap-4">
 

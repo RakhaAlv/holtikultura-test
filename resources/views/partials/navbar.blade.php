@@ -1,98 +1,101 @@
 <nav
     x-data="{ openPeriode: false }"
-    class="flex items-center justify-between border-b border-gray-200 bg-white px-8 py-5 shadow-sm">
+    class="fixed top-0 right-0 z-30 flex h-[80px] items-center justify-between border-b border-gray-200 bg-white px-6 shadow-sm transition-all duration-300"
+    :class="sidebarOpen ? 'left-[280px]' : 'left-0'">
 
     <!-- Left -->
-<div class ="flex items-center gap-5">
+    <div class="flex items-center gap-4">
 
-    <!-- Toggle Sidebar -->
+        <!-- Toggle Sidebar -->
         <button
             @click="sidebarOpen = !sidebarOpen"
             class="rounded-lg p-2 transition hover:bg-gray-100">
 
             <img
-                src="{{ asset('Icon-Sidebar.svg')}}"
+                src="{{ asset('Icon-Sidebar.svg') }}"
                 alt="Sidebar"
-                class="h-9 w-9">
+                class="h-10 w-10">
         </button>
 
-    <!-- Page Title --> 
-     <h1 class="text-[28px] font-semibold text-gray-800">
-        Dashboard Utama
-    </h1>
-</div>
+        <!-- Page Title -->
+        <h1 class="text-2xl font-semibold text-gray-800">
+            Dashboard Utama<br>
+        </h1>
+ 
 
-    <!-- Right --> 
-<div class="flex items-center gap-5">
+    </div>
 
-    <!-- Periode -->
-<div class="relative">
-    
-    <button
-         @click="openPeriode = !openPeriode"
-         class="flex h-[52px] min-w-[220px] items-center justify-between rounded-xl border border-gray-300 bg-white px-5 shadow-sm transition hover:border-green-600">
+    <!-- Right -->
+    <div class="flex items-center gap-4">
 
-        <div class ="flex items-center gap-3">
-
-            <img
-                src="{{ asset('Icon-Calender.svg')}}"
-                class="h-5 w-5">
-
-            <span class="font-medium text-gray-700">
-                Periode 2025
-            </span>
-        </div> 
-        
-        <svg
-            class="h-5 w-5 text-gray-600 transition duration-200"
-            :class="{'rotate-180' : openPeriode}"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24">
-
-            <path 
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M19 9l-7 7-7-7"/>
-        </svg>
-
-    </button>
-
-    <!-- Dropdown -->
-        <div
-            x-show="openPeriode"
-            @click.outside="openPeriode = false"
-            x-transition
-            class="absolute right-0 z-50 mt-2 w-full overflow-hidden rounded-xl bg-white shadow-xl">
+        <!-- Periode -->
+        <div class="relative">
 
             <button
-                class="block w-full px-5 py-3 text-left hover:bg-gray-100">
-                Periode 2025
-            </button>      
-            
-            <button
-                class="block w-full px-5 py-3 text-left hover:bg-gray-100">
-                Periode 2024
+                @click="openPeriode = !openPeriode"
+                class="flex h-11 min-w-[190px] items-center justify-between rounded-xl border border-gray-300 bg-white px-4 shadow-sm transition hover:border-green-600">
+
+                <div class="flex items-center gap-2">
+
+                    <img
+                        src="{{ asset('Icon-Calender.svg') }}"
+                        class="h-4 w-4">
+
+                    <span class="text-sm font-medium text-gray-700">
+                        Periode 2025
+                    </span>
+
+                </div>
+
+                <svg
+                    class="h-4 w-4 text-gray-600 transition duration-200"
+                    :class="{ 'rotate-180': openPeriode }"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    viewBox="0 0 24 24">
+
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M19 9l-7 7-7-7"/>
+
+                </svg>
+
             </button>
 
-            <button
-                class="block w-full px-5 py-3 text-left hover:bg-gray-100">
-                Periode 2023
-            </button>
+            <!-- Dropdown -->
+            <div
+                x-show="openPeriode"
+                @click.outside="openPeriode = false"
+                x-transition
+                class="absolute right-0 z-50 mt-2 w-full overflow-hidden rounded-xl bg-white shadow-xl">
+
+                <button class="block w-full px-4 py-2.5 text-left text-sm hover:bg-gray-100">
+                    Periode 2025
+                </button>
+
+                <button class="block w-full px-4 py-2.5 text-left text-sm hover:bg-gray-100">
+                    Periode 2024
+                </button>
+
+                <button class="block w-full px-4 py-2.5 text-left text-sm hover:bg-gray-100">
+                    Periode 2023
+                </button>
+
+            </div>
 
         </div>
-</div>
 
-<!-- update data -->
+        <!-- Update Data -->
         <button
-            class="flex h-[52px] items-center gap-3 rounded-xl bg-[#16B33A] px-6 text-white shadow-md transition hover:bg-[#139630]">
+            class="flex h-11 items-center gap-2 rounded-xl bg-[#16B33A] px-5 text-white shadow-md transition hover:bg-[#139630]">
 
             <img
                 src="{{ asset('Icon-UpdateData.svg') }}"
-                class="h-5 w-5">
+                class="h-4 w-4">
 
-            <span class="font-semibold">
+            <span class="text-sm font-semibold">
                 Update Data
             </span>
 
