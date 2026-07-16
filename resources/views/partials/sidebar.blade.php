@@ -91,8 +91,8 @@
         <span class="text-[18px] text-white ">Cabai</span>
     </a>
 
-    <a href="#" class="mb-5 flex items-center gap-4">
-        <img src="{{ asset('Icon-Durian.svg') }}" class="w-6">
+    <a href="#" class="mb-6 flex items-center gap-4">
+        <img src="{{ asset('Icon-Durian.svg') }}" class="w-8">
         <span class="text-[18px] text-white">Durian</span>
     </a>
 
@@ -201,7 +201,7 @@
                 class="w-10">
 
             <span class="text-base font-medium text-white">
-                {{ auth()->user()->email }}
+                {{ auth()->user()->name }}
             </span>
 
         </div>
