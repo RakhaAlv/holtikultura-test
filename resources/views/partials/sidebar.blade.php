@@ -42,7 +42,7 @@
         </a>
 </div>
 
-<hr class="mx-5 mt-6 border-green-700">
+<hr class="mx-5 mt-4 border-green-700">
     <!-- Rekap Komoditas -->
 
     <div class="mt-6">
@@ -51,7 +51,7 @@
             class="flex w-full items-center justify-between px-6">
 
     <span
-        class="text-lg uppercase tracking-wide text-white">
+        class="text-sm font-semibold uppercase tracking-wide text-white">
         Rekap Data Komoditas
     </span>
 
@@ -74,30 +74,30 @@
 <div
     x-show="openKomoditas"
     x-transition
-    class="mx-4 mt-4 rounded-xl bg-[#083E16] p-5 shadow-xl">
+    class="mx-4 mt-4 rounded-xl bg-[#083E16] p-4 shadow-xl">
 
-    <a href="#" class="mb-6 flex items-center gap-4">
-        <img src="{{ asset('Icon-Bawang.svg') }}" class="w-8">
+    <a href="#" class="mb-5 flex items-center gap-4">
+        <img src="{{ asset('Icon-Bawang.svg') }}" class="w-6">
         <span class="text-[18px] text-white">Bawang Putih</span>
     </a>
 
-    <a href="#" class="mb-6 flex items-center gap-4">
-        <img src="{{ asset('Icon-Bawang.svg') }}" class="w-8">
+    <a href="#" class="mb-5 flex items-center gap-4">
+        <img src="{{ asset('Icon-Bawang.svg') }}" class="w-6">
         <span class="text-[18px] text-white">Bawang Merah</span>
     </a>
 
-    <a href="#" class="mb-6 flex items-center gap-4">
-        <img src="{{ asset('Icon-Cabai.svg') }}" class="w-8">
+    <a href="#" class="mb-5 flex items-center gap-4">
+        <img src="{{ asset('Icon-Cabai.svg') }}" class="w-6">
         <span class="text-[18px] text-white ">Cabai</span>
     </a>
 
-    <a href="#" class="mb-6 flex items-center gap-4">
-        <img src="{{ asset('Icon-Durian.svg') }}" class="w-8">
+    <a href="#" class="mb-5 flex items-center gap-4">
+        <img src="{{ asset('Icon-Durian.svg') }}" class="w-6">
         <span class="text-[18px] text-white">Durian</span>
     </a>
 
     <a href="#" class="flex items-center gap-4">
-        <img src="{{ asset('Icon-tractor.svg') }}" class="w-8">
+        <img src="{{ asset('Icon-tractor.svg') }}" class="w-6">
         <span class="text-[18px] text-white">P2B</span>
     </a>
 
@@ -110,17 +110,17 @@
 {{-- Semua role bisa akses --}}
 {{-- ========================================== --}}
 
-<hr class="mx-5 mt-6 border-green-700">
+<hr class="mx-5 mt-4 border-green-700">
 
-<div class="mt-8 px-6">
+<div class="mt-5 px-6">
 
     <a href="#" class="flex items-center gap-4">
 
         <img
             src="{{ asset('Icon-Map.svg') }}"
-            class="w-8">
+            class="w-6">
 
-        <span class="text-lg uppercase text-white">
+        <span class="text-base font-medium uppercase text-white">
             Rekap Data Wilayah
         </span>
 
@@ -135,17 +135,17 @@
 
 @if(auth()->user()->isSuperAdmin() || auth()->user()->isAdminDirektorat())
 
-<hr class="mx-5 mt-6 border-green-700">
+<hr class="mx-5 mt-4 border-green-700">
 
-<div class="mt-8 px-6">
+<div class="mt-5 px-6">
 
     <a href="#" class="flex items-center gap-4">
 
         <img
             src="{{ asset('Icon-Management.svg') }}"
-            class="w-8">
+            class="w-6">
 
-        <span class="text-lg uppercase text-white">
+        <span class="text-base font-medium uppercase text-white">
             Management Data
         </span>
 
@@ -162,7 +162,7 @@
 
 @if(auth()->user()->isSuperAdmin())
 
-<hr class="mx-5 mt-6 border-green-700">
+<hr class="mx-5 mt-4 border-green-700">
 
 <div class="mt-6 px-6">
 
@@ -170,9 +170,9 @@
 
         <img
             src="{{ asset('Icon-Management.svg') }}"
-            class="w-8">
+            class="w-6">
 
-        <span class="text-lg uppercase text-white">
+        <span class="text-base font-medium uppercase text-white">
             User Management
         </span>
 
@@ -181,7 +181,6 @@
 </div>
 
 @endif
-
 
 <!-- Spacer -->
 
@@ -193,13 +192,13 @@
 
     <button 
         @click="openProfile=!openProfile"
-        class="flex w-full items-center justify-between px-5 py-6 hover:bg-green-800">
+        class="flex w-full items-center justify-between px-5 py-4 hover:bg-green-800">
 
         <div class="flex items-center gap-4">
 
             <img
                 src="{{ asset('Icon-User.svg') }}"
-                class="w-12">
+                class="w-10">
 
             <span class="text-base font-medium text-white">
                 {{ auth()->user()->email }}
@@ -232,7 +231,7 @@
 
             <button
                 type="submit"
-                class="flex w-full items-center gap-4 px-5 py-4 hover:bg-green-800 text-white">
+                class="flex w-full items-center gap-4 px-4 py-3 hover:bg-green-800 text-white">
                 Logout
             </button>
         </form>
