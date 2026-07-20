@@ -261,6 +261,12 @@ window.addEventListener('load', async function () {
 
     const chart = echarts.init(chartDom);
 
+    const observer = new ResizeObserver(() => {
+    chart.resize();
+    });
+
+    observer.observe(chartDom);
+
     const geoJson = await fetch('/geojson/indonesia-provinsi.json')
         .then(res => res.json());
 
