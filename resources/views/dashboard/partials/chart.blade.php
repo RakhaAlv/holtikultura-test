@@ -27,6 +27,8 @@
 
 <script>
 
+//ECharts otomatis menyesuaikan ukurannya
+
 window.addEventListener("load", function () {
 
     const chartDom = document.getElementById('commodityChart');
@@ -221,6 +223,7 @@ window.addEventListener("load", function () {
 
     };
 
+    //supaya kalau mini sidebar aktif dia mengikuti ukuran layar
     chart.setOption(option);
 
     setTimeout(() => {
