@@ -1,6 +1,7 @@
+import Alpine from 'alpinejs'
+window.Alpine = Alpine
+Alpine.start()
 
-import Alpine from 'alpinejs';
+import * as echarts from 'echarts'
 
-window.Alpine = Alpine;
-
-Alpine.start();
+window.echarts = echarts
