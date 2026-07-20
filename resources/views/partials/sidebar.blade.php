@@ -117,10 +117,10 @@
                 <span class="text-[16px]">Cabai</span>
             </a>
 
-    <a href="#" class="mb-5 flex items-center gap-4">
-        <img src="{{ asset('Buah-Icon.svg') }}" class="w-6">
-        <span class="text-[18px] text-white">Durian</span>
-    </a>
+            <a href="#" class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 hover:bg-[#0E5A22]">
+                <img src="{{ asset('Buah-Icon.svg') }}" class="w-6">
+                <span class="text-[16px]">Durian</span>
+            </a>
 
             <a href="#" class="flex items-center gap-4 rounded-lg px-2 py-2 hover:bg-[#0E5A22]">
                 <img src="{{ asset('Icon-tractor.svg') }}" class="w-6">
