@@ -76,25 +76,10 @@
     x-transition
     class="mx-4 mt-4 rounded-xl bg-[#083E16] p-4 shadow-xl">
 
-    <a href="#" class="mb-5 flex items-center gap-4">
-        <img src="{{ asset('Icon-Bawang.svg') }}" class="w-6">
-        <span class="text-[18px] text-white">Bawang Putih</span>
-    </a>
-
-    <a href="#" class="mb-5 flex items-center gap-4">
-        <img src="{{ asset('Icon-Bawang.svg') }}" class="w-6">
-        <span class="text-[18px] text-white">Bawang Merah</span>
-    </a>
-
-    <a href="#" class="mb-5 flex items-center gap-4">
-        <img src="{{ asset('Icon-Cabai.svg') }}" class="w-6">
-        <span class="text-[18px] text-white ">Cabai</span>
-    </a>
-
-    <a href="#" class="mb-6 flex items-center gap-4">
-        <img src="{{ asset('Buah-Icon.svg') }}" class="w-6">
-        <span class="text-[18px] text-white">Durian</span>
-    </a>
+            <a href="#" class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 hover:bg-[#0E5A22]">
+                <img src="{{ asset('Buah-Icon.svg') }}" class="w-6">
+                <span class="text-[16px]">Durian</span>
+            </a>
 
     <a href="#" class="flex items-center gap-4">
         <img src="{{ asset('Icon-tractor.svg') }}" class="w-6">

@@ -34,29 +34,13 @@ $commodities = [
         'progress' => 83,
     ],
 
-    [
-        'name' => 'P2B',
-        'icon' => 'Buah-Icon.svg',
-        'target' => '845 Ha',
-        'realisasi' => '700 Ha',
-        'progress' => 83,
-    ],
-
-    [
-        'name' => 'Durian',
-        'icon' => 'Buah-Icon.svg',
-        'target' => '845 Ha',
-        'realisasi' => '700 Ha',
-        'progress' => 83,
-    ],
-        
 ];
 
 @endphp
 
 <div x-data="{ showAll: false }">
 
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-5">
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
 
         @foreach($commodities as $index => $commodity)
 
@@ -66,19 +50,21 @@ $commodities = [
             class="rounded-3xl bg-white p-6 shadow-xl transition duration-300 hover:shadow-2xl">
 
             <!-- Header -->
-            <div class="flex items-start justify-between">
+            <div class="flex justify-between items-center">
 
-                <h2 class="text-xl font-semibold text-gray-800 leading-snug">
+                <!-- Judul -->
+                <h2 class="text-xl font-semibold text-gray-800 leading-snug pt-0">
 
                     {{ $commodity['name'] }}
 
                 </h2>
 
+                <!-- Icon -->
                 <div class="flex h-14 w-14 items-center justify-center rounded-full bg-[#F3F8F4]">
 
                     <img
                         src="{{ asset($commodity['icon']) }}"
-                        class="h-30 w-30">
+                        class="h-15 w-15 object-contain">
 
                 </div>
 
@@ -119,7 +105,6 @@ $commodities = [
             </div>
 
             <!-- Progress -->
-
             <div class="mt-7">
 
                 <div class="mb-2 flex justify-between text-sm">
@@ -156,24 +141,10 @@ $commodities = [
 
     </div>
 
-    <!-- Show More -->
+   
+    <div class="mt-6 flex justify-center">
 
-<div class="mt-6 flex justify-center">
-
-    <button
-        @click="showAll = !showAll"
-        class="rounded-full bg-[#2E7D32] px-8 py-3 font-semibold text-white transition hover:bg-green-800">
-
-        <span x-show="!showAll">
-            Show More ▼
-        </span>
-
-        <span x-show="showAll">
-            Show Less ▲
-        </span>
-
-    </button>
-
-</div>
+       
+    </div>
 
 </div>
