@@ -102,58 +102,55 @@ $rows = [
 
         <tbody>
 
-            @foreach($rows as $row)
+@foreach($rows as $index => $row)
 
-        <tr class="border-b border-[#DCEFD9] bg-[#E9FFE8] transition hover:bg-[#DDF7DB]">
+<tr
+    x-data="{ open:false }"
+    class="border-b border-[#DCEFD9] bg-[#E9FFE8]">
 
-                <!-- Komoditas -->
+    <td colspan="5" class="p-0">
 
-                <td class="px-8 py-5 text-[16px] font-medium text-[#222]">
+        <!-- BARIS NASIONAL -->
+        <table class="w-full">
+
+            <tr class="transition hover:bg-[#DDF7DB]">
+
+                <td class="px-8 py-5 w-[22%]">
 
                     {{ $row['komoditas'] }}
 
                 </td>
 
-                <!-- Wilayah -->
-
-                <td class="px-6 py-5">
+                <td class="px-6 py-5 w-[25%]">
 
                     <button
-                        class="flex items-center gap-3 text-[16px] text-[#222] transition hover:text-green-700">
+                        @click="open=!open"
+                        class="flex items-center gap-3">
 
                         <img
                             src="{{ asset('Icon-Arrow-Right.svg') }}"
-                            class="h-4 w-4">
+                            class="h-4 w-4 transition duration-300"
+                            :class="{ 'rotate-90': open }">
 
-                        {{ $row['wilayah'] }}
+                        <span>Nasional</span>
 
                     </button>
 
                 </td>
 
-                <!-- Target --> 
-                
-                <td class="px-6 py-5 text-[16px]">
-
+                <td class="px-6 py-5 w-[18%]">
                     {{ $row['target'] }}
-                
                 </td>
 
-                <!-- Realisasi -->
-
-                <td class="px-6 py-5 text-[16px] font-semibold text-[#138A2E]">
-
+                <td class="px-6 py-5 w-[18%] text-[#138A2E] font-semibold">
                     {{ $row['realisasi'] }}
-
                 </td>
 
-                <!-- Persentase --> 
+                <td class="px-6 py-5 text-center">
 
-                <td class="px-6 py-6 text-center">
+                    <span class="rounded-lg bg-[#F6C1C1] px-3 py-1 text-[#9A2323]">
 
-                    <span class="rounded-lg bg-[#F6C1C1] px-3 py-1 text-[14px] font-medium text-[#9A2323]">
-
-                        {{$row['persentase'] }}
+                        {{ $row['persentase'] }}
 
                     </span>
 
@@ -161,10 +158,166 @@ $rows = [
 
             </tr>
 
-            @endforeach
+            <!-- DROPDOWN -->
+            <tr
+                x-show="open"
+                x-transition>
 
-        </tbody>
+                <td colspan="5" class="bg-[#F7FFF6] p-0">
 
-    </table>
+                    <table class="w-full">
+
+                        <!-- ACEH -->
+
+                        <tr class="border-t">
+
+                            <td class="px-20 py-4 w-[22%] text-gray-600">
+
+                                
+
+                            </td>
+
+                            <td class="px-6 py-4 w-[25%]">
+
+                                <button
+                                    class="flex items-center gap-3">
+
+                                    <img
+                                        src="{{ asset('Icon-Arrow-Right.svg') }}"
+                                        class="h-3 w-3">
+
+                                    Aceh
+
+                                </button>
+
+                            </td>
+
+                            <td class="px-6 py-4">
+                                600 Ha
+                            </td>
+
+                            <td class="px-6 py-4 text-[#138A2E]">
+                                350 Ha
+                            </td>
+
+                            <td class="px-6 py-4 text-center">
+
+                                <span class="rounded-lg bg-green-100 px-3 py-1 text-green-700">
+
+                                    58%
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                        <!-- SUMUT -->
+
+                        <tr class="border-t">
+
+                            <td class="px-20 py-4">
+
+                                
+
+                            </td>
+
+                            <td class="px-6 py-4">
+
+                                <button
+                                    class="flex items-center gap-3">
+
+                                    <img
+                                        src="{{ asset('Icon-Arrow-Right.svg') }}"
+                                        class="h-3 w-3">
+
+                                    Sumatera Utara
+
+                                </button>
+
+                            </td>
+
+                            <td class="px-6 py-4">
+                                480 Ha
+                            </td>
+
+                            <td class="px-6 py-4 text-[#138A2E]">
+                                215 Ha
+                            </td>
+
+                            <td class="px-6 py-4 text-center">
+
+                                <span class="rounded-lg bg-yellow-100 px-3 py-1 text-yellow-700">
+
+                                    44%
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                        <!-- JAWA BARAT -->
+
+                        <tr class="border-t">
+
+                            <td class="px-20 py-4">
+
+                                
+
+                            </td>
+
+                            <td class="px-6 py-4">
+
+                                <button
+                                    class="flex items-center gap-3">
+
+                                    <img
+                                        src="{{ asset('Icon-Arrow-Right.svg') }}"
+                                        class="h-3 w-3">
+
+                                    Jawa Barat
+
+                                </button>
+
+                            </td>
+
+                            <td class="px-6 py-4">
+                                800 Ha
+                            </td>
+
+                            <td class="px-6 py-4 text-[#138A2E]">
+                                118 Ha
+                            </td>
+
+                            <td class="px-6 py-4 text-center">
+
+                                <span class="rounded-lg bg-red-100 px-3 py-1 text-red-700">
+
+                                    15%
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                    </table>
+
+                </td>
+
+            </tr>
+
+        </table>
+
+    </td>
+
+</tr>
+
+    @endforeach
+
+    </tbody>
+
+</table>
 
 </div>
