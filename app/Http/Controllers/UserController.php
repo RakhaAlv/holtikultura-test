@@ -4,15 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+// day 4 progress
+use App\Models\User;
+
+
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -60,5 +58,12 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+// day 4 progress, add index method to show user management page
+    public function index()
+    {
+    $users = \App\Models\User::with(['role', 'direktorat'])->get();
+
+    return view('users.index', compact('users'));
     }
 }

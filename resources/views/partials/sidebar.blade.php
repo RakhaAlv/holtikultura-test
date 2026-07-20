@@ -35,9 +35,9 @@
         <div
             class="pt-4 transition-all duration-300"
             :class="sidebarMini ? 'px-2' : 'px-4'">
-
+        {{-- day 4 progress, agar bisa di klik, harus di kasih href ke route dashboard --}}
             <a
-                href="#"
+                href="{{ route('dashboard') }}"
                 class="flex rounded-xl bg-[#16B33A] py-2.5 shadow-lg transition-all duration-300"
                 :class="sidebarMini ? 'justify-center px-0' : 'items-center gap-4 px-3'">
 
@@ -244,9 +244,9 @@
         <div
             class="mt-4 transition-all duration-300"
             :class="sidebarMini ? 'px-0 flex justify-center' : 'px-6'">
-
+        {{-- day 4 progress, agar bisa di klik, harus di kasih href ke route users.index --}}
         <a
-            href="#"
+            href="{{ route('users.index') }}"
             class="flex rounded-xl py-2.5 transition hover:bg-green-800"
             :class="sidebarMini ? 'justify-center w-12 h-12 items-center' : 'items-center gap-4 px-3'">
 
