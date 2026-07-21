@@ -8,14 +8,15 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('direktorat', function (Blueprint $table) {
+        Schema::create('direktorats', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_direktorat');
+            $table->string('nama');
+            $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('direktorat');
+        Schema::dropIfExists('direktorats');
     }
 };

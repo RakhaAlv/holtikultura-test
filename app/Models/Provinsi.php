@@ -2,33 +2,32 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Provinsi extends Model
 {
-    protected $table = 'provinsi';
+    use HasFactory;
 
-    // ID diisi manual dengan Kode BPS, bukan auto-increment
+    // Primary Key menggunakan Kode BPS (Non-Incrementing)
     public $incrementing = false;
     protected $keyType = 'int';
-    public $timestamps = false;
 
-    protected $fillable = ['id', 'nama_prov'];
+    protected $fillable = ['id', 'nama'];
 
-    // --- RELASI KE BAWAH ---
-    public function kabupaten()
+    public function kabupatens(): HasMany
     {
-        return $this->hasMany(Kabupaten::class, 'provinsi_id');
+        return $this->hasMany(Kabupaten::class);
     }
 
-    // --- RELASI TRANSAKSI ---
-    public function target()
+    public function targets(): HasMany
     {
-        return $this->hasMany(Target::class, 'provinsi_id');
+        return $this->hasMany(Target::class);
     }
 
-    public function realisasi()
+    public function realisasis(): HasMany
     {
-        return $this->hasMany(Realisasi::class, 'provinsi_id');
+        return $this->hasMany(Realisasi::class);
     }
 }

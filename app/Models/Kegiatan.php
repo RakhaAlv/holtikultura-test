@@ -2,28 +2,28 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Kegiatan extends Model
 {
-    protected $table = 'kegiatan';
-    public $timestamps = false;
+    use HasFactory;
 
     protected $fillable = [
-        'direktorat_id', // Wajib didaftarkan di fillable
-        'kd_program', 
-        'nama_program', 
-        'kd_rincianoutput', 
-        'nama_rincianoutput', 
-        'jenis_output'
+        'kode_kegiatan',
+        'nama_kegiatan',
+        'kode_rincian_output',
+        'nama_rincian_output',
     ];
 
-    // Relasi balik ke tabel induk (Direktorat)
-    public function direktorat()
+    public function targets(): HasMany
     {
-        return $this->belongsTo(Direktorat::class, 'direktorat_id');
+        return $this->hasMany(Target::class);
     }
 
-    public function target() { return $this->hasMany(Target::class, 'kegiatan_id'); }
-    public function realisasi() { return $this->hasMany(Realisasi::class, 'kegiatan_id'); }
+    public function realisasis(): HasMany
+    {
+        return $this->hasMany(Realisasi::class);
+    }
 }

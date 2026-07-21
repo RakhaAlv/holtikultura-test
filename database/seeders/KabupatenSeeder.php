@@ -10,34 +10,40 @@ class KabupatenSeeder extends Seeder
 {
     public function run(): void
     {
-        // Standar bypass FK saat truncate
+        DB::disableQueryLog();
+
         Schema::disableForeignKeyConstraints();
-        DB::table('kabupaten')->truncate();
+        DB::table('kabupatens')->truncate();
         Schema::enableForeignKeyConstraints();
 
         $path = database_path('data/kabupaten.csv');
         if (!file_exists($path)) return;
 
         $file = fopen($path, 'r');
-        fgetcsv($file, 1000, ';'); 
+        fgetcsv($file, 1000, ';'); // Skip header
 
         $data = [];
         while (($row = fgetcsv($file, 1000, ';')) !== false) {
             if (!isset($row[2]) || empty($row[2])) continue;
 
             $data[] = [
-                'id' => (int) $row[2],
+                'id'          => (int) $row[2],
                 'provinsi_id' => (int) $row[0],
-                'nama_kab' => trim($row[3]),
+                'nama'        => trim(preg_replace('/[^\x20-\x7E]/', '', $row[3])),
+                'created_at'  => now(),
+                'updated_at'  => now(),
             ];
 
             if (count($data) >= 1000) {
-                DB::table('kabupaten')->insert($data);
+                DB::table('kabupatens')->insert($data);
                 $data = [];
             }
         }
 
-        if (!empty($data)) DB::table('kabupaten')->insert($data);
+        if (!empty($data)) {
+            DB::table('kabupatens')->insert($data);
+        }
+
         fclose($file);
     }
 }

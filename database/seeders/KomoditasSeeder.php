@@ -1,25 +1,31 @@
 <?php
+
 namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class KomoditasSeeder extends Seeder
 {
     public function run(): void
     {
-        $file = fopen(database_path('data/masterkom.csv'), 'r');
-        fgetcsv($file);
-        $data = [];
-        while (($row = fgetcsv($file, 1000, ";")) !== false) {
-            if (!isset($row[0]) || empty($row[0])) continue;
-            $data[] = [
-                'id'     => (int) $row[0],
-                'kd_kom' => $row[1],
-                'nama'   => $row[3],
-            ];
-            if (count($data) >= 500) { DB::table('komoditas')->insert($data); $data = []; }
-        }
-        if (!empty($data)) DB::table('komoditas')->insert($data);
-        fclose($file);
+        DB::disableQueryLog();
+
+        Schema::disableForeignKeyConstraints();
+        DB::table('komoditas')->truncate();
+        Schema::enableForeignKeyConstraints();
+
+        $komoditas = [
+            ['id' => 1, 'kode_komoditas' => 'BPT', 'nama' => 'Bawang Putih', 'created_at' => now(), 'updated_at' => now()],
+            ['id' => 2, 'kode_komoditas' => 'BMR', 'nama' => 'Bawang Merah', 'created_at' => now(), 'updated_at' => now()],
+            ['id' => 3, 'kode_komoditas' => 'CBI', 'nama' => 'Cabai',        'created_at' => now(), 'updated_at' => now()],
+            ['id' => 4, 'kode_komoditas' => 'KTG', 'nama' => 'Kentang',      'created_at' => now(), 'updated_at' => now()],
+            ['id' => 5, 'kode_komoditas' => 'DRN', 'nama' => 'Durian',       'created_at' => now(), 'updated_at' => now()],
+            ['id' => 6, 'kode_komoditas' => 'JGM', 'nama' => 'Jagung Manis', 'created_at' => now(), 'updated_at' => now()],
+            ['id' => 7, 'kode_komoditas' => 'P2B', 'nama' => 'P2B',          'created_at' => now(), 'updated_at' => now()],
+        ];
+
+        DB::table('komoditas')->insert($komoditas);
     }
 }

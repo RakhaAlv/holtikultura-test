@@ -1,44 +1,50 @@
 <?php
+
 namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class KegiatanSeeder extends Seeder
 {
     public function run(): void
     {
-        $file = fopen(database_path('data/kegiatan.csv'), 'r');
-        fgetcsv($file);
+        DB::disableQueryLog();
 
-        $mapDirektorat = [
-            'perbenihan hortikultura' => 2,
-            'perlindungan hortikultura' => 3,
-            'peningkatan produksi sayuran dan tanaman obat' => 4,
-            'buah dan florikultura' => 5, 
-        ];
+        Schema::disableForeignKeyConstraints();
+        DB::table('kegiatans')->truncate();
+        Schema::enableForeignKeyConstraints();
+
+        $path = database_path('data/kegiatan.csv');
+        if (!file_exists($path)) return;
+
+        $file = fopen($path, 'r');
+        fgetcsv($file, 1000, ';'); // Skip header
 
         $data = [];
-        while (($row = fgetcsv($file, 1000, ";")) !== false) {
+        while (($row = fgetcsv($file, 1000, ';')) !== false) {
             if (!isset($row[0]) || empty($row[0])) continue;
 
-            $namaDirCsv = strtolower(trim($row[1]));
-            $direktorat_id = $mapDirektorat[$namaDirCsv] ?? 1; // Default ke 1 (Sekretariat) jika teks tidak cocok
-
             $data[] = [
-                'direktorat_id'      => $direktorat_id, // Kolom relasi utama ke tabel direktorat
-                'kd_program'         => $row[2],
-                'nama_program'       => $row[3],
-                'kd_rincianoutput'   => $row[0],
-                'nama_rincianoutput' => $row[1],
-                'jenis_output'       => $row[4],
+                'kode_kegiatan'       => trim(preg_replace('/[^\x20-\x7E]/', '', $row[2] ?? '1771')),
+                'nama_kegiatan'       => trim(preg_replace('/[^\x20-\x7E]/', '', $row[3] ?? $row[1])),
+                'kode_rincian_output' => trim(preg_replace('/[^\x20-\x7E]/', '', $row[0])),
+                'nama_rincian_output' => trim(preg_replace('/[^\x20-\x7E]/', '', $row[1])),
+                'created_at'          => now(),
+                'updated_at'          => now(),
             ];
-            
-            if (count($data) >= 500) { 
-                DB::table('kegiatan')->insert($data); 
-                $data = []; 
+
+            if (count($data) >= 500) {
+                DB::table('kegiatans')->insert($data);
+                $data = [];
             }
         }
-        if (!empty($data)) DB::table('kegiatan')->insert($data);
+
+        if (!empty($data)) {
+            DB::table('kegiatans')->insert($data);
+        }
+
         fclose($file);
     }
 }

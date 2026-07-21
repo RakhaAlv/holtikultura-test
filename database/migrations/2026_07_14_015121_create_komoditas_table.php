@@ -10,8 +10,9 @@ return new class extends Migration
     {
         Schema::create('komoditas', function (Blueprint $table) {
             $table->id();
-            $table->string('kd_kom')->unique();
+            $table->string('kode_komoditas')->nullable()->index();
             $table->string('nama');
+            $table->timestamps();
         });
     }
 
