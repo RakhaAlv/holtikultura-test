@@ -66,7 +66,7 @@ Route::middleware('auth')->get('/cek-role', function () {
     dd(
         auth()->user()->role_id,
         auth()->user()->role,
-        auth()->user()->role->nama_role
+        auth()->user()->role->name
     );
 
 });
@@ -156,6 +156,15 @@ Route::middleware(['auth', 'role:Super Admin,Admin Direktorat'])
 Route::middleware(['auth'])->get('/rekap-data', function () {
     return view('rekapdata.rekap-data');
 })->name('rekap-data');
+
+Route::middleware('auth')->get('/debug-user', function () {
+    return [
+        'role_id' => auth()->user()->role_id,
+        'nama_role' => auth()->user()->role->name,
+        'isSuperAdmin' => auth()->user()->isSuperAdmin(),
+        'isAdminDirektorat' => auth()->user()->isAdminDirektorat(),
+    ];
+});
 
 require __DIR__.'/auth.php';
 
