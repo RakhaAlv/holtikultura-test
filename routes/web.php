@@ -70,5 +70,39 @@ Route::middleware('auth')->get('/cek-role', function () {
 
 });
 
+// day 5 progress, route untuk menampilkan bawang merah, bawang putih, cabai, durian, dan p2b
+
+Route::middleware('auth')->get('/bawang-merah', function () {
+    return view('komoditas.bawang-merah');
+})->name('bawang-merah');
+
+Route::middleware('auth')->get('/bawang-putih', function () {
+    return view('komoditas.bawang-putih');
+})->name('bawang-putih');
+
+Route::middleware('auth')->get('/cabai', function () {
+    return view('komoditas.cabai');
+})->name('cabai');
+
+Route::middleware('auth')->get('/durian', function () {
+    return view('komoditas.durian');
+})->name('durian');
+
+Route::middleware('auth')->get('/p2b', function () {
+    return view('komoditas.p2b');
+})->name('p2b');
+
+//day 5 progress, route untuk menampilkan halaman data management, hanya bisa diakses oleh super admin dan admin direktorat
+Route::middleware(['auth', 'role:Super Admin,Admin Direktorat'])
+    ->get('/data-management', function () {
+        return view('datamanagement.data-management');
+})->name('data-management');
+
+
+//day 5 progress, route untuk menampilkan halaman rekap data wilayah
+Route::middleware(['auth'])->get('/rekap-data', function () {
+    return view('rekapdata.rekap-data');
+})->name('rekap-data');
+
 require __DIR__.'/auth.php';
 
