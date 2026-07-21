@@ -18,8 +18,8 @@
         </button>
 
         <!-- Page Title -->
-        <h1 class="text-2xl font-semibold text-gray-800">
-            Dashboard Utama<br>
+        <h1 class="text-3xl font-semibold text-[#1F2937]">
+            @yield('navbar-title', 'Dashboard Utama')
         </h1>
 
 

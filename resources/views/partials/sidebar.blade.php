@@ -103,27 +103,42 @@
                 x-transition
                 class="mx-4 mt-4 rounded-xl bg-[#083E16] p-4 shadow-xl">
 
-            <a href="{{ route('bawang-putih') }}" class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 hover:bg-[#0E5A22]">
+            <a href="{{ route('komoditas.show', 'bawang-putih') }}" class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 transition
+                {{ request()->route('slug') == 'bawang-putih'
+                ? 'bg-[#16B33A]'
+                : 'hover:bg-[#0E5A22]' }}">
                 <img src="{{ asset('Icon-Bawang.svg') }}" class="w-6">
                 <span class="text-[16px]">Bawang Putih</span>
             </a>
 
-            <a href="{{ route('bawang-merah') }}" class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 hover:bg-[#0E5A22]">
+            <a href="{{ route('komoditas.show', 'bawang-merah') }}"  class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 transition
+                {{ request()->route('slug') == 'bawang-merah'
+                ? 'bg-[#16B33A]'
+                : 'hover:bg-[#0E5A22]' }}">
                 <img src="{{ asset('Icon-Bawang.svg') }}" class="w-6">
                 <span class="text-[16px]">Bawang Merah</span>
             </a>
 
-            <a href="{{ route('cabai') }}" class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 hover:bg-[#0E5A22]">
+            <a href="{{ route('komoditas.show', 'cabai') }}" class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 transition
+                {{ request()->route('slug') == 'cabai'
+                ? 'bg-[#16B33A]'
+                : 'hover:bg-[#0E5A22]' }}">
                 <img src="{{ asset('Icon-Cabai.svg') }}" class="w-6">
                 <span class="text-[16px]">Cabai</span>
             </a>
 
-            <a href="{{ route('durian') }}" class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 hover:bg-[#0E5A22]">
+            <a href="{{ route('komoditas.show', 'durian') }}"  class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 transition
+                {{ request()->route('slug') == 'durian'
+                ? 'bg-[#16B33A]'
+                : 'hover:bg-[#0E5A22]' }}">
                 <img src="{{ asset('Buah-Icon.svg') }}" class="w-6">
                 <span class="text-[16px]">Durian</span>
             </a>
 
-            <a href="{{ route('p2b') }}" class="flex items-center gap-4 rounded-lg px-2 py-2 hover:bg-[#0E5A22]">
+            <a href="{{ route('komoditas.show', 'p2b') }}"  class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 transition
+                {{ request()->route('slug') == 'p2b'
+                ? 'bg-[#16B33A]'
+                : 'hover:bg-[#0E5A22]' }}">
                 <img src="{{ asset('Icon-tractor.svg') }}" class="w-6">
                 <span class="text-[16px]">P2B</span>
             </a>
@@ -139,23 +154,38 @@
                 x-transition
                 class="mt-4 flex flex-col items-center gap-3">
 
-            <a href="{{ route('bawang-putih') }}" class="flex h-12 w-12 items-center justify-center rounded-xl hover:bg-green-700">
+            <a href="{{ route('komoditas.show', 'bawang-putih') }}" class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 hover:bg-green-700 transition
+                {{ request()->route('slug') == 'bawang-putih'
+                ? 'bg-[#16B33A]'
+                : 'hover:bg-[#0E5A22]' }}">
                 <img src="{{ asset('Icon-Bawang.svg') }}" class="w-6">
             </a>
 
-            <a href="{{ route('bawang-merah') }}" class="flex h-12 w-12 items-center justify-center rounded-xl hover:bg-green-700">
+            <a href="{{ route('komoditas.show', 'bawang-merah') }}" class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 hover:bg-green-700 transition
+                {{ request()->route('slug') == 'bawang-merah'
+                ? 'bg-[#16B33A]'
+                : 'hover:bg-[#0E5A22]' }}">
                 <img src="{{ asset('Icon-Bawang.svg') }}" class="w-6">
             </a>
 
-            <a href="{{ route('cabai') }}" class="flex h-12 w-12 items-center justify-center rounded-xl hover:bg-green-700">
+            <a href="{{ route('komoditas.show', 'cabai') }}" class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 hover:bg-green-700 transition
+                {{ request()->route('slug') == 'cabai'
+                ? 'bg-[#16B33A]'
+                : 'hover:bg-[#0E5A22]' }}">
                 <img src="{{ asset('Icon-Cabai.svg') }}" class="w-6">
             </a>
 
-            <a href="{{ route('durian') }}" class="flex h-12 w-12 items-center justify-center rounded-xl hover:bg-green-700">
+            <a href="{{ route('komoditas.show', 'durian') }}" class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 hover:bg-green-700 transition
+                {{ request()->route('slug') == 'durian'
+                ? 'bg-[#16B33A]'
+                : 'hover:bg-[#0E5A22]' }}">
                 <img src="{{ asset('Buah-Icon.svg') }}" class="w-6">
             </a>
 
-            <a href="{{ route('p2b') }}" class="flex h-12 w-12 items-center justify-center rounded-xl hover:bg-green-700">
+            <a href="{{ route('komoditas.show', 'p2b') }}" class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 hover:bg-green-700 transition
+                {{ request()->route('slug') == 'p2b'
+                ? 'bg-[#16B33A]'
+                : 'hover:bg-[#0E5A22]' }}">
                 <img src="{{ asset('Icon-tractor.svg') }}" class="w-6">
             </a>
 
@@ -175,7 +205,8 @@
 
         <a
             href="{{ route('rekap-data') }}"
-            class="flex rounded-xl py-2.5 transition hover:bg-green-800"
+            class="flex rounded-xl py-2.5 transition 
+            {{ request()->routeIs('rekap-data') ? 'bg-[#16B33A] shadow-lg' : 'hover:bg-green-800' }}"
             :class="sidebarMini ? 'justify-center w-12 h-12 items-center' : 'items-center gap-4 px-3'">
 
         <img
@@ -210,7 +241,8 @@
 
         <a
             href="{{ route('data-management') }}"
-            class="flex rounded-xl py-2.5 transition hover:bg-green-800"
+            class="flex rounded-xl py-2.5 transition 
+            {{ request()->routeIs('data-management') ? 'bg-[#16B33A] shadow-lg' : 'hover:bg-green-800' }}"
             :class="sidebarMini ? 'justify-center w-12 h-12 items-center' : 'items-center gap-4 px-3'">
 
         <img
@@ -248,7 +280,8 @@
         {{-- day 4 progress, agar bisa di klik, harus di kasih href ke route users.index --}}
         <a
             href="{{ route('users.index') }}"
-            class="flex rounded-xl py-2.5 transition hover:bg-green-800"
+            class="flex rounded-xl py-2.5 transition
+            {{ request()->routeIs('users.index') ? 'bg-[#16B33A] shadow-lg' : 'hover:bg-green-800' }}"
             :class="sidebarMini ? 'justify-center w-12 h-12 items-center' : 'items-center gap-4 px-3'">
 
         <img
