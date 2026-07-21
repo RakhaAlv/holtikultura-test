@@ -109,25 +109,25 @@
                 <span class="text-[16px]">Bawang Putih</span>
             </a>
 
-            <a href="{{ route('bawang-merah') }}" class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 hover:bg-[#0E5A22] transition
+            <a href="{{ route('bawang-merah') }}" class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 transition
                 {{ request()->routeIs('bawang-merah') ?  'bg-[#16B33A]' : 'hover:bg-[#0E5A22]' }}">
                 <img src="{{ asset('Icon-Bawang.svg') }}" class="w-6">
                 <span class="text-[16px]">Bawang Merah</span>
             </a>
 
-            <a href="{{ route('cabai') }}" class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 hover:bg-[#0E5A22] transition
+            <a href="{{ route('cabai') }}" class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 transition
                 {{ request()->routeIs('cabai') ?  'bg-[#16B33A]' : 'hover:bg-[#0E5A22]' }}">
                 <img src="{{ asset('Icon-Cabai.svg') }}" class="w-6">
                 <span class="text-[16px]">Cabai</span>
             </a>
 
-            <a href="{{ route('durian') }}" class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 hover:bg-[#0E5A22] transition
+            <a href="{{ route('durian') }}" class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 transition
                 {{ request()->routeIs('durian') ?  'bg-[#16B33A]' : 'hover:bg-[#0E5A22]' }}">
                 <img src="{{ asset('Buah-Icon.svg') }}" class="w-6">
                 <span class="text-[16px]">Durian</span>
             </a>
 
-            <a href="{{ route('p2b') }}" class="flex items-center gap-4 rounded-lg px-2 py-2 hover:bg-[#0E5A22] transition
+            <a href="{{ route('p2b') }}" class="flex items-center gap-4 rounded-lg px-2 py-2 transition
                 {{ request()->routeIs('p2b') ?  'bg-[#16B33A]' : 'hover:bg-[#0E5A22]' }}">
                 <img src="{{ asset('Icon-tractor.svg') }}" class="w-6">
                 <span class="text-[16px]">P2B</span>
