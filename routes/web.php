@@ -71,3 +71,4 @@ Route::middleware('auth')->get('/cek-role', function () {
 });
 
 require __DIR__.'/auth.php';
+

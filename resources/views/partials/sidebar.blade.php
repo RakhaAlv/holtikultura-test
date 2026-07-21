@@ -38,7 +38,8 @@
         {{-- day 4 progress, agar bisa di klik, harus di kasih href ke route dashboard --}}
             <a
                 href="{{ route('dashboard') }}"
-                class="flex rounded-xl bg-[#16B33A] py-2.5 shadow-lg transition-all duration-300"
+                class="flex rounded-xl py-2.5 transition-all duration-300
+                {{ request()->routeIs('dashboard') ? 'bg-[#16B33A] shadow-lg' : 'hover:bg-green-800' }}"
                 :class="sidebarMini ? 'justify-center px-0' : 'items-center gap-4 px-3'">
 
                 <img
