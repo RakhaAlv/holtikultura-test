@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 //// day 3 progress User Controller
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Str;
 
 Route::get('/', function () {
     return redirect()->route('login');
