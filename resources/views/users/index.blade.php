@@ -2,15 +2,13 @@
 
 @section('title', 'User Management')
 
+@section('navbar-title', 'User Management')
+
 @section('content')
 
 <div class="rounded-[28px] bg-white p-8 shadow-[0_8px_30px_rgba(0,0,0,0.08)]">
 
     <div class="flex justify-between items-center mb-6">
-
-        <h1 class="text-3xl font-bold">
-            User Management
-        </h1>
 
         <a href="#"
             class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg">
@@ -71,4 +69,4 @@
 
 </div>
 
-@endsection
+@endsection 
