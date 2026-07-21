@@ -2,26 +2,32 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Desa extends Model
 {
-    protected $table = 'desa';
+    use HasFactory;
+
     public $incrementing = false;
     protected $keyType = 'int';
-    public $timestamps = false;
 
-    protected $fillable = ['id', 'kecamatan_id', 'nama_desa'];
+    protected $fillable = ['id', 'kecamatan_id', 'nama'];
 
-    // --- RELASI KE ATAS ---
-    public function kecamatan()
+    public function kecamatan(): BelongsTo
     {
-        return $this->belongsTo(Kecamatan::class, 'kecamatan_id');
+        return $this->belongsTo(Kecamatan::class);
     }
 
-    // --- RELASI TRANSAKSI ---
-    public function realisasi()
+    public function targets(): HasMany
     {
-        return $this->hasMany(Realisasi::class, 'desa_id');
+        return $this->hasMany(Target::class);
+    }
+
+    public function realisasis(): HasMany
+    {
+        return $this->hasMany(Realisasi::class);
     }
 }

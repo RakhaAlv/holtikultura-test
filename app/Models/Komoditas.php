@@ -2,22 +2,29 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Komoditas extends Model
 {
+    use HasFactory;
+
+    // Menangani penamaan tabel tak beraturan (plural default: komoditas)
     protected $table = 'komoditas';
-    public $timestamps = false; // Atau true jika kamu mengaktifkan timestamps di migration
 
-    protected $fillable = ['kd_kom', 'nama'];
+    protected $fillable = [
+        'kode_komoditas',
+        'nama',
+    ];
 
-    public function target()
+    public function targets(): HasMany
     {
-        return $this->hasMany(Target::class, 'komoditas_id');
+        return $this->hasMany(Target::class);
     }
 
-    public function realisasi()
+    public function realisasis(): HasMany
     {
-        return $this->hasMany(Realisasi::class, 'komoditas_id');
+        return $this->hasMany(Realisasi::class);
     }
 }

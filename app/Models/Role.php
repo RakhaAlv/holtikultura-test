@@ -2,34 +2,23 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Role extends Model
 {
-    protected $table = 'roles';
+    use HasFactory;
 
-    // Migration roles tidak punya kolom timestamps
-    public $timestamps = false;
+    protected $fillable = ['name'];
 
-    protected $fillable = [
-        'nama_role',
-        'provinsi_id',
-        'kabupaten_id',
-    ];
+    // Constant Lookup untuk menghindari Magic Numbers di codebase
+    public const SUPER_ADMIN = 1;
+    public const ADMIN_DIREKTORAT = 2;
+    public const USER = 3;
 
-    // --- RELASI ---
-    public function users()
+    public function users(): HasMany
     {
-        return $this->hasMany(User::class, 'role_id');
-    }
-
-    public function provinsi()
-    {
-        return $this->belongsTo(Provinsi::class, 'provinsi_id');
-    }
-
-    public function kabupaten()
-    {
-        return $this->belongsTo(Kabupaten::class, 'kabupaten_id');
+        return $this->hasMany(User::class);
     }
 }

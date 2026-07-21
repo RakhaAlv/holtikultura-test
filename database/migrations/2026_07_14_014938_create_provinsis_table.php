@@ -8,14 +8,16 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('provinsi', function (Blueprint $table) {
-            $table->unsignedBigInteger('id')->primary(); // Kode BPS
-            $table->string('nama_prov');
+        Schema::create('provinsis', function (Blueprint $table) {
+            // Kode BPS Provinsi (contoh: 12), Primary Key Non-Incrementing
+            $table->unsignedBigInteger('id')->primary();
+            $table->string('nama');
+            $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('provinsi');
+        Schema::dropIfExists('provinsis');
     }
 };

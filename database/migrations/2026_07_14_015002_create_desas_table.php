@@ -8,17 +8,24 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('desa', function (Blueprint $table) {
+        Schema::create('desas', function (Blueprint $table) {
+            // Kode BPS Desa (contoh: 1216022005), Primary Key Non-Incrementing
             $table->unsignedBigInteger('id')->primary();
             $table->unsignedBigInteger('kecamatan_id');
-            $table->string('nama_desa');
+            $table->string('nama');
+            $table->timestamps();
 
-            $table->foreign('kecamatan_id')->references('id')->on('kecamatan')->onDelete('restrict');
+            $table->foreign('kecamatan_id')
+                  ->references('id')
+                  ->on('kecamatans')
+                  ->onDelete('cascade');
+
+            $table->index('kecamatan_id');
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('desa');
+        Schema::dropIfExists('desas');
     }
 };

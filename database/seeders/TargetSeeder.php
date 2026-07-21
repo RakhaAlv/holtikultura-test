@@ -1,48 +1,95 @@
 <?php
+
 namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use App\Models\Satuan;
+use Illuminate\Support\Facades\Schema;
 
 class TargetSeeder extends Seeder
 {
     public function run(): void
     {
-        $file = fopen(database_path('data/target.csv'), 'r');
-        fgetcsv($file);
+        DB::disableQueryLog();
 
-        $komoditasMap = DB::table('komoditas')->get()->mapWithKeys(fn($item) => [strtolower(trim($item->nama)) => $item->id])->toArray();
-        $satuanMap = DB::table('satuan')->get()->mapWithKeys(fn($item) => [strtolower(trim($item->nama_satuan)) => $item->id])->toArray();
-        $kegiatanDefault = DB::table('kegiatan')->first()->id ?? 1;
+        Schema::disableForeignKeyConstraints();
+        DB::table('targets')->truncate();
+        Schema::enableForeignKeyConstraints();
+
+        $path = database_path('data/banper.csv');
+        if (!file_exists($path)) return;
+
+        // In-Memory Lookup & Validation Caches (Cegah N+1 Query & FK Failure)
+        $kegiatanMap    = DB::table('kegiatans')->pluck('id', 'kode_kegiatan')->toArray();
+        $desaCache      = DB::table('desas')->pluck('id')->toArray();
+        $komoditasCache = DB::table('komoditas')->pluck('id')->toArray();
+        $satuanCache    = DB::table('satuans')->pluck('id')->toArray();
+
+        $defaultKegiatanId  = DB::table('kegiatans')->value('id') ?? 1;
+        $defaultKomoditasId = 1; // Fallback ke Bawang Putih
+        $defaultSatuanId    = 1; // Fallback ke Ha
+        $defaultUserId      = 1; // Super Admin
+
+        $file = fopen($path, 'r');
+        fgetcsv($file, 0, ';'); // Skip Header
 
         $data = [];
-        while (($row = fgetcsv($file, 0, ";")) !== false) {
-            if (!isset($row[0]) || empty($row[0])) continue;
+        $chunkSize = 1000;
 
-            $namaSatuan = strtolower(trim($row[8]));
-            $namaKomoditas = strtolower(trim($row[2]));
+        while (($row = fgetcsv($file, 0, ';')) !== false) {
+            $kodeDesa = (int) preg_replace('/[^0-9]/', '', $row[16] ?? '');
 
-            if (!isset($satuanMap[$namaSatuan])) {
-                $newSatuan = DB::table('satuan')->insertGetId(['nama_satuan' => trim($row[8])]);
-                $satuanMap[$namaSatuan] = $newSatuan;
+            // Skip jika Kode Desa tidak valid atau tidak terdaftar di DB
+            if ($kodeDesa < 1000000000 || !in_array($kodeDesa, $desaCache)) {
+                continue;
             }
 
+            // Parse Desimal Indonesia (koma ke titik)
+            $rawTarget = trim($row[22] ?? '0');
+            $targetVal = (float) str_replace(',', '.', $rawTarget);
+
+            // Tentukan ID Relasi dengan Fallback Validasi FK
+            $direktoratId = !empty($row[1]) ? (int) $row[1] : 1;
+            $kodeKegiatan = trim(preg_replace('/[^\x20-\x7E]/', '', $row[3] ?? ''));
+            $kegiatanId   = $kegiatanMap[$kodeKegiatan] ?? $defaultKegiatanId;
+
+            $rawKomoditasId = !empty($row[7]) ? (int) $row[7] : 0;
+            $komoditasId    = in_array($rawKomoditasId, $komoditasCache) ? $rawKomoditasId : $defaultKomoditasId;
+
+            $rawSatuanId = !empty($row[20]) ? (int) $row[20] : 0;
+            $satuanId    = in_array($rawSatuanId, $satuanCache) ? $rawSatuanId : $defaultSatuanId;
+
+            // Extract Hierarki Wilayah dari Kode BPS Desa
+            $provinsiId  = (int) substr((string)$kodeDesa, 0, 2);
+            $kabupatenId = (int) substr((string)$kodeDesa, 0, 4);
+            $kecamatanId = (int) substr((string)$kodeDesa, 0, 6);
+
             $data[] = [
-                'tahun'         => (int) $row[0],
-                'kegiatan_id'   => $kegiatanDefault,
-                'komoditas_id'  => $komoditasMap[$namaKomoditas] ?? 1,
-                'satuan_id'     => $satuanMap[$namaSatuan],
-                'provinsi_id'   => (int) $row[3],
-                'kabupaten_id'  => (int) $row[4],
-                'target_output' => (float) $row[7],
-                'created_by'    => 1,
+                'direktorat_id' => $direktoratId,
+                'kegiatan_id'   => $kegiatanId,
+                'komoditas_id'  => $komoditasId,
+                'satuan_id'     => $satuanId,
+                'provinsi_id'   => $provinsiId,
+                'kabupaten_id'  => $kabupatenId,
+                'kecamatan_id'  => $kecamatanId,
+                'desa_id'       => $kodeDesa,
+                'tahun'         => !empty($row[8]) ? (int) $row[8] : 2025,
+                'target'        => $targetVal,
+                'created_by'    => $defaultUserId,
                 'created_at'    => now(),
                 'updated_at'    => now(),
             ];
-            
-            if (count($data) >= 500) { DB::table('target')->insert($data); $data = []; }
+
+            if (count($data) >= $chunkSize) {
+                DB::table('targets')->insert($data);
+                $data = [];
+            }
         }
-        if (!empty($data)) DB::table('target')->insert($data);
+
+        if (!empty($data)) {
+            DB::table('targets')->insert($data);
+        }
+
         fclose($file);
     }
 }

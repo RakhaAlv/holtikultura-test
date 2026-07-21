@@ -10,36 +10,42 @@ class DesaSeeder extends Seeder
 {
     public function run(): void
     {
+        DB::disableQueryLog();
+
         Schema::disableForeignKeyConstraints();
-        DB::table('desa')->truncate();
+        DB::table('desas')->truncate();
         Schema::enableForeignKeyConstraints();
 
         $path = database_path('data/desa.csv');
         if (!file_exists($path)) return;
 
         $file = fopen($path, 'r');
-        fgetcsv($file, 1000, ';');
+        fgetcsv($file, 1000, ';'); // Skip header
 
         $data = [];
-        $chunkSize = 2000; 
+        $chunkSize = 2000;
 
         while (($row = fgetcsv($file, 1000, ';')) !== false) {
             if (!isset($row[6]) || empty($row[6])) continue;
 
             $data[] = [
-
-                'id' => (int) $row[6], 
+                'id'           => (int) $row[6],
                 'kecamatan_id' => (int) $row[4],
-                'nama_desa' => trim($row[7]),
+                'nama'         => trim(preg_replace('/[^\x20-\x7E]/', '', $row[7])),
+                'created_at'   => now(),
+                'updated_at'   => now(),
             ];
 
             if (count($data) >= $chunkSize) {
-                DB::table('desa')->insert($data);
+                DB::table('desas')->insert($data);
                 $data = [];
             }
         }
 
-        if (!empty($data)) DB::table('desa')->insert($data);
+        if (!empty($data)) {
+            DB::table('desas')->insert($data);
+        }
+
         fclose($file);
     }
 }

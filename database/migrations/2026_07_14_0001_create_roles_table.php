@@ -10,12 +10,8 @@ return new class extends Migration
     {
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_role');
-            $table->unsignedBigInteger('provinsi_id')->nullable();
-            $table->unsignedBigInteger('kabupaten_id')->nullable();
-
-            $table->foreign('provinsi_id')->references('id')->on('provinsi')->onDelete('restrict');
-            $table->foreign('kabupaten_id')->references('id')->on('kabupaten')->onDelete('restrict');
+            $table->string('name'); // 1: Super Admin, 2: Admin Direktorat, 3: User
+            $table->timestamps();
         });
     }
 
