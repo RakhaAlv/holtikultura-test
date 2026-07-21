@@ -103,27 +103,27 @@
                 x-transition
                 class="mx-4 mt-4 rounded-xl bg-[#083E16] p-4 shadow-xl">
 
-            <a href="#" class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 hover:bg-[#0E5A22]">
+            <a href="{{ route('bawang-putih') }}" class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 hover:bg-[#0E5A22]">
                 <img src="{{ asset('Icon-Bawang.svg') }}" class="w-6">
                 <span class="text-[16px]">Bawang Putih</span>
             </a>
 
-            <a href="#" class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 hover:bg-[#0E5A22]">
+            <a href="{{ route('bawang-merah') }}" class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 hover:bg-[#0E5A22]">
                 <img src="{{ asset('Icon-Bawang.svg') }}" class="w-6">
                 <span class="text-[16px]">Bawang Merah</span>
             </a>
 
-            <a href="#" class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 hover:bg-[#0E5A22]">
+            <a href="{{ route('cabai') }}" class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 hover:bg-[#0E5A22]">
                 <img src="{{ asset('Icon-Cabai.svg') }}" class="w-6">
                 <span class="text-[16px]">Cabai</span>
             </a>
 
-            <a href="#" class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 hover:bg-[#0E5A22]">
+            <a href="{{ route('durian') }}" class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 hover:bg-[#0E5A22]">
                 <img src="{{ asset('Buah-Icon.svg') }}" class="w-6">
                 <span class="text-[16px]">Durian</span>
             </a>
 
-            <a href="#" class="flex items-center gap-4 rounded-lg px-2 py-2 hover:bg-[#0E5A22]">
+            <a href="{{ route('p2b') }}" class="flex items-center gap-4 rounded-lg px-2 py-2 hover:bg-[#0E5A22]">
                 <img src="{{ asset('Icon-tractor.svg') }}" class="w-6">
                 <span class="text-[16px]">P2B</span>
             </a>
@@ -139,23 +139,23 @@
                 x-transition
                 class="mt-4 flex flex-col items-center gap-3">
 
-            <a href="#" class="flex h-12 w-12 items-center justify-center rounded-xl hover:bg-green-700">
+            <a href="{{ route('bawang-putih') }}" class="flex h-12 w-12 items-center justify-center rounded-xl hover:bg-green-700">
                 <img src="{{ asset('Icon-Bawang.svg') }}" class="w-6">
             </a>
 
-            <a href="#" class="flex h-12 w-12 items-center justify-center rounded-xl hover:bg-green-700">
+            <a href="{{ route('bawang-merah') }}" class="flex h-12 w-12 items-center justify-center rounded-xl hover:bg-green-700">
                 <img src="{{ asset('Icon-Bawang.svg') }}" class="w-6">
             </a>
 
-            <a href="#" class="flex h-12 w-12 items-center justify-center rounded-xl hover:bg-green-700">
+            <a href="{{ route('cabai') }}" class="flex h-12 w-12 items-center justify-center rounded-xl hover:bg-green-700">
                 <img src="{{ asset('Icon-Cabai.svg') }}" class="w-6">
             </a>
 
-            <a href="#" class="flex h-12 w-12 items-center justify-center rounded-xl hover:bg-green-700">
+            <a href="{{ route('durian') }}" class="flex h-12 w-12 items-center justify-center rounded-xl hover:bg-green-700">
                 <img src="{{ asset('Buah-Icon.svg') }}" class="w-6">
             </a>
 
-            <a href="#" class="flex h-12 w-12 items-center justify-center rounded-xl hover:bg-green-700">
+            <a href="{{ route('p2b') }}" class="flex h-12 w-12 items-center justify-center rounded-xl hover:bg-green-700">
                 <img src="{{ asset('Icon-tractor.svg') }}" class="w-6">
             </a>
 
@@ -174,7 +174,7 @@
             :class="sidebarMini ? 'px-0 flex justify-center' : 'px-6'">
 
         <a
-            href="#"
+            href="{{ route('rekap-data') }}"
             class="flex rounded-xl py-2.5 transition hover:bg-green-800"
             :class="sidebarMini ? 'justify-center w-12 h-12 items-center' : 'items-center gap-4 px-3'">
 
@@ -209,7 +209,7 @@
             :class="sidebarMini ? 'px-0 flex justify-center' : 'px-6'">
 
         <a
-            href="#"
+            href="{{ route('data-management') }}"
             class="flex rounded-xl py-2.5 transition hover:bg-green-800"
             :class="sidebarMini ? 'justify-center w-12 h-12 items-center' : 'items-center gap-4 px-3'">
 
