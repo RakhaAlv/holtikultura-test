@@ -5,9 +5,8 @@
 @section('title', 'Data Management')
 
 @section('content')
+@section('navbar-title')
+Management Data
 
-<h1 class="text-3xl font-bold">
-    Halaman Data Management
-</h1>
 
 @endsection

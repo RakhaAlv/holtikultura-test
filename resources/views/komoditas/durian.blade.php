@@ -4,10 +4,11 @@
 
 @section('title', 'Durian')
 
-@section('content')
+@section('navbar-title')
+Rekap Komoditas : Durian
 
 <h1 class="text-3xl font-bold">
-    Halaman Durian
+
 </h1>
 
 @endsection

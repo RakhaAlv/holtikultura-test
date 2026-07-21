@@ -4,10 +4,11 @@
 
 @section('title', 'P2b')
 
-@section('content')
+@section('navbar-title')
+Rekap Komoditas : Bawang Putih
 
 <h1 class="text-3xl font-bold">
-    Halaman P2b
+
 </h1>
 
 @endsection

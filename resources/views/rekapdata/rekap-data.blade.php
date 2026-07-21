@@ -4,10 +4,7 @@
 
 @section('title', 'Rekap Data Wilayah')
 
-@section('content')
-
-<h1 class="text-3xl font-bold">
-    Halaman Rekap Data Wilayah
-</h1>
+@section('navbar-title')
+Rekap Data Wilayah
 
 @endsection
