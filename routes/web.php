@@ -73,25 +73,77 @@ Route::middleware('auth')->get('/cek-role', function () {
 
 // day 5 progress, route untuk menampilkan bawang merah, bawang putih, cabai, durian, dan p2b
 
-Route::middleware('auth')->get('/bawang-merah', function () {
-    return view('komoditas.bawang-merah');
-})->name('bawang-merah');
+// day 5 progress, route komoditas dinamis
 
-Route::middleware('auth')->get('/bawang-putih', function () {
-    return view('komoditas.bawang-putih');
-})->name('bawang-putih');
+Route::middleware('auth')->get('/komoditas/{slug}', function ($slug) {
 
-Route::middleware('auth')->get('/cabai', function () {
-    return view('komoditas.cabai');
-})->name('cabai');
+    $komoditas = [
 
-Route::middleware('auth')->get('/durian', function () {
-    return view('komoditas.durian');
-})->name('durian');
+        'bawang-putih' => [
 
-Route::middleware('auth')->get('/p2b', function () {
-    return view('komoditas.p2b');
-})->name('p2b');
+            'nama' => 'Bawang Putih',
+            'target' => 5000,
+            'realisasi' => 683,
+
+        ],
+
+        'bawang-merah' => [
+
+            'nama' => 'Bawang Merah',
+            'target' => 150,
+            'realisasi' => 0,
+
+        ],
+
+        'cabai' => [
+
+            'nama' => 'Cabai',
+            'target' => 2953,
+            'realisasi' => 278,
+
+        ],
+
+        'durian' => [
+
+            'nama' => 'Durian',
+            'target' => 2337,
+            'realisasi' => 0,
+
+        ],
+
+        'p2b' => [
+
+            'nama' => 'P2B',
+            'target' => 411,
+            'realisasi' => 156,
+
+        ],
+
+    ];
+
+    abort_unless(isset($komoditas[$slug]), 404);
+
+    $data = $komoditas[$slug];
+
+    $persentase = $data['target'] > 0
+        ? round(($data['realisasi'] / $data['target']) * 100, 1)
+        : 0;
+
+    return view('komoditas.show', [
+
+        'slug' => $slug,
+
+        'namaKomoditas' => $data['nama'],
+
+        'target' => $data['target'],
+
+        'realisasi' => $data['realisasi'],
+
+        'persentase' => $persentase,
+
+    ]);
+
+})->name('komoditas.show');
 
 //day 5 progress, route untuk menampilkan halaman data management, hanya bisa diakses oleh super admin dan admin direktorat
 Route::middleware(['auth', 'role:Super Admin,Admin Direktorat'])

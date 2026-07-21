@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
-@section('title', 'Bawang Merah')
+@section('title', $namaKomoditas)
 
-@section('navbar-title', 'Rekap Komoditas : Bawang Merah')
+@section('navbar-title', 'Rekap Komoditas : ' . $namaKomoditas)
 
 @section('content')
 
@@ -35,7 +35,7 @@
                         </p>
 
                         <h2 class="mt-1 text-[44px] font-bold leading-none text-[#111]">
-                            5.000
+                            {{ number_format($target,0,',','.') }}
                         </h2>
 
                         <p class="mt-1 text-[18px] text-[#555]">
@@ -74,7 +74,7 @@
                         </p>
 
                         <h2 class="mt-1 text-[44px] font-bold leading-none text-[#111]">
-                            683
+                            {{ number_format($realisasi,0,',','.') }}
                         </h2>
 
                         <p class="mt-1 text-[18px] text-[#555]">
@@ -113,7 +113,7 @@
                         </p>
 
                         <h2 class="mt-1 text-[44px] font-bold leading-none text-[#111]">
-                            13.7%
+                            {{ $persentase }}%
                         </h2>
 
                     </div>
@@ -127,8 +127,7 @@
 
                         <div
                             class="h-full rounded-full bg-[#E83D5A]"
-                            style="width:13.7%">
-
+                            style="width: {{ $persentase }}%">
                         </div>
 
                     </div>
