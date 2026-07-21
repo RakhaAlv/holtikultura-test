@@ -10,17 +10,20 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('role_id')->constrained('roles')->onDelete('restrict');
-            $table->foreignId('direktorat_id')->nullable()->constrained('direktorat')->onDelete('restrict');
+            $table->foreignId('role_id')->default(3)->constrained('roles')->onDelete('restrict');
+            $table->foreignId('direktorat_id')->nullable()->constrained('direktorats')->onDelete('restrict');
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+
+            // Index untuk mempercepat query filtering RBAC
+            $table->index('role_id');
+            $table->index('direktorat_id');
         });
 
-        // Tabel Bawaan Laravel untuk reset password & sesi (wajib dipertahankan)
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');

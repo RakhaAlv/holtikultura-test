@@ -8,42 +8,51 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('realisasi', function (Blueprint $table) {
+        Schema::create('realisasis', function (Blueprint $table) {
             $table->id();
-            $table->year('tahun')->index();
-            
-            $table->foreignId('kegiatan_id')->constrained('kegiatan')->onDelete('restrict');
+            $table->foreignId('direktorat_id')->constrained('direktorats')->onDelete('restrict');
+            $table->foreignId('kegiatan_id')->constrained('kegiatans')->onDelete('restrict');
             $table->foreignId('komoditas_id')->constrained('komoditas')->onDelete('restrict');
-            $table->foreignId('satuan_id')->constrained('satuan')->onDelete('restrict');
-            
+            $table->foreignId('satuan_id')->constrained('satuans')->onDelete('restrict');
+
+            // Denormalisasi Hierarki Wilayah (Kode BPS)
             $table->unsignedBigInteger('provinsi_id');
             $table->unsignedBigInteger('kabupaten_id');
             $table->unsignedBigInteger('kecamatan_id');
             $table->unsignedBigInteger('desa_id');
-            
-            $table->string('kelompok_tani');
-            $table->decimal('realisasi_output', 12, 2);
+
+            $table->string('nama_kelompok')->nullable();
+            $table->year('tahun');
+            $table->decimal('target', 15, 2)->default(0);
+            $table->decimal('jumlah_output', 15, 2)->default(0);
+            $table->decimal('anggaran', 15, 2)->default(0);
+
+            // Presisi Status Progress Banper
             $table->enum('status', [
                 'Usulan CPCL',
                 'Kontrak/PKS',
                 'Pemberkasan Dokumen Pencairan',
                 'Distribusi Bantuan',
                 'Bantuan Sudah Diterima'
-            ])->default('Usulan CPCL')->index();       
+            ])->default('Usulan CPCL');
 
-            $table->foreignId('created_by')->constrained('users')->onDelete('restrict');
-            $table->foreignId('updated_by')->nullable()->constrained('users')->onDelete('set null');
+            $table->foreignId('created_by')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamps();
 
-            $table->foreign('provinsi_id')->references('id')->on('provinsi')->onDelete('restrict');
-            $table->foreign('kabupaten_id')->references('id')->on('kabupaten')->onDelete('restrict');
-            $table->foreign('kecamatan_id')->references('id')->on('kecamatan')->onDelete('restrict');
-            $table->foreign('desa_id')->references('id')->on('desa')->onDelete('restrict');
+            // Foreign Keys Wilayah
+            $table->foreign('provinsi_id')->references('id')->on('provinsis')->onDelete('restrict');
+            $table->foreign('kabupaten_id')->references('id')->on('kabupatens')->onDelete('restrict');
+            $table->foreign('kecamatan_id')->references('id')->on('kecamatans')->onDelete('restrict');
+            $table->foreign('desa_id')->references('id')->on('desas')->onDelete('restrict');
+
+            // Compound Indexing
+            $table->index(['direktorat_id', 'tahun', 'status']);
+            $table->index(['provinsi_id', 'komoditas_id']);
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('realisasi');
+        Schema::dropIfExists('realisasis');
     }
 };

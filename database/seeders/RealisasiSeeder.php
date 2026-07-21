@@ -4,10 +4,10 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class RealisasiSeeder extends Seeder
 {
-
     private array $statusMap = [
         'usulan cpcl'                   => 'Usulan CPCL',
         'kontrak/pks'                   => 'Kontrak/PKS',
@@ -20,104 +20,98 @@ class RealisasiSeeder extends Seeder
 
     public function run(): void
     {
-        $filePath = database_path('data/data_fix.csv');
+        DB::disableQueryLog();
 
-        if (!file_exists($filePath)) {
-            $this->command->error("File tidak ditemukan di: {$filePath}.");
-            return;
-        }
+        Schema::disableForeignKeyConstraints();
+        DB::table('realisasis')->truncate();
+        Schema::enableForeignKeyConstraints();
 
-        $file = fopen($filePath, 'r');
-        fgetcsv($file, 0, ";"); 
+        $path = database_path('data/banper.csv');
+        if (!file_exists($path)) return;
 
-        $komoditasMap = DB::table('komoditas')->get()->mapWithKeys(fn($item) => [strtolower(trim($item->nama)) => $item->id])->toArray();
-        $satuanMap    = DB::table('satuan')->get()->mapWithKeys(fn($item) => [strtolower(trim($item->nama_satuan)) => $item->id])->toArray();
-        $kegiatanMap  = DB::table('kegiatan')->get()->mapWithKeys(fn($item) => [strtolower(trim($item->nama_program)) => $item->id])->toArray();
+        // In-Memory Lookup & Validation Caches
+        $kegiatanMap    = DB::table('kegiatans')->pluck('id', 'kode_kegiatan')->toArray();
+        $desaCache      = DB::table('desas')->pluck('id')->toArray();
+        $komoditasCache = DB::table('komoditas')->pluck('id')->toArray();
+        $satuanCache    = DB::table('satuans')->pluck('id')->toArray();
 
-        $existingDesa = DB::table('desa')->pluck('id')->toArray();
+        $defaultKegiatanId  = DB::table('kegiatans')->value('id') ?? 1;
+        $defaultKomoditasId = 1;
+        $defaultSatuanId    = 1;
+        $defaultUserId      = 1;
 
-        $kegiatanDefault = DB::table('kegiatan')->first()->id ?? 1;
-        $userDefault      = DB::table('users')->first()->id ?? 1;
+        $file = fopen($path, 'r');
+        fgetcsv($file, 0, ';'); // Skip Header
 
         $data = [];
-        $rowCount = 0;
-        $skippedCount = 0;
-        $skippedLog = []; 
+        $chunkSize = 1000;
 
-        while (($row = fgetcsv($file, 0, ";")) !== false) {
-            if (!isset($row[8]) || empty(trim($row[8]))) continue;
+        while (($row = fgetcsv($file, 0, ';')) !== false) {
+            $kodeDesa = (int) preg_replace('/[^0-9]/', '', $row[16] ?? '');
 
-            $namaKegiatan   = strtolower(trim(preg_replace('/[^\x20-\x7E]/', '', $row[1])));
-            $namaKomoditas  = strtolower(trim(preg_replace('/[^\x20-\x7E]/', '', $row[2])));
-            $namaSatuan     = strtolower(trim(preg_replace('/[^\x20-\x7E]/', '', $row[11])));
-            $namaDesaBersih = trim(preg_replace('/[^\x20-\x7E]/', '', $row[7]));
-            $kelompokTani   = trim(preg_replace('/[^\x20-\x7E]/', '', $row[9]));
-            $statusBersih   = trim(preg_replace('/[^\x20-\x7E]/', '', $row[15]));
-
-            $kodeDesa = (int) preg_replace('/[^0-9]/', '', $row[8]);
-
-            if ($kodeDesa < 1000000000) {
-                $skippedCount++;
-                $skippedLog[] = "SKIP (kode desa tidak valid): {$row[7]} | kode: {$row[8]}";
+            if ($kodeDesa < 1000000000 || !in_array($kodeDesa, $desaCache)) {
                 continue;
             }
 
-            $provinsi_id  = (int) substr($kodeDesa, 0, 2);
-            $kabupaten_id = (int) substr($kodeDesa, 0, 4);
-            $kecamatan_id = (int) substr($kodeDesa, 0, 6);
-            $desa_id      = $kodeDesa;
+            // Parse Desimal Indonesia
+            $rawTarget       = trim($row[22] ?? '0');
+            $rawJumlahOutput = trim($row[21] ?? '0');
+            $rawAnggaran     = trim($row[23] ?? '0');
 
-            if (!in_array($desa_id, $existingDesa)) {
-                $skippedCount++;
-                $skippedLog[] = "SKIP (desa tidak ditemukan di master): {$namaDesaBersih} | kode: {$desa_id}";
-                continue;
-            }
+            $targetVal       = (float) str_replace(',', '.', $rawTarget);
+            $jumlahOutputVal = (float) str_replace(',', '.', $rawJumlahOutput);
+            $anggaranVal     = (float) str_replace(',', '.', $rawAnggaran);
 
-            if (!empty($namaSatuan) && !isset($satuanMap[$namaSatuan])) {
-                $newSatuan = DB::table('satuan')->insertGetId(['nama_satuan' => $namaSatuan]);
-                $satuanMap[$namaSatuan] = $newSatuan;
-            }
+            // Validasi Relasi FK
+            $direktoratId = !empty($row[1]) ? (int) $row[1] : 1;
+            $kodeKegiatan = trim(preg_replace('/[^\x20-\x7E]/', '', $row[3] ?? ''));
+            $kegiatanId   = $kegiatanMap[$kodeKegiatan] ?? $defaultKegiatanId;
+
+            $rawKomoditasId = !empty($row[7]) ? (int) $row[7] : 0;
+            $komoditasId    = in_array($rawKomoditasId, $komoditasCache) ? $rawKomoditasId : $defaultKomoditasId;
+
+            $rawSatuanId = !empty($row[20]) ? (int) $row[20] : 0;
+            $satuanId    = in_array($rawSatuanId, $satuanCache) ? $rawSatuanId : $defaultSatuanId;
+
+            // Extract Hierarki Wilayah
+            $provinsiId  = (int) substr((string)$kodeDesa, 0, 2);
+            $kabupatenId = (int) substr((string)$kodeDesa, 0, 4);
+            $kecamatanId = (int) substr((string)$kodeDesa, 0, 6);
+
+            $namaKelompok = trim(preg_replace('/[^\x20-\x7E]/', '', $row[17] ?? ''));
+            $rawStatus    = trim(preg_replace('/[^\x20-\x7E]/', '', $row[24] ?? ''));
 
             $data[] = [
-                'tahun'            => (int) $row[3],
-                'kegiatan_id'      => $kegiatanMap[$namaKegiatan] ?? $kegiatanDefault,
-                'komoditas_id'     => $komoditasMap[$namaKomoditas] ?? 1,
-                'satuan_id'        => $satuanMap[$namaSatuan] ?? 1,
-                'provinsi_id'      => $provinsi_id,
-                'kabupaten_id'     => $kabupaten_id,
-                'kecamatan_id'     => $kecamatan_id,
-                'desa_id'          => $desa_id,
-                'kelompok_tani'    => $kelompokTani ?: '-',
-                'realisasi_output' => (float) str_replace(',', '.', $row[12]),
-                'status'           => $this->normalizeStatus($statusBersih),
-                'created_by'       => $userDefault,
-                'created_at'       => now(),
-                'updated_at'       => now(),
+                'direktorat_id' => $direktoratId,
+                'kegiatan_id'   => $kegiatanId,
+                'komoditas_id'  => $komoditasId,
+                'satuan_id'     => $satuanId,
+                'provinsi_id'   => $provinsiId,
+                'kabupaten_id'  => $kabupatenId,
+                'kecamatan_id'  => $kecamatanId,
+                'desa_id'       => $kodeDesa,
+                'nama_kelompok' => $namaKelompok ?: '-',
+                'tahun'         => !empty($row[8]) ? (int) $row[8] : 2025,
+                'target'        => $targetVal,
+                'jumlah_output' => $jumlahOutputVal,
+                'anggaran'      => $anggaranVal,
+                'status'        => $this->normalizeStatus($rawStatus),
+                'created_by'    => $defaultUserId,
+                'created_at'    => now(),
+                'updated_at'    => now(),
             ];
 
-            if (count($data) >= 500) {
-                DB::table('realisasi')->insert($data);
-                $rowCount += count($data);
+            if (count($data) >= $chunkSize) {
+                DB::table('realisasis')->insert($data);
                 $data = [];
             }
         }
 
         if (!empty($data)) {
-            DB::table('realisasi')->insert($data);
-            $rowCount += count($data);
+            DB::table('realisasis')->insert($data);
         }
 
         fclose($file);
-
-        if (!empty($skippedLog)) {
-            file_put_contents(
-                storage_path('logs/realisasi_skipped_' . now()->format('Ymd_His') . '.log'),
-                implode("\n", $skippedLog)
-            );
-        }
-
-        $this->command->info("Berhasil menambahkan {$rowCount} data realisasi ");
-        $this->command->warn("{$skippedCount} baris Dilewati karena kode desa tidak valid");
     }
 
     private function normalizeStatus(?string $status): string

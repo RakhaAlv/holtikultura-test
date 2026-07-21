@@ -2,32 +2,37 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Kecamatan extends Model
 {
-    protected $table = 'kecamatan';
+    use HasFactory;
+
     public $incrementing = false;
     protected $keyType = 'int';
-    public $timestamps = false;
 
-    protected $fillable = ['id', 'kabupaten_id', 'nama_kec'];
+    protected $fillable = ['id', 'kabupaten_id', 'nama'];
 
-    // --- RELASI KE ATAS ---
-    public function kabupaten()
+    public function kabupaten(): BelongsTo
     {
-        return $this->belongsTo(Kabupaten::class, 'kabupaten_id');
+        return $this->belongsTo(Kabupaten::class);
     }
 
-    // --- RELASI KE BAWAH ---
-    public function desa()
+    public function desas(): HasMany
     {
-        return $this->hasMany(Desa::class, 'kecamatan_id');
+        return $this->hasMany(Desa::class);
     }
 
-    // --- RELASI TRANSAKSI ---
-    public function realisasi()
+    public function targets(): HasMany
     {
-        return $this->hasMany(Realisasi::class, 'kecamatan_id');
+        return $this->hasMany(Target::class);
+    }
+
+    public function realisasis(): HasMany
+    {
+        return $this->hasMany(Realisasi::class);
     }
 }

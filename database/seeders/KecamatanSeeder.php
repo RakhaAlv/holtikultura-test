@@ -10,33 +10,40 @@ class KecamatanSeeder extends Seeder
 {
     public function run(): void
     {
+        DB::disableQueryLog();
+
         Schema::disableForeignKeyConstraints();
-        DB::table('kecamatan')->truncate();
+        DB::table('kecamatans')->truncate();
         Schema::enableForeignKeyConstraints();
 
         $path = database_path('data/kecamatan.csv');
         if (!file_exists($path)) return;
 
         $file = fopen($path, 'r');
-        fgetcsv($file, 1000, ';');
+        fgetcsv($file, 1000, ';'); // Skip header
 
         $data = [];
         while (($row = fgetcsv($file, 1000, ';')) !== false) {
             if (!isset($row[4]) || empty($row[4])) continue;
 
             $data[] = [
-                'id' => (int) $row[4],
+                'id'           => (int) $row[4],
                 'kabupaten_id' => (int) $row[2],
-                'nama_kec' => trim($row[5]),
+                'nama'         => trim(preg_replace('/[^\x20-\x7E]/', '', $row[5])),
+                'created_at'   => now(),
+                'updated_at'   => now(),
             ];
 
             if (count($data) >= 1000) {
-                DB::table('kecamatan')->insert($data);
+                DB::table('kecamatans')->insert($data);
                 $data = [];
             }
         }
 
-        if (!empty($data)) DB::table('kecamatan')->insert($data);
+        if (!empty($data)) {
+            DB::table('kecamatans')->insert($data);
+        }
+
         fclose($file);
     }
 }

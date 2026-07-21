@@ -2,20 +2,28 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Direktorat extends Model
 {
-    protected $table = 'direktorat';
+    use HasFactory;
 
-    // Matikan timestamp jika tabel ini tidak memiliki created_at/updated_at di migration
-    public $timestamps = false;
+    protected $fillable = ['nama'];
 
-    protected $fillable = ['nama_direktorat'];
-
-    // Relasi ke User
-    public function users()
+    public function users(): HasMany
     {
-        return $this->hasMany(User::class, 'direktorat_id');
+        return $this->hasMany(User::class);
+    }
+
+    public function targets(): HasMany
+    {
+        return $this->hasMany(Target::class);
+    }
+
+    public function realisasis(): HasMany
+    {
+        return $this->hasMany(Realisasi::class);
     }
 }

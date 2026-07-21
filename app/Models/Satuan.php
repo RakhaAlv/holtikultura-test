@@ -2,22 +2,23 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Satuan extends Model
 {
-    protected $table = 'satuan';
-    public $timestamps = false;
+    use HasFactory;
 
-    protected $fillable = ['nama_satuan'];
+    protected $fillable = ['nama'];
 
-    public function target()
+    public function targets(): HasMany
     {
-        return $this->hasMany(Target::class, 'satuan_id');
+        return $this->hasMany(Target::class);
     }
 
-    public function realisasi()
+    public function realisasis(): HasMany
     {
-        return $this->hasMany(Realisasi::class, 'satuan_id');
+        return $this->hasMany(Realisasi::class);
     }
 }
