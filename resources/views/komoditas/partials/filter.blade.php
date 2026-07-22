@@ -7,7 +7,7 @@
 
             <img
                 src="{{ asset('Icon-Filter-Lokasi.svg') }}"
-                class="h-7 w-7">
+                class="h-12 w-12">
 
         </div>
 
