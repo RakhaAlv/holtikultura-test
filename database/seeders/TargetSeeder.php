@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use RuntimeException;
 
 class TargetSeeder extends Seeder
 {
@@ -16,13 +17,13 @@ class TargetSeeder extends Seeder
         DB::table('targets')->truncate();
         Schema::enableForeignKeyConstraints();
 
+        // 1. Path Tunggal (Single Source of Truth)
         $path = database_path('data/target.csv');
         if (!file_exists($path)) {
-            $path = database_path('data/harmonisasi_target_horti.csv');
-            if (!file_exists($path)) return;
+            throw new RuntimeException("File data target tidak ditemukan pada path: {$path}");
         }
 
-        // In-Memory Lookup Caches (Mencegah N+1 Query)
+        // In-Memory Lookup Caches (Mencegah N+1 Kueri)
         $kegiatanMap    = DB::table('kegiatans')->pluck('id', 'kode_kegiatan')->toArray();
         $provinsiCache  = DB::table('provinsis')->pluck('id')->toArray();
         $kabupatenCache = DB::table('kabupatens')->pluck('id')->toArray();
@@ -35,24 +36,25 @@ class TargetSeeder extends Seeder
         $defaultUserId      = 1;
 
         $file = fopen($path, 'r');
-        fgetcsv($file, 0, ';'); // Skip Header
+        fgetcsv($file, 0, ';'); // Skip Header Row
 
         $data = [];
         $chunkSize = 1000;
 
+        // --- TAHAP A: Import Data Target 2026 dari target.csv ---
         while (($row = fgetcsv($file, 0, ';')) !== false) {
             if (!isset($row[0]) || empty(trim($row[0]))) continue;
 
             $provinsiId  = (int) preg_replace('/[^0-9]/', '', $row[12] ?? '');
             $kabupatenId = (int) preg_replace('/[^0-9]/', '', $row[14] ?? '');
 
-            // Validasi Relasi Wilayah
+            // Validasi Relasi Wilayah Master
             if (!in_array($provinsiId, $provinsiCache) || !in_array($kabupatenId, $kabupatenCache)) {
                 continue;
             }
 
-            $rawTarget = trim($row[16] ?? '0');
-            $targetVal = (float) str_replace(',', '.', $rawTarget);
+            // Sanitasi Desimal Format Indonesia (e.g. "1.000" -> 1000)
+            $targetVal = $this->sanitizeDecimal($row[16] ?? '0');
 
             $direktoratId   = !empty($row[1]) ? (int) $row[1] : 1;
             $kodeKegiatan   = trim(preg_replace('/[^\x20-\x7E]/', '', $row[3] ?? ''));
@@ -89,5 +91,39 @@ class TargetSeeder extends Seeder
         }
 
         fclose($file);
+
+        // --- TAHAP B: Auto-Generate Target 2025 dari Data Realisasi 2025 ---
+        DB::statement("
+            INSERT INTO targets (
+                direktorat_id, kegiatan_id, komoditas_id, satuan_id, 
+                provinsi_id, kabupaten_id, tahun, target, created_by, created_at, updated_at
+            )
+            SELECT 
+                direktorat_id, kegiatan_id, komoditas_id, satuan_id, 
+                provinsi_id, kabupaten_id, 2025, SUM(jumlah_output), ?, NOW(), NOW()
+            FROM realisasis
+            WHERE tahun = 2025
+            GROUP BY direktorat_id, kegiatan_id, komoditas_id, satuan_id, provinsi_id, kabupaten_id
+        ", [$defaultUserId]);
+    }
+
+    /**
+     * Normalisasi string angka Indonesia ke float MySQL
+     */
+    private function sanitizeDecimal(?string $value): float
+    {
+        if (empty($value)) return 0.0;
+        $value = trim($value);
+
+        if (strpos($value, '.') !== false && strpos($value, ',') !== false) {
+            $value = str_replace('.', '', $value);
+            $value = str_replace(',', '.', $value);
+        } elseif (strpos($value, ',') !== false) {
+            $value = str_replace(',', '.', $value);
+        } elseif (preg_match('/^\d{1,3}(\.\d{3})+$/', $value)) {
+            $value = str_replace('.', '', $value);
+        }
+
+        return (float) $value;
     }
 }

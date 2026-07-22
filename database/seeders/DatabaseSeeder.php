@@ -26,8 +26,9 @@ class DatabaseSeeder extends Seeder
             KegiatanSeeder::class,
 
             // 4. Data Transaksional Banper
-            TargetSeeder::class,
             RealisasiSeeder::class,
+            TargetSeeder::class,
+            
         ]);
     }
 }
