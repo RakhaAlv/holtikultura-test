@@ -14,50 +14,48 @@ class Realisasi extends Model
 
     protected $guarded = ['id'];
 
-    protected $with = [
-        'direktorat',
-        'kegiatan',
-        'komoditas',
-        'satuan',
-        'provinsi',
-        'kabupaten',
-        'kecamatan',
-        'desa'
-    ];
+    // Hapus $with untuk mencegah Memory Leak pada Kueri Agregasi/Chart
 
     protected function casts(): array
     {
         return [
-            'tahun' => 'integer',
-            'target' => 'decimal:2',
+            'tahun'         => 'integer',
             'jumlah_output' => 'decimal:2',
-            'anggaran' => 'decimal:2',
-            'provinsi_id' => 'integer',
-            'kabupaten_id' => 'integer',
-            'kecamatan_id' => 'integer',
-            'desa_id' => 'integer',
+            'anggaran'      => 'decimal:2',
+            'provinsi_id'   => 'integer',
+            'kabupaten_id'  => 'integer',
+            'kecamatan_id'  => 'integer',
+            'desa_id'       => 'integer',
         ];
     }
 
     protected static function booted(): void
     {
+        // Proteksi RBAC Isolation (Aman untuk CLI / Background Jobs)
         static::addGlobalScope('rbac_isolation', function (Builder $builder) {
-            if (Auth::check()) {
+            if (!app()->runningInConsole() && Auth::check()) {
                 /** @var \App\Models\User $user */
                 $user = Auth::user();
 
-                if ($user->isAdminDirektorat()) {
+                if (method_exists($user, 'isAdminDirektorat') && $user->isAdminDirektorat()) {
                     $builder->where($builder->qualifyColumn('direktorat_id'), $user->direktorat_id);
-                } elseif ($user->isUser()) {
+                } elseif (method_exists($user, 'isUser') && $user->isUser()) {
                     $builder->where($builder->qualifyColumn('created_by'), $user->id);
                 }
             }
         });
     }
 
+    // --- LOCAL SCOPES UNTUK AGREGASI DASHBOARD ---
+
     public function scopeByTahun(Builder $query, int $tahun): Builder
     {
         return $query->where('tahun', $tahun);
+    }
+
+    public function scopeByKomoditas(Builder $query, ?int $komoditasId = null): Builder
+    {
+        return $query->when($komoditasId, fn ($q) => $q->where('komoditas_id', $komoditasId));
     }
 
     public function scopeRekapPerDirektorat(Builder $query, int $tahun): Builder
@@ -73,6 +71,8 @@ class Realisasi extends Model
                      ->selectRaw('provinsi_id, SUM(anggaran) as total_anggaran, SUM(jumlah_output) as total_output')
                      ->groupBy('provinsi_id');
     }
+
+    // --- RELASI (Hierarki Wilayah Lengkap) ---
 
     public function direktorat(): BelongsTo { return $this->belongsTo(Direktorat::class); }
     public function kegiatan(): BelongsTo { return $this->belongsTo(Kegiatan::class); }

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use RuntimeException;
 
 class RealisasiSeeder extends Seeder
 {
@@ -26,10 +27,9 @@ class RealisasiSeeder extends Seeder
         DB::table('realisasis')->truncate();
         Schema::enableForeignKeyConstraints();
 
-        $path = database_path('data/rekap_banper_horti.csv');
+        $path = database_path('data/banper.csv');
         if (!file_exists($path)) {
-            $path = database_path('data/banper.csv');
-            if (!file_exists($path)) return;
+            throw new RuntimeException("File data banper tidak ditemukan pada path: {$path}");
         }
 
         // In-Memory Lookup Caches
@@ -52,17 +52,13 @@ class RealisasiSeeder extends Seeder
         while (($row = fgetcsv($file, 0, ';')) !== false) {
             $kodeDesa = (int) preg_replace('/[^0-9]/', '', $row[16] ?? '');
 
-            // Skip baris kotor/kosong
             if ($kodeDesa < 1000000000 || !in_array($kodeDesa, $desaCache)) {
                 continue;
             }
 
-            // Parsing Pecahan Desimal & Anggaran (koma ke titik)
-            $rawJumlahOutput = trim($row[21] ?? '0');
-            $rawAnggaran     = trim($row[23] ?? '0');
-
-            $jumlahOutputVal = (float) str_replace(',', '.', $rawJumlahOutput);
-            $anggaranVal     = (float) str_replace(',', '.', $rawAnggaran);
+            // Sanitasi format angka Indonesia -> Decimal MySQL
+            $jumlahOutputVal = $this->sanitizeDecimal($row[21] ?? '0');
+            $anggaranVal     = $this->sanitizeDecimal($row[23] ?? '0');
 
             $direktoratId   = !empty($row[1]) ? (int) $row[1] : 1;
             $kodeKegiatan   = trim(preg_replace('/[^\x20-\x7E]/', '', $row[3] ?? ''));
@@ -74,7 +70,6 @@ class RealisasiSeeder extends Seeder
             $rawSatuanId    = !empty($row[20]) ? (int) $row[20] : 0;
             $satuanId       = in_array($rawSatuanId, $satuanCache) ? $rawSatuanId : $defaultSatuanId;
 
-            // Extract Hierarki Wilayah dari Kode BPS Desa
             $provinsiId  = (int) substr((string)$kodeDesa, 0, 2);
             $kabupatenId = (int) substr((string)$kodeDesa, 0, 4);
             $kecamatanId = (int) substr((string)$kodeDesa, 0, 6);
@@ -112,6 +107,23 @@ class RealisasiSeeder extends Seeder
         }
 
         fclose($file);
+    }
+
+    private function sanitizeDecimal(?string $value): float
+    {
+        if (empty($value)) return 0.0;
+        $value = trim($value);
+
+        if (strpos($value, '.') !== false && strpos($value, ',') !== false) {
+            $value = str_replace('.', '', $value);
+            $value = str_replace(',', '.', $value);
+        } elseif (strpos($value, ',') !== false) {
+            $value = str_replace(',', '.', $value);
+        } elseif (preg_match('/^\d{1,3}(\.\d{3})+$/', $value)) {
+            $value = str_replace('.', '', $value);
+        }
+
+        return (float) $value;
     }
 
     private function normalizeStatus(?string $status): string
