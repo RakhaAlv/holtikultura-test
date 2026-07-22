@@ -15,19 +15,18 @@ return new class extends Migration
             $table->foreignId('komoditas_id')->constrained('komoditas')->onDelete('restrict');
             $table->foreignId('satuan_id')->constrained('satuans')->onDelete('restrict');
 
-            // Denormalisasi Hierarki Wilayah (Kode BPS)
+            // Denormalisasi Hierarki Wilayah BPS
             $table->unsignedBigInteger('provinsi_id');
             $table->unsignedBigInteger('kabupaten_id');
             $table->unsignedBigInteger('kecamatan_id');
             $table->unsignedBigInteger('desa_id');
 
-            $table->string('nama_kelompok')->nullable();
+            $table->string('nama_kelompok');
             $table->year('tahun');
-            $table->decimal('target', 15, 2)->default(0);
+            
             $table->decimal('jumlah_output', 15, 2)->default(0);
             $table->decimal('anggaran', 15, 2)->default(0);
 
-            // Presisi Status Progress Banper
             $table->enum('status', [
                 'Usulan CPCL',
                 'Kontrak/PKS',
@@ -46,8 +45,9 @@ return new class extends Migration
             $table->foreign('desa_id')->references('id')->on('desas')->onDelete('restrict');
 
             // Compound Indexing
-            $table->index(['direktorat_id', 'tahun', 'status']);
-            $table->index(['provinsi_id', 'komoditas_id']);
+            $table->index(['direktorat_id', 'tahun']);
+            $table->index(['provinsi_id', 'tahun']);
+            $table->index(['desa_id', 'tahun']);
         });
     }
 
