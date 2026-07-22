@@ -2,18 +2,37 @@
     x-data="{ aceh: true }"
     class="rounded-[18px] bg-white shadow-[0_6px_18px_rgba(0,0,0,0.08)]">
 
-    {{-- Header --}}
-    <div class="border-b border-[#ECECEC] px-6 py-5">
+{{-- Header --}}
+<div class="border-b border-[#ECECEC] px-6 py-5">
 
-        <h2 class="text-[24px] font-semibold text-[#1F2937]">
-            Rincian Capaian
-        </h2>
+    <div class="flex items-start gap-4">
 
-        <p class="mt-1 text-[14px] text-[#7A7A7A]">
-            Klik baris wilayah untuk melihat detail ke bawah.
-        </p>
+        {{-- Icon --}}
+        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#B8F0C6]">
+
+            <img
+                src="{{ asset('Icon-Tabel-Komoditas.svg') }}"
+                class="h-7 w-7">
+
+        </div>
+
+        {{-- Title --}}
+        <div>
+
+            <h2 class="text-[22px] font-bold text-[#1F2937]">
+                Tabel Capaian Wilayah (Pivot)
+            </h2>
+
+            <p class="mt-1 text-[14px] text-[#6B7280]">
+                Klik tanda <span class="font-semibold">&gt;</span> untuk melihat rincian hingga tingkat Kelompok Tani.
+                Geser tabel ke kanan atau ke bawah untuk melihat seluruh data.
+            </p>
+
+        </div>
 
     </div>
+
+</div>
 
     <div class="overflow-x-auto">
 
