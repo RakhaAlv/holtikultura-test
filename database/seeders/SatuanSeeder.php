@@ -16,14 +16,12 @@ class SatuanSeeder extends Seeder
         DB::table('satuans')->truncate();
         Schema::enableForeignKeyConstraints();
 
-        // Master Satuan Baku
+        // Master Satuan Resmi (Terkunci 4 Record)
         $satuans = [
-            ['id' => 1, 'nama' => 'Ha', 'created_at' => now(), 'updated_at' => now()],
+            ['id' => 1, 'nama' => 'HA',       'created_at' => now(), 'updated_at' => now()],
             ['id' => 2, 'nama' => 'Kelompok', 'created_at' => now(), 'updated_at' => now()],
-            ['id' => 3, 'nama' => 'Kg', 'created_at' => now(), 'updated_at' => now()],
-            ['id' => 4, 'nama' => 'Batang', 'created_at' => now(), 'updated_at' => now()],
-            ['id' => 5, 'nama' => 'Unit', 'created_at' => now(), 'updated_at' => now()],
-            ['id' => 6, 'nama' => 'Paket', 'created_at' => now(), 'updated_at' => now()],
+            ['id' => 3, 'nama' => 'Kilogram', 'created_at' => now(), 'updated_at' => now()],
+            ['id' => 4, 'nama' => 'Unit',     'created_at' => now(), 'updated_at' => now()],
         ];
 
         DB::table('satuans')->insert($satuans);

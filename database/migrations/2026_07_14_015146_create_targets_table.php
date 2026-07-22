@@ -15,14 +15,12 @@ return new class extends Migration
             $table->foreignId('komoditas_id')->constrained('komoditas')->onDelete('restrict');
             $table->foreignId('satuan_id')->constrained('satuans')->onDelete('restrict');
 
-            // Denormalisasi Hierarki Wilayah (Kode BPS)
+            // Hierarki Wilayah BPS (Tingkat Kabupaten)
             $table->unsignedBigInteger('provinsi_id');
             $table->unsignedBigInteger('kabupaten_id');
-            $table->unsignedBigInteger('kecamatan_id');
-            $table->unsignedBigInteger('desa_id');
 
             $table->year('tahun');
-            $table->decimal('target', 15, 2)->default(0); // Hanya menyimpan target volume/luas fisik
+            $table->decimal('target', 15, 2)->default(0);
 
             $table->foreignId('created_by')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamps();
@@ -30,12 +28,11 @@ return new class extends Migration
             // Foreign Keys Wilayah
             $table->foreign('provinsi_id')->references('id')->on('provinsis')->onDelete('restrict');
             $table->foreign('kabupaten_id')->references('id')->on('kabupatens')->onDelete('restrict');
-            $table->foreign('kecamatan_id')->references('id')->on('kecamatans')->onDelete('restrict');
-            $table->foreign('desa_id')->references('id')->on('desas')->onDelete('restrict');
 
             // Compound Indexing
             $table->index(['direktorat_id', 'tahun']);
             $table->index(['provinsi_id', 'tahun']);
+            $table->index(['kabupaten_id', 'tahun']);
         });
     }
 
