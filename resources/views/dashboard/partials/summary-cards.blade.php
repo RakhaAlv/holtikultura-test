@@ -47,20 +47,16 @@ $commodities = [
         <div
             x-show="showAll || {{ $index }} < 5"
             x-transition
-            class="rounded-3xl bg-white p-6 shadow-xl transition duration-300 hover:shadow-2xl">
+            class="dashboard-card">
 
-            <!-- Header -->
-            <div class="flex justify-between items-center">
+            {{-- Header --}}
+            <div class="flex items-center justify-between">
 
-                <!-- Judul -->
-                <h2 class="text-xl font-semibold text-gray-800 leading-snug pt-0">
-
+                <h2 class="dashboard-card-title">
                     {{ $commodity['name'] }}
-
                 </h2>
 
-                <!-- Icon -->
-                <div class="flex h-14 w-14 items-center justify-center rounded-full bg-[#F3F8F4]">
+                <div class="dashboard-card-icon">
 
                     <img
                         src="{{ asset($commodity['icon']) }}"
@@ -70,65 +66,52 @@ $commodities = [
 
             </div>
 
-            <!-- Target -->
+            {{-- Target --}}
             <div class="mt-8">
 
-                <p class="text-sm text-gray-500">
-
+                <p class="dashboard-card-label">
                     Target
-
                 </p>
 
-                <h3 class="mt-1 text-2xl font-bold">
-
+                <h3 class="dashboard-card-value">
                     {{ $commodity['target'] }}
-
                 </h3>
 
             </div>
 
-            <!-- Realisasi -->
+            {{-- Realisasi --}}
             <div class="mt-5">
 
-                <p class="text-sm text-gray-500">
-
+                <p class="dashboard-card-label">
                     Realisasi
-
                 </p>
 
-                <h3 class="mt-1 text-2xl font-bold text-[#2E7D32]">
-
+                <h3 class="dashboard-card-value-success">
                     {{ $commodity['realisasi'] }}
-
                 </h3>
 
             </div>
 
-            <!-- Progress -->
+            {{-- Progress --}}
             <div class="mt-7">
 
                 <div class="mb-2 flex justify-between text-sm">
 
-                    <span class="text-gray-500">
-
+                    <span class="dashboard-card-label">
                         Progress
-
                     </span>
 
                     <span class="font-semibold">
-
                         {{ $commodity['progress'] }}%
-
                     </span>
 
                 </div>
 
-                <div class="h-3 rounded-full bg-gray-200">
+                <div class="dashboard-progress">
 
                     <div
-                        class="h-3 rounded-full bg-red-500"
+                        class="dashboard-progress-fill"
                         style="width: {{ $commodity['progress'] }}%">
-
                     </div>
 
                 </div>
@@ -139,12 +122,6 @@ $commodities = [
 
         @endforeach
 
-    </div>
-
-   
-    <div class="mt-6 flex justify-center">
-
-       
     </div>
 
 </div>
