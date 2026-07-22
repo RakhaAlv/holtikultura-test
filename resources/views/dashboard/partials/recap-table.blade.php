@@ -1,50 +1,4 @@
-@php
 
-$rows = [
-
-[
-    'komoditas' => 'Bawang Putih',
-    'wilayah' => 'Nasional',
-    'target' => '5.000 Ha',
-    'realisasi' => '683 Ha',
-    'persentase' => '13.7%',
-],
-
-[
-    'komoditas' => 'Bawang Merah',
-    'wilayah' => 'Nasional',
-    'target' => '150 Ha',
-    'realisasi' => '0 Ha',
-    'persentase' => '0.0%',
-],
-
-[
-    'komoditas' => 'Cabai',
-    'wilayah' => 'Nasional',
-    'target' => '2.953 Ha',
-    'realisasi' => '278 Ha',
-    'persentase' => '9.4%',
-],
-
-[
-    'komoditas' => 'Durian',
-    'wilayah' => 'Nasional',
-    'target' => '2.337 Ha',
-    'realisasi' => '0 Ha',
-    'persentase' => '0.0%',
-],
-
-[
-    'komoditas' => 'P2B',
-    'wilayah' => 'Nasional',
-    'target' => '411 Kelompok',
-    'realisasi' => '156 Kelompok',
-    'persentase' => '38%',
-],
-
-];
-
-@endphp
 
 
 
@@ -102,7 +56,7 @@ $rows = [
 
         <tbody>
 
-@foreach($rows as $index => $row)
+@foreach($rows as $row)
 
 <tr
     x-data="{ open:false }"

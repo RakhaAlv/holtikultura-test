@@ -1,51 +1,13 @@
-@php
 
-$commodities = [
-
-    [
-        'name' => 'Bawang Putih',
-        'icon' => 'Bawang-Putih-Card.svg',
-        'target' => '1.250 Ha',
-        'realisasi' => '1.020 Ha',
-        'progress' => 82,
-    ],
-
-    [
-        'name' => 'Bawang Merah',
-        'icon' => 'Bawang-Merah-Card.svg',
-        'target' => '1.980 Ha',
-        'realisasi' => '1.610 Ha',
-        'progress' => 81,
-    ],
-
-    [
-        'name' => 'Cabai',
-        'icon' => 'Cabai-Card.svg',
-        'target' => '2.430 Ha',
-        'realisasi' => '1.920 Ha',
-        'progress' => 79,
-    ],
-
-    [
-        'name' => 'Durian',
-        'icon' => 'Durian-Card.svg',
-        'target' => '845 Ha',
-        'realisasi' => '700 Ha',
-        'progress' => 83,
-    ],
-
-];
-
-@endphp
 
 <div x-data="{ showAll: false }">
 
     <div class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
 
-        @foreach($commodities as $index => $commodity)
+        @foreach($summary as $commodity)
 
         <div
-            x-show="showAll || {{ $index }} < 5"
+            
             x-transition
             class="dashboard-card">
 
