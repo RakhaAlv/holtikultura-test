@@ -1,12 +1,21 @@
-{{-- day 5 progress, halaman data management --}}
-
 @extends('layouts.app')
 
-@section('title', 'Data Management')
+@section('title', 'Management Data')
 
-@section('content')
 @section('navbar-title')
 Management Data
+@endsection
 
+@section('content')
+
+<div class="space-y-5">
+
+    @include('datamanagement.partials.header')
+
+    @include('datamanagement.partials.filter')
+
+    @include('datamanagement.partials.table')
+
+</div>
 
 @endsection

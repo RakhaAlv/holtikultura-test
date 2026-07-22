@@ -1,3 +1,41 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@layer components {
+
+    .dashboard-card {
+        @apply rounded-3xl bg-white p-6 transition duration-300 hover:shadow-2xl;
+        box-shadow: 0 10px 25px rgba(0,0,0,.12);
+    }
+
+    .dashboard-card-title {
+        @apply text-xl font-semibold leading-snug text-gray-800;
+    }
+
+    .dashboard-card-icon {
+        @apply flex h-14 w-14 items-center justify-center rounded-full bg-[#F3F8F4];
+    }
+
+    .dashboard-card-label {
+        @apply text-sm text-gray-500;
+    }
+
+    .dashboard-card-value {
+        @apply mt-1 text-2xl font-bold;
+    }
+
+    .dashboard-card-value-success {
+        @apply mt-1 text-2xl font-bold text-[#2E7D32];
+    }
+
+    .dashboard-progress {
+        @apply h-3 rounded-full bg-gray-200;
+    }
+
+    .dashboard-progress-fill {
+        @apply h-3 rounded-full bg-red-500;
+    }
+
+}

@@ -1,41 +1,39 @@
- {{-- Graph --}}
+{{-- Graph --}}
 
-    <div class="rounded-[28px] bg-white p-8 shadow-[0_8px_30px_rgba(0,0,0,0.08)]">
+<div class="rounded-[22px] bg-white p-6 shadow-[0_8px_24px_rgba(0,0,0,0.08)]">
 
-        <div class="mb-8 flex items-center gap-5">
+    {{-- Header --}}
+    <div class="mb-6 flex items-center gap-4">
 
-            <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#D8EEFF]">
+        <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#D8EEFF]">
 
-                <img
-                    src="{{ asset('Icon-Graph-Komoditas.svg') }}"
-                    class="h-9 w-9">
-
-            </div>
-
-            <div>
-
-                <h2 class="text-[34px] font-semibold text-[#1F2937]">
-
-                    Grafik Capaian vs Target per Provinsi
-
-                </h2>
-
-                <p class="mt-1 text-[15px] text-[#7A7A7A]">
-
-                    Perbandingan target dan realisasi Bawang Putih pada setiap provinsi.
-
-                </p>
-
-            </div>
+            <img
+                src="{{ asset('Icon-Graph-Komoditas.svg') }}"
+                class="h-8 w-8">
 
         </div>
 
-        <div
-            id="provinsiChart"
-            class="h-[520px] w-full">
+        <div>
+
+            <h2 class="text-[28px] font-semibold text-[#1F2937]">
+                Grafik Capaian vs Target per Provinsi
+            </h2>
+
+            <p class="mt-1 text-[14px] text-[#7A7A7A]">
+                Perbandingan target dan realisasi Bawang Putih pada setiap provinsi.
+            </p>
+
         </div>
 
     </div>
+
+    {{-- Chart --}}
+    <div
+        id="provinsiChart"
+        class="h-[420px] w-full">
+    </div>
+
+</div>
 
 
     <script>
