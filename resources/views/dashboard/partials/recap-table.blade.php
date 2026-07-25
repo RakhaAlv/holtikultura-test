@@ -1,7 +1,3 @@
-
-
-
-
 <div class="overflow-hidden rounded-[24px] bg-white">
 
     <!-- Header -->
@@ -17,18 +13,76 @@
 
     </div>
 
+    <!-- Filter -->
+    <form method="GET" action="{{ url()->current() }}" class="mt-6 mb-6 flex flex-wrap gap-3">
 
-<!-- Table -->
+        <input type="hidden" name="tahun" value="{{ $tahun }}">
 
-<table class ="w-full border-collapse">
+        <!-- Provinsi -->
+        <select
+            name="provinsi"
+            class="rounded-lg border border-gray-300 px-3 py-2">
 
-    <!-- Header -->
+            <option value="">
+                Semua Provinsi
+            </option>
 
-    <thead>
+            @foreach($provinsis as $provinsi)
 
-        <tr class ="bg-[#ECECEC] text-left text-[15px] font-semibold uppercase text-[#333]">
+                <option
+                    value="{{ $provinsi->id }}"
+                    {{ $provinsiId == $provinsi->id ? 'selected' : '' }}>
 
-            <th class="px-8 py-5">
+                    {{ $provinsi->nama }}
+
+                </option>
+
+            @endforeach
+
+        </select>
+
+        <!-- Kabupaten -->
+        <select
+            name="kabupaten"
+            class="rounded-lg border border-gray-300 px-3 py-2">
+
+            <option value="">
+                Semua Kabupaten
+            </option>
+
+            @foreach($kabupatens as $kabupaten)
+
+                <option
+                    value="{{ $kabupaten->id }}"
+                    {{ $kabupatenId == $kabupaten->id ? 'selected' : '' }}>
+
+                    {{ $kabupaten->nama }}
+
+                </option>
+
+            @endforeach
+
+        </select>
+
+        <button
+            type="submit"
+            class="rounded-lg bg-green-600 px-5 py-2 text-white hover:bg-green-700">
+
+            Terapkan
+
+        </button>
+
+    </form>
+
+    <!-- Table -->
+
+    <table class="w-full border-collapse">
+
+        <thead>
+
+            <tr class="bg-[#ECECEC] text-left text-[15px] font-semibold uppercase text-[#333]">
+
+                <th class="px-8 py-5">
                     Komoditas
                 </th>
 
@@ -50,61 +104,139 @@
 
             </tr>
 
- </thead>
-
-        <!-- Body -->
+        </thead>
 
         <tbody>
 
-@foreach($rows as $row)
+        @forelse($rows as $row)
 
-<tr
-    x-data="{ open:false }"
-    class="border-b border-[#DCEFD9] bg-[#E9FFE8]">
+            <tr
+                x-data="{ open:false }"
+                class="border-b border-[#DCEFD9] bg-[#E9FFE8]">
 
-    <td colspan="5" class="p-0">
+                <td colspan="5" class="p-0">
 
-        <!-- BARIS NASIONAL -->
+                    <table class="w-full">
+
+                        <tr class="transition hover:bg-[#DDF7DB]">
+
+                            <td class="w-[22%] px-8 py-5">
+
+                                {{ $row['komoditas'] }}
+
+                            </td>
+
+                            <td class="w-[25%] px-6 py-5">
+
+                                <button
+                                    @click="open=!open"
+                                    class="flex items-center gap-3">
+
+                                    <img
+                                        src="{{ asset('Icon-Arrow-Right.svg') }}"
+                                        class="h-4 w-4 transition duration-300"
+                                        :class="{ 'rotate-90': open }">
+
+                                    <span>Nasional</span>
+
+                                </button>
+
+                            </td>
+
+                            <td class="w-[18%] px-6 py-5">
+
+                                {{ number_format($row['target'],0,',','.') }}
+
+                            </td>
+
+                            <td class="w-[18%] px-6 py-5 font-semibold text-[#138A2E]">
+
+                                {{ number_format($row['realisasi'],0,',','.') }}
+
+                            </td>
+
+                            <td class="px-6 py-5 text-center">
+
+                                @php
+
+                                    if ($row['progress'] >= 100) {
+                                        $badge = 'bg-green-100 text-green-700';
+                                    } elseif ($row['progress'] >= 80) {
+                                        $badge = 'bg-yellow-100 text-yellow-700';
+                                    } else {
+                                        $badge = 'bg-red-100 text-red-700';
+                                    }
+
+                                @endphp
+
+                                <span class="rounded-lg px-3 py-1 {{ $badge }}">
+
+                                    {{ number_format($row['progress'],2) }}%
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                        <!-- Placeholder -->
+                        <tr
+    x-show="open"
+    x-transition>
+
+    <td colspan="5" class="bg-[#F7FFF6] p-0">
+
         <table class="w-full">
 
-            <tr class="transition hover:bg-[#DDF7DB]">
+            @foreach($row['provinsi'] as $provinsi)
 
-                <td class="px-8 py-5 w-[22%]">
+            <tr class="border-t border-[#DCEFD9]">
 
-                    {{ $row['komoditas'] }}
+                <td class="w-[22%] px-8 py-4"></td>
 
-                </td>
+                <td class="w-[25%] px-6 py-4">
 
-                <td class="px-6 py-5 w-[25%]">
-
-                    <button
-                        @click="open=!open"
-                        class="flex items-center gap-3">
+                    <button class="flex items-center gap-2">
 
                         <img
                             src="{{ asset('Icon-Arrow-Right.svg') }}"
-                            class="h-4 w-4 transition duration-300"
-                            :class="{ 'rotate-90': open }">
+                            class="h-3 w-3">
 
-                        <span>Nasional</span>
+                        {{ $provinsi['provinsi'] }}
 
                     </button>
 
                 </td>
 
-                <td class="px-6 py-5 w-[18%]">
-                    {{ $row['target'] }}
+                <td class="w-[18%] px-6 py-4">
+
+                    {{ number_format($provinsi['target'],0,',','.') }}
+
                 </td>
 
-                <td class="px-6 py-5 w-[18%] text-[#138A2E] font-semibold">
-                    {{ $row['realisasi'] }}
+                <td class="w-[18%] px-6 py-4 font-semibold text-[#138A2E]">
+
+                    {{ number_format($provinsi['realisasi'],0,',','.') }}
+
                 </td>
 
-                <td class="px-6 py-5 text-center">
+                <td class="px-6 py-4 text-center">
 
-                    <span class="rounded-lg bg-[#F6C1C1] px-3 py-1 text-[#9A2323]">
+                    @php
 
-                        {{ $row['persentase'] }}
+                        if($provinsi['progress'] >= 100){
+                            $badge = 'bg-green-100 text-green-700';
+                        }elseif($provinsi['progress'] >= 80){
+                            $badge = 'bg-yellow-100 text-yellow-700';
+                        }else{
+                            $badge = 'bg-red-100 text-red-700';
+                        }
+
+                    @endphp
+
+                    <span class="rounded-lg px-3 py-1 {{ $badge }}">
+
+                        {{ number_format($provinsi['progress'],2) }}%
 
                     </span>
 
@@ -112,155 +244,7 @@
 
             </tr>
 
-            <!-- DROPDOWN -->
-            <tr
-                x-show="open"
-                x-transition>
-
-                <td colspan="5" class="bg-[#F7FFF6] p-0">
-
-                    <table class="w-full">
-
-                        <!-- ACEH -->
-
-                        <tr class="border-t">
-
-                            <td class="px-20 py-4 w-[22%] text-gray-600">
-
-                                
-
-                            </td>
-
-                            <td class="px-6 py-4 w-[25%]">
-
-                                <button
-                                    class="flex items-center gap-3">
-
-                                    <img
-                                        src="{{ asset('Icon-Arrow-Right.svg') }}"
-                                        class="h-3 w-3">
-
-                                    Aceh
-
-                                </button>
-
-                            </td>
-
-                            <td class="px-6 py-4">
-                                600 Ha
-                            </td>
-
-                            <td class="px-6 py-4 text-[#138A2E]">
-                                350 Ha
-                            </td>
-
-                            <td class="px-6 py-4 text-center">
-
-                                <span class="rounded-lg bg-green-100 px-3 py-1 text-green-700">
-
-                                    58%
-
-                                </span>
-
-                            </td>
-
-                        </tr>
-
-                        <!-- SUMUT -->
-
-                        <tr class="border-t">
-
-                            <td class="px-20 py-4">
-
-                                
-
-                            </td>
-
-                            <td class="px-6 py-4">
-
-                                <button
-                                    class="flex items-center gap-3">
-
-                                    <img
-                                        src="{{ asset('Icon-Arrow-Right.svg') }}"
-                                        class="h-3 w-3">
-
-                                    Sumatera Utara
-
-                                </button>
-
-                            </td>
-
-                            <td class="px-6 py-4">
-                                480 Ha
-                            </td>
-
-                            <td class="px-6 py-4 text-[#138A2E]">
-                                215 Ha
-                            </td>
-
-                            <td class="px-6 py-4 text-center">
-
-                                <span class="rounded-lg bg-yellow-100 px-3 py-1 text-yellow-700">
-
-                                    44%
-
-                                </span>
-
-                            </td>
-
-                        </tr>
-
-                        <!-- JAWA BARAT -->
-
-                        <tr class="border-t">
-
-                            <td class="px-20 py-4">
-
-                                
-
-                            </td>
-
-                            <td class="px-6 py-4">
-
-                                <button
-                                    class="flex items-center gap-3">
-
-                                    <img
-                                        src="{{ asset('Icon-Arrow-Right.svg') }}"
-                                        class="h-3 w-3">
-
-                                    Jawa Barat
-
-                                </button>
-
-                            </td>
-
-                            <td class="px-6 py-4">
-                                800 Ha
-                            </td>
-
-                            <td class="px-6 py-4 text-[#138A2E]">
-                                118 Ha
-                            </td>
-
-                            <td class="px-6 py-4 text-center">
-
-                                <span class="rounded-lg bg-red-100 px-3 py-1 text-red-700">
-
-                                    15%
-
-                                </span>
-
-                            </td>
-
-                        </tr>
-
-                    </table>
-
-                </td>
-
-            </tr>
+            @endforeach
 
         </table>
 
@@ -268,10 +252,28 @@
 
 </tr>
 
-    @endforeach
+                    </table>
 
-    </tbody>
+                </td>
 
-</table>
+            </tr>
+
+        @empty
+
+            <tr>
+
+                <td colspan="5" class="py-10 text-center text-gray-500">
+
+                    Tidak ada data.
+
+                </td>
+
+            </tr>
+
+        @endforelse
+
+        </tbody>
+
+    </table>
 
 </div>

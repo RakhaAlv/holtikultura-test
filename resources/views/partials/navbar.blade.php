@@ -42,7 +42,7 @@
                         class="h-4 w-4">
 
                     <span class="text-sm font-medium text-gray-700">
-                        Periode 2025
+                    Periode {{ $tahun ?? request('tahun', 2025) }}
                     </span>
 
                 </div>
@@ -64,24 +64,28 @@
 
             </button>
 
-            <!-- Dropdown -->
+           <!-- Dropdown -->
             <div
                 x-show="openPeriode"
                 @click.outside="openPeriode = false"
                 x-transition
                 class="absolute right-0 z-50 mt-2 w-full overflow-hidden rounded-xl bg-white shadow-xl">
 
-                <button class="block w-full px-4 py-2.5 text-left text-sm hover:bg-gray-100">
-                    Periode 2025
-                </button>
+            <a
+                href="{{ request()->fullUrlWithQuery(['tahun' => 2025]) }}"
+                class="block w-full px-4 py-2.5 text-left text-sm hover:bg-gray-100">
 
-                <button class="block w-full px-4 py-2.5 text-left text-sm hover:bg-gray-100">
-                    Periode 2024
-                </button>
+                Periode 2025
 
-                <button class="block w-full px-4 py-2.5 text-left text-sm hover:bg-gray-100">
-                    Periode 2023
-                </button>
+            </a>
+
+            <a
+                href="{{ request()->fullUrlWithQuery(['tahun' => 2026]) }}"
+                class="block w-full px-4 py-2.5 text-left text-sm hover:bg-gray-100">
+
+                Periode 2026
+
+            </a>
 
             </div>
 
