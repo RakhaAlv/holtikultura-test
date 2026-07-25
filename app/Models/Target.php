@@ -12,9 +12,10 @@ class Target extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['id'];
+    // Pastikan model menggunakan tabel targets
+    protected $table = 'targets';
 
-    // Hapus $with untuk mencegah Memory Leak pada Kueri Agregasi/Chart
+    protected $guarded = ['id'];
 
     protected function casts(): array
     {
@@ -28,46 +29,92 @@ class Target extends Model
 
     protected static function booted(): void
     {
-        // Proteksi RBAC Isolation (Aman untuk CLI / Background Jobs)
         static::addGlobalScope('rbac_isolation', function (Builder $builder) {
             if (!app()->runningInConsole() && Auth::check()) {
+
                 /** @var \App\Models\User $user */
                 $user = Auth::user();
 
                 if (method_exists($user, 'isAdminDirektorat') && $user->isAdminDirektorat()) {
-                    $builder->where($builder->qualifyColumn('direktorat_id'), $user->direktorat_id);
+                    $builder->where(
+                        $builder->qualifyColumn('direktorat_id'),
+                        $user->direktorat_id
+                    );
                 } elseif (method_exists($user, 'isUser') && $user->isUser()) {
-                    $builder->where($builder->qualifyColumn('created_by'), $user->id);
+                    $builder->where(
+                        $builder->qualifyColumn('created_by'),
+                        $user->id
+                    );
                 }
             }
         });
     }
 
-    // --- LOCAL SCOPES UNTUK AGREGASI DASHBOARD ---
+    // ==========================
+    // LOCAL SCOPES
+    // ==========================
 
     public function scopeByTahun(Builder $query, int $tahun): Builder
     {
         return $query->where('tahun', $tahun);
     }
 
-    public function scopeByWilayah(Builder $query, ?int $provinsiId = null, ?int $kabupatenId = null): Builder
-    {
-        return $query->when($provinsiId, fn ($q) => $q->where('provinsi_id', $provinsiId))
-                     ->when($kabupatenId, fn ($q) => $q->where('kabupaten_id', $kabupatenId));
+    public function scopeByWilayah(
+        Builder $query,
+        ?int $provinsiId = null,
+        ?int $kabupatenId = null
+    ): Builder {
+        return $query
+            ->when($provinsiId, fn ($q) => $q->where('provinsi_id', $provinsiId))
+            ->when($kabupatenId, fn ($q) => $q->where('kabupaten_id', $kabupatenId));
     }
 
-    public function scopeByKomoditas(Builder $query, ?int $komoditasId = null): Builder
-    {
-        return $query->when($komoditasId, fn ($q) => $q->where('komoditas_id', $komoditasId));
+    public function scopeByKomoditas(
+        Builder $query,
+        ?int $komoditasId = null
+    ): Builder {
+        return $query->when(
+            $komoditasId,
+            fn ($q) => $q->where('komoditas_id', $komoditasId)
+        );
     }
 
-    // --- RELASI (Terikat Tingkat Kabupaten) ---
+    // ==========================
+    // RELASI
+    // ==========================
 
-    public function direktorat(): BelongsTo { return $this->belongsTo(Direktorat::class); }
-    public function kegiatan(): BelongsTo { return $this->belongsTo(Kegiatan::class); }
-    public function komoditas(): BelongsTo { return $this->belongsTo(Komoditas::class); }
-    public function satuan(): BelongsTo { return $this->belongsTo(Satuan::class); }
-    public function provinsi(): BelongsTo { return $this->belongsTo(Provinsi::class); }
-    public function kabupaten(): BelongsTo { return $this->belongsTo(Kabupaten::class); }
-    public function creator(): BelongsTo { return $this->belongsTo(User::class, 'created_by'); }
+    public function direktorat(): BelongsTo
+    {
+        return $this->belongsTo(Direktorat::class);
+    }
+
+    public function kegiatan(): BelongsTo
+    {
+        return $this->belongsTo(Kegiatan::class);
+    }
+
+    public function komoditas(): BelongsTo
+    {
+        return $this->belongsTo(Komoditas::class);
+    }
+
+    public function satuan(): BelongsTo
+    {
+        return $this->belongsTo(Satuan::class);
+    }
+
+    public function provinsi(): BelongsTo
+    {
+        return $this->belongsTo(Provinsi::class);
+    }
+
+    public function kabupaten(): BelongsTo
+    {
+        return $this->belongsTo(Kabupaten::class);
+    }
+
+    public function creator(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
 }
