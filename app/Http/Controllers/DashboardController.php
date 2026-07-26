@@ -150,28 +150,80 @@ class DashboardController extends Controller
                 'provinsi_id'
             )
             ->get();
-        
-        $provinsiTargets = Target::select(
-        'komoditas_id',
-        'provinsi_id',
-        DB::raw('SUM(target) as total_target')
-    )
-    ->where('tahun', $tahun)
-    ->when($provinsiId, function ($q) use ($provinsiId) {
-        $q->where('provinsi_id', $provinsiId);
-    })
-    ->when($kabupatenId, function ($q) use ($kabupatenId) {
-        $q->where('kabupaten_id', $kabupatenId);
-    })
-    ->groupBy(
-        'komoditas_id',
-        'provinsi_id'
-    )
-    ->get()
-    ->keyBy(function ($item) {
-        return $item->komoditas_id . '-' . $item->provinsi_id;
-    });
 
+        $provinsiTargets = Target::select(
+            'komoditas_id',
+            'provinsi_id',
+            DB::raw('SUM(target) as total_target')
+            )   
+            ->where('tahun', $tahun)
+            ->when($provinsiId, function ($q) use ($provinsiId) {
+                $q->where('provinsi_id', $provinsiId);
+            })
+            ->when($kabupatenId, function ($q) use ($kabupatenId) {
+                $q->where('kabupaten_id', $kabupatenId);
+            })
+            ->groupBy(
+                'komoditas_id',
+                'provinsi_id'
+            )
+            ->get()
+            ->keyBy(function ($item) {
+                return $item->komoditas_id . '-' . $item->provinsi_id;
+            });
+        
+        $kabupatenRows = Realisasi::select(
+            'komoditas_id',
+            'provinsi_id',
+            'kabupaten_id',
+            DB::raw('SUM(jumlah_output) as total_realisasi')
+        )
+            ->where('tahun', $tahun)
+            ->when($provinsiId, function ($q) use ($provinsiId) {
+                $q->where('provinsi_id', $provinsiId);
+            })
+            ->when($kabupatenId, function ($q) use ($kabupatenId) {
+                $q->where('kabupaten_id', $kabupatenId);
+            })
+            ->with([
+                'provinsi',
+                'kabupaten',
+            ])
+            ->groupBy(
+                'komoditas_id',
+                'provinsi_id',
+                'kabupaten_id'
+        )
+            ->get();
+        
+        
+        $kabupatenTargets = Target::select(
+            'komoditas_id',
+            'provinsi_id',
+            'kabupaten_id',
+            DB::raw('SUM(target) as total_target')
+            )
+            ->where('tahun', $tahun)
+            ->when($provinsiId, function ($q) use ($provinsiId) {
+                $q->where('provinsi_id', $provinsiId);
+            })
+            ->when($kabupatenId, function ($q) use ($kabupatenId) {
+                $q->where('kabupaten_id', $kabupatenId);
+            })
+            ->groupBy(
+                'komoditas_id',
+                'provinsi_id',
+                'kabupaten_id'
+            )
+            ->get()
+            ->keyBy(function ($item) {
+            return
+                $item->komoditas_id.'-'.
+                $item->provinsi_id.'-'.
+                $item->kabupaten_id;
+            });
+
+     
     
         /*
         |--------------------------------------------------------------------------
@@ -182,7 +234,9 @@ class DashboardController extends Controller
         $rows = $realisasiTable->map(function ($item) use (
             $targets,
             $provinsiRows,
-            $provinsiTargets
+            $provinsiTargets,
+            $kabupatenRows,
+            $kabupatenTargets
         ) { 
 
         $target = $targets[$item->komoditas_id] ?? 0;
@@ -193,7 +247,11 @@ class DashboardController extends Controller
         // Ambil semua provinsi untuk komoditas ini
         $provinsi = $provinsiRows
             ->where('komoditas_id', $item->komoditas_id)
-            ->map(function ($p) use ($provinsiTargets) {
+            ->map(function ($p) use (
+                $provinsiTargets,
+                $kabupatenRows,
+                $kabupatenTargets
+            ) {
 
         $key = $p->komoditas_id.'-'.$p->provinsi_id;
 
@@ -203,11 +261,45 @@ class DashboardController extends Controller
             ? round($p->total_realisasi / $target * 100,2)
             : 0;
 
+        
+        $kabupaten = $kabupatenRows
+            ->where('komoditas_id', $p->komoditas_id)
+            ->where('provinsi_id', $p->provinsi_id)
+            ->map(function ($k) use ($kabupatenTargets) {
+
+        $key =
+            $k->komoditas_id.'-'.
+            $k->provinsi_id.'-'.
+            $k->kabupaten_id;
+
+        $target =
+            $kabupatenTargets[$key]->total_target ?? 0;
+
+        $progress = $target > 0
+            ? round($k->total_realisasi / $target * 100,2)
+            : 0;
+
+        return [
+
+            'kabupaten' => $k->kabupaten->nama,
+
+            'target' => $target,
+
+            'realisasi' => $k->total_realisasi,
+
+            'progress' => $progress,
+
+        ];
+
+    })
+    ->values();
+
         return [
             'provinsi'  => $p->provinsi->nama,
             'target'    => $target,
             'realisasi' => $p->total_realisasi,
             'progress'  => $progress,
+            'kabupaten' => $kabupaten,
         ];
 
     })
@@ -224,125 +316,11 @@ class DashboardController extends Controller
 
     });
         
-        
-
-        $kabupatenTargets = Target::select(
-            'komoditas_id',
-            'kabupaten_id',
-        DB::raw('SUM(target) as total_target')
-            )
-            ->where('tahun', $tahun)
-            ->when($provinsiId, function ($q) use ($provinsiId) {
-                $q->where('provinsi_id', $provinsiId);
-            })
-            ->when($kabupatenId, function ($q) use ($kabupatenId) {
-                $q->where('kabupaten_id', $kabupatenId);
-            })
-            ->groupBy(
-                'komoditas_id',
-                'kabupaten_id'
-        )
-            ->get()
-            ->keyBy(function ($item) {
-            return $item->komoditas_id.'-'.$item->kabupaten_id;
-        });
-
-        
-        
-        
-
-        $provinsiRows = $provinsiRows->map(function ($item) use ($provinsiTargets) {
-            
-            $key = $item->komoditas_id . '-' . $item->provinsi_id;
-
-            $target = $provinsiTargets[$key]->total_target ?? 0;
-
-            $progress = 0;
-
-            if ($target > 0) {
-                $progress = round(
-                ($item->total_realisasi / $target) * 100,2);
-            }
-
-            return [
-                'komoditas_id' => $item->komoditas_id,
-                'provinsi_id'  => $item->provinsi_id,
-
-                'komoditas' => $item->komoditas->nama,
-                'provinsi'  => $item->provinsi->nama,
-
-                'target' => $target,
-                'realisasi' => $item->total_realisasi,
-                'progress' => $progress,
-            ];
-        });
-
-        $kabupatenRows = Realisasi::select(
-        'komoditas_id',
-        'provinsi_id',
-        'kabupaten_id',
-        DB::raw('SUM(jumlah_output) as total_realisasi')
-    )
-        ->where('tahun', $tahun)
-        ->when($provinsiId, function ($q) use ($provinsiId) {
-            $q->where('provinsi_id', $provinsiId);
-        })
-        ->when($kabupatenId, function ($q) use ($kabupatenId) {
-            $q->where('kabupaten_id', $kabupatenId);
-        })
-        ->with([
-            'komoditas',
-            'provinsi',
-            'kabupaten'
-        ])
-        ->groupBy(
-            'komoditas_id',
-            'provinsi_id',
-            'kabupaten_id'
-        )
-        ->get();
-
-        $kabupatenRows = $kabupatenRows->map(function ($item) use ($kabupatenTargets) {
-
-        $key = $item->komoditas_id.'-'.$item->kabupaten_id;
-
-        $target = $kabupatenTargets[$key]->total_target ?? 0;
-
-        $progress = 0;
-
-        if ($target > 0) {
-            $progress = round(
-                ($item->total_realisasi / $target) * 100,2);
-    }
-
-    return [
-
-        'komoditas_id' => $item->komoditas_id,
-
-        'provinsi_id' => $item->provinsi_id,
-
-        'kabupaten_id' => $item->kabupaten_id,
-
-        'komoditas' => $item->komoditas->nama,
-
-        'provinsi' => $item->provinsi->nama,
-
-        'kabupaten' => $item->kabupaten->nama,
-
-        'target' => $target,
-
-        'realisasi' => $item->total_realisasi,
-
-        'progress' => $progress,
-
-    ];
-});
+    // day 8 progress, menghapus provinsi rows dan kabupaten rows
 
         return view('dashboard.index', compact(
             'summary',
             'rows',
-            'provinsiRows',
-            'kabupatenRows',
             'tahun',
             'provinsis',
             'kabupatens',
@@ -350,4 +328,4 @@ class DashboardController extends Controller
             'kabupatenId'
         ));
     }
-}
+}      

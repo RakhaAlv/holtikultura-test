@@ -190,21 +190,26 @@
 
             @foreach($row['provinsi'] as $provinsi)
 
+            <tbody x-data="{ openProv:false }">
+
             <tr class="border-t border-[#DCEFD9]">
 
                 <td class="w-[22%] px-8 py-4"></td>
 
                 <td class="w-[25%] px-6 py-4">
 
-                    <button class="flex items-center gap-2">
+                    <button
+    @click="openProv=!openProv"
+    class="flex items-center gap-3">
 
-                        <img
-                            src="{{ asset('Icon-Arrow-Right.svg') }}"
-                            class="h-3 w-3">
+    <img
+        src="{{ asset('Icon-Arrow-Right.svg') }}"
+        class="h-3 w-3 transition"
+        :class="{ 'rotate-90': openProv }">
 
-                        {{ $provinsi['provinsi'] }}
+    {{ $provinsi['provinsi'] }}
 
-                    </button>
+</button>
 
                 </td>
 
@@ -241,8 +246,83 @@
                     </span>
 
                 </td>
+</tr>
 
-            </tr>
+
+
+<tr
+    x-show="openProv"
+    x-transition>
+
+    
+
+    <td colspan="5" class="bg-[#FBFFFB] p-0">
+
+        <table class="w-full">
+
+            @foreach($provinsi['kabupaten'] as $kabupaten)
+
+            <tr class="border-t border-[#E5F2E4]">
+
+                <td class="w-[22%] px-24 py-3"></td>
+
+                <td class="w-[25%] px-10 py-3">
+
+                    <div class="flex items-center gap-3">
+
+                        <img
+                            src="{{ asset('Icon-Arrow-Right.svg') }}"
+                            class="h-3 w-3">
+
+                        {{ $kabupaten['kabupaten'] }}
+
+                    </div>
+
+                </td>
+
+                <td class="w-[18%] px-6 py-3">
+
+                    {{ number_format($kabupaten['target'],0,',','.') }}
+
+                </td>
+
+                <td class="w-[18%] px-6 py-3 font-semibold text-[#138A2E]">
+
+                    {{ number_format($kabupaten['realisasi'],0,',','.') }}
+
+                </td>
+
+                <td class="px-6 py-3 text-center">
+
+                    @php
+
+                        if($kabupaten['progress'] >= 100){
+                            $badge = 'bg-green-100 text-green-700';
+                        }elseif($kabupaten['progress'] >= 80){
+                            $badge = 'bg-yellow-100 text-yellow-700';
+                        }else{
+                            $badge = 'bg-red-100 text-red-700';
+                        }
+
+                    @endphp
+
+                    <span class="rounded-lg px-3 py-1 {{ $badge }}">
+
+                        {{ number_format($kabupaten['progress'],2) }}%
+
+                    </span>
+
+                </tr>
+
+            </tbody>
+
+            @endforeach
+
+        </table>
+
+    </td>
+
+</tr>
 
             @endforeach
 
