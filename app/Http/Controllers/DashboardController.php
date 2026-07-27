@@ -437,7 +437,7 @@ return [
     // day 9 progress, implementasi AJAX di peta
     public function mapData()
 {
-    $tahun = request('tahun', date('Y'));
+        $tahun = session('tahun', 2025);
 
     $komoditasId = request('komoditas');
 

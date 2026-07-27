@@ -1,12 +1,10 @@
+
 @extends('layouts.app')
 
-@section('title', $namaKomoditas)
-
-@section('navbar-title', 'Rekap Komoditas : '.$namaKomoditas)
+@section('navbar-title','Rekap Komoditas : '. $komoditas->nama)
 
 @section('content')
-
-<div class="space-y-7">
+<div class="space-y-6">
 
     @include('komoditas.partials.cards')
 
@@ -17,5 +15,4 @@
     @include('komoditas.partials.table')
 
 </div>
-
 @endsection

@@ -14,6 +14,9 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         // day 3 progress
         // setting middleware alias untuk mempermudah penggunaan middleware di route. 
+        $middleware->web(append: [
+            \App\Http\Middleware\SetTahunSession::class,
+        ]);
         $middleware->alias([
             'role' => \App\Http\Middleware\CheckRole::class,
         ]);
