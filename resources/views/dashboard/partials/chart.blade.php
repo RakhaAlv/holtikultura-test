@@ -58,21 +58,43 @@ window.addEventListener("load", function () {
 
             trigger:'axis',
 
-            axisPointer:{
-                type:'shadow'
-            },
-
-            backgroundColor:'#fff',
-
-            borderColor:'#E5E7EB',
-
-            borderWidth:1,
-
-            textStyle:{
-                color:'#222'
-            }
-
+                axisPointer:{
+            type:'shadow'
         },
+
+        formatter:function(params){
+
+        let html = params[0].name + "<br>";
+
+        params.forEach(item=>{
+
+            html +=
+                item.marker +
+                " " +
+                item.seriesName +
+                ": <b>" +
+                item.value.toLocaleString('id-ID') +
+                " Ha</b><br>";
+
+        });
+
+        return html;
+
+    },
+
+    backgroundColor:'#fff',
+
+    borderColor:'#E5E7EB',
+
+    borderWidth:1,
+
+    textStyle:{
+        color:'#222'
+    }
+
+},
+
+        
 
         legend:{
 
@@ -109,46 +131,39 @@ window.addEventListener("load", function () {
                 color:'#555'
             },
 
-            data:[
-                'Bawang Putih',
-                'Bawang Merah',
-                'Cabai',
-                'Durian',
-                'P2B'
-            ]
+            data: @json($chartData->pluck('komoditas'))
 
         },
 
         yAxis:{
 
-            type:'value',
+    type:'value',
 
-            min:0,
+    min:0,
 
-            max:6000,
+    axisLine:{
+        show:false
+    },
 
-            interval:1000,
+    axisTick:{
+        show:false
+    },
 
-            axisLine:{
-                show:false
-            },
+    axisLabel:{
+    color:'#777',
+    fontSize:14,
+    formatter:function(value){
+        return value.toLocaleString('id-ID');
+    }
+},
 
-            axisTick:{
-                show:false
-            },
+    splitLine:{
+        lineStyle:{
+            color:'#ECECEC'
+        }
+    }
 
-            axisLabel:{
-                color:'#777',
-                fontSize:14
-            },
-
-            splitLine:{
-                lineStyle:{
-                    color:'#ECECEC'
-                }
-            }
-
-        },
+},
 
         series:[
 
@@ -157,8 +172,9 @@ window.addEventListener("load", function () {
                 name:'Target',
 
                 type:'bar',
-
-                data:[5000,150,2953,2337,411],
+                
+                
+                data: @json($chartData->pluck('target')),
 
                 barWidth:50,
 
@@ -194,7 +210,7 @@ window.addEventListener("load", function () {
 
                 type:'bar',
 
-                data:[683,0,278,0,156],
+                data: @json($chartData->pluck('realisasi')),
 
                 barWidth:50,
 
