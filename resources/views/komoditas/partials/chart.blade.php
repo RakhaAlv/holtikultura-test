@@ -85,7 +85,10 @@
                 interval:0,
                 fontSize:11,
                 margin:20,
-                rotate:0
+                rotate:0,
+                formatter: function (value) {
+                    return value.split(' ').join('\n');
+                }
             },
 
             data: @json($chartData->pluck('provinsi'))
@@ -112,7 +115,7 @@
 
                 type:'bar',
 
-                data: @json($chartData->pluck('target'))
+                data: @json($chartData->pluck('target')),
 
                 barWidth:24,
 
@@ -136,7 +139,7 @@
 
                 type:'bar',
 
-                data: @json($chartData->pluck('realisasi'))
+                data: @json($chartData->pluck('realisasi')),
 
                 barWidth:24,
 
