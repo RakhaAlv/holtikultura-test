@@ -39,9 +39,7 @@ class Realisasi extends Model
 
                 if (method_exists($user, 'isAdminDirektorat') && $user->isAdminDirektorat()) {
                     $builder->where($builder->qualifyColumn('direktorat_id'), $user->direktorat_id);
-                } elseif (method_exists($user, 'isUser') && $user->isUser()) {
-                    $builder->where($builder->qualifyColumn('created_by'), $user->id);
-                }
+                } 
             }
         });
     }

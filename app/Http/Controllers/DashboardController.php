@@ -14,8 +14,10 @@ use App\Models\Komoditas;
 
 class DashboardController extends Controller
 {
+    
     public function index()
     {
+        
         // Tahun yang dipilih dari dropdown
         $tahun = request('tahun', date('Y'));
 
