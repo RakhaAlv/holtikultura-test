@@ -17,14 +17,17 @@ class DashboardController extends Controller
     
     public function index()
     {
-        
+        // Progress day 9 revisi dropdown
         // Tahun yang dipilih dari dropdown
-        $tahun = request('tahun', date('Y'));
+        if (request()->has('tahun')) {
+             session(['tahun' => request('tahun')]);
+            }
 
-        
+            $tahun = session('tahun', 2025);
     
         $provinsiId = request('provinsi');
         $kabupatenId = request('kabupaten');
+
         // day 7 progress, Ambil semua provinsi untuk mengisi dropdown.
         $provinsis = Provinsi::orderBy('nama')->get();
 
