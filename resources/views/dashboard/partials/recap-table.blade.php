@@ -13,102 +13,137 @@
 
     </div>
 
-    <!-- Filter -->
-    <form method="GET" action="{{ url()->current() }}" class="mt-6 mb-6 flex flex-wrap gap-3">
+    {{-- Filter --}}
+<form
+    method="GET"
+    action="{{ url()->current() }}"
+    class="mt-6 mb-8">
 
-        <input type="hidden" name="tahun" value="{{ $tahun }}">
+    <input type="hidden" name="tahun" value="{{ $tahun }}">
 
-        <!-- Provinsi -->
-        <select
-            name="provinsi"
-            class="rounded-lg border border-gray-300 px-3 py-2">
+    <div class="grid grid-cols-1 gap-5 lg:grid-cols-12">
 
-            <option value="">
-                Semua Provinsi
-            </option>
+        {{-- Provinsi --}}
+        <div class="lg:col-span-5">
 
-            @foreach($provinsis as $provinsi)
+            <label class="mb-2 block text-[15px] font-semibold text-[#222]">
+                Provinsi
+            </label>
 
-                <option
-                    value="{{ $provinsi->id }}"
-                    {{ $provinsiId == $provinsi->id ? 'selected' : '' }}>
+            <select
+                name="provinsi"
+                class="h-[54px] w-full rounded-xl border border-[#D9D9D9] bg-white px-4 text-[15px] shadow-sm focus:border-[#15803D] focus:outline-none">
 
-                    {{ $provinsi->nama }}
-
+                <option value="">
+                    Semua Provinsi
                 </option>
 
-            @endforeach
+                @foreach($provinsis as $provinsi)
 
-        </select>
+                    <option
+                        value="{{ $provinsi->id }}"
+                        {{ $provinsiId == $provinsi->id ? 'selected' : '' }}>
 
-        <!-- Kabupaten -->
-        <select
-            name="kabupaten"
-            class="rounded-lg border border-gray-300 px-3 py-2">
+                        {{ $provinsi->nama }}
 
-            <option value="">
-                Semua Kabupaten
-            </option>
+                    </option>
 
-            @foreach($kabupatens as $kabupaten)
+                @endforeach
 
-                <option
-                    value="{{ $kabupaten->id }}"
-                    {{ $kabupatenId == $kabupaten->id ? 'selected' : '' }}>
+            </select>
 
-                    {{ $kabupaten->nama }}
+        </div>
 
+        {{-- Kabupaten --}}
+        <div class="lg:col-span-5">
+
+            <label class="mb-2 block text-[15px] font-semibold text-[#222]">
+                Kabupaten/Kota
+            </label>
+
+            <select
+                name="kabupaten"
+                class="h-[54px] w-full rounded-xl border border-[#D9D9D9] bg-white px-4 text-[15px] shadow-sm focus:border-[#15803D] focus:outline-none">
+
+                <option value="">
+                    Semua Kabupaten/Kota
                 </option>
 
-            @endforeach
+                @foreach($kabupatens as $kabupaten)
 
-        </select>
+                    <option
+                        value="{{ $kabupaten->id }}"
+                        {{ $kabupatenId == $kabupaten->id ? 'selected' : '' }}>
 
-        <button
-            type="submit"
-            class="rounded-lg bg-green-600 px-5 py-2 text-white hover:bg-green-700">
+                        {{ $kabupaten->nama }}
 
-            Terapkan
+                    </option>
 
-        </button>
+                @endforeach
 
-    </form>
+            </select>
+
+        </div>
+
+        {{-- Tombol --}}
+        <div class="flex items-end lg:col-span-2">
+
+            <button
+                type="submit"
+                class="h-[54px] w-full rounded-xl bg-[#16B33A] text-[15px] font-semibold text-white transition hover:bg-[#166534]">
+
+                Terapkan
+
+            </button>
+
+        </div>
+
+    </div>
+
+</form>
 
     <!-- Table -->
 
-    <table class="w-full border-collapse">
+   <table class="w-full table-fixed border-collapse">
 
-        <thead>
+    <thead>
 
-            <tr class="bg-[#ECECEC] text-left text-[15px] font-semibold uppercase text-[#333]">
+        <tr class="bg-[#ECECEC] text-[15px] font-semibold uppercase text-[#333]">
 
-                <th class="px-8 py-5">
-                    Komoditas
-                </th>
+            <th class="w-[22%] px-8 py-5 text-left">
+                Komoditas
+            </th>
 
-                <th class="px-6 py-5">
-                    Wilayah
-                </th>
+            <th class="w-[25%] px-6 py-5 text-left">
+                Wilayah
+            </th>
 
-                <th class="px-6 py-5">
-                    Target
-                </th>
+            <th class="w-[18%] px-6 py-5 text-center">
+                Target
+            </th>
 
-                <th class="px-6 py-5">
-                    Realisasi
-                </th>
+            <th class="w-[18%] px-6 py-5 text-center">
+                Realisasi
+            </th>
 
-                <th class="px-6 py-5 text-center">
-                    Persentase
-                </th>
+            <th class="w-[17%] px-6 py-5 text-center">
+                Persentase
+            </th>
 
-            </tr>
+        </tr>
 
-        </thead>
+    </thead>
 
-        <tbody>
+    <tbody>
+        
 
         @forelse($rows as $row)
+
+        @php
+            $satuan = strtolower($row['komoditas']) == 'p2b'
+            ? 'Kelompok'
+            : 'Ha';
+        @endphp
 
             <tr
                 x-data="{ open:false }"
@@ -116,49 +151,70 @@
 
                 <td colspan="5" class="p-0">
 
-                    <table class="w-full">
+                    <table class="w-full table-fixed">
+
+                        <colgroup>
+                            <col class="w-[22%]">
+                            <col class="w-[25%]">
+                            <col class="w-[18%]">
+                            <col class="w-[18%]">
+                            <col class="w-[17%]">
+                        </colgroup>
 
                         <tr class="transition hover:bg-[#DDF7DB]">
 
-                            <td class="w-[22%] px-8 py-5">
+                            {{-- Komoditas --}}
+                            <td class="px-8 py-5 align-middle">
 
-                                {{ $row['komoditas'] }}
+                            {{ $row['komoditas'] }}
 
                             </td>
 
-                            <td class="w-[25%] px-6 py-5">
+
+                            {{-- Wilayah --}}
+                            <td class="px-6 py-5 align-middle">
 
                                 <button
                                     @click="open=!open"
                                     class="flex items-center gap-3">
 
-                                    <img
-                                        src="{{ asset('Icon-Arrow-Right.svg') }}"
-                                        class="h-4 w-4 transition duration-300"
-                                        :class="{ 'rotate-90': open }">
+                                <img
+                                    src="{{ asset('Icon-Arrow-Right.svg') }}"
+                                    class="h-4 w-4 transition duration-300"
+                                    :class="{ 'rotate-90': open }">
 
-                                    <span>Nasional</span>
+                                <span>Nasional</span>
 
-                                </button>
+                            </button>
 
-                            </td>
+                        </td>
 
-                            <td class="w-[18%] px-6 py-5">
+                            <td class="px-6 py-5 text-center align-middle">
 
                                 {{ number_format($row['target'],0,',','.') }}
 
+                                <span class="text-gray-500">
+                                    {{ $satuan }}
+                                 </span>
+
                             </td>
 
-                            <td class="w-[18%] px-6 py-5 font-semibold text-[#138A2E]">
+
+                            {{-- Realisasi --}}
+                            <td class="px-6 py-5 text-center font-semibold text-[#138A2E] align-middle">
 
                                 {{ number_format($row['realisasi'],0,',','.') }}
 
-                            </td>
+                            <span class="text-[#138A2E]">
+                                {{ $satuan }}
+                            </span>
 
-                            <td class="px-6 py-5 text-center">
+                                 </td>
 
-                                @php
+                            {{-- Persentase --}}
+                            <td class="px-6 py-5 text-center align-middle">
 
+                                 @php
                                     if ($row['progress'] >= 100) {
                                         $badge = 'bg-green-100 text-green-700';
                                     } elseif ($row['progress'] >= 80) {
@@ -166,86 +222,107 @@
                                     } else {
                                         $badge = 'bg-red-100 text-red-700';
                                     }
-
                                 @endphp
 
-                                <span class="rounded-lg px-3 py-1 {{ $badge }}">
+                                <span class="inline-flex items-center justify-center rounded-lg px-3 py-1 {{ $badge }}">
 
                                     {{ number_format($row['progress'],2) }}%
 
-                                </span>
+                            </span>
 
-                            </td>
+                        </td>
 
-                        </tr>
-
+                    </tr>
                         <!-- Placeholder -->
                         <tr
-    x-show="open"
-    x-transition>
+                            x-show="open"
+                            x-transition>
 
-    <td colspan="5" class="bg-[#F7FFF6] p-0">
+                        <td colspan="5" class="bg-[#F7FFF6] p-0">
 
-        <table class="w-full">
+                            <table class="w-full table-fixed">
 
-            @foreach($row['provinsi'] as $provinsi)
+                                <colgroup>
+                                    <col class="w-[22%]">
+                                    <col class="w-[25%]">
+                                    <col class="w-[18%]">
+                                    <col class="w-[18%]">
+                                    <col class="w-[17%]">
+                                </colgroup>
 
-            <tbody x-data="{ openProv:false }">
+           @foreach($row['provinsi'] as $provinsi)
 
-            <tr class="border-t border-[#DCEFD9]">
+                <tbody x-data="{ openProv:false }">
 
-                <td class="w-[22%] px-8 py-4"></td>
+                    <tr class="border-t border-[#DCEFD9]">
 
-                <td class="w-[25%] px-6 py-4">
+                        {{-- Kolom Komoditas (kosong) --}}
 
-                    <button
-    @click="openProv=!openProv"
-    class="flex items-center gap-3">
+                    <td class="px-8 py-4"></td>
 
-    <img
-        src="{{ asset('Icon-Arrow-Right.svg') }}"
-        class="h-3 w-3 transition"
-        :class="{ 'rotate-90': openProv }">
+                    {{-- Wilayah --}}
+                    <td class="px-6 py-4">
 
-    {{ $provinsi['provinsi'] }}
+                        <button
+                            @click="openProv=!openProv"
+                            class="flex items-center gap-3">
 
-</button>
+                        <img
+                            src="{{ asset('Icon-Arrow-Right.svg') }}"
+                            class="h-3 w-3 transition"
+                            :class="{ 'rotate-90': openProv }">
+
+                        <span>
+                            {{ $provinsi['provinsi'] }}
+                        </span>
+
+                    </button>
 
                 </td>
 
-                <td class="w-[18%] px-6 py-4">
+                {{-- Target --}}
+                <td class="px-6 py-4 text-center">
 
                     {{ number_format($provinsi['target'],0,',','.') }}
 
-                </td>
-
-                <td class="w-[18%] px-6 py-4 font-semibold text-[#138A2E]">
-
-                    {{ number_format($provinsi['realisasi'],0,',','.') }}
-
-                </td>
-
-                <td class="px-6 py-4 text-center">
-
-                    @php
-
-                        if($provinsi['progress'] >= 100){
-                            $badge = 'bg-green-100 text-green-700';
-                        }elseif($provinsi['progress'] >= 80){
-                            $badge = 'bg-yellow-100 text-yellow-700';
-                        }else{
-                            $badge = 'bg-red-100 text-red-700';
-                        }
-
-                    @endphp
-
-                    <span class="rounded-lg px-3 py-1 {{ $badge }}">
-
-                        {{ number_format($provinsi['progress'],2) }}%
-
+                    <span class="text-gray-500">
+                        {{ $satuan }}
                     </span>
 
                 </td>
+
+                {{-- Realisasi --}}
+                <td class="px-6 py-4 text-center font-semibold text-[#138A2E]">
+
+                    {{ number_format($provinsi['realisasi'],0,',','.') }}
+
+                <span class="text-[#138A2E]">
+                    {{ $satuan }}
+                </span>
+
+            </td>
+
+            {{-- Persentase --}}
+            <td class="px-6 py-4 text-center">
+
+        @php
+            if($provinsi['progress'] >= 100){
+                $badge = 'bg-green-100 text-green-700';
+            }elseif($provinsi['progress'] >= 80){
+                $badge = 'bg-yellow-100 text-yellow-700';
+            }else{
+                $badge = 'bg-red-100 text-red-700';
+            }
+        @endphp
+
+        <span class="inline-flex items-center justify-center rounded-lg px-3 py-1 {{ $badge }}">
+
+            {{ number_format($provinsi['progress'],2) }}%
+
+        </span>
+
+    </td>
+
 </tr>
 
 
@@ -258,65 +335,84 @@
 
     <td colspan="5" class="bg-[#FBFFFB] p-0">
 
-        <table class="w-full">
+        <table class="w-full table-fixed">
 
-            @foreach($provinsi['kabupaten'] as $kabupaten)
+            <colgroup>
+                <col class="w-[22%]">
+                <col class="w-[25%]">
+                <col class="w-[18%]">
+                <col class="w-[18%]">
+                <col class="w-[17%]">
+            </colgroup>
 
-            <tr class="border-t border-[#E5F2E4]">
+           @foreach($provinsi['kabupaten'] as $kabupaten)
 
-                <td class="w-[22%] px-24 py-3"></td>
+            <tr class="border-t border-[#E5F2E4] hover:bg-[#F6FFF5]">
 
-                <td class="w-[25%] px-10 py-3">
+                {{-- Komoditas --}}
+            <td class="px-8 py-3"></td>
 
-                    <div class="flex items-center gap-3">
+                {{-- Wilayah --}}
+            <td class="px-10 py-3">
 
-                        <img
-                            src="{{ asset('Icon-Arrow-Right.svg') }}"
-                            class="h-3 w-3">
+            <div class="flex items-center gap-3">
 
-                        {{ $kabupaten['kabupaten'] }}
+                <span class="h-2 w-2 rounded-full bg-[#949494]"></span>
 
-                    </div>
+                <span>
+                    {{ $kabupaten['kabupaten'] }}
+                </span>
 
-                </td>
+            </div>
 
-                <td class="w-[18%] px-6 py-3">
+        </td>
 
-                    {{ number_format($kabupaten['target'],0,',','.') }}
+        {{-- Target --}}
+            <td class="px-6 py-3 text-center">
 
-                </td>
+        {{ number_format($kabupaten['target'],0,',','.') }}
 
-                <td class="w-[18%] px-6 py-3 font-semibold text-[#138A2E]">
+            <span class="text-gray-500">
+                {{ $satuan }}
+            </span>
 
-                    {{ number_format($kabupaten['realisasi'],0,',','.') }}
+        </td>
 
-                </td>
+        {{-- Realisasi --}}
+            <td class="px-6 py-3 text-center font-semibold text-[#138A2E]">
 
-                <td class="px-6 py-3 text-center">
+        {{ number_format($kabupaten['realisasi'],0,',','.') }}
 
-                    @php
+        <span class="text-[#138A2E]">
+            {{ $satuan }}
+        </span>
 
-                        if($kabupaten['progress'] >= 100){
-                            $badge = 'bg-green-100 text-green-700';
-                        }elseif($kabupaten['progress'] >= 80){
-                            $badge = 'bg-yellow-100 text-yellow-700';
-                        }else{
-                            $badge = 'bg-red-100 text-red-700';
-                        }
+    </td>
 
-                    @endphp
+    {{-- Persentase --}}
+    <td class="px-6 py-3 text-center">
 
-                    <span class="rounded-lg px-3 py-1 {{ $badge }}">
+        @php
+            if($kabupaten['progress'] >= 100){
+                $badge = 'bg-green-100 text-green-700';
+            }elseif($kabupaten['progress'] >= 80){
+                $badge = 'bg-yellow-100 text-yellow-700';
+            }else{
+                $badge = 'bg-red-100 text-red-700';
+            }
+        @endphp
 
-                        {{ number_format($kabupaten['progress'],2) }}%
+        <span class="inline-flex items-center justify-center rounded-lg px-3 py-1 {{ $badge }}">
 
-                    </span>
+            {{ number_format($kabupaten['progress'],2) }}%
 
-                </tr>
+        </span>
 
-            </tbody>
+    </td>
 
-            @endforeach
+</tr>
+
+@endforeach
 
         </table>
 

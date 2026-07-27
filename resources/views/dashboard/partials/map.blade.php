@@ -149,23 +149,38 @@ window.addEventListener('load', async function () {
     console.log(@json($mapData));
     chart.setOption({
 
-        tooltip: {
-    trigger: 'item',
+    tooltip: {
+        trigger: 'item',
 
-    formatter: function(params){
+        formatter: function (params) {
 
-        if(params.value == null){
+            const value = Array.isArray(params.value)
+                ? params.value[2]
+                : params.value;
 
-            return params.name + "<br>Tidak ada data";
+            if (
+                value === null ||
+                value === undefined ||
+                value === '-' ||
+                isNaN(value)
+        ) {
+
+            return `
+                <b>${params.name}</b><br>
+                Progress : <b>Tidak Ada Data</b>
+            `;
 
         }
 
-        return `
-            <b>${params.name}</b><br>
-            Progress : <b>${params.value}%</b>
-        `;
+            return `
+                <b>${params.name}</b><br>
+                Progress : <b>${Number(value).toLocaleString('id-ID', {
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 2
+                })}%</b>
+            `;
 
-    }
+        }
 },
 
         visualMap: {
