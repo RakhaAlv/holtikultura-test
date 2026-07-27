@@ -1,4 +1,20 @@
-<div class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
+@php
+    $count = count($summary);
+@endphp
+
+    {{-- Days 9 Progress --}}
+    <div
+        class="grid grid-cols-1 gap-6 md:grid-cols-2
+    @if($count == 1)
+        xl:grid-cols-1
+    @elseif($count == 2)
+        xl:grid-cols-2
+    @elseif($count == 3)
+        xl:grid-cols-3
+    @else
+        xl:grid-cols-4
+    @endif
+    ">
 
     @foreach($summary as $commodity)
 
@@ -13,7 +29,7 @@
 
             <img
                 src="{{ asset($commodity['icon']) }}"
-                class="h-12 w-12">
+                class="h-14 w-14">
 
         </div>
 
@@ -74,3 +90,4 @@
     @endforeach
 
 </div>
+

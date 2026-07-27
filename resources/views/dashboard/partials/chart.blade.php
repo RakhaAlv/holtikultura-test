@@ -73,7 +73,9 @@ window.addEventListener("load", function () {
                 " " +
                 item.seriesName +
                 ": <b>" +
-                item.value.toLocaleString('id-ID') +
+                Number(item.value).toLocaleString('id-ID', {
+                maximumFractionDigits: 0
+                }) +
                 " Ha</b><br>";
 
         });
@@ -189,8 +191,10 @@ window.addEventListener("load", function () {
                     fontSize: 13,
                     fontWeight: '600',
                     formatter: function(params) {
-                    return params.value.toLocaleString('id-ID') + ' Ha';
-                    }
+                    return Number(params.value).toLocaleString('id-ID', {
+                    maximumFractionDigits: 0
+                    }) + ' Ha';
+                }
                 },
 
 
@@ -221,7 +225,9 @@ window.addEventListener("load", function () {
                     fontSize: 13,
                     fontWeight: '700',
                     formatter: function(params) {
-                    return params.value.toLocaleString('id-ID') + ' Ha';
+                    return Number(params.value).toLocaleString('id-ID', {
+                    maximumFractionDigits: 0
+                    }) + ' Ha';
                     }
                 },
 
