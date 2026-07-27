@@ -16,6 +16,9 @@ use App\Http\Controllers\DashboardController;
 
 Route::get('/dashboard', [DashboardController::class,'index'])
     ->name('dashboard');
+
+Route::get('/dashboard/map-data', [DashboardController::class, 'mapData'])
+    ->name('dashboard.mapData');
     
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
