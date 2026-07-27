@@ -9,13 +9,17 @@ use App\Models\Target;
 // day 7 progress model provinsi dan kabupaten untuk filter data
 use App\Models\Provinsi;
 use App\Models\Kabupaten;
+// day 9 progress, komoditas 
+use App\Models\Komoditas;
 
 class DashboardController extends Controller
 {
     public function index()
     {
         // Tahun yang dipilih dari dropdown
-        $tahun = request('tahun', 2025);
+        $tahun = request('tahun', date('Y'));
+
+        
     
         $provinsiId = request('provinsi');
         $kabupatenId = request('kabupaten');
@@ -26,7 +30,7 @@ class DashboardController extends Controller
 
             if ($provinsiId) {
             $kabupatens->where('provinsi_id', $provinsiId);
-        }
+        }   
             $kabupatens = $kabupatens
                 ->orderBy('nama')
                 ->get();
@@ -37,6 +41,9 @@ class DashboardController extends Controller
                 DB::raw('SUM(target) as total_target')
                 )
                 ->where('tahun', $tahun)
+
+                
+
                 ->when($provinsiId, function ($q) use ($provinsiId) {
                     $q->where('provinsi_id', $provinsiId);
                 })
@@ -59,6 +66,9 @@ class DashboardController extends Controller
                 DB::raw('SUM(jumlah_output) as total_realisasi')
             )
             ->where('tahun', $tahun)
+
+            
+
             ->when($provinsiId, function ($q) use ($provinsiId) {
                 $q->where('provinsi_id', $provinsiId);
             })
@@ -115,11 +125,16 @@ class DashboardController extends Controller
                 'progress' => $progress,
             ];
         });
+
+        
         $realisasiTable = Realisasi::select(
                 'komoditas_id',
                 DB::raw('SUM(jumlah_output) as total_realisasi')
             )
             ->where('tahun', $tahun)
+
+            
+
             ->when($provinsiId, function ($q) use ($provinsiId) {
                 $q->where('provinsi_id', $provinsiId);
             })
@@ -129,6 +144,20 @@ class DashboardController extends Controller
             ->with('komoditas')
             ->groupBy('komoditas_id')
             ->get();
+
+            $chartData = $realisasiTable->map(function ($item) use ($targets) {
+
+    return [
+
+        'komoditas' => $item->komoditas->nama,
+
+        'target' => $targets[$item->komoditas_id] ?? 0,
+
+        'realisasi' => $item->total_realisasi,
+
+    ];
+
+});
         
 
         //day 7 progress, query provinsi dan kabupaten untuk filter data
@@ -138,6 +167,9 @@ class DashboardController extends Controller
             DB::raw('SUM(jumlah_output) as total_realisasi')
             )
             ->where('tahun', $tahun)
+
+            
+
             ->when($provinsiId, function ($q) use ($provinsiId) {
                 $q->where('provinsi_id', $provinsiId);
             })
@@ -157,6 +189,9 @@ class DashboardController extends Controller
             DB::raw('SUM(target) as total_target')
             )   
             ->where('tahun', $tahun)
+
+           
+
             ->when($provinsiId, function ($q) use ($provinsiId) {
                 $q->where('provinsi_id', $provinsiId);
             })
@@ -179,6 +214,9 @@ class DashboardController extends Controller
             DB::raw('SUM(jumlah_output) as total_realisasi')
         )
             ->where('tahun', $tahun)
+
+           
+
             ->when($provinsiId, function ($q) use ($provinsiId) {
                 $q->where('provinsi_id', $provinsiId);
             })
@@ -204,6 +242,9 @@ class DashboardController extends Controller
             DB::raw('SUM(target) as total_target')
             )
             ->where('tahun', $tahun)
+
+            
+
             ->when($provinsiId, function ($q) use ($provinsiId) {
                 $q->where('provinsi_id', $provinsiId);
             })
@@ -291,19 +332,19 @@ class DashboardController extends Controller
 
         ];
 
-    })
-    ->values();
+        })
+             ->values();
 
-        return [
-            'provinsi'  => $p->provinsi->nama,
-            'target'    => $target,
-            'realisasi' => $p->total_realisasi,
-            'progress'  => $progress,
-            'kabupaten' => $kabupaten,
-        ];
+            return [
+                'provinsi'  => $p->provinsi->nama,
+                'target'    => $target,
+                'realisasi' => $p->total_realisasi,
+                'progress'  => $progress,
+                'kabupaten' => $kabupaten,
+            ];
 
-    })
-    ->values();
+        })
+        ->values();
 
         return [
             'komoditas_id' => $item->komoditas_id,
@@ -316,16 +357,139 @@ class DashboardController extends Controller
 
     });
         
-    // day 8 progress, menghapus provinsi rows dan kabupaten rows
+    /*
+|--------------------------------------------------------------------------
+| Data Peta Indonesia
+|--------------------------------------------------------------------------
+*/
 
+        $mapTargets = Target::select(
+        'provinsi_id',
+        DB::raw('SUM(target) as total_target')
+    )
+        ->where('tahun', $tahun)
+
+        
+
+        ->when($provinsiId, function ($q) use ($provinsiId) {
+            $q->where('provinsi_id', $provinsiId);
+        })
+        ->groupBy('provinsi_id')
+        ->pluck('total_target', 'provinsi_id');
+
+        $mapData = Realisasi::select(
+            'provinsi_id',
+            DB::raw('SUM(jumlah_output) as total_realisasi')
+            )
+            ->with('provinsi')
+            ->where('tahun', $tahun)
+
+            
+            ->when($provinsiId, function ($q) use ($provinsiId) {
+                $q->where('provinsi_id', $provinsiId);
+            })
+            
+            ->groupBy('provinsi_id')
+            ->get()
+            ->map(function ($item) use ($mapTargets) {
+
+            $target = $mapTargets[$item->provinsi_id] ?? 0;
+
+$progress = $target > 0
+    ? round(($item->total_realisasi / $target) * 100, 2)
+    : 0;
+
+return [
+
+    'name' => $item->provinsi->nama,
+
+    'value' => $progress,
+
+];
+
+    });
+    // day 9 progress, komoditas
+    $komoditas = Komoditas::whereHas('targets', function ($q) use ($tahun) {
+    $q->where('tahun', $tahun);
+    })
+        ->orderBy('nama')
+        ->get();
+    // day 8 progress, menghapus provinsi rows dan kabupaten rows
         return view('dashboard.index', compact(
             'summary',
             'rows',
+            'chartData',
             'tahun',
+            'komoditas',
             'provinsis',
             'kabupatens',
             'provinsiId',
-            'kabupatenId'
+            'kabupatenId',
+            'mapData'
         ));
     }
+
+    // day 9 progress, implementasi AJAX di peta
+    public function mapData()
+{
+    $tahun = request('tahun', date('Y'));
+
+    $komoditasId = request('komoditas');
+
+    $provinsiId = request('provinsi');
+
+    $mapTargets = Target::select(
+            'provinsi_id',
+            DB::raw('SUM(target) as total_target')
+        )
+        ->where('tahun', $tahun)
+
+        ->when($komoditasId, function ($q) use ($komoditasId) {
+            $q->where('komoditas_id', $komoditasId);
+        })
+
+        ->when($provinsiId, function ($q) use ($provinsiId) {
+            $q->where('provinsi_id', $provinsiId);
+        })
+
+        ->groupBy('provinsi_id')
+        ->pluck('total_target', 'provinsi_id');
+
+
+    $mapData = Realisasi::select(
+            'provinsi_id',
+            DB::raw('SUM(jumlah_output) as total_realisasi')
+        )
+        ->with('provinsi')
+
+        ->where('tahun', $tahun)
+
+        ->when($komoditasId, function ($q) use ($komoditasId) {
+            $q->where('komoditas_id', $komoditasId);
+        })
+
+        ->when($provinsiId, function ($q) use ($provinsiId) {
+            $q->where('provinsi_id', $provinsiId);
+        })
+
+        ->groupBy('provinsi_id')
+        ->get()
+        ->map(function ($item) use ($mapTargets) {
+
+            $target = $mapTargets[$item->provinsi_id] ?? 0;
+
+            $komoditasId = request('komoditas');
+
+            $progress = $target > 0
+                ? round(($item->total_realisasi / $target) * 100, 2)
+                : 0;
+
+            return [
+                'name'  => $item->provinsi->nama,
+                'value' => $progress,
+            ];
+        });
+
+    return response()->json($mapData);
+}
 }      
