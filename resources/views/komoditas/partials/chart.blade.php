@@ -88,29 +88,7 @@
                 rotate:0
             },
 
-            data:[
-
-                'Aceh',
-                'Sumatera\nUtara',
-                'Sumatera\nBarat',
-                'Jambi',
-                'Sumatera\nSelatan',
-                'Bengkulu',
-                'Lampung',
-                'Jawa\nBarat',
-                'Jawa\nTengah',
-                'DI\nYogyakarta',
-                'Jawa\nTimur',
-                'Bali',
-                'NTB',
-                'NTT',
-                'Sulawesi\nUtara',
-                'Sulawesi\nTengah',
-                'Sulawesi\nSelatan',
-                'Gorontalo',
-                'Sulawesi\nBarat'
-
-            ]
+            data: @json($chartData->pluck('provinsi'))
 
         },
 
@@ -134,29 +112,7 @@
 
                 type:'bar',
 
-                data:[
-
-                    40,
-                    525,
-                    170,
-                    110,
-                    100,
-                    55,
-                    40,
-                    240,
-                    2257,
-                    150,
-                    260,
-                    125,
-                    463,
-                    20,
-                    50,
-                    50,
-                    315,
-                    10,
-                    20
-
-                ],
+                data: @json($chartData->pluck('target'))
 
                 barWidth:24,
 
@@ -180,29 +136,7 @@
 
                 type:'bar',
 
-                data:[
-
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    325,
-                    0,
-                    0,
-                    0,
-                    338,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0
-
-                ],
+                data: @json($chartData->pluck('realisasi'))
 
                 barWidth:24,
 

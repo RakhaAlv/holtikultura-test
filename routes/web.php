@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Str;
 
+use App\Http\Controllers\KomoditasController;
+
 Route::get('/', function () {
     return redirect()->route('login');
 });
@@ -79,75 +81,8 @@ Route::middleware('auth')->get('/cek-role', function () {
 
 // day 5 progress, route komoditas dinamis
 
-Route::middleware('auth')->get('/komoditas/{slug}', function ($slug) {
-
-    $komoditas = [
-
-        'bawang-putih' => [
-
-            'nama' => 'Bawang Putih',
-            'target' => 5000,
-            'realisasi' => 683,
-
-        ],
-
-        'bawang-merah' => [
-
-            'nama' => 'Bawang Merah',
-            'target' => 150,
-            'realisasi' => 0,
-
-        ],
-
-        'cabai' => [
-
-            'nama' => 'Cabai',
-            'target' => 2953,
-            'realisasi' => 278,
-
-        ],
-
-        'durian' => [
-
-            'nama' => 'Durian',
-            'target' => 2337,
-            'realisasi' => 0,
-
-        ],
-
-        'p2b' => [
-
-            'nama' => 'P2B',
-            'target' => 411,
-            'realisasi' => 156,
-
-        ],
-
-    ];
-
-    abort_unless(isset($komoditas[$slug]), 404);
-
-    $data = $komoditas[$slug];
-
-    $persentase = $data['target'] > 0
-        ? round(($data['realisasi'] / $data['target']) * 100, 1)
-        : 0;
-
-    return view('komoditas.show', [
-
-        'slug' => $slug,
-
-        'namaKomoditas' => $data['nama'],
-
-        'target' => $data['target'],
-
-        'realisasi' => $data['realisasi'],
-
-        'persentase' => $persentase,
-
-    ]);
-
-})->name('komoditas.show');
+Route::get('/komoditas/{komoditas}', [KomoditasController::class, 'show'])
+    ->name('komoditas.show');
 
 //day 5 progress, route untuk menampilkan halaman data management, hanya bisa diakses oleh super admin dan admin direktorat
 Route::middleware(['auth', 'role:Super Admin,Admin Direktorat'])
