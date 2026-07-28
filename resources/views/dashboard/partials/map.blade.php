@@ -28,7 +28,7 @@
             <select
                 id="komoditasFilter"
                 name="komoditas"
-                class="h-11 w-[250px] rounded-xl border border-gray-200 px-4">
+                class="h-11 w-[200px] rounded-xl border border-gray-200 px-4">
 
                 @foreach($komoditas as $item)
 
@@ -57,11 +57,11 @@
    {{-- Map Section --}}
 <div>
 
-    <div class="relative h-[650px] rounded-3xl bg-white">
+    <div class="relative  rounded-3xl bg-white">
 
         <div
             id="indonesiaMap"
-            class="h-full w-full">
+            class="h-[500px] w-full">
         </div>
 
     </div>
@@ -74,41 +74,39 @@
 
     {{-- Legend --}}
     <div
-        class="flex flex-wrap items-center gap-8 rounded-2xl border border-gray-200 bg-white p-6">
+    class="flex flex-wrap items-center gap-6 rounded-2xl border border-gray-200 bg-white p-5">
 
-        <div class="flex items-center gap-3">
-            <div class="h-5 w-5 rounded bg-[#8B0000]"></div>
-            <span class="text-sm">≥ 90% (Sangat Tinggi)</span>
-        </div>
-
-        <div class="flex items-center gap-3">
-            <div class="h-5 w-5 rounded bg-[#E11D1D]"></div>
-            <span class="text-sm">70% - 90%</span>
-        </div>
-
-        <div class="flex items-center gap-3">
-            <div class="h-5 w-5 rounded bg-[#FF6B35]"></div>
-            <span class="text-sm">50% - 70%</span>
-        </div>
-
-        <div class="flex items-center gap-3">
-            <div class="h-5 w-5 rounded bg-[#FFA24A]"></div>
-            <span class="text-sm">30% - 50%</span>
-        </div>
-
-        <div class="flex items-center gap-3">
-            <div class="h-5 w-5 rounded bg-[#FFD1C2]"></div>
-            <span class="text-sm">&lt; 30%</span>
-        </div>
-
-        <div class="flex items-center gap-3">
-            <div class="h-5 w-5 rounded bg-[#CFCFCF]"></div>
-            <span class="text-sm">Tidak Ada Data</span>
-        </div>
-
+    <div class="flex items-center gap-2">
+        <div class="h-4 w-4 rounded bg-[#14532D]"></div>
+        <span class="text-sm">≥ 90% (Sangat Tinggi)</span>
     </div>
 
-</div>  
+    <div class="flex items-center gap-2">
+        <div class="h-4 w-4 rounded bg-[#15803D]"></div>
+        <span class="text-sm">70% - 90%</span>
+    </div>
+
+    <div class="flex items-center gap-2">
+        <div class="h-4 w-4 rounded bg-[#22C55E]"></div>
+        <span class="text-sm">50% - 70%</span>
+    </div>
+
+    <div class="flex items-center gap-2">
+        <div class="h-4 w-4 rounded bg-[#86EFAC]"></div>
+        <span class="text-sm">30% - 50%</span>
+    </div>
+
+    <div class="flex items-center gap-2">
+        <div class="h-4 w-4 rounded bg-[#DCFCE7]"></div>
+        <span class="text-sm">&lt; 30%</span>
+    </div>
+
+    <div class="flex items-center gap-2">
+        <div class="h-4 w-4 rounded bg-[#D1D5DB]"></div>
+        <span class="text-sm">Tidak Ada Data</span>
+    </div>
+
+</div>
 
 
 <script>
@@ -189,11 +187,11 @@ window.addEventListener('load', async function () {
             show: false,
             inRange: {
                 color: [
-                    '#FFE6D5',
-                    '#FDBA74',
-                    '#FB923C',
-                    '#F97316',
-                    '#DC2626'
+                    '#DCFCE7',
+                    '#86EFAC',
+                    '#4ADE80',
+                    '#22C55E',
+                    '#15803D'
                 ]
             }
         },
