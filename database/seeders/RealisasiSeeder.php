@@ -37,6 +37,9 @@ class RealisasiSeeder extends Seeder
         $desaCache      = DB::table('desas')->pluck('id')->toArray();
         $komoditasCache = DB::table('komoditas')->pluck('id')->toArray();
         $satuanCache    = DB::table('satuans')->pluck('id')->toArray();
+        $provinsiCache  = DB::table('provinsis')->pluck('id')->toArray();
+        $kabupatenCache = DB::table('kabupatens')->pluck('id')->toArray();
+        $kecamatanCache = DB::table('kecamatans')->pluck('id')->toArray();
 
         $defaultKegiatanId  = DB::table('kegiatans')->value('id') ?? 1;
         $defaultKomoditasId = 1;
@@ -52,27 +55,31 @@ class RealisasiSeeder extends Seeder
         while (($row = fgetcsv($file, 0, ';')) !== false) {
             $kodeDesa = (int) preg_replace('/[^0-9]/', '', $row[16] ?? '');
 
-            if ($kodeDesa < 1000000000 || !in_array($kodeDesa, $desaCache)) {
+            if ($kodeDesa < 1000000000 || !in_array($kodeDesa, $desaCache, true)) {
                 continue;
             }
 
-            // Sanitasi format angka Indonesia -> Decimal MySQL
-            $jumlahOutputVal = $this->sanitizeDecimal($row[21] ?? '0');
-            $anggaranVal     = $this->sanitizeDecimal($row[23] ?? '0');
+            $provinsiId  = !empty($row[10]) ? (int) $row[10] : 0;
+            $kabupatenId = !empty($row[12]) ? (int) $row[12] : 0;
+            $kecamatanId = !empty($row[14]) ? (int) $row[14] : 0;
 
-            $direktoratId   = !empty($row[1]) ? (int) $row[1] : 1;
-            $kodeKegiatan   = trim(preg_replace('/[^\x20-\x7E]/', '', $row[3] ?? ''));
-            $kegiatanId     = $kegiatanMap[$kodeKegiatan] ?? $defaultKegiatanId;
+            if (
+                !in_array($provinsiId, $provinsiCache, true)
+                || !in_array($kabupatenId, $kabupatenCache, true)
+                || !in_array($kecamatanId, $kecamatanCache, true)
+            ) {
+                continue;
+            }
 
             $rawKomoditasId = !empty($row[7]) ? (int) $row[7] : 0;
-            $komoditasId    = in_array($rawKomoditasId, $komoditasCache) ? $rawKomoditasId : $defaultKomoditasId;
+            $komoditasId    = in_array($rawKomoditasId, $komoditasCache, true) ? $rawKomoditasId : $defaultKomoditasId;
 
-            $rawSatuanId    = !empty($row[20]) ? (int) $row[20] : 0;
-            $satuanId       = in_array($rawSatuanId, $satuanCache) ? $rawSatuanId : $defaultSatuanId;
+            $rawSatuanId = !empty($row[20]) ? (int) $row[20] : 0;
+            $satuanId    = in_array($rawSatuanId, $satuanCache, true) ? $rawSatuanId : $defaultSatuanId;
 
-            $provinsiId  = (int) substr((string)$kodeDesa, 0, 2);
-            $kabupatenId = (int) substr((string)$kodeDesa, 0, 4);
-            $kecamatanId = (int) substr((string)$kodeDesa, 0, 6);
+            $direktoratId = !empty($row[1]) ? (int) $row[1] : 1;
+            $kodeKegiatan = trim(preg_replace('/[^\x20-\x7E]/', '', $row[3] ?? ''));
+            $kegiatanId   = $kegiatanMap[$kodeKegiatan] ?? $defaultKegiatanId;
 
             $namaKelompok = trim(preg_replace('/[^\x20-\x7E]/', '', $row[17] ?? ''));
             $rawStatus    = trim(preg_replace('/[^\x20-\x7E]/', '', $row[24] ?? ''));
@@ -88,8 +95,8 @@ class RealisasiSeeder extends Seeder
                 'desa_id'       => $kodeDesa,
                 'nama_kelompok' => $namaKelompok ?: '-',
                 'tahun'         => !empty($row[8]) ? (int) $row[8] : 2025,
-                'jumlah_output' => $jumlahOutputVal,
-                'anggaran'      => $anggaranVal,
+                'jumlah_output' => $this->sanitizeDecimal($row[21] ?? '0'),
+                'anggaran'      => $this->sanitizeDecimal($row[23] ?? '0'),
                 'status'        => $this->normalizeStatus($rawStatus),
                 'created_by'    => $defaultUserId,
                 'created_at'    => now(),
