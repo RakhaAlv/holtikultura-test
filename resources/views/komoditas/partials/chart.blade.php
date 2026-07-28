@@ -27,28 +27,107 @@
 
     </div>
 
-    {{-- Chart --}}
+{{-- Chart --}}
+<div class="overflow-x-auto">
+
     <div
-        id="provinsiChart"
-        class="h-[420px] w-full">
+        id="chartWrapper"
+        class="min-w-full">
+
+        <div
+            id="provinsiChart"
+            class="h-[420px]">
+        </div>
+
     </div>
 
 </div>
+
+{{-- Legend --}}
+<div class="mt-6 flex justify-center gap-8">
+
+    <div class="flex items-center gap-2">
+        <div class="h-4 w-4 rounded bg-[#66B8E8]"></div>
+        <span class="text-sm text-gray-600">
+            Target
+        </span>
+    </div>
+
+    <div class="flex items-center gap-2">
+        <div class="h-4 w-4 rounded bg-[#25CF4A]"></div>
+        <span class="text-sm text-gray-600">
+            Realisasi
+        </span>
+    </div>
+
+</div>
+
+</div>
+
 
 
     <script>
 
     window.addEventListener("load", function () {
 
-    const chartDom = document.getElementById('provinsiChart');
+const chartDom = document.getElementById('provinsiChart');
+const wrapper = document.getElementById('chartWrapper');
 
-    const chart = echarts.init(chartDom);
+const chart = echarts.init(chartDom);
+
+const jumlahProvinsi = @json($chartData->count());
+
+// lebar minimum per provinsi
+const widthPerItem = 90;
+
+// total lebar chart
+const chartWidth = Math.max(
+    jumlahProvinsi * widthPerItem,
+    wrapper.parentElement.clientWidth
+);
+
+// wrapper yang diperlebar
+wrapper.style.width = chartWidth + 'px';
+
+// chart selalu mengikuti wrapper
+chartDom.style.width = '100%';
+chart.resize();
 
     new ResizeObserver(() => {
 
         chart.resize();
 
-    }).observe(chartDom);
+    }).observe(wrapper);
+
+    const targetData = @json($chartData->pluck('target'));
+    const realisasiData = @json($chartData->pluck('realisasi'));
+
+    const maxValue = Math.max(
+    ...targetData,
+    ...realisasiData
+    );
+
+const splitNumber = 5;
+
+// interval ideal
+let interval = Math.ceil(maxValue / splitNumber);
+
+// dibulatkan ke angka "cantik"
+if (interval <= 10) {
+    interval = Math.ceil(interval / 5) * 5;
+} else if (interval <= 50) {
+    interval = Math.ceil(interval / 10) * 10;
+} else if (interval <= 100) {
+    interval = Math.ceil(interval / 20) * 20;
+} else if (interval <= 500) {
+    interval = Math.ceil(interval / 50) * 50;
+} else if (interval <= 1000) {
+    interval = Math.ceil(interval / 100) * 100;
+} else {
+    interval = Math.ceil(interval / 500) * 500;
+}
+
+const maxAxis = interval * splitNumber;
 
     const option = {
 
@@ -57,8 +136,8 @@
         grid:{
             top:35,
             left:60,
-            right:30,
-            bottom:90,
+            right:40,
+            bottom:80,
             containLabel:true
         },
 
@@ -70,8 +149,17 @@
         },
 
         legend:{
-            bottom:15
-        },
+            show: false,
+            bottom: 10,
+            left: 'center',
+            itemWidth: 18,
+            itemHeight: 12,
+            itemGap: 20,
+            textStyle: {
+            fontSize: 14,
+            color: '#555'
+        }
+    },
 
         xAxis:{
 
@@ -95,17 +183,31 @@
 
         },
 
-        yAxis:{
+yAxis: {
+    type: 'value',
 
-            type:'value',
+    name: 'Ha',
 
-            name:'Ha',
+    max: maxAxis,
 
-            max:2500,
+    interval: interval,
 
-            interval:500
+    splitNumber: splitNumber,
 
-        },
+    axisLine: {
+        show: false
+    },
+
+    axisTick: {
+        show: false
+    },
+
+    splitLine: {
+        lineStyle: {
+            color: '#ECECEC'
+        }
+    }
+},
 
         series:[
 
@@ -115,9 +217,9 @@
 
                 type:'bar',
 
-                data: @json($chartData->pluck('target')),
+                data: targetData,
 
-                barWidth:24,
+                barWidth:30,
 
                 itemStyle:{
                     color:'#66B8E8',
@@ -127,9 +229,14 @@
                 label:{
                     show:true,
                     position:'top',
-                    formatter:'{c}',
-                    fontWeight:'600'
-                }
+                    fontWeight:'600',
+                formatter:function(params){
+                return Number(params.value).toLocaleString('id-ID', {
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0
+                });
+            }
+        }
 
             },
 
@@ -139,9 +246,9 @@
 
                 type:'bar',
 
-                data: @json($chartData->pluck('realisasi')),
+                data: realisasiData,
 
-                barWidth:24,
+                barWidth:30,
 
                 itemStyle:{
                     color:'#25CF4A',
@@ -153,10 +260,17 @@
                     position:'top',
                     formatter:function(params){
 
-                        return params.value == 0 ? '' : params.value;
-
+                    if (params.value == 0) {
+                    return '';
                     }
-                }
+
+                    return Number(params.value).toLocaleString('id-ID', {
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0
+                });
+
+            }
+        }
 
             }
 
