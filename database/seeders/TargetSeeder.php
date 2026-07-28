@@ -92,7 +92,7 @@ class TargetSeeder extends Seeder
 
         fclose($file);
 
-        // --- TAHAP B: Auto-Generate Target 2025 dari Data Realisasi 2025 ---
+        //Auto-Generate Target 2025 dari Data Realisasi 2025
         DB::statement("
             INSERT INTO targets (
                 direktorat_id, kegiatan_id, komoditas_id, satuan_id, 
@@ -107,9 +107,6 @@ class TargetSeeder extends Seeder
         ", [$defaultUserId]);
     }
 
-    /**
-     * Normalisasi string angka Indonesia ke float MySQL
-     */
     private function sanitizeDecimal(?string $value): float
     {
         if (empty($value)) return 0.0;

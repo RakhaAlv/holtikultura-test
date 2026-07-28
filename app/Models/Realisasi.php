@@ -70,8 +70,6 @@ class Realisasi extends Model
                      ->groupBy('provinsi_id');
     }
 
-    // --- RELASI (Hierarki Wilayah Lengkap) ---
-
     public function direktorat(): BelongsTo { return $this->belongsTo(Direktorat::class); }
     public function kegiatan(): BelongsTo { return $this->belongsTo(Kegiatan::class); }
     public function komoditas(): BelongsTo { return $this->belongsTo(Komoditas::class); }

@@ -19,7 +19,6 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
 
-            // Index untuk mempercepat query filtering RBAC
             $table->index('role_id');
             $table->index('direktorat_id');
         });
