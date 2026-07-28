@@ -27,4 +27,29 @@ class Komoditas extends Model
     {
         return $this->hasMany(Realisasi::class);
     }
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKey()
+    {
+        return \Illuminate\Support\Str::slug($this->nama);
+    }
+
+    /**
+     * Retrieve the model for a bound value.
+     *
+     * @param  mixed  $value
+     * @param  string|null  $field
+     * @return \Illuminate\Database\Eloquent\Model|null
+     */
+    public function resolveRouteBinding($value, $field = null)
+    {
+        return $this->where(function ($query) use ($value) {
+            $query->whereRaw("LOWER(REPLACE(nama, ' ', '-')) = ?", [$value])
+                  ->orWhereRaw("LOWER(REPLACE(kode_komoditas, ' ', '-')) = ?", [$value]);
+        })->firstOrFail();
+    }
 }

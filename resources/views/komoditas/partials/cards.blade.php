@@ -25,7 +25,7 @@
                         </p>
 
                         <h2 class="mt-1 text-[44px] font-bold leading-none text-[#111]">
-                            {{ number_format($target,0,',','.') }}
+                            {{ number_format($totalTarget,0,',','.') }}
                         </h2>
 
                         <p class="mt-1 text-[18px] text-[#555]">
@@ -64,7 +64,7 @@
                         </p>
 
                         <h2 class="mt-1 text-[44px] font-bold leading-none text-[#111]">
-                            {{ number_format($realisasi,0,',','.') }}
+                            {{ number_format($totalRealisasi,0,',','.') }}
                         </h2>
 
                         <p class="mt-1 text-[18px] text-[#555]">
@@ -103,7 +103,7 @@
                         </p>
 
                         <h2 class="mt-1 text-[44px] font-bold leading-none text-[#111]">
-                            {{ $persentase }}%
+                           {{ $progress }}%
                         </h2>
 
                     </div>
@@ -117,7 +117,7 @@
 
                         <div
                             class="h-full rounded-full bg-[#E83D5A]"
-                            style="width: {{ $persentase }}%">
+                            style="width: {{ min($progress,100) }}%">
                         </div>
 
                     </div>

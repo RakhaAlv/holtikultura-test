@@ -1,3 +1,7 @@
+@php
+    $currentKomoditas = request()->route('komoditas');
+    $currentSlug = is_object($currentKomoditas) ? $currentKomoditas->getRouteKey() : $currentKomoditas;
+@endphp
 <aside
     x-data="{ openProfile: false, openKomoditas: true }"
     :class="sidebarMini ? 'w-[90px]' : 'w-[280px]'"
@@ -104,7 +108,7 @@
                 class="mx-4 mt-4 rounded-xl bg-[#083E16] p-4 shadow-xl">
 
             <a href="{{ route('komoditas.show', 'bawang-putih') }}" class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 transition
-                {{ request()->route('slug') == 'bawang-putih'
+                {{ $currentSlug == 'bawang-putih'
                 ? 'bg-[#16B33A]'
                 : 'hover:bg-[#0E5A22]' }}">
                 <img src="{{ asset('Icon-Bawang.svg') }}" class="w-6">
@@ -112,7 +116,7 @@
             </a>
 
             <a href="{{ route('komoditas.show', 'bawang-merah') }}"  class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 transition
-                {{ request()->route('slug') == 'bawang-merah'
+                {{ $currentSlug == 'bawang-merah'
                 ? 'bg-[#16B33A]'
                 : 'hover:bg-[#0E5A22]' }}">
                 <img src="{{ asset('Icon-Bawang.svg') }}" class="w-6">
@@ -120,7 +124,7 @@
             </a>
 
             <a href="{{ route('komoditas.show', 'cabai') }}" class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 transition
-                {{ request()->route('slug') == 'cabai'
+                {{ $currentSlug == 'cabai'
                 ? 'bg-[#16B33A]'
                 : 'hover:bg-[#0E5A22]' }}">
                 <img src="{{ asset('Icon-Cabai.svg') }}" class="w-6">
@@ -128,7 +132,7 @@
             </a>
 
             <a href="{{ route('komoditas.show', 'durian') }}"  class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 transition
-                {{ request()->route('slug') == 'durian'
+                {{ $currentSlug == 'durian'
                 ? 'bg-[#16B33A]'
                 : 'hover:bg-[#0E5A22]' }}">
                 <img src="{{ asset('Buah-Icon.svg') }}" class="w-6">
@@ -136,7 +140,7 @@
             </a>
 
             <a href="{{ route('komoditas.show', 'p2b') }}"  class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 transition
-                {{ request()->route('slug') == 'p2b'
+                {{ $currentSlug == 'p2b'
                 ? 'bg-[#16B33A]'
                 : 'hover:bg-[#0E5A22]' }}">
                 <img src="{{ asset('Icon-tractor.svg') }}" class="w-6">
@@ -155,35 +159,35 @@
                 class="mt-4 flex flex-col items-center gap-3">
 
             <a href="{{ route('komoditas.show', 'bawang-putih') }}" class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 hover:bg-green-700 transition
-                {{ request()->route('slug') == 'bawang-putih'
+                {{ $currentSlug == 'bawang-putih'
                 ? 'bg-[#16B33A]'
                 : 'hover:bg-[#0E5A22]' }}">
                 <img src="{{ asset('Icon-Bawang.svg') }}" class="w-6">
             </a>
 
             <a href="{{ route('komoditas.show', 'bawang-merah') }}" class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 hover:bg-green-700 transition
-                {{ request()->route('slug') == 'bawang-merah'
+                {{ $currentSlug == 'bawang-merah'
                 ? 'bg-[#16B33A]'
                 : 'hover:bg-[#0E5A22]' }}">
                 <img src="{{ asset('Icon-Bawang.svg') }}" class="w-6">
             </a>
 
             <a href="{{ route('komoditas.show', 'cabai') }}" class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 hover:bg-green-700 transition
-                {{ request()->route('slug') == 'cabai'
+                {{ $currentSlug == 'cabai'
                 ? 'bg-[#16B33A]'
                 : 'hover:bg-[#0E5A22]' }}">
                 <img src="{{ asset('Icon-Cabai.svg') }}" class="w-6">
             </a>
 
             <a href="{{ route('komoditas.show', 'durian') }}" class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 hover:bg-green-700 transition
-                {{ request()->route('slug') == 'durian'
+                {{ $currentSlug == 'durian'
                 ? 'bg-[#16B33A]'
                 : 'hover:bg-[#0E5A22]' }}">
                 <img src="{{ asset('Buah-Icon.svg') }}" class="w-6">
             </a>
 
             <a href="{{ route('komoditas.show', 'p2b') }}" class="mb-4 flex items-center gap-4 rounded-lg px-2 py-2 hover:bg-green-700 transition
-                {{ request()->route('slug') == 'p2b'
+                {{ $currentSlug == 'p2b'
                 ? 'bg-[#16B33A]'
                 : 'hover:bg-[#0E5A22]' }}">
                 <img src="{{ asset('Icon-tractor.svg') }}" class="w-6">
