@@ -1,3 +1,9 @@
+@php
+    $satuan = strtolower($komoditas->nama) === 'p2b'
+        ? 'Kelompok'
+        : 'Ha';
+@endphp
+
 {{-- Summary Cards --}}
     <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
 
@@ -28,9 +34,9 @@
                             {{ number_format($totalTarget,0,',','.') }}
                         </h2>
 
-                        <p class="mt-1 text-[18px] text-[#555]">
-                            Ha
-                        </p>
+                     <p class="mt-1 text-[18px] text-[#555]">
+                        {{ $satuan }}
+                    </p>
 
                     </div>
 
@@ -68,7 +74,7 @@
                         </h2>
 
                         <p class="mt-1 text-[18px] text-[#555]">
-                            Ha
+                            {{ $satuan }}
                         </p>
 
                     </div>

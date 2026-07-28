@@ -20,7 +20,7 @@
             </h2>
 
             <p class="mt-1 text-[14px] text-[#7A7A7A]">
-                Perbandingan target dan realisasi Bawang Putih pada setiap provinsi.
+                Perbandingan target dan realisasi {{ $komoditas->nama }} pada setiap provinsi.
             </p>
 
         </div>
@@ -70,34 +70,52 @@
 
     window.addEventListener("load", function () {
 
-const chartDom = document.getElementById('provinsiChart');
-const wrapper = document.getElementById('chartWrapper');
+    const chartDom = document.getElementById('provinsiChart');
+    const wrapper = document.getElementById('chartWrapper');
 
-const chart = echarts.init(chartDom);
+    const chart = echarts.init(chartDom);
 
-const jumlahProvinsi = @json($chartData->count());
+    const jumlahProvinsi = @json($chartData->count());
+    const komoditas = @json($komoditas->nama);
+
+    const satuan = komoditas.toLowerCase() === 'p2b'
+        ? 'Kelompok'
+        : 'Ha';
+
+    const barWidth = jumlahProvinsi <= 10
+        ? 40
+            : jumlahProvinsi <= 20
+        ? 34
+        : 28;
 
 // lebar minimum per provinsi
-const widthPerItem = 90;
+    let widthPerItem;
 
+    if (jumlahProvinsi <= 10) {
+        widthPerItem = 140;
+    } else if (jumlahProvinsi <= 20) {
+        widthPerItem = 110;
+    } else {
+        widthPerItem = 90;
+    }
 // total lebar chart
-const chartWidth = Math.max(
-    jumlahProvinsi * widthPerItem,
-    wrapper.parentElement.clientWidth
-);
+    const chartWidth = Math.max(
+        jumlahProvinsi * widthPerItem,
+        wrapper.parentElement.clientWidth
+    );
 
 // wrapper yang diperlebar
-wrapper.style.width = chartWidth + 'px';
+    wrapper.style.width = chartWidth + 'px';
 
 // chart selalu mengikuti wrapper
-chartDom.style.width = '100%';
-chart.resize();
+    chartDom.style.width = '100%';
+    chart.resize();
 
-    new ResizeObserver(() => {
+        new ResizeObserver(() => {
 
-        chart.resize();
+            chart.resize();
 
-    }).observe(wrapper);
+        }).observe(wrapper);
 
     const targetData = @json($chartData->pluck('target'));
     const realisasiData = @json($chartData->pluck('realisasi'));
@@ -183,31 +201,31 @@ const maxAxis = interval * splitNumber;
 
         },
 
-yAxis: {
-    type: 'value',
+            yAxis: {
+                type: 'value',
 
-    name: 'Ha',
+                name: satuan,
 
-    max: maxAxis,
+                max: maxAxis,
 
-    interval: interval,
+                interval: interval,
 
-    splitNumber: splitNumber,
+                splitNumber: splitNumber,
 
-    axisLine: {
-        show: false
-    },
+                axisLine: {
+                    show: false
+                },
 
-    axisTick: {
-        show: false
-    },
+                axisTick: {
+                    show: false
+                },
 
-    splitLine: {
-        lineStyle: {
-            color: '#ECECEC'
+                splitLine: {
+                    lineStyle: {
+                    color: '#ECECEC'
+            }   
         }
-    }
-},
+    },
 
         series:[
 
@@ -219,7 +237,7 @@ yAxis: {
 
                 data: targetData,
 
-                barWidth:30,
+                barWidth:barWidth,
 
                 itemStyle:{
                     color:'#66B8E8',
@@ -248,7 +266,7 @@ yAxis: {
 
                 data: realisasiData,
 
-                barWidth:30,
+                barWidth:barWidth,
 
                 itemStyle:{
                     color:'#25CF4A',
