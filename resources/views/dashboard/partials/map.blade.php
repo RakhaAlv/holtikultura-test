@@ -28,7 +28,7 @@
             <select
                 id="komoditasFilter"
                 name="komoditas"
-                class="h-11 w-[250px] rounded-xl border border-gray-200 px-4">
+                class="h-11 w-[200px] rounded-xl border border-gray-200 px-4">
 
                 @foreach($komoditas as $item)
 
