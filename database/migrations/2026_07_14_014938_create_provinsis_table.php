@@ -9,7 +9,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('provinsis', function (Blueprint $table) {
-            // Kode BPS Provinsi (contoh: 12), Primary Key Non-Incrementing
             $table->unsignedBigInteger('id')->primary();
             $table->string('nama');
             $table->timestamps();
