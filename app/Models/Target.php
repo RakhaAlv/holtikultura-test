@@ -12,7 +12,6 @@ class Target extends Model
 {
     use HasFactory;
 
-    // Pastikan model menggunakan tabel targets
     protected $table = 'targets';
 
     protected $guarded = ['id'];
@@ -46,9 +45,7 @@ class Target extends Model
         });
     }
 
-    // ==========================
     // LOCAL SCOPES
-    // ==========================
 
     public function scopeByTahun(Builder $query, int $tahun): Builder
     {
@@ -75,10 +72,7 @@ class Target extends Model
         );
     }
 
-    // ==========================
     // RELASI
-    // ==========================
-
     public function direktorat(): BelongsTo
     {
         return $this->belongsTo(Direktorat::class);

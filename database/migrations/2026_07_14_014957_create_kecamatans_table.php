@@ -9,7 +9,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('kecamatans', function (Blueprint $table) {
-            // Kode BPS Kecamatan (contoh: 121602), Primary Key Non-Incrementing
             $table->unsignedBigInteger('id')->primary();
             $table->unsignedBigInteger('kabupaten_id');
             $table->string('nama');
