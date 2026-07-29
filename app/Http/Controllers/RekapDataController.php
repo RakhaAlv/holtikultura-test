@@ -39,7 +39,7 @@ class RekapDataController extends Controller
         // 5 target komoditas
         $komoditasIds = [1, 2, 3, 5, 7];
 
-        // Fetch filtered provinces
+        // Fetch filter provinsi
         $filteredProvinsisQuery = Provinsi::orderBy('nama');
         if ($provinsiId) {
             $filteredProvinsisQuery->where('id', $provinsiId);
@@ -51,7 +51,7 @@ class RekapDataController extends Controller
         }
         $filteredProvinsis = $filteredProvinsisQuery->get();
 
-        // Fetch filtered kabupatens
+        // Fetch filter kabupaten
         $filteredKabupatensQuery = Kabupaten::orderBy('nama');
         if ($provinsiId) {
             $filteredKabupatensQuery->where('provinsi_id', $provinsiId);
@@ -61,7 +61,7 @@ class RekapDataController extends Controller
         }
         $filteredKabupatens = $filteredKabupatensQuery->get()->groupBy('provinsi_id');
 
-        // Fetch targets grouped by Provinsi and Komoditas
+        // Fetch target di grouping dengan provinsi dan komoditas
         $provinsiTargets = Target::select(
                 'provinsi_id',
                 'komoditas_id',
@@ -73,7 +73,7 @@ class RekapDataController extends Controller
             ->get()
             ->groupBy('provinsi_id');
 
-        // Fetch realisasi grouped by Provinsi and Komoditas
+        // Fetch realisasi di grouping dengan provinsi dan komoditas
         $provinsiRealisasis = Realisasi::select(
                 'provinsi_id',
                 'komoditas_id',
@@ -85,7 +85,7 @@ class RekapDataController extends Controller
             ->get()
             ->groupBy('provinsi_id');
 
-        // Fetch targets grouped by Kabupaten and Komoditas
+        // Fetch targets di grouping dengan kabupaten dan komoditas
         $kabupatenTargets = Target::select(
                 'kabupaten_id',
                 'komoditas_id',
@@ -97,7 +97,7 @@ class RekapDataController extends Controller
             ->get()
             ->groupBy('kabupaten_id');
 
-        // Fetch realisasi grouped by Kabupaten and Komoditas
+        // Fetch realisasi di grouping dengan kabupaten dan komoditas
         $kabupatenRealisasis = Realisasi::select(
                 'kabupaten_id',
                 'komoditas_id',
@@ -109,7 +109,7 @@ class RekapDataController extends Controller
             ->get()
             ->groupBy('kabupaten_id');
 
-        // Build structured data
+        // struktur datany
         $wilayahRows = $filteredProvinsis->map(function ($prov) use (
             $filteredKabupatens,
             $provinsiTargets,
