@@ -95,28 +95,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const kabupaten = document.getElementById('kabupaten');
 
     provinsi.addEventListener('change', function () {
+        kabupaten.value = ""; // Reset kabupaten when province changes
+        this.closest('form').submit();
+    });
 
-        kabupaten.innerHTML =
-            '<option value="">Memuat...</option>';
-
-fetch(`{{ route('rekap-data.getKabupaten') }}?provinsi=${this.value}`)            .then(response => response.json())
-            .then(data => {
-
-                kabupaten.innerHTML =
-                    '<option value="">Semua Kabupaten/Kota</option>';
-
-                data.forEach(function(item){
-
-                    kabupaten.innerHTML += `
-                        <option value="${item.id}">
-                            ${item.nama}
-                        </option>
-                    `;
-
-                });
-
-            });
-
+    kabupaten.addEventListener('change', function () {
+        this.closest('form').submit();
     });
 
 });
