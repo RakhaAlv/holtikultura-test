@@ -9,6 +9,8 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Str;
 
 use App\Http\Controllers\KomoditasController;
+use App\Http\Controllers\RekapDataController;
+
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -107,9 +109,13 @@ Route::middleware(['auth', 'role:Super Admin,Admin Direktorat'])
 
 
 //day 5 progress, route untuk menampilkan halaman rekap data wilayah
-Route::middleware(['auth'])->get('/rekap-data', function () {
-    return view('rekapdata.rekap-data');
-})->name('rekap-data');
+Route::middleware('auth')
+    ->get('/rekap-data', [RekapDataController::class, 'index'])
+    ->name('rekap-data');
+
+Route::middleware('auth')
+    ->get('/rekap-data/get-kabupaten', [RekapDataController::class, 'getKabupaten'])
+    ->name('rekap-data.getKabupaten');
 
 Route::middleware('auth')->get('/debug-user', function () {
     return [
