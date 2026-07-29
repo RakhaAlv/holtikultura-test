@@ -15,7 +15,7 @@ return new class extends Migration
             $table->foreignId('komoditas_id')->constrained('komoditas')->onDelete('restrict');
             $table->foreignId('satuan_id')->constrained('satuans')->onDelete('restrict');
 
-            // Denormalisasi Hierarki Wilayah BPS
+            // Denormalisasi Hierarki Wilayah 
             $table->unsignedBigInteger('provinsi_id');
             $table->unsignedBigInteger('kabupaten_id');
             $table->unsignedBigInteger('kecamatan_id');

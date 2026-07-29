@@ -10,7 +10,6 @@ class Komoditas extends Model
 {
     use HasFactory;
 
-    // Menangani penamaan tabel tak beraturan (plural default: komoditas)
     protected $table = 'komoditas';
 
     protected $fillable = [
