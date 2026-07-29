@@ -57,9 +57,7 @@ Route::middleware(['auth', 'role:Super Admin,Admin Direktorat'])
 
 
 //day 5 progress, route untuk menampilkan halaman rekap data wilayah
-Route::middleware(['auth'])->get('/rekap-data', function () {
-    return view('rekapdata.rekap-data');
-})->name('rekap-data');
+Route::middleware(['auth'])->get('/rekap-data', [RekapDataController::class, 'index'])->name('rekap-data');
 
     Route::get('/rekap-data/get-kabupaten', [RekapDataController::class, 'getKabupaten'])
         ->name('rekap-data.getKabupaten');
