@@ -1,5 +1,4 @@
-<form method="GET" action="{{ url()->current() }}">
-
+<form id="filterForm">
     <input type="hidden" name="tahun" value="{{ $tahun }}">
 
     {{-- Header --}}
@@ -39,8 +38,8 @@
             </label>
 
             <select
+                id="provinsiFilter"
                 name="provinsi"
-                onchange="this.form.submit()"
                 class="h-[46px] w-full rounded-xl border border-[#D4D4D4] bg-white px-4 text-[15px] text-[#222] shadow-sm transition focus:border-[#16B33A] focus:outline-none">
 
                 <option value="">
@@ -71,8 +70,8 @@
             </label>
 
             <select
+                id="kabupatenFilter"
                 name="kabupaten"
-                onchange="this.form.submit()"
                 class="h-[46px] w-full rounded-xl border border-[#D4D4D4] bg-white px-4 text-[15px] text-[#222] shadow-sm transition focus:border-[#16B33A] focus:outline-none">
 
                 <option value="">
@@ -98,3 +97,51 @@
     </div>
 
 </form>
+
+<script>
+
+const provinsi = document.getElementById('provinsiFilter');
+const kabupaten = document.getElementById('kabupatenFilter');
+
+async function loadTable() {
+
+    const params = new URLSearchParams({
+
+        tahun: "{{ $tahun }}",
+        provinsi: provinsi.value,
+        kabupaten: kabupaten.value
+
+    });
+
+    const response = await fetch("/dashboard/rekap-table?" + params);
+
+    const html = await response.text();
+
+    document.getElementById("rekapTable").innerHTML = html;
+}
+
+provinsi.addEventListener("change", async function () {
+
+    const response = await fetch(
+        "/dashboard/kabupaten?provinsi=" + this.value
+    );
+
+    const data = await response.json();
+
+    kabupaten.innerHTML =
+        '<option value="">Semua Kabupaten/Kota</option>';
+
+    data.forEach(function(item){
+
+        kabupaten.innerHTML +=
+        `<option value="${item.id}">
+            ${item.nama}
+        </option>`;
+    });
+
+    loadTable();
+});
+
+kabupaten.addEventListener("change", loadTable);
+
+</script>

@@ -84,6 +84,21 @@ Route::middleware('auth')->get('/cek-role', function () {
 Route::get('/komoditas/{komoditas}', [KomoditasController::class, 'show'])
     ->name('komoditas.show');
 
+Route::get('/dashboard/get-kabupaten', [DashboardController::class, 'getKabupaten'])
+    ->name('dashboard.getKabupaten');
+
+Route::get('/dashboard/map-data', [DashboardController::class, 'mapData'])
+    ->name('dashboard.mapData');
+
+Route::get('/dashboard/kabupaten', [DashboardController::class, 'getKabupaten'])
+    ->name('dashboard.kabupaten');
+
+Route::get('/dashboard/kabupaten',
+    [DashboardController::class,'getKabupaten']);
+
+Route::get('/dashboard/rekap-table',
+    [DashboardController::class,'filterTable']);
+    
 //day 5 progress, route untuk menampilkan halaman data management, hanya bisa diakses oleh super admin dan admin direktorat
 Route::middleware(['auth', 'role:Super Admin,Admin Direktorat'])
     ->get('/data-management', function () {
