@@ -36,7 +36,7 @@
     <div class="shrink-0 rounded-2xl border border-slate-100 bg-white p-5 shadow-sm flex items-center justify-between">
         <div>
             <h1 class="text-2xl font-bold text-slate-800 tracking-tight">Manajemen Pengguna</h1>
-            <p class="text-xs text-slate-500 mt-1">Kelola akun Super Admin, Admin Direktorat, dan User Sistem HORTIKU.</p>
+            <p class="text-xs text-slate-500 mt-1">Kelola akun Super Admin, Admin Direktorat, dan User Sistem.</p>
         </div>
         <button @click="openCreate = true" class="inline-flex items-center gap-2 rounded-xl bg-[#165C27] px-5 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-[#114B1F] transition">
             <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
