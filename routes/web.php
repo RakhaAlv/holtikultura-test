@@ -9,6 +9,12 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Str;
 
 use App\Http\Controllers\KomoditasController;
+// day 11 progress, management data controller
+use App\Http\Controllers\ManagementController;
+
+use App\Http\Controllers\ManagementTargetController;
+
+use App\Http\Controllers\ManagementRealisasiController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -59,10 +65,10 @@ Route::middleware(['auth', 'role:Super Admin'])
     });
 
         // management data hanya bisa diakses oleh super admin dan admin direktorat
-Route::middleware(['auth', 'role:Super Admin,Admin Direktorat'])
-    ->get('/management-data', function () {
-        return "Halaman Management Data";
-    });
+//Route::middleware(['auth', 'role:Super Admin,Admin Direktorat'])
+    //->get('/management-data', function () {
+        //return "Halaman Management Data";
+    //});
         // user management hanya bisa diakses oleh super admin
 Route::middleware(['auth','role:Super Admin'])
     ->resource('users', UserController::class);
@@ -98,12 +104,18 @@ Route::get('/dashboard/kabupaten',
 
 Route::get('/dashboard/rekap-table',
     [DashboardController::class,'filterTable']);
+
+
     
-//day 5 progress, route untuk menampilkan halaman data management, hanya bisa diakses oleh super admin dan admin direktorat
-Route::middleware(['auth', 'role:Super Admin,Admin Direktorat'])
-    ->get('/data-management', function () {
-        return view('datamanagement.data-management');
-})->name('data-management');
+//day 11 progress, route untuk menampilkan halaman data management, hanya bisa diakses oleh super admin dan admin direktorat
+Route::middleware(['auth','role:Super Admin,Admin Direktorat'])
+    ->get('/data-management', [ManagementController::class, 'index'])
+    ->name('data-management');
+    
+
+        
+
+
 
 
 //day 5 progress, route untuk menampilkan halaman rekap data wilayah
@@ -119,6 +131,32 @@ Route::middleware('auth')->get('/debug-user', function () {
         'isAdminDirektorat' => auth()->user()->isAdminDirektorat(),
     ];
 });
+
+
+
+
+Route::middleware(['auth', 'role:Super Admin,Admin Direktorat'])
+    ->prefix('data-management')
+    ->group(function () {
+
+         Route::get('/target', [ManagementTargetController::class,'table'])
+            ->name('management.target');
+
+        Route::post('/target', [ManagementTargetController::class,'store'])
+            ->name('management.target.store');
+
+        Route::put('/target/{target}', [ManagementTargetController::class,'update'])
+            ->name('management.target.update');
+
+        Route::delete('/target/{target}', [ManagementTargetController::class,'destroy'])
+            ->name('management.target.destroy');
+
+        Route::get('/realisasi', [ManagementRealisasiController::class,'table'])
+            ->name('management.realisasi');
+
+    });
+
+
 
 require __DIR__.'/auth.php';
 
