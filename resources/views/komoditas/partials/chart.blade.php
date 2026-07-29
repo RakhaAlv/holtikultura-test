@@ -77,6 +77,7 @@
 
     const jumlahProvinsi = @json($chartData->count());
     const komoditas = @json($komoditas->nama);
+    const tampilSatuan = komoditas.toLowerCase() !== 'p2b';
 
     const satuan = komoditas.toLowerCase() === 'p2b'
         ? 'Kelompok'
@@ -159,12 +160,30 @@ const maxAxis = interval * splitNumber;
             containLabel:true
         },
 
-        tooltip:{
-            trigger:'axis',
-            axisPointer:{
-                type:'shadow'
-            }
-        },
+        tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+        type: 'shadow'
+    },
+formatter: function (params) {
+
+    let html = `<b>${params[0].axisValue}</b><br><br>`;
+
+    params.forEach(item => {
+
+        const nilai = Number(item.value).toLocaleString('id-ID');
+
+        html += `
+            ${item.marker}
+            ${item.seriesName} :
+            <b>${nilai}${tampilSatuan ? ' ' + satuan : ''}</b><br>
+        `;
+
+    });
+
+    return html;
+}
+},
 
         legend:{
             show: false,
@@ -245,15 +264,20 @@ const maxAxis = interval * splitNumber;
                 },
 
                 label:{
-                    show:true,
-                    position:'top',
-                    fontWeight:'600',
+                    show: true,
+                    position: 'top',
+                    fontSize: 10,
+                    fontWeight: '600',
+
                 formatter:function(params){
-                return Number(params.value).toLocaleString('id-ID', {
-                    minimumFractionDigits: 0,
-                    maximumFractionDigits: 0
-                });
-            }
+
+        const nilai = Number(params.value).toLocaleString('id-ID');
+
+        return tampilSatuan
+            ? nilai + ' ' + satuan
+            : nilai;
+
+    }
         }
 
             },
@@ -274,21 +298,25 @@ const maxAxis = interval * splitNumber;
                 },
 
                 label:{
-                    show:true,
-                    position:'top',
-                    formatter:function(params){
+                    show: true,
+                    position: 'top',
+                    fontSize: 10,
+                    fontWeight: '600',
+
+                formatter:function(params){
 
                     if (params.value == 0) {
-                    return '';
+                        return '';
                     }
 
-                    return Number(params.value).toLocaleString('id-ID', {
-                    minimumFractionDigits: 0,
-                    maximumFractionDigits: 0
-                });
+                const nilai = Number(params.value).toLocaleString('id-ID');
 
+                return tampilSatuan
+                    ? nilai + ' ' + satuan
+                    : nilai;
+
+                }
             }
-        }
 
             }
 
