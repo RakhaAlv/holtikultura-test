@@ -7,7 +7,7 @@ use App\Http\Controllers\RekapDataController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Str;
 
-use App\Http\Controllers\KomoditasController;
+
 
 Route::get('/', function () {
     return redirect()->route('login');
