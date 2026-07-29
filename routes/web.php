@@ -1,69 +1,32 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KomoditasController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
-//// day 2 progress
-use Illuminate\Support\Facades\Auth;
-//// day 3 progress User Controller
+use App\Http\Controllers\RekapDataController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Str;
 
 use App\Http\Controllers\KomoditasController;
-use App\Http\Controllers\RekapDataController;
-
 
 Route::get('/', function () {
     return redirect()->route('login');
 });
 
-use App\Http\Controllers\DashboardController;
-
-Route::get('/dashboard', [DashboardController::class,'index'])
-    ->name('dashboard');
-
-Route::get('/dashboard/map-data', [DashboardController::class, 'mapData'])
-    ->name('dashboard.mapData');
-    
 Route::middleware('auth')->group(function () {
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
+    // Dashboard utama
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-
-//// day 2 progress ( cek jika user sudah login dan memiliki direktorat )
-Route::middleware('auth')->get('/tes-direktorat', function () {
-    dd(Auth::User()->direktorat);
-
-});
-
-Route::middleware('auth')->get('/tes-role', function () {
-    dd(Auth::User()->role);
-
-});
-
-
-Route::middleware('auth')->get('/tes-helper', function () {
-
-    dd(auth()->user()->isSuperAdmin());
-
-
-});
-
-
-// day 3 progress
-// route untuk testing middleware role super admin
-
-Route::middleware(['auth', 'role:Super Admin'])
-    ->get('/tes-superadmin', function () {
-        return 'halo super admin';
-    });
-
-        // management data hanya bisa diakses oleh super admin dan admin direktorat
-Route::middleware(['auth', 'role:Super Admin,Admin Direktorat'])
-    ->get('/management-data', function () {
-        return "Halaman Management Data";
+    // Dashboard AJAX / Data Endpoints
+    Route::prefix('dashboard')->name('dashboard.')->group(function () {
+        Route::get('/map-data', [DashboardController::class, 'mapData'])->name('mapData');
+        Route::get('/get-kabupaten', [DashboardController::class, 'getKabupaten'])->name('getKabupaten');
+        Route::get('/rekap-table', [DashboardController::class, 'filterTable'])->name('filterTable');
     });
         // user management hanya bisa diakses oleh super admin
 Route::middleware(['auth','role:Super Admin'])
@@ -86,21 +49,6 @@ Route::middleware('auth')->get('/cek-role', function () {
 Route::get('/komoditas/{komoditas}', [KomoditasController::class, 'show'])
     ->name('komoditas.show');
 
-Route::get('/dashboard/get-kabupaten', [DashboardController::class, 'getKabupaten'])
-    ->name('dashboard.getKabupaten');
-
-Route::get('/dashboard/map-data', [DashboardController::class, 'mapData'])
-    ->name('dashboard.mapData');
-
-Route::get('/dashboard/kabupaten', [DashboardController::class, 'getKabupaten'])
-    ->name('dashboard.kabupaten');
-
-Route::get('/dashboard/kabupaten',
-    [DashboardController::class,'getKabupaten']);
-
-Route::get('/dashboard/rekap-table',
-    [DashboardController::class,'filterTable']);
-    
 //day 5 progress, route untuk menampilkan halaman data management, hanya bisa diakses oleh super admin dan admin direktorat
 Route::middleware(['auth', 'role:Super Admin,Admin Direktorat'])
     ->get('/data-management', function () {
@@ -109,22 +57,13 @@ Route::middleware(['auth', 'role:Super Admin,Admin Direktorat'])
 
 
 //day 5 progress, route untuk menampilkan halaman rekap data wilayah
-Route::middleware('auth')
-    ->get('/rekap-data', [RekapDataController::class, 'index'])
-    ->name('rekap-data');
+Route::middleware(['auth'])->get('/rekap-data', function () {
+    return view('rekapdata.rekap-data');
+})->name('rekap-data');
 
-Route::middleware('auth')
-    ->get('/rekap-data/get-kabupaten', [RekapDataController::class, 'getKabupaten'])
-    ->name('rekap-data.getKabupaten');
+    Route::get('/rekap-data/get-kabupaten', [RekapDataController::class, 'getKabupaten'])
+        ->name('rekap-data.getKabupaten');
 
-Route::middleware('auth')->get('/debug-user', function () {
-    return [
-        'role_id' => auth()->user()->role_id,
-        'nama_role' => auth()->user()->role->name,
-        'isSuperAdmin' => auth()->user()->isSuperAdmin(),
-        'isAdminDirektorat' => auth()->user()->isAdminDirektorat(),
-    ];
 });
 
 require __DIR__.'/auth.php';
-
