@@ -10,7 +10,9 @@
 
     @include('rekapdata.partials.filter')
 
-    @include('rekapdata.partials.table')
+@include('rekapdata.partials.table', [
+    'wilayahRows' => $wilayahRows
+])
 
 </div>
 

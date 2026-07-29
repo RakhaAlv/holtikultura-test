@@ -1,8 +1,10 @@
 <div
     x-data="{
-        aceh: true,
-        sumut: false,
-        sumbar: false
+        openRows: {
+            @if($provinsiId)
+                '{{ $provinsiId }}': true
+            @endif
+        }
     }"
     class="overflow-hidden rounded-[14px] bg-white shadow-[0_4px_12px_rgba(0,0,0,0.08)]">
 
@@ -105,15 +107,15 @@
 
                     @for ($i = 0; $i < 5; $i++)
 
-                        <th class="border border-[#E5E7EB] py-3 text-[13px] font-semibold">
+                        <th class="border border-[#E5E7EB] py-3 text-[13px] font-semibold text-center">
                             Target
                         </th>
 
-                        <th class="border border-[#E5E7EB] py-3 text-[13px] font-semibold">
+                        <th class="border border-[#E5E7EB] py-3 text-[13px] font-semibold text-center">
                             Realisasi
                         </th>
 
-                        <th class="border border-[#E5E7EB] py-3 text-[13px] font-semibold">
+                        <th class="border border-[#E5E7EB] py-3 text-[13px] font-semibold text-center">
                             %
                         </th>
 
@@ -125,363 +127,126 @@
 
             <tbody class="text-[13px]">
 
-    {{-- ======================================= --}}
-    {{-- PROVINSI ACEH --}}
-    {{-- ======================================= --}}
-
-    <tr
-        @click="aceh = !aceh"
-        class="cursor-pointer bg-[#F8FBFF] hover:bg-[#EEF6FF] transition">
-
-        {{-- Wilayah --}}
-        <td class="border border-[#E5E7EB] px-4 py-3">
-
-            <div class="flex items-center gap-3">
-
-                <svg
-                    class="h-4 w-4 transition duration-300"
-                    :class="{ 'rotate-90': aceh }"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    viewBox="0 0 24 24">
-
-                    <path d="M9 5l7 7-7 7" />
-
-                </svg>
-
-                <span class="font-semibold text-[13px]">
-                    Prov. Aceh
-                </span>
-
-            </div>
-
-        </td>
-
-        {{-- Bawang Putih --}}
-        <td class="border border-[#E5E7EB] text-center">40</td>
-        <td class="border border-[#E5E7EB] text-center">0</td>
-        <td class="border border-[#E5E7EB] text-center">
-            <span class="rounded-full bg-red-100 px-2 py-1 text-[11px] font-semibold text-red-600">
-                0%
-            </span>
-        </td>
-
-        {{-- Bawang Merah --}}
-        <td class="border border-[#E5E7EB] text-center">0</td>
-        <td class="border border-[#E5E7EB] text-center">0</td>
-        <td class="border border-[#E5E7EB] text-center">-</td>
-
-        {{-- Cabai --}}
-        <td class="border border-[#E5E7EB] text-center">0</td>
-        <td class="border border-[#E5E7EB] text-center">0</td>
-        <td class="border border-[#E5E7EB] text-center">-</td>
-
-        {{-- Durian --}}
-        <td class="border border-[#E5E7EB] text-center">0</td>
-        <td class="border border-[#E5E7EB] text-center">0</td>
-        <td class="border border-[#E5E7EB] text-center">-</td>
-
-        {{-- P2B --}}
-        <td class="border border-[#E5E7EB] text-center">0</td>
-        <td class="border border-[#E5E7EB] text-center">0</td>
-        <td class="border border-[#E5E7EB] text-center">-</td>
-
-    </tr>
-
-    {{-- ======================================= --}}
-    {{-- ACEH TENGAH --}}
-    {{-- ======================================= --}}
-
-    <tr
-        x-show="aceh"
-        x-transition>
-
-        <td class="border border-[#E5E7EB] py-3 pl-10">
-
-            Kab. Aceh Tengah
-
-        </td>
-
-        {{-- Bawang Putih --}}
-        <td class="border text-center">20</td>
-        <td class="border text-center">0</td>
-        <td class="border text-center">
-
-            <span class="rounded-full bg-red-100 px-2 py-1 text-[11px] font-semibold text-red-600">
-                0%
-            </span>
-
-        </td>
-
-        {{-- Bawang Merah --}}
-        <td class="border text-center">0</td>
-        <td class="border text-center">0</td>
-        <td class="border text-center">-</td>
-
-        {{-- Cabai --}}
-        <td class="border text-center">0</td>
-        <td class="border text-center">0</td>
-        <td class="border text-center">-</td>
-
-        {{-- Durian --}}
-        <td class="border text-center">0</td>
-        <td class="border text-center">0</td>
-        <td class="border text-center">-</td>
-
-        {{-- P2B --}}
-        <td class="border text-center">0</td>
-        <td class="border text-center">0</td>
-        <td class="border text-center">-</td>
-
-    </tr>
-
-    {{-- ======================================= --}}
-    {{-- GAYO LUES --}}
-    {{-- ======================================= --}}
-
-    <tr
-        x-show="aceh"
-        x-transition>
-
-        <td class="border border-[#E5E7EB] py-3 pl-10">
-
-            Kab. Gayo Lues
-
-        </td>
-
-        <td class="border text-center">10</td>
-        <td class="border text-center">0</td>
-        <td class="border text-center">
-
-            <span class="rounded-full bg-red-100 px-2 py-1 text-[11px] font-semibold text-red-600">
-                0%
-            </span>
-
-        </td>
-
-        <td class="border text-center">0</td>
-        <td class="border text-center">0</td>
-        <td class="border text-center">-</td>
-
-        <td class="border text-center">0</td>
-        <td class="border text-center">0</td>
-        <td class="border text-center">-</td>
-
-        <td class="border text-center">0</td>
-        <td class="border text-center">0</td>
-        <td class="border text-center">-</td>
-
-        <td class="border text-center">0</td>
-        <td class="border text-center">0</td>
-        <td class="border text-center">-</td>
-
-    </tr>
-
-    {{-- ======================================= --}}
-    {{-- BENER MERIAH --}}
-    {{-- ======================================= --}}
-
-    <tr
-        x-show="aceh"
-        x-transition>
-
-        <td class="border border-[#E5E7EB] py-3 pl-10">
-
-            Kab. Bener Meriah
-
-        </td>
-
-        <td class="border text-center">10</td>
-        <td class="border text-center">0</td>
-        <td class="border text-center">
-
-            <span class="rounded-full bg-red-100 px-2 py-1 text-[11px] font-semibold text-red-600">
-                0%
-            </span>
-
-        </td>
-
-        <td class="border text-center">0</td>
-        <td class="border text-center">0</td>
-        <td class="border text-center">-</td>
-
-        <td class="border text-center">0</td>
-        <td class="border text-center">0</td>
-        <td class="border text-center">-</td>
-
-        <td class="border text-center">0</td>
-        <td class="border text-center">0</td>
-        <td class="border text-center">-</td>
-
-        <td class="border text-center">0</td>
-        <td class="border text-center">0</td>
-        <td class="border text-center">-</td>
-
-    </tr>
-
-    {{-- ======================================= --}}
-    {{-- SUMATERA UTARA --}}
-    {{-- ======================================= --}}
-
-    <tr
-        x-data="{ sumut: false }"
-        @click="sumut = !sumut"
-        class="cursor-pointer bg-[#F8FBFF] hover:bg-[#EEF6FF] transition">
-
-        <td class="border border-[#E5E7EB] px-4 py-3">
-
-            <div class="flex items-center gap-3">
-
-                <svg
-                    class="h-4 w-4 transition duration-300"
-                    :class="{ 'rotate-90': sumut }"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    viewBox="0 0 24 24">
-
-                    <path d="M9 5l7 7-7 7"/>
-
-                </svg>
-
-                <span class="font-semibold text-[13px]">
-                    Prov. Sumatera Utara
-                </span>
-
-            </div>
-
-        </td>
-
-        {{-- Bawang Putih --}}
-        <td class="border text-center">525</td>
-        <td class="border text-center">0</td>
-        <td class="border text-center">
-            <span class="rounded-full bg-red-100 px-2 py-1 text-[11px] font-semibold text-red-600">
-                0%
-            </span>
-        </td>
-
-        {{-- Bawang Merah --}}
-        <td class="border text-center">350</td>
-        <td class="border text-center">0</td>
-        <td class="border text-center">0%</td>
-
-        {{-- Cabai --}}
-        <td class="border text-center">920</td>
-        <td class="border text-center">0</td>
-        <td class="border text-center">0%</td>
-
-        {{-- Durian --}}
-        <td class="border text-center">70</td>
-        <td class="border text-center">0</td>
-        <td class="border text-center">0%</td>
-
-        {{-- P2B --}}
-        <td class="border text-center">45</td>
-        <td class="border text-center">0</td>
-        <td class="border text-center">0%</td>
-
-    </tr>
-
-    {{-- ====================== --}}
-    {{-- KAB. KARO --}}
-    {{-- ====================== --}}
-
-    <tr
-        x-show="sumut"
-        x-transition>
-
-        <td class="border border-[#E5E7EB] py-3 pl-10">
-            Kab. Karo
-        </td>
-
-        <td class="border text-center">200</td>
-        <td class="border text-center">0</td>
-        <td class="border text-center">0%</td>
-
-        <td class="border text-center">120</td>
-        <td class="border text-center">0</td>
-        <td class="border text-center">0%</td>
-
-        <td class="border text-center">350</td>
-        <td class="border text-center">0</td>
-        <td class="border text-center">0%</td>
-
-        <td class="border text-center">20</td>
-        <td class="border text-center">0</td>
-        <td class="border text-center">0%</td>
-
-        <td class="border text-center">15</td>
-        <td class="border text-center">0</td>
-        <td class="border text-center">0%</td>
-
-    </tr>
-
-    {{-- ====================== --}}
-    {{-- KAB. SIMALUNGUN --}}
-    {{-- ====================== --}}
-
-    <tr
-        x-show="sumut"
-        x-transition>
-
-        <td class="border border-[#E5E7EB] py-3 pl-10">
-            Kab. Simalungun
-        </td>
-
-        <td class="border text-center">180</td>
-        <td class="border text-center">0</td>
-        <td class="border text-center">0%</td>
-
-        <td class="border text-center">110</td>
-        <td class="border text-center">0</td>
-        <td class="border text-center">0%</td>
-
-        <td class="border text-center">300</td>
-        <td class="border text-center">0</td>
-        <td class="border text-center">0%</td>
-
-        <td class="border text-center">30</td>
-        <td class="border text-center">0</td>
-        <td class="border text-center">0%</td>
-
-        <td class="border text-center">10</td>
-        <td class="border text-center">0</td>
-        <td class="border text-center">0%</td>
-
-    </tr>
-
-    {{-- ====================== --}}
-    {{-- KAB. DAIRI --}}
-    {{-- ====================== --}}
-
-    <tr
-        x-show="sumut"
-        x-transition>
-
-        <td class="border border-[#E5E7EB] py-3 pl-10">
-            Kab. Dairi
-        </td>
-
-        <td class="border text-center">145</td>
-        <td class="border text-center">0</td>
-        <td class="border text-center">0%</td>
-
-        <td class="border text-center">120</td>
-        <td class="border text-center">0</td>
-        <td class="border text-center">0%</td>
-
-        <td class="border text-center">270</td>
-        <td class="border text-center">0</td>
-        <td class="border text-center">0%</td>
-
-        <td class="border text-center">20</td>
-        <td class="border text-center">0</td>
-        <td class="border text-center">0%</td>
-
-        <td class="border text-center">20</td>
-        <td class="border text-center">0</td>
-        <td class="border text-center">0%</td>
-
-    </tr>
+            @foreach($wilayahRows as $prov)
+                {{-- Provinsi Row --}}
+                <tr
+                    @click="openRows[{{ $prov['id'] }}] = !openRows[{{ $prov['id'] }}]"
+                    class="cursor-pointer bg-[#F8FBFF] hover:bg-[#EEF6FF] transition">
+
+                    {{-- Wilayah --}}
+                    <td class="border border-[#E5E7EB] px-4 py-3">
+
+                        <div class="flex items-center gap-3">
+
+                            <svg
+                                class="h-4 w-4 transition duration-300"
+                                :class="{ 'rotate-90': openRows[{{ $prov['id'] }}] }"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                viewBox="0 0 24 24">
+
+                                <path d="M9 5l7 7-7 7" />
+
+                            </svg>
+
+                            <span class="font-semibold text-[13px]">
+                                Prov. {{ $prov['nama'] }}
+                            </span>
+
+                        </div>
+
+                    </td>
+
+                    {{-- 5 Komoditas --}}
+                    @foreach([1, 2, 3, 5, 7] as $komId)
+                        @php
+                            $komData = $prov['komoditas'][$komId];
+                        @endphp
+                        <td class="border text-center">
+                            {{ $komData['target'] > 0 ? number_format($komData['target'], 0, ',', '.') : '0' }}
+                        </td>
+                        <td class="border text-center">
+                            {{ $komData['realisasi'] > 0 ? number_format($komData['realisasi'], 0, ',', '.') : '0' }}
+                        </td>
+                        <td class="border text-center">
+                            @if($komData['target'] > 0)
+                                @php
+                                    $progressRound = round($komData['progress']);
+                                @endphp
+                                @if($progressRound <= 50)
+                                    <span class="rounded-full bg-red-100 px-2 py-1 text-[11px] font-semibold text-red-600">
+                                        {{ $progressRound }}%
+                                    </span>
+                                @elseif($progressRound <= 75)
+                                    <span class="rounded-full bg-yellow-100 px-2 py-1 text-[11px] font-semibold text-yellow-800">
+                                        {{ $progressRound }}%
+                                    </span>
+                                @else
+                                    <span class="rounded-full bg-green-100 px-2 py-1 text-[11px] font-semibold text-green-600">
+                                        {{ $progressRound }}%
+                                    </span>
+                                @endif
+                            @else
+                                -
+                            @endif
+                        </td>
+                    @endforeach
+
+                </tr>
+
+                {{-- Kabupaten Rows --}}
+                @foreach($prov['kabupatens'] as $kab)
+                    <tr
+                        x-show="openRows[{{ $prov['id'] }}]"
+                        x-transition>
+
+                        <td class="border border-[#E5E7EB] py-3 pl-10">
+                            Kab. {{ $kab['nama'] }}
+                        </td>
+
+                        @foreach([1, 2, 3, 5, 7] as $komId)
+                            @php
+                                $komData = $kab['komoditas'][$komId];
+                            @endphp
+                            <td class="border text-center">
+                                {{ $komData['target'] > 0 ? number_format($komData['target'], 0, ',', '.') : '0' }}
+                            </td>
+                            <td class="border text-center">
+                                {{ $komData['realisasi'] > 0 ? number_format($komData['realisasi'], 0, ',', '.') : '0' }}
+                            </td>
+                            <td class="border text-center">
+                                @if($komData['target'] > 0)
+                                    @php
+                                        $progressRound = round($komData['progress']);
+                                    @endphp
+                                    @if($progressRound <= 50)
+                                        <span class="rounded-full bg-red-100 px-2 py-1 text-[11px] font-semibold text-red-600">
+                                            {{ $progressRound }}%
+                                        </span>
+                                    @elseif($progressRound <= 75)
+                                        <span class="rounded-full bg-yellow-100 px-2 py-1 text-[11px] font-semibold text-yellow-800">
+                                            {{ $progressRound }}%
+                                        </span>
+                                    @else
+                                        <span class="rounded-full bg-green-100 px-2 py-1 text-[11px] font-semibold text-green-600">
+                                            {{ $progressRound }}%
+                                        </span>
+                                    @endif
+                                @else
+                                    -
+                                @endif
+                            </td>
+                        @endforeach
+
+                    </tr>
+                @endforeach
+            @endforeach
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>

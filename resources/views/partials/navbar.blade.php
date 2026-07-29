@@ -1,108 +1,108 @@
 <nav
     x-data="{ openPeriode: false }"
-    class="fixed top-0 right-0 z-30 flex h-[80px] items-center justify-between border-b border-gray-200 bg-white px-6 shadow-sm transition-all duration-300"
-    :class="sidebarMini ? 'left-[90px]' : 'left-[280px]'">
+    class="fixed top-0 right-0 left-[280px] z-30 flex h-[80px] items-center justify-between border-b border-gray-200 bg-white px-6 shadow-sm transition-[left] duration-300"
+    :class="sidebarMini ? '!left-[90px]' : '!left-[280px]'">
 
-    <!-- Left -->
+    <!-- Left: Navigation Toggle & Dynamic Page Title -->
     <div class="flex items-center gap-4">
 
-        <!-- Toggle Sidebar -->
+        <!-- Toggle Sidebar Button -->
         <button
             @click="sidebarMini = !sidebarMini"
+            type="button"
             class="rounded-lg p-2 transition hover:bg-gray-100">
-
             <img
                 src="{{ asset('Icon-Sidebar.svg') }}"
-                alt="Sidebar"
+                alt="Sidebar Toggle"
                 class="h-10 w-10">
         </button>
 
-        <!-- Page Title -->
+        <!-- Dynamic Page Title -->
         <h1 class="text-3xl font-semibold text-[#1F2937]">
-            @yield('navbar-title', 'Dashboard Utama')
+            @if(request()->routeIs('users.*'))
+                User Management
+            @else
+                @yield('navbar-title', 'Dashboard Utama')
+            @endif
         </h1>
 
     </div>
 
-    <!-- Right -->
+    <!-- Right: Period Selector & Action Button (Hidden on User Management) -->
     <div class="flex items-center gap-4">
 
-        <!-- Periode -->
-        <div class="relative">
+        @if(!request()->routeIs('users.*'))
+            <!-- Periode Filter Dropdown -->
+            <div class="relative">
 
-            <button
-                @click="openPeriode = !openPeriode"
-                class="flex h-11 min-w-[190px] items-center justify-between rounded-xl border border-gray-300 bg-white px-4 shadow-sm transition hover:border-green-600">
+                <button
+                    @click="openPeriode = !openPeriode"
+                    type="button"
+                    class="flex h-11 min-w-[190px] items-center justify-between rounded-xl border border-gray-300 bg-white px-4 shadow-sm transition hover:border-green-600">
 
-                <div class="flex items-center gap-2">
+                    <div class="flex items-center gap-2">
+                        <img
+                            src="{{ asset('Icon-Calender.svg') }}"
+                            class="h-4 w-4"
+                            alt="Calendar">
 
-                    <img
-                        src="{{ asset('Icon-Calender.svg') }}"
-                        class="h-4 w-4">
+                        <span class="text-sm font-medium text-gray-700">
+                            Periode {{ session('tahun', 2026) }}
+                        </span>
+                    </div>
 
-                    <span class="text-sm font-medium text-gray-700">
-                    Periode {{ session('tahun', 2025) }}
-                    </span>
+                    <svg
+                        class="h-4 w-4 text-gray-600 transition duration-200"
+                        :class="{ 'rotate-180': openPeriode }"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                    </svg>
+
+                </button>
+
+                <!-- Periode Dropdown Options -->
+                <div
+                    x-show="openPeriode"
+                    @click.outside="openPeriode = false"
+                    x-cloak
+                    x-transition
+                    class="absolute right-0 z-50 mt-2 w-full overflow-hidden rounded-xl bg-white shadow-xl border border-gray-100">
+
+                    <a
+                        href="{{ request()->fullUrlWithQuery(['tahun' => 2025]) }}"
+                        class="block w-full px-4 py-2.5 text-left text-sm hover:bg-gray-100 text-gray-700 transition">
+                        Periode 2025
+                    </a>
+
+                    <a
+                        href="{{ request()->fullUrlWithQuery(['tahun' => 2026]) }}"
+                        class="block w-full px-4 py-2.5 text-left text-sm hover:bg-gray-100 text-gray-700 transition">
+                        Periode 2026
+                    </a>
 
                 </div>
 
-                <svg
-                    class="h-4 w-4 text-gray-600 transition duration-200"
-                    :class="{ 'rotate-180': openPeriode }"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    viewBox="0 0 24 24">
-
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M19 9l-7 7-7-7"/>
-
-                </svg>
-
-            </button>
-
-           <!-- Dropdown -->
-            <div
-                x-show="openPeriode"
-                @click.outside="openPeriode = false"
-                x-transition
-                class="absolute right-0 z-50 mt-2 w-full overflow-hidden rounded-xl bg-white shadow-xl">
-
-            <a
-                href="{{ url()->current() }}?tahun=2025"
-                class="block w-full px-4 py-2.5 text-left text-sm hover:bg-gray-100">
-
-                Periode 2025
-
-            </a>
-
-            <a
-                href="{{ url()->current() }}?tahun=2026"
-                class="block w-full px-4 py-2.5 text-left text-sm hover:bg-gray-100">
-
-                Periode 2026
-
-            </a>
-
             </div>
 
-        </div>
+            <!-- Update Data Button -->
+            <button
+                type="button"
+                class="flex h-11 items-center gap-2 rounded-xl bg-[#16B33A] px-5 text-white shadow-md transition hover:bg-[#139630]">
 
-        <!-- Update Data -->
-        <button
-            class="flex h-11 items-center gap-2 rounded-xl bg-[#16B33A] px-5 text-white shadow-md transition hover:bg-[#139630]">
+                <img
+                    src="{{ asset('Icon-UpdateData.svg') }}"
+                    class="h-4 w-4"
+                    alt="Update">
 
-            <img
-                src="{{ asset('Icon-UpdateData.svg') }}"
-                class="h-4 w-4">
+                <span class="text-sm font-semibold">
+                    Update Data
+                </span>
 
-            <span class="text-sm font-semibold">
-                Update Data
-            </span>
-
-        </button>
+            </button>
+        @endif
 
     </div>
 
