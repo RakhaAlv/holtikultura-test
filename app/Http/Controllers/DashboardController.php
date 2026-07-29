@@ -11,6 +11,8 @@ use App\Models\Provinsi;
 use App\Models\Kabupaten;
 // day 9 progress, komoditas 
 use App\Models\Komoditas;
+use Illuminate\Http\Request;
+
 
 class DashboardController extends Controller
 {
@@ -496,5 +498,159 @@ return [
         });
 
     return response()->json($mapData);
+}
+
+// day 10 progress, bikin ajax buat tabel dashboard
+
+public function getKabupaten(Request $request)
+{
+    $kabupaten = Kabupaten::where('provinsi_id', $request->provinsi)
+        ->orderBy('nama')
+        ->get([
+            'id',
+            'nama'
+        ]);
+
+    return response()->json($kabupaten);
+}
+public function filterTable(Request $request)
+{
+    $tahun = session('tahun', 2025);
+    $provinsiId = $request->provinsi;
+    $kabupatenId = $request->kabupaten;
+
+    // 1. Target per komoditas
+    $targets = Target::select(
+            'komoditas_id',
+            DB::raw('SUM(target) as total_target')
+        )
+        ->where('tahun', $tahun)
+        ->when($provinsiId, fn($q) => $q->where('provinsi_id', $provinsiId))
+        ->when($kabupatenId, fn($q) => $q->where('kabupaten_id', $kabupatenId))
+        ->groupBy('komoditas_id')
+        ->pluck('total_target', 'komoditas_id');
+
+    // 2. Realisasi per komoditas
+    $realisasiTable = Realisasi::select(
+            'komoditas_id',
+            DB::raw('SUM(jumlah_output) as total_realisasi')
+        )
+        ->where('tahun', $tahun)
+        ->when($provinsiId, fn($q) => $q->where('provinsi_id', $provinsiId))
+        ->when($kabupatenId, fn($q) => $q->where('kabupaten_id', $kabupatenId))
+        ->with('komoditas')
+        ->groupBy('komoditas_id')
+        ->get();
+
+    // 3. Realisasi per provinsi (per komoditas)
+    $provinsiRows = Realisasi::select(
+            'komoditas_id',
+            'provinsi_id',
+            DB::raw('SUM(jumlah_output) as total_realisasi')
+        )
+        ->where('tahun', $tahun)
+        ->when($provinsiId, fn($q) => $q->where('provinsi_id', $provinsiId))
+        ->with(['komoditas', 'provinsi'])
+        ->groupBy('komoditas_id', 'provinsi_id')
+        ->get();
+
+    // 4. Target per provinsi (per komoditas)
+    $provinsiTargets = Target::select(
+            'komoditas_id',
+            'provinsi_id',
+            DB::raw('SUM(target) as total_target')
+        )
+        ->where('tahun', $tahun)
+        ->when($provinsiId, fn($q) => $q->where('provinsi_id', $provinsiId))
+        ->when($kabupatenId, fn($q) => $q->where('kabupaten_id', $kabupatenId))
+        ->groupBy('komoditas_id', 'provinsi_id')
+        ->get()
+        ->keyBy(fn($item) => $item->komoditas_id . '-' . $item->provinsi_id);
+
+    // 5. Realisasi per kabupaten (per komoditas + provinsi)
+    $kabupatenRows = Realisasi::select(
+            'komoditas_id',
+            'provinsi_id',
+            'kabupaten_id',
+            DB::raw('SUM(jumlah_output) as total_realisasi')
+        )
+        ->where('tahun', $tahun)
+        ->when($provinsiId, fn($q) => $q->where('provinsi_id', $provinsiId))
+        ->when($kabupatenId, fn($q) => $q->where('kabupaten_id', $kabupatenId))
+        ->with(['provinsi', 'kabupaten'])
+        ->groupBy('komoditas_id', 'provinsi_id', 'kabupaten_id')
+        ->get();
+
+    // 6. Target per kabupaten (per komoditas + provinsi)
+    $kabupatenTargets = Target::select(
+            'komoditas_id',
+            'provinsi_id',
+            'kabupaten_id',
+            DB::raw('SUM(target) as total_target')
+        )
+        ->where('tahun', $tahun)
+        ->when($provinsiId, fn($q) => $q->where('provinsi_id', $provinsiId))
+        ->when($kabupatenId, fn($q) => $q->where('kabupaten_id', $kabupatenId))
+        ->groupBy('komoditas_id', 'provinsi_id', 'kabupaten_id')
+        ->get()
+        ->keyBy(fn($item) => $item->komoditas_id . '-' . $item->provinsi_id . '-' . $item->kabupaten_id);
+
+    // 7. Build rows — struktur identik dengan index()
+    $rows = $realisasiTable->map(function ($item) use (
+        $targets,
+        $provinsiRows,
+        $provinsiTargets,
+        $kabupatenRows,
+        $kabupatenTargets
+    ) {
+        $target = $targets[$item->komoditas_id] ?? 0;
+        $progress = $target > 0
+            ? round($item->total_realisasi / $target * 100, 2) : 0;
+
+        $provinsi = $provinsiRows
+            ->where('komoditas_id', $item->komoditas_id)
+            ->map(function ($p) use ($provinsiTargets, $kabupatenRows, $kabupatenTargets) {
+                $key = $p->komoditas_id . '-' . $p->provinsi_id;
+                $target = $provinsiTargets[$key]->total_target ?? 0;
+                $progress = $target > 0
+                    ? round($p->total_realisasi / $target * 100, 2) : 0;
+
+                $kabupaten = $kabupatenRows
+                    ->where('komoditas_id', $p->komoditas_id)
+                    ->where('provinsi_id', $p->provinsi_id)
+                    ->map(function ($k) use ($kabupatenTargets) {
+                        $key = $k->komoditas_id . '-' . $k->provinsi_id . '-' . $k->kabupaten_id;
+                        $target = $kabupatenTargets[$key]->total_target ?? 0;
+                        $progress = $target > 0
+                            ? round($k->total_realisasi / $target * 100, 2) : 0;
+
+                        return [
+                            'kabupaten' => $k->kabupaten->nama,
+                            'target'    => $target,
+                            'realisasi' => $k->total_realisasi,
+                            'progress'  => $progress,
+                        ];
+                    })->values();
+
+                return [
+                    'provinsi'  => $p->provinsi->nama,
+                    'target'    => $target,
+                    'realisasi' => $p->total_realisasi,
+                    'progress'  => $progress,
+                    'kabupaten' => $kabupaten,
+                ];
+            })->values();
+
+        return [
+            'komoditas_id' => $item->komoditas_id,
+            'komoditas'    => $item->komoditas->nama,
+            'target'       => $target,
+            'realisasi'    => $item->total_realisasi,
+            'progress'     => $progress,
+            'provinsi'     => $provinsi,
+        ];
+    });
+
+    return view('dashboard.partials.recap-table', compact('rows'));
 }
 }      
