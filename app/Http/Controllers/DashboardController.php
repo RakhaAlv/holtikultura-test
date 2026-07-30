@@ -504,6 +504,8 @@ return [
 
 public function getKabupaten(Request $request)
 {
+    $provinsiId = $request->provinsi ?? $request->provinsi_id;
+
     $kabupaten = Kabupaten::where('provinsi_id', $request->provinsi)
         ->orderBy('nama')
         ->get([
@@ -513,6 +515,7 @@ public function getKabupaten(Request $request)
 
     return response()->json($kabupaten);
 }
+
 public function filterTable(Request $request)
 {
     $tahun = session('tahun', 2025);

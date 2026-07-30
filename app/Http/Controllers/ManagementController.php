@@ -10,4 +10,9 @@ class ManagementController extends Controller
     {
         return view('datamanagement.data-management');
     }
+
+    public function show(Target $target)
+{
+    return response()->json($target);
+}
 }

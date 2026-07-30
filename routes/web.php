@@ -154,6 +154,9 @@ Route::middleware('auth')->group(function () {
             Route::post('/target', [ManagementTargetController::class, 'store'])
                 ->name('management.target.store');
 
+            Route::get('/target/{target}', [ManagementTargetController::class, 'show'])
+            ->name('management.target.show');
+
             Route::put('/target/{target}', [ManagementTargetController::class, 'update'])
                 ->name('management.target.update');
 

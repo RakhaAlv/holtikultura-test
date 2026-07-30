@@ -31,7 +31,7 @@
     <!-- Right: Period Selector & Action Button (Hidden on User Management) -->
     <div class="flex items-center gap-4">
 
-        @if(!request()->routeIs('users.*'))
+        @if(!request()->routeIs('users.*') && !request()->routeIs('data-management'))
             <!-- Periode Filter Dropdown -->
             <div class="relative">
 
