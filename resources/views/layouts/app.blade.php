@@ -40,7 +40,21 @@
 
         {{-- Main Content --}}
         <main class="flex-1 p-5 pt-[88px]">
+@if ($errors->any())
+    <div class="mb-4 rounded-lg bg-red-100 p-4 text-red-700">
+        <ul class="list-disc pl-5">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
+@if(session('success'))
+    <div class="mb-4 rounded-lg bg-green-100 p-4 text-green-700">
+        {{ session('success') }}
+    </div>
+@endif
             @yield('content')
 
         </main>
@@ -48,6 +62,6 @@
     </div>
 
 </div>
-
+@stack('scripts')
 </body>
 </html>

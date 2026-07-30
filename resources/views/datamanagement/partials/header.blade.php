@@ -1,6 +1,5 @@
 <div class="flex flex-col gap-4 rounded-[18px] bg-white p-6 shadow-[0_4px_12px_rgba(0,0,0,0.08)] lg:flex-row lg:items-center lg:justify-between">
 
-    {{-- Judul --}}
     <div>
 
         <h1 class="text-[32px] font-bold text-[#1F2937]">
@@ -17,12 +16,11 @@
 
     </div>
 
-    {{-- Tombol --}}
     <button
+        id="btnTambahTarget"
         type="button"
         class="flex h-[52px] items-center justify-center gap-3 rounded-xl bg-[#15803D] px-6 text-[15px] font-semibold text-white transition hover:bg-[#166534]">
 
-        {{-- Icon Plus --}}
         <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-5 w-5"
@@ -38,7 +36,7 @@
 
         </svg>
 
-        Tambah Data Realisasi
+        Tambah Target
 
     </button>
 
