@@ -40,4 +40,28 @@
 
     </button>
 
+    <button
+        id="btnTambahRealisasi"
+        type="button"
+        class="hidden h-[52px] items-center justify-center gap-3 rounded-xl bg-[#15803D] px-6 text-[15px] font-semibold text-white transition hover:bg-[#166534]">
+
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2">
+
+            <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 4v16m8-8H4" />
+
+        </svg>
+
+        Tambah Realisasi
+
+    </button>
+
 </div>

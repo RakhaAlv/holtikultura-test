@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 
 use App\Models\Provinsi;
 use App\Models\Kabupaten;
+use App\Models\Kecamatan;
+use App\Models\Desa;
 use App\Models\Target;
 use App\Models\Realisasi;
 
@@ -215,5 +217,112 @@ class RekapDataController extends Controller
             ]);
 
         return response()->json($kabupaten);
+    }
+
+    /**
+     * Lazy-load baris Kecamatan untuk satu Kabupaten (dipanggil via AJAX
+     * saat baris Kabupaten di tabel pivot pertama kali di-expand).
+     *
+     * Catatan: tabel `targets` tidak punya kolom kecamatan_id, jadi di level
+     * ini hanya nilai Realisasi yang bisa dihitung. Target & Progress
+     * ditampilkan '-' di view.
+     */
+    public function getKecamatanRows(Request $request)
+    {
+        $tahun = $request->tahun ?? session('tahun', 2025);
+        $kabupatenId = $request->kabupaten_id;
+        $komoditasIds = [1, 2, 3, 5, 7];
+
+        $kecamatans = Kecamatan::where('kabupaten_id', $kabupatenId)
+            ->orderBy('nama')
+            ->get();
+
+        $realisasis = Realisasi::select(
+                'kecamatan_id',
+                'komoditas_id',
+                DB::raw('SUM(jumlah_output) as total_realisasi')
+            )
+            ->where('tahun', $tahun)
+            ->where('kabupaten_id', $kabupatenId)
+            ->whereIn('komoditas_id', $komoditasIds)
+            ->groupBy('kecamatan_id', 'komoditas_id')
+            ->get()
+            ->groupBy('kecamatan_id');
+
+        $rows = $kecamatans->map(function ($kec) use ($realisasis, $komoditasIds) {
+
+            $komoditasData = [];
+
+            foreach ($komoditasIds as $komId) {
+                $realisasiItem = $realisasis->get($kec->id)?->firstWhere('komoditas_id', $komId);
+
+                $komoditasData[$komId] = [
+                    'realisasi' => $realisasiItem ? (float) $realisasiItem->total_realisasi : 0,
+                ];
+            }
+
+            return [
+                'id'        => $kec->id,
+                'nama'      => $kec->nama,
+                'komoditas' => $komoditasData,
+            ];
+        });
+
+        return view('rekapdata.partials.kecamatan-rows', [
+            'kecamatans'  => $rows,
+            'kabupatenId' => $kabupatenId,
+            'tahun'       => $tahun,
+        ]);
+    }
+
+    /**
+     * Lazy-load baris Desa untuk satu Kecamatan (dipanggil via AJAX
+     * saat baris Kecamatan di tabel pivot pertama kali di-expand).
+     */
+    public function getDesaRows(Request $request)
+    {
+        $tahun = $request->tahun ?? session('tahun', 2025);
+        $kecamatanId = $request->kecamatan_id;
+        $komoditasIds = [1, 2, 3, 5, 7];
+
+        $desas = Desa::where('kecamatan_id', $kecamatanId)
+            ->orderBy('nama')
+            ->get();
+
+        $realisasis = Realisasi::select(
+                'desa_id',
+                'komoditas_id',
+                DB::raw('SUM(jumlah_output) as total_realisasi')
+            )
+            ->where('tahun', $tahun)
+            ->where('kecamatan_id', $kecamatanId)
+            ->whereIn('komoditas_id', $komoditasIds)
+            ->groupBy('desa_id', 'komoditas_id')
+            ->get()
+            ->groupBy('desa_id');
+
+        $rows = $desas->map(function ($desa) use ($realisasis, $komoditasIds) {
+
+            $komoditasData = [];
+
+            foreach ($komoditasIds as $komId) {
+                $realisasiItem = $realisasis->get($desa->id)?->firstWhere('komoditas_id', $komId);
+
+                $komoditasData[$komId] = [
+                    'realisasi' => $realisasiItem ? (float) $realisasiItem->total_realisasi : 0,
+                ];
+            }
+
+            return [
+                'id'        => $desa->id,
+                'nama'      => $desa->nama,
+                'komoditas' => $komoditasData,
+            ];
+        });
+
+        return view('rekapdata.partials.desa-rows', [
+            'desas'       => $rows,
+            'kecamatanId' => $kecamatanId,
+        ]);
     }
 }

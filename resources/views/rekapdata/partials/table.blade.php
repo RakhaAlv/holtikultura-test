@@ -30,7 +30,7 @@
                 </h2>
 
                 <p class="mt-1 text-[14px] text-[#6B7280]">
-                    Klik tanda &gt; untuk melihat rincian hingga tingkat Kelompok Tani.
+                    Klik tanda &gt; untuk melihat rincian hingga tingkat Desa.
                     Geser tabel ke kanan atau ke bawah untuk melihat seluruh data.
                 </p>
 
@@ -45,7 +45,7 @@
     {{-- ========================= --}}
     <div class="overflow-x-auto">
 
-        <table class="min-w-[1405px] border-collapse">
+        <table id="pivotWilayahTable" class="min-w-[1405px] border-collapse">
 
             <thead>
 
@@ -199,10 +199,30 @@
                 @foreach($prov['kabupatens'] as $kab)
                     <tr
                         x-show="openRows[{{ $prov['id'] }}]"
-                        x-transition>
+                        x-transition
+                        class="kabupatenRow cursor-pointer hover:bg-[#F6FFF5] transition"
+                        data-id="{{ $kab['id'] }}"
+                        data-tahun="{{ $tahun ?? session('tahun', 2025) }}">
 
                         <td class="border border-[#E5E7EB] py-3 pl-10">
-                            Kab. {{ $kab['nama'] }}
+
+                            <div class="flex items-center gap-3">
+
+                                <svg
+                                    class="chevron h-3.5 w-3.5 transition duration-300"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    viewBox="0 0 24 24">
+
+                                    <path d="M9 5l7 7-7 7" />
+
+                                </svg>
+
+                                <span>Kab. {{ $kab['nama'] }}</span>
+
+                            </div>
+
                         </td>
 
                         @foreach([1, 2, 3, 5, 7] as $komId)
@@ -250,3 +270,90 @@
     </div>
 
 </div>
+
+@push('scripts')
+<script>
+
+// ===============================
+// LAZY LOAD: Kabupaten -> Kecamatan
+// ===============================
+
+document.addEventListener('click', function(e){
+
+    const kabRow = e.target.closest('.kabupatenRow');
+
+    if(kabRow){
+
+        const kabId = kabRow.dataset.id;
+        const tahun = kabRow.dataset.tahun;
+
+        const existing = document.querySelectorAll('.group-kab-' + kabId);
+
+        if(existing.length > 0){
+            // sudah pernah di-load, tinggal toggle show/hide
+            existing.forEach(function(row){
+                row.classList.toggle('hidden');
+            });
+
+            // kalau ditutup, sembunyikan juga semua desa turunannya
+            const chevronOpen = !existing[0].classList.contains('hidden');
+            if(!chevronOpen){
+                existing.forEach(function(kecRow){
+                    document.querySelectorAll('.group-kec-' + kecRow.dataset.id)
+                        .forEach(function(desaRow){ desaRow.classList.add('hidden'); });
+                });
+            }
+
+            kabRow.querySelector('.chevron').classList.toggle('rotate-90');
+            return;
+        }
+
+        // belum pernah di-load -> fetch
+        fetch(`{{ route('rekap-data.getKecamatanRows') }}?kabupaten_id=${kabId}&tahun=${tahun}`)
+
+            .then(response => response.text())
+
+            .then(html => {
+                kabRow.insertAdjacentHTML('afterend', html);
+                kabRow.querySelector('.chevron').classList.toggle('rotate-90');
+            });
+
+        return;
+    }
+
+    // ===============================
+    // LAZY LOAD: Kecamatan -> Desa
+    // ===============================
+
+    const kecRow = e.target.closest('.kecamatanRow');
+
+    if(kecRow){
+
+        const kecId = kecRow.dataset.id;
+        const tahun = kecRow.dataset.tahun;
+
+        const existing = document.querySelectorAll('.group-kec-' + kecId);
+
+        if(existing.length > 0){
+            existing.forEach(function(row){
+                row.classList.toggle('hidden');
+            });
+            kecRow.querySelector('.chevron').classList.toggle('rotate-90');
+            return;
+        }
+
+        fetch(`{{ route('rekap-data.getDesaRows') }}?kecamatan_id=${kecId}&tahun=${tahun}`)
+
+            .then(response => response.text())
+
+            .then(html => {
+                kecRow.insertAdjacentHTML('afterend', html);
+                kecRow.querySelector('.chevron').classList.toggle('rotate-90');
+            });
+
+    }
+
+});
+
+</script>
+@endpush
