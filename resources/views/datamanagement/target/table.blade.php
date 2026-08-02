@@ -158,7 +158,7 @@
                         {{ $target->tahun }}
                     </td>
 
-                    <td class="px-3 py-3 text-center font-semibold text-blue-600">
+                    <td class="px-3 py-3 text-center font-semibold text-black-600">
                         {{ number_format($target->target, 2, ',', '.') }}
                     </td>
 
