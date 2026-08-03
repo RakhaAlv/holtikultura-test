@@ -26,23 +26,21 @@
             </label>
 
             <select
-                id="komoditasFilter"
-                name="komoditas"
-                class="h-11 w-[200px] rounded-xl border border-gray-200 px-4">
+    id="komoditasFilter"
+    name="komoditas"
+    class="h-11 w-[200px] rounded-xl border border-gray-200 px-4">
 
-                @foreach($komoditas as $item)
+    <option value="" selected>
+        Pilih Komoditas
+    </option>
 
-                    <option
-                        value="{{ $item->id }}"
-                        {{ request('komoditas') == $item->id ? 'selected' : '' }}>
+    @foreach($komoditas as $item)
+        <option value="{{ $item->id }}">
+            {{ $item->nama }}
+        </option>
+    @endforeach
 
-                        {{ $item->nama }}
-
-                    </option>
-
-                @endforeach
-
-            </select>
+</select>
 
         </div>
 
@@ -110,76 +108,66 @@
 
 
 <script>
-
 window.addEventListener('load', async function () {
 
     const chartDom = document.getElementById('indonesiaMap');
-
     const chart = echarts.init(chartDom);
 
-    const observer = new ResizeObserver(() => {
-    chart.resize();
-    });
+    new ResizeObserver(() => {
+        chart.resize();
+    }).observe(chartDom);
 
-    
-
-    observer.observe(chartDom);
-
+    // ==========================
+    // Load GeoJSON
+    // ==========================
     const geoJson = await fetch('/geojson/indonesia-provinsi.json')
         .then(res => res.json());
 
     geoJson.features.forEach(feature => {
+        feature.properties.name =
+            feature.properties.PROVINSI.toUpperCase();
+    });
 
-    feature.properties.name =
-        feature.properties.PROVINSI.toUpperCase();
-
-});
-
-    echarts.registerMap(
-    'Indonesia',
-    geoJson,
-    {
+    echarts.registerMap('Indonesia', geoJson, {
         nameProperty: 'PROVINSI'
-    }
-);
-    console.log(geoJson.features[0].properties);
+    });
 
-    console.log(@json($mapData));
+    // ==========================
+    // Initial Map (Kosong)
+    // ==========================
     chart.setOption({
 
-    tooltip: {
-        trigger: 'item',
+        tooltip: {
+            trigger: 'item',
+            formatter: function (params) {
 
-        formatter: function (params) {
+                const value = Array.isArray(params.value)
+                    ? params.value[2]
+                    : params.value;
 
-            const value = Array.isArray(params.value)
-                ? params.value[2]
-                : params.value;
+                if (
+                    document.getElementById('komoditasFilter').value === '' ||
+                    value === undefined ||
+                    value === null ||
+                    value === '-' ||
+                    isNaN(value)
+                ) {
+                    return `
+                        <b>${params.name}</b><br>
+                        Progress : <b>Tidak Ada Data</b>
+                    `;
+                }
 
-            if (
-                value === null ||
-                value === undefined ||
-                value === '-' ||
-                isNaN(value)
-        ) {
-
-            return `
-                <b>${params.name}</b><br>
-                Progress : <b>Tidak Ada Data</b>
-            `;
-
-        }
-
-            return `
-                <b>${params.name}</b><br>
-                Progress : <b>${Number(value).toLocaleString('id-ID', {
-                    minimumFractionDigits: 0,
-                    maximumFractionDigits: 2
-                })}%</b>
-            `;
-
-        }
-},
+                return `
+                    <b>${params.name}</b><br>
+                    Progress :
+                    <b>${Number(value).toLocaleString('id-ID',{
+                        minimumFractionDigits:0,
+                        maximumFractionDigits:2
+                    })}%</b>
+                `;
+            }
+        },
 
         visualMap: {
             min: 0,
@@ -197,77 +185,101 @@ window.addEventListener('load', async function () {
         },
 
         series: [
-
             {
-
                 type: 'map',
-
                 map: 'Indonesia',
 
                 roam: false,
 
                 zoom: 1.20,
 
-                scaleLimit:{
-                min:1.20,
-                max:1.20
+                scaleLimit: {
+                    min: 1.20,
+                    max: 1.20
                 },
 
-                selectedMode: false,  // tidak bisa dipilih
+                selectedMode: false,
 
                 emphasis: {
-
                     label: {
                         show: false
                     },
-
                     itemStyle: {
                         areaColor: '#16B33A'
                     }
-
                 },
 
-                data: @json($mapData)
+                // warna default saat belum pilih komoditas
+                itemStyle: {
+                    areaColor: '#D1D5DB',
+                    borderColor: '#FFFFFF'
+                },
 
+                data: []
             }
-
         ]
 
     });
 
-    window.addEventListener('resize', () => chart.resize());
+    // ==========================
+    // Resize
+    // ==========================
+    window.addEventListener('resize', () => {
+        chart.resize();
+    });
 
+    // ==========================
+    // Filter Komoditas
+    // ==========================
     const komoditasFilter = document.getElementById('komoditasFilter');
 
     komoditasFilter.addEventListener('change', async function () {
 
-    const komoditas = this.value;
+        const komoditas = this.value;
 
-    const tahun =
-    document.querySelector('input[name="tahun"]').value;
+        // kalau pilih "Pilih Komoditas"
+        if (komoditas === '') {
 
-    const response = await fetch(
-    `/dashboard/map-data?komoditas=${komoditas}&tahun=${tahun}`
-    );
+            chart.setOption({
+                series: [{
+                    type: 'map',
+                    map: 'Indonesia',
 
-    const data = await response.json();
+                    itemStyle: {
+                        areaColor: '#D1D5DB',
+                        borderColor: '#FFFFFF'
+                    },
 
-    chart.setOption({
+                    data: []
+                }]
+            });
 
-    series: [{
+            return;
+        }
 
-        type: 'map',
+        const tahun =
+            document.querySelector('input[name="tahun"]').value;
 
-        map: 'Indonesia',
+        const response = await fetch(
+            `/dashboard/map-data?komoditas=${komoditas}&tahun=${tahun}`
+        );
 
-        data: data
+        const data = await response.json();
 
-    }]
+        chart.setOption({
+            series: [{
+                type: 'map',
+                map: 'Indonesia',
+
+                itemStyle: {
+                    borderColor: '#FFFFFF'
+                },
+
+                data: data
+            }]
+        });
 
     });
 
 });
-
-});
-
 </script>
