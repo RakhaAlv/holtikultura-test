@@ -175,17 +175,17 @@
                                     $progressRound = round($komData['progress']);
                                 @endphp
                                 @if($progressRound <= 50)
-                                    <span class="rounded-full bg-red-100 px-2 py-1 text-[11px] font-semibold text-red-600">
-                                        {{ $progressRound }}%
-                                    </span>
+    <span class="rounded-full bg-red-100 px-2 py-1 text-[11px] font-semibold text-red-600">
+        {{ $progressRound }}%
+    </span>
                                 @elseif($progressRound <= 75)
-                                    <span class="rounded-full bg-yellow-100 px-2 py-1 text-[11px] font-semibold text-yellow-800">
-                                        {{ $progressRound }}%
-                                    </span>
+    <span class="rounded-full bg-yellow-100 px-2 py-1 text-[11px] font-semibold text-yellow-800">
+        {{ $progressRound }}%
+    </span>
                                 @else
-                                    <span class="rounded-full bg-green-100 px-2 py-1 text-[11px] font-semibold text-green-600">
-                                        {{ $progressRound }}%
-                                    </span>
+    <span class="rounded-full bg-green-100 px-2 py-1 text-[11px] font-semibold text-green-600">
+        {{ $progressRound }}%
+    </span>
                                 @endif
                             @else
                                 -
@@ -244,7 +244,7 @@
                                         <span class="rounded-full bg-red-100 px-2 py-1 text-[11px] font-semibold text-red-600">
                                             {{ $progressRound }}%
                                         </span>
-                                    @elseif($progressRound <= 75)
+                                    @elseif($progressRound <= 75 )
                                         <span class="rounded-full bg-yellow-100 px-2 py-1 text-[11px] font-semibold text-yellow-800">
                                             {{ $progressRound }}%
                                         </span>

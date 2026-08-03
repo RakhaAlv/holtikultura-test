@@ -32,7 +32,7 @@
                 <select
     id="provinsi"
     name="provinsi"
-    class="h-[42px] w-full rounded-[10px] border-2 border-[#2D2D2D] bg-white px-3 text-[15px] outline-none">
+    class="h-[46px] w-full rounded-xl border border-[#D4D4D4] bg-white px-4 text-[15px] text-[#222] shadow-sm transition focus:border-[#16B33A] focus:outline-none">
 
     <option value="">Semua Provinsi</option>
 
@@ -60,7 +60,7 @@
 <select
     id="kabupaten"
     name="kabupaten"
-    class="h-[42px] w-full rounded-[10px] border-2 border-[#2D2D2D] bg-white px-3 text-[15px] outline-none">
+    class="h-[46px] w-full rounded-xl border border-[#D4D4D4] bg-white px-4 text-[15px] text-[#222] shadow-sm transition focus:border-[#16B33A] focus:outline-none">
 
     <option value="">Semua Kabupaten/Kota</option>
 
