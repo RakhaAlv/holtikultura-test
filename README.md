@@ -1,59 +1,282 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+### <div align="center">
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+### //<img src="https://hortikultura.pertanian.go.id/wp-content/uploads/2023/09/logo-horti-copy.png">//
 
-## About Laravel
+# Sistem Informasi Pemantauan Komoditas Direktorat Jenderal Hortikultura
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Direktorat Jenderal Hortikultura  
+### Kementerian Pertanian Republik Indonesia
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+![Laravel](https://img.shields.io/badge/Laravel-13-red?style=for-the-badge&logo=laravel)
+![PHP](https://img.shields.io/badge/PHP-8.4-blue?style=for-the-badge&logo=php)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.x-38BDF8?style=for-the-badge&logo=tailwindcss)
+![MySQL](https://img.shields.io/badge/MySQL-Database-4479A1?style=for-the-badge&logo=mysql)
+![License](https://img.shields.io/badge/License-Internal-success?style=for-the-badge)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+**Sistem Informasi berbasis web untuk mendukung proses monitoring, pengelolaan, dan pelaporan data komoditas hortikultura secara terintegrasi.**
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+</div>
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+# 📖 Deskripsi
 
-## Agentic Development
+Sistem Informasi Pemantauan Komoditas Direktorat Jenderal Hortikultura merupakan aplikasi berbasis web yang dikembangkan untuk membantu proses pengelolaan data komoditas hortikultura di lingkungan Direktorat Jenderal Hortikultura, Kementerian Pertanian Republik Indonesia.
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+Aplikasi ini memungkinkan pengguna untuk melakukan monitoring target dan realisasi bantuan komoditas hortikultura secara cepat, akurat, dan terpusat melalui dashboard interaktif.
 
-```bash
-composer require laravel/boost --dev
+---
 
-php artisan boost:install
+# ✨ Fitur Utama
+
+## 📊 Dashboard Monitoring
+
+- Summary Card setiap komoditas
+- Progress Target dan Realisasi
+- Progress Bar
+- Dashboard interaktif
+- Filter data berdasarkan wilayah dan tahun
+
+---
+
+## 📂 Manajemen Data Target
+
+- Menambah data target
+- Mengubah data target
+- Menghapus data target
+- Filter data
+- Pencarian data
+
+---
+
+## 🌱 Manajemen Data Realisasi
+
+- Menambah data realisasi
+- Mengubah data realisasi
+- Menghapus data realisasi
+- Status bantuan
+- Monitoring realisasi
+
+---
+
+## 👥 User Management
+
+- Manajemen akun pengguna
+- Role Based Access Control (RBAC)
+- Hak akses berdasarkan peran
+
+---
+
+# 🔐 Hak Akses Pengguna
+
+| Role | Hak Akses |
+|-------|-----------|
+| **Super Admin** | Mengelola seluruh data, dashboard, target, realisasi, dan akun pengguna |
+| **Admin Direktorat** | Mengelola data sesuai direktorat masing-masing |
+| **User** | Melihat dashboard dan data tanpa hak mengubah |
+
+---
+
+# 🖥️ Teknologi
+
+| Backend | Frontend | Database |
+|----------|-----------|-----------|
+| Laravel 13 | Blade Template | MySQL |
+| PHP 8.4 | Tailwind CSS | |
+| Composer | JavaScript | |
+| | Vite | |
+
+---
+
+# 📁 Struktur Project
+
+```
+project/
+│
+├── app/
+├── bootstrap/
+├── config/
+├── database/
+├── public/
+├── resources/
+│   ├── css/
+│   ├── js/
+│   └── views/
+├── routes/
+├── storage/
+├── tests/
+├── .env
+├── artisan
+└── README.md
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+---
 
-## Contributing
+# 🚀 Instalasi
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Clone Repository
 
-## Code of Conduct
+```bash
+git clone https://github.com/username/repository.git
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Masuk ke project
 
-## Security Vulnerabilities
+```bash
+cd repository
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Install dependency
 
-## License
+```bash
+composer install
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-test
+Install frontend
+
+```bash
+npm install
+```
+
+Copy file environment
+
+```bash
+cp .env.example .env
+```
+
+Generate key
+
+```bash
+php artisan key:generate
+```
+
+Konfigurasi database pada file **.env**
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=hortikultura
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+Migrasi database
+
+```bash
+php artisan migrate
+```
+
+Jika menggunakan seeder
+
+```bash
+php artisan db:seed
+```
+
+Jalankan Vite
+
+```bash
+npm run dev
+```
+
+Jalankan Laravel
+
+```bash
+php artisan serve
+```
+
+Akses aplikasi melalui
+
+```
+http://127.0.0.1:8000
+```
+
+---
+
+# 📈 Modul Sistem
+
+- Dashboard Monitoring
+- Summary Card Komoditas
+- Manajemen Target
+- Manajemen Realisasi
+- User Management
+- Authentication
+- Authorization
+- Dashboard Analytics
+- Filter Data
+- Progress Monitoring
+
+---
+
+# 📊 Dashboard
+
+Dashboard menyediakan informasi berupa:
+
+- Total Target
+- Total Realisasi
+- Persentase Progress
+- Rekapitulasi Komoditas
+- Monitoring Bantuan
+- Filter Wilayah
+- Filter Tahun
+
+---
+
+# 🔒 Keamanan Sistem
+
+- Authentication Login
+- Laravel Middleware
+- CSRF Protection
+- Validasi Input
+- Role Based Access Control (RBAC)
+
+---
+
+# 📷 Tampilan Aplikasi
+
+> Tambahkan screenshot aplikasi pada bagian ini.
+
+### Dashboard
+
+```
+assets/dashboard.png
+```
+
+### Management Target
+
+```
+assets/target.png
+```
+
+### Management Realisasi
+
+```
+assets/realisasi.png
+```
+
+### User Management
+
+```
+assets/users.png
+```
+
+---
+
+# 👨‍💻 Pengembang
+
+**Sistem Informasi Pemantauan Komoditas Direktorat Jenderal Hortikultura**
+
+Dikembangkan sebagai aplikasi berbasis Laravel untuk mendukung proses monitoring dan pengelolaan data komoditas hortikultura pada Direktorat Jenderal Hortikultura.
+
+---
+
+<div align="center">
+
+**Direktorat Jenderal Hortikultura**  
+**Kementerian Pertanian Republik Indonesia**
+
+© 2026 All Rights Reserved.
+
+</div>

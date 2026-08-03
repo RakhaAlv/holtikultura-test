@@ -166,8 +166,11 @@
                     <label class="mb-2 block text-sm font-semibold">Status Bantuan</label>
                     <select id="statusFieldR" name="status" class="w-full rounded-lg border p-3" required>
                         <option value="">Pilih Status</option>
+                        <option value="Usulan CPCL">Usulan CPCL</option>
+                        <option value="Kontrak/PKS">Kontrak/PKS</option>
+                        <option value="Pemberkasan Dokumen Pencairan">Pemberkasan Dokumen Pencairan</option>
+                        <option value="Distribusi Bantuan">Distribusi Bantuan</option>
                         <option value="Bantuan Sudah Diterima">Bantuan Sudah Diterima</option>
-                        <option value="Bantuan Belum Diterima">Bantuan Belum Diterima</option>
                     </select>
                 </div>
 

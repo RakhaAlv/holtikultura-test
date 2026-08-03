@@ -9,6 +9,8 @@ use App\Models\Target;
 // day 7 progress model provinsi dan kabupaten untuk filter data
 use App\Models\Provinsi;
 use App\Models\Kabupaten;
+use App\Models\Kecamatan;
+use App\Models\Desa;
 // day 9 progress, komoditas 
 use App\Models\Komoditas;
 use Illuminate\Http\Request;
@@ -516,6 +518,32 @@ public function getKabupaten(Request $request)
     return response()->json($kabupaten);
 }
 
+// AJAX cascading dropdown: Kabupaten -> Kecamatan
+public function getKecamatan(Request $request)
+{
+    $kecamatan = Kecamatan::where('kabupaten_id', $request->kabupaten)
+        ->orderBy('nama')
+        ->get([
+            'id',
+            'nama'
+        ]);
+
+    return response()->json($kecamatan);
+}
+
+// AJAX cascading dropdown: Kecamatan -> Desa
+public function getDesa(Request $request)
+{
+    $desa = Desa::where('kecamatan_id', $request->kecamatan)
+        ->orderBy('nama')
+        ->get([
+            'id',
+            'nama'
+        ]);
+
+    return response()->json($desa);
+}
+
 public function filterTable(Request $request)
 {
     $tahun = session('tahun', date('Y'));
@@ -656,4 +684,4 @@ public function filterTable(Request $request)
 
     return view('dashboard.partials.recap-table', compact('rows'));
 }
-}      
+}
