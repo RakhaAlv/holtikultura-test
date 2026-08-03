@@ -25,7 +25,7 @@ class DashboardController extends Controller
              session(['tahun' => request('tahun')]);
             }
 
-            $tahun = session('tahun', 2025);
+            $tahun = session('tahun', date('Y'));
     
         $provinsiId = request('provinsi');
         $kabupatenId = request('kabupaten');
@@ -439,7 +439,7 @@ return [
     // day 9 progress, implementasi AJAX di peta
     public function mapData()
 {
-        $tahun = session('tahun', 2025);
+        $tahun = session('tahun', date('Y'));
 
     $komoditasId = request('komoditas');
 
@@ -504,6 +504,8 @@ return [
 
 public function getKabupaten(Request $request)
 {
+    $provinsiId = $request->provinsi ?? $request->provinsi_id;
+
     $kabupaten = Kabupaten::where('provinsi_id', $request->provinsi)
         ->orderBy('nama')
         ->get([
@@ -513,9 +515,10 @@ public function getKabupaten(Request $request)
 
     return response()->json($kabupaten);
 }
+
 public function filterTable(Request $request)
 {
-    $tahun = session('tahun', 2025);
+    $tahun = session('tahun', date('Y'));
     $provinsiId = $request->provinsi;
     $kabupatenId = $request->kabupaten;
 

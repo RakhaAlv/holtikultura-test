@@ -45,6 +45,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/get-kabupaten', [DashboardController::class, 'getKabupaten'])
             ->name('getKabupaten');
 
+        Route::get('/get-kecamatan', [DashboardController::class, 'getKecamatan'])
+            ->name('getKecamatan');
+
+        Route::get('/get-desa', [DashboardController::class, 'getDesa'])
+            ->name('getDesa');
+
         Route::get('/rekap-table', [DashboardController::class, 'filterTable'])
             ->name('filterTable');
 
@@ -114,6 +120,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/rekap-data/get-kabupaten', [RekapDataController::class, 'getKabupaten'])
         ->name('rekap-data.getKabupaten');
 
+    Route::get('/rekap-data/get-kecamatan-rows', [RekapDataController::class, 'getKecamatanRows'])
+        ->name('rekap-data.getKecamatanRows');
+
+    Route::get('/rekap-data/get-desa-rows', [RekapDataController::class, 'getDesaRows'])
+        ->name('rekap-data.getDesaRows');
+
     /*
     |--------------------------------------------------------------------------
     | User Management
@@ -154,6 +166,9 @@ Route::middleware('auth')->group(function () {
             Route::post('/target', [ManagementTargetController::class, 'store'])
                 ->name('management.target.store');
 
+            Route::get('/target/{target}', [ManagementTargetController::class, 'show'])
+                ->name('management.target.show');
+
             Route::put('/target/{target}', [ManagementTargetController::class, 'update'])
                 ->name('management.target.update');
 
@@ -168,6 +183,18 @@ Route::middleware('auth')->group(function () {
 
             Route::get('/realisasi', [ManagementRealisasiController::class, 'table'])
                 ->name('management.realisasi');
+
+            Route::post('/realisasi', [ManagementRealisasiController::class, 'store'])
+                ->name('management.realisasi.store');
+
+            Route::get('/realisasi/{realisasi}', [ManagementRealisasiController::class, 'show'])
+                ->name('management.realisasi.show');
+
+            Route::put('/realisasi/{realisasi}', [ManagementRealisasiController::class, 'update'])
+                ->name('management.realisasi.update');
+
+            Route::delete('/realisasi/{realisasi}', [ManagementRealisasiController::class, 'destroy'])
+                ->name('management.realisasi.destroy');
 
         });
 

@@ -29,7 +29,7 @@
 
             <img
                 src="{{ asset($commodity['icon']) }}"
-                class="h-14 w-14">
+                class="h-20 w-20">
 
         </div>
 
