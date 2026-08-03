@@ -32,7 +32,7 @@ class ManagementTargetController extends Controller
         $search = $request->search;
 
         $query->where(function ($q) use ($search) {
-            $q->whereHas('kegiatan', fn ($q2) => $q2->where('nama_kegiatan', 'like', "%{$search}%"))
+            $q->whereHas('kegiatan', fn ($q2) => $q2->where('nama_rincian_output', 'like', "%{$search}%"))
               ->orWhereHas('komoditas', fn ($q2) => $q2->where('nama', 'like', "%{$search}%"))
               ->orWhereHas('provinsi', fn ($q2) => $q2->where('nama', 'like', "%{$search}%"))
               ->orWhereHas('kabupaten', fn ($q2) => $q2->where('nama', 'like', "%{$search}%"));
@@ -64,7 +64,7 @@ class ManagementTargetController extends Controller
     return view('datamanagement.target.table', [
         'targets'      => $targets,
         'direktorats'  => Direktorat::orderBy('nama')->get(),
-        'kegiatans'    => Kegiatan::orderBy('nama_kegiatan')->get(),
+        'kegiatans'    => Kegiatan::orderBy('nama_rincian_output')->get(),
         'komoditas'    => Komoditas::orderBy('nama')->get(),
         'provinsis'    => Provinsi::orderBy('nama')->get(),
         'kabupatens'   => Kabupaten::orderBy('nama')->get(),

@@ -139,7 +139,7 @@
                     </td>
 
                     <td class="px-3 py-3">
-                        {{ $target->kegiatan?->nama_kegiatan }}
+                        {{ $target->kegiatan?->nama_rincian_output }}
                     </td>
 
                     <td class="px-3 py-3">

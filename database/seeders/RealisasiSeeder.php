@@ -33,7 +33,7 @@ class RealisasiSeeder extends Seeder
         }
 
         // In-Memory Lookup Caches
-        $kegiatanMap    = DB::table('kegiatans')->pluck('id', 'kode_kegiatan')->toArray();
+        $kegiatanMap    = DB::table('kegiatans')->pluck('id', 'kode_rincian_output')->toArray();
         $desaCache      = DB::table('desas')->pluck('id')->toArray();
         $komoditasCache = DB::table('komoditas')->pluck('id')->toArray();
         $satuanCache    = DB::table('satuans')->pluck('id')->toArray();
@@ -78,7 +78,7 @@ class RealisasiSeeder extends Seeder
             $satuanId    = in_array($rawSatuanId, $satuanCache, true) ? $rawSatuanId : $defaultSatuanId;
 
             $direktoratId = !empty($row[1]) ? (int) $row[1] : 1;
-            $kodeKegiatan = trim(preg_replace('/[^\x20-\x7E]/', '', $row[3] ?? ''));
+            $kodeKegiatan = trim(preg_replace('/[^\x20-\x7E]/', '', $row[5] ?? ''));
             $kegiatanId   = $kegiatanMap[$kodeKegiatan] ?? $defaultKegiatanId;
 
             $namaKelompok = trim(preg_replace('/[^\x20-\x7E]/', '', $row[17] ?? ''));
