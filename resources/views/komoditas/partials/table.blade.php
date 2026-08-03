@@ -105,9 +105,9 @@
 
                         <td class="text-center">
                             @php
-                                if ($provData['progress'] >= 100) {
+                                if ($provData['progress'] >= 75) {
                                     $badge = 'bg-green-100 text-green-700';
-                                } elseif ($provData['progress'] >= 80) {
+                                } elseif ($provData['progress'] >= 50) {
                                     $badge = 'bg-yellow-100 text-yellow-700';
                                 } else {
                                     $badge = 'bg-red-100 text-red-700';
@@ -144,9 +144,9 @@
 
                             <td class="text-center">
                                 @php
-                                    if ($kabData['progress'] >= 100) {
+                                    if ($kabData['progress'] >= 75) {
                                         $badgeKab = 'bg-green-100 text-green-700';
-                                    } elseif ($kabData['progress'] >= 80) {
+                                    } elseif ($kabData['progress'] >= 50) {
                                         $badgeKab = 'bg-yellow-100 text-yellow-700';
                                     } else {
                                         $badgeKab = 'bg-red-100 text-red-700';

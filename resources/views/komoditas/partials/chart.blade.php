@@ -121,6 +121,8 @@
     const targetData = @json($chartData->pluck('target'));
     const realisasiData = @json($chartData->pluck('realisasi'));
 
+    
+
     const maxValue = Math.max(
     ...targetData,
     ...realisasiData

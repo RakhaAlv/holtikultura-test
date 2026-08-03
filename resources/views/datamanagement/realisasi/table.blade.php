@@ -225,22 +225,34 @@
                     </td>
 
                     <td class="px-3 py-3">
-                        <div class="flex justify-center gap-1.5">
+            <div class="flex justify-center gap-1.5">
 
-                            <button
-                                class="btnEditRealisasi flex h-7 w-7 items-center justify-center rounded-md border border-[#16A34A] text-[#16A34A]"
-                                data-id="{{ $item->id }}">
-                                ✏️
-                            </button>
+                {{-- Edit --}}
+                <button
+                    class="btnEditRealisasi flex h-8 w-8 items-center justify-center rounded-md transition hover:scale-110"
+                    data-id="{{ $item->id }}">
 
-                            <button
-                                class="btnDeleteRealisasi flex h-7 w-7 items-center justify-center rounded-md border border-[#EF4444] text-[#EF4444]"
-                                data-id="{{ $item->id }}">
-                                🗑️
-                            </button>
+                    <img
+                        src="{{ asset('Icon-Edit-Realisasi.svg') }}"
+                        alt="Edit"
+                        class="h-5 w-5">
 
-                        </div>
-                    </td>
+                </button>
+
+                {{-- Delete --}}
+                <button
+                    class="btnDeleteRealisasi flex h-8 w-8 items-center justify-center rounded-md transition hover:scale-110"
+                    data-id="{{ $item->id }}">
+
+                    <img
+                        src="{{ asset('Icon-Trash-Realisasi.svg') }}"
+                        alt="Delete"
+                        class="h-5 w-5">
+
+                </button>
+
+            </div>
+        </td>
 
                 </tr>
 

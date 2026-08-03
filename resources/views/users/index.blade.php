@@ -37,7 +37,7 @@
     {{-- CARD 1: Header Modul --}}
     <div class="shrink-0 rounded-2xl border border-slate-100 bg-white p-5 shadow-sm flex items-center justify-between">
         <div class="flex items-center gap-3.5">
-            {{-- Icon Container Hijau HORTIKU --}}
+            {{-- Icon Container Hijau --}}
             <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#DDF6D2]">
                 <svg class="h-6 w-6" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_512_1489)">
@@ -52,7 +52,7 @@
             </div>
             <div>
                 <h1 class="text-xl font-bold text-slate-800 tracking-tight">Manajemen Pengguna</h1>
-                <p class="text-xs text-slate-500 mt-0.5">Kelola akun Super Admin, Admin Direktorat, dan User Sistem HORTIKU.</p>
+                <p class="text-xs text-slate-500 mt-0.5">Kelola akun Super Admin, Admin Direktorat, dan User Sistem.</p>
             </div>
         </div>
         <button @click="openCreate = true" class="inline-flex items-center gap-2 rounded-xl bg-[#165C27] px-5 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-[#114B1F] transition">
