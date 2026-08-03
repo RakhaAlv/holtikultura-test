@@ -124,8 +124,11 @@
 
                 <select name="status" class="h-[42px] w-full rounded-[10px] border border-[#D1D5DB] px-3 text-[14px]">
                     <option value="">Semua Status</option>
+                    <option value="Usulan CPCL" @selected(request('status') == 'Usulan CPCL')>Usulan CPCL</option>
+                    <option value="Kontrak/PKS" @selected(request('status') == 'Kontrak/PKS')>Kontrak/PKS</option>
+                    <option value="Pemberkasan Dokumen Pencairan" @selected(request('status') == 'Pemberkasan Dokumen Pencairan')>Pemberkasan Dokumen Pencairan</option>
+                    <option value="Distribusi Bantuan" @selected(request('status') == 'Distribusi Bantuan')>Distribusi Bantuan</option>
                     <option value="Bantuan Sudah Diterima" @selected(request('status') == 'Bantuan Sudah Diterima')>Bantuan Sudah Diterima</option>
-                    <option value="Bantuan Belum Diterima" @selected(request('status') == 'Bantuan Belum Diterima')>Bantuan Belum Diterima</option>
                 </select>
             </div>
 
@@ -207,8 +210,16 @@
                     </td>
 
                     <td class="px-3 py-3 text-center">
-                        <span class="inline-flex rounded-md px-2 py-1 text-[10px] font-semibold
-                            {{ $item->status === 'Bantuan Sudah Diterima' ? 'bg-[#EAF8EC] text-[#15803D]' : 'bg-[#FEF2F2] text-[#DC2626]' }}">
+                        @php
+                            $statusBadge = match($item->status) {
+                                'Bantuan Sudah Diterima' => 'bg-[#EAF8EC] text-[#15803D]',
+                                'Distribusi Bantuan' => 'bg-[#E0F2FE] text-[#0369A1]',
+                                'Pemberkasan Dokumen Pencairan' => 'bg-[#FEF3C7] text-[#92400E]',
+                                'Kontrak/PKS' => 'bg-[#EDE9FE] text-[#5B21B6]',
+                                default => 'bg-[#F3F4F6] text-[#4B5563]', // Usulan CPCL
+                            };
+                        @endphp
+                        <span class="inline-flex rounded-md px-2 py-1 text-[10px] font-semibold {{ $statusBadge }}">
                             {{ $item->status }}
                         </span>
                     </td>
