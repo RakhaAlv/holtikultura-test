@@ -30,15 +30,17 @@
     name="komoditas"
     class="h-11 w-[200px] rounded-xl border border-gray-200 px-4">
 
-    <option value="" selected>
-        Pilih Komoditas
-    </option>
+@php
+    $defaultKomoditas = $komoditas->firstWhere('nama', 'Bawang Merah')->id;
+@endphp
 
-    @foreach($komoditas as $item)
-        <option value="{{ $item->id }}">
-            {{ $item->nama }}
-        </option>
-    @endforeach
+@foreach($komoditas as $item)
+    <option
+        value="{{ $item->id }}"
+        {{ $item->id == $defaultKomoditas ? 'selected' : '' }}>
+        {{ $item->nama }}
+    </option>
+@endforeach
 
 </select>
 
@@ -133,12 +135,13 @@ window.addEventListener('load', async function () {
     });
 
     // ==========================
-    // Initial Map (Kosong)
+    // Chart Awal
     // ==========================
     chart.setOption({
 
         tooltip: {
             trigger: 'item',
+
             formatter: function (params) {
 
                 const value = Array.isArray(params.value)
@@ -146,7 +149,6 @@ window.addEventListener('load', async function () {
                     : params.value;
 
                 if (
-                    document.getElementById('komoditasFilter').value === '' ||
                     value === undefined ||
                     value === null ||
                     value === '-' ||
@@ -161,9 +163,9 @@ window.addEventListener('load', async function () {
                 return `
                     <b>${params.name}</b><br>
                     Progress :
-                    <b>${Number(value).toLocaleString('id-ID',{
-                        minimumFractionDigits:0,
-                        maximumFractionDigits:2
+                    <b>${Number(value).toLocaleString('id-ID', {
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 2
                     })}%</b>
                 `;
             }
@@ -184,102 +186,106 @@ window.addEventListener('load', async function () {
             }
         },
 
-        series: [
-            {
-                type: 'map',
-                map: 'Indonesia',
+        series: [{
+            type: 'map',
+            map: 'Indonesia',
 
-                roam: false,
+            roam: false,
 
-                zoom: 1.20,
+            zoom: 1.20,
 
-                scaleLimit: {
-                    min: 1.20,
-                    max: 1.20
+            scaleLimit: {
+                min: 1.20,
+                max: 1.20
+            },
+
+            selectedMode: false,
+
+            emphasis: {
+                label: {
+                    show: false
                 },
-
-                selectedMode: false,
-
-                emphasis: {
-                    label: {
-                        show: false
-                    },
-                    itemStyle: {
-                        areaColor: '#16B33A'
-                    }
-                },
-
-                // warna default saat belum pilih komoditas
                 itemStyle: {
-                    areaColor: '#D1D5DB',
-                    borderColor: '#FFFFFF'
-                },
+                    areaColor: '#16B33A'
+                }
+            },
 
-                data: []
-            }
-        ]
+            itemStyle: {
+                areaColor: '#D1D5DB',
+                borderColor: '#FFFFFF'
+            },
 
+            data: []
+        }]
     });
 
-    // ==========================
-    // Resize
-    // ==========================
     window.addEventListener('resize', () => {
         chart.resize();
     });
 
     // ==========================
-    // Filter Komoditas
+    // Dropdown
     // ==========================
     const komoditasFilter = document.getElementById('komoditasFilter');
 
-    komoditasFilter.addEventListener('change', async function () {
+    async function loadMapData() {
 
-        const komoditas = this.value;
+        const komoditas = komoditasFilter.value;
+        const tahun = document.querySelector('input[name="tahun"]').value;
 
-        // kalau pilih "Pilih Komoditas"
-        if (komoditas === '') {
+        try {
+
+            const response = await fetch(
+                `/dashboard/map-data?komoditas=${komoditas}&tahun=${tahun}`
+            );
+
+            const data = await response.json();
 
             chart.setOption({
                 series: [{
                     type: 'map',
                     map: 'Indonesia',
 
+                    roam: false,
+
+                    zoom: 1.20,
+
+                    scaleLimit: {
+                        min: 1.20,
+                        max: 1.20
+                    },
+
+                    selectedMode: false,
+
+                    emphasis: {
+                        label: {
+                            show: false
+                        },
+                        itemStyle: {
+                            areaColor: '#16B33A'
+                        }
+                    },
+
                     itemStyle: {
-                        areaColor: '#D1D5DB',
                         borderColor: '#FFFFFF'
                     },
 
-                    data: []
+                    data: data
                 }]
             });
 
-            return;
+        } catch (error) {
+            console.error(error);
         }
+    }
 
-        const tahun =
-            document.querySelector('input[name="tahun"]').value;
+    // Saat dropdown berubah
+    komoditasFilter.addEventListener('change', loadMapData);
 
-        const response = await fetch(
-            `/dashboard/map-data?komoditas=${komoditas}&tahun=${tahun}`
-        );
-
-        const data = await response.json();
-
-        chart.setOption({
-            series: [{
-                type: 'map',
-                map: 'Indonesia',
-
-                itemStyle: {
-                    borderColor: '#FFFFFF'
-                },
-
-                data: data
-            }]
-        });
-
-    });
+    // ==========================
+    // LOAD PERTAMA KALI
+    // ==========================
+    await loadMapData();
 
 });
 </script>
