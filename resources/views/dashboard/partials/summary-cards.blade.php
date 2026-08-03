@@ -2,9 +2,9 @@
     $count = count($summary);
 @endphp
 
-    {{-- Days 9 Progress --}}
-    <div
-        class="grid grid-cols-1 gap-6 md:grid-cols-2
+{{-- Cards --}}
+<div
+    class="grid grid-cols-1 gap-6 md:grid-cols-2
     @if($count == 1)
         xl:grid-cols-1
     @elseif($count == 2)
@@ -14,9 +14,21 @@
     @else
         xl:grid-cols-4
     @endif
-    ">
+">
 
-    @foreach($summary as $commodity)
+@foreach($summary as $commodity)
+
+    @php
+        $progress = $commodity['progress'];
+
+        if ($progress < 50) {
+            $progressColor = 'bg-red-500';
+        } elseif ($progress < 75) {
+            $progressColor = 'bg-yellow-400';
+        } else {
+            $progressColor = 'bg-green-500';
+        }
+    @endphp
 
     <div class="dashboard-card">
 
@@ -62,14 +74,14 @@
         {{-- Progress --}}
         <div class="mt-6">
 
-            <div class="flex justify-between mb-2">
+            <div class="mb-2 flex justify-between">
 
                 <span class="dashboard-card-label">
                     Progress
                 </span>
 
                 <span class="font-semibold">
-                    {{ $commodity['progress'] }}%
+                    {{ $progress }}%
                 </span>
 
             </div>
@@ -77,8 +89,8 @@
             <div class="dashboard-progress">
 
                 <div
-                    class="dashboard-progress-fill"
-                    style="width: {{ min($commodity['progress'],100) }}%">
+                    class="dashboard-progress-fill {{ $progressColor }}"
+                    style="width: {{ min($progress, 100) }}%">
                 </div>
 
             </div>
@@ -87,7 +99,6 @@
 
     </div>
 
-    @endforeach
+@endforeach
 
 </div>
-
