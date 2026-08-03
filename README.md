@@ -1,6 +1,6 @@
-<div align="center">
+### <div align="center">
 
-<img src="https://hortikultura.pertanian.go.id/wp-content/uploads/2023/09/logo-horti-copy.png">
+### //<img src="https://hortikultura.pertanian.go.id/wp-content/uploads/2023/09/logo-horti-copy.png">//
 
 # Sistem Informasi Pemantauan Komoditas Direktorat Jenderal Hortikultura
 
