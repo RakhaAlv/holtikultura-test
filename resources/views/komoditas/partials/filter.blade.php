@@ -18,7 +18,7 @@
     </div>
 
     {{-- Filter --}}
-    <div class="grid grid-cols-1 gap-5 lg:grid-cols-3">
+    <form id="formFilterKomoditas" class="grid grid-cols-1 gap-5 lg:grid-cols-4">
 
         {{-- Provinsi --}}
         <div>
@@ -28,9 +28,17 @@
             </label>
 
             <select
+                id="provinsiSelectKomoditas"
+                name="provinsi"
                 class="h-[44px] w-full rounded-[10px] border-2 border-[#2D2D2D] bg-white px-4 text-[15px] outline-none">
 
-                <option>Semua Provinsi</option>
+                <option value="">Semua Provinsi</option>
+
+                @foreach($provinsis as $item)
+                    <option value="{{ $item->id }}" @selected($provinsiId == $item->id)>
+                        {{ $item->nama }}
+                    </option>
+                @endforeach
 
             </select>
 
@@ -44,9 +52,17 @@
             </label>
 
             <select
+                id="kabupatenSelectKomoditas"
+                name="kabupaten"
                 class="h-[44px] w-full rounded-[10px] border-2 border-[#2D2D2D] bg-white px-4 text-[15px] outline-none">
 
-                <option>Semua Kabupaten/Kota</option>
+                <option value="">Semua Kabupaten/Kota</option>
+
+                @foreach($kabupatens as $item)
+                    <option value="{{ $item->id }}" @selected($kabupatenId == $item->id)>
+                        {{ $item->nama }}
+                    </option>
+                @endforeach
 
             </select>
 
@@ -60,14 +76,105 @@
             </label>
 
             <select
+                id="kecamatanSelectKomoditas"
+                name="kecamatan"
                 class="h-[44px] w-full rounded-[10px] border-2 border-[#2D2D2D] bg-white px-4 text-[15px] outline-none">
 
-                <option>Semua Kecamatan</option>
+                <option value="">Semua Kecamatan</option>
+
+                @foreach($kecamatans as $item)
+                    <option value="{{ $item->id }}" @selected($kecamatanId == $item->id)>
+                        {{ $item->nama }}
+                    </option>
+                @endforeach
 
             </select>
 
         </div>
 
-    </div>
+        {{-- Tombol --}}
+        <div>
+
+            <label class="mb-2 block opacity-0">Action</label>
+
+            <div class="flex h-[44px] gap-2">
+
+                <a
+                    href="{{ route('komoditas.show', $komoditas) }}"
+                    class="flex flex-1 items-center justify-center rounded-[10px] border-2 border-[#2D2D2D] bg-white text-[15px] font-semibold text-[#222] transition hover:bg-gray-100">
+                    Reset
+                </a>
+
+                <button
+                    type="submit"
+                    class="flex flex-1 items-center justify-center rounded-[10px] bg-[#15803D] text-[15px] font-semibold text-white transition hover:bg-[#166534]">
+                    Filter
+                </button>
+
+            </div>
+
+        </div>
+
+    </form>
 
 </div>
+
+@push('scripts')
+<script>
+
+// ===============================
+// CASCADING: Provinsi -> Kabupaten -> Kecamatan
+// (Reset dropdown di bawahnya saat dropdown atasnya berubah, lalu submit manual via tombol Filter)
+// ===============================
+
+document.addEventListener('change', function(e){
+
+    if(e.target.id === 'provinsiSelectKomoditas'){
+
+        const kabupaten = document.getElementById('kabupatenSelectKomoditas');
+        const kecamatan = document.getElementById('kecamatanSelectKomoditas');
+
+        kecamatan.innerHTML = `<option value="">Semua Kecamatan</option>`;
+
+        if(!e.target.value){
+            kabupaten.innerHTML = `<option value="">Semua Kabupaten/Kota</option>`;
+            return;
+        }
+
+        kabupaten.innerHTML = `<option value="">Memuat...</option>`;
+
+        fetch("{{ route('dashboard.getKabupaten') }}?provinsi=" + e.target.value)
+            .then(response => response.json())
+            .then(data => {
+                let html = `<option value="">Semua Kabupaten/Kota</option>`;
+                data.forEach(item => html += `<option value="${item.id}">${item.nama}</option>`);
+                kabupaten.innerHTML = html;
+            });
+
+    }
+
+    if(e.target.id === 'kabupatenSelectKomoditas'){
+
+        const kecamatan = document.getElementById('kecamatanSelectKomoditas');
+
+        if(!e.target.value){
+            kecamatan.innerHTML = `<option value="">Semua Kecamatan</option>`;
+            return;
+        }
+
+        kecamatan.innerHTML = `<option value="">Memuat...</option>`;
+
+        fetch("{{ route('dashboard.getKecamatan') }}?kabupaten=" + e.target.value)
+            .then(response => response.json())
+            .then(data => {
+                let html = `<option value="">Semua Kecamatan</option>`;
+                data.forEach(item => html += `<option value="${item.id}">${item.nama}</option>`);
+                kecamatan.innerHTML = html;
+            });
+
+    }
+
+});
+
+</script>
+@endpush
