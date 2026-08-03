@@ -142,7 +142,7 @@ class ManagementRealisasiController extends Controller
             'satuan_id'      => 'required',
             'jumlah_output'  => 'required|numeric',
             'anggaran'       => 'nullable|numeric',
-            'status'         => 'required|in:Bantuan Sudah Diterima,Bantuan Belum Diterima',
+            'status'         => 'required|in:Usulan CPCL,Kontrak/PKS,Pemberkasan Dokumen Pencairan,Distribusi Bantuan,Bantuan Sudah Diterima',
         ]);
 
         return $request->only([
