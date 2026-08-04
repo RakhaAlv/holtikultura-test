@@ -85,7 +85,7 @@
 
                         @foreach($kegiatans as $kegiatan)
                             <option value="{{ $kegiatan->id }}">
-                                {{ $kegiatan->nama_kegiatan }}
+                                {{ $kegiatan->nama_rincian_output }}
                             </option>
                         @endforeach
 

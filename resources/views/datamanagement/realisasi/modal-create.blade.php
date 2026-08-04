@@ -54,7 +54,7 @@
                     <select id="kegiatanFieldR" name="kegiatan_id" class="w-full rounded-lg border p-3" required>
                         <option value="">Pilih Kegiatan</option>
                         @foreach($kegiatans as $kegiatan)
-                            <option value="{{ $kegiatan->id }}">{{ $kegiatan->nama_kegiatan }}</option>
+                            <option value="{{ $kegiatan->id }}">{{ $kegiatan->nama_rincian_output }}</option>
                         @endforeach
                     </select>
                 </div>
