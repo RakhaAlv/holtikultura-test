@@ -140,8 +140,8 @@ class ManagementRealisasiController extends Controller
             'kecamatan_id'   => 'required',
             'desa_id'        => 'required',
             'satuan_id'      => 'required',
-            'jumlah_output'  => 'required|numeric',
-            'anggaran'       => 'nullable|numeric',
+            'jumlah_output'  => 'required|numeric|min:0',
+            'anggaran'       => 'nullable|numeric|min:0',
             'status'         => 'required|in:Usulan CPCL,Kontrak/PKS,Pemberkasan Dokumen Pencairan,Distribusi Bantuan,Bantuan Sudah Diterima',
         ]);
 

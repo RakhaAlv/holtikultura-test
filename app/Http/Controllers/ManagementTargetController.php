@@ -83,7 +83,7 @@ class ManagementTargetController extends Controller
         'provinsi_id'   => 'required',
         'kabupaten_id'  => 'required',
         'satuan_id'     => 'required',
-        'target'        => 'required|numeric',
+        'target'        => 'required|numeric|min:0',
     ]);
 
     // Khusus Super Admin wajib memilih direktorat
@@ -139,7 +139,7 @@ public function update(Request $request, Target $target)
         'provinsi_id'   => 'required',
         'kabupaten_id'  => 'required',
         'satuan_id'     => 'required',
-        'target'        => 'required|numeric',
+        'target'        => 'required|numeric|min:0',
     ]);
 
     // Khusus Super Admin wajib memilih direktorat
