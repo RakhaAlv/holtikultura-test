@@ -3,7 +3,7 @@
     $currentSlug = is_object($currentKomoditas) ? $currentKomoditas->getRouteKey() : $currentKomoditas;
 @endphp
 <aside
-    x-data="{ openProfile: false, openKomoditas: true }"
+    x-data="{ openProfile: false, openKomoditas: true, showLogoutModal: false }"
     :class="sidebarMini ? 'w-[90px]' : 'w-[280px]'"
     class="relative flex h-screen flex-col overflow-hidden bg-[#165C27] text-white transition-all duration-300 ease-in-out">
 
@@ -309,80 +309,27 @@
 <!-- Spacer -->
 
 <div class="flex-1"></div>
+<!-- ================= PROFILE ================= -->
+<div class="relative mt-auto border-t border-green-700">
 
-<!-- Profile -->
-
-<div class="relative border-t border-green-700">
-
-    <button
-        @click="!sidebarMini && (openProfile = !openProfile)"
-        class="flex w-full transition-all duration-300 hover:bg-green-800"
-        :class="sidebarMini
-            ? 'justify-center items-center py-5'
-            : 'items-center justify-between px-5 py-4'">
-
-        <!-- Left -->
-        <div
-            class="flex items-center"
-            :class="sidebarMini ? 'justify-center' : 'gap-4'">
-
-            <img
-                src="{{ asset('Icon-User.svg') }}"
-                class="h-10 w-10 shrink-0">
-
-            <span
-                x-show="!sidebarMini"
-                x-transition.opacity.duration.200ms
-                class="text-base font-medium whitespace-nowrap">
-
-                {{ auth()->user()->name }}
-
-            </span>
-
-        </div>
-
-        <!-- Arrow -->
-
-        <svg
-            x-show="!sidebarMini"
-            x-transition.opacity
-            class="h-5 w-5 transition duration-300"
-            :class="{ 'rotate-180': openProfile }"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24">
-
-            <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M19 9l-7 7-7-7"/>
-
-        </svg>
-
-    </button>
-
-    <!-- Dropdown -->
-
+    <!-- Floating Logout -->
     <div
         x-show="!sidebarMini && openProfile"
-        x-transition:enter="transition ease-out duration-300"
-        x-transition:enter-start="opacity-0 -translate-y-2"
-        x-transition:enter-end="opacity-100 translate-y-0"
-        x-transition:leave="transition ease-in duration-200"
-        x-transition:leave-start="opacity-100 translate-y-0"
-        x-transition:leave-end="opacity-0 -translate-y-2"
-        class="mx-4 mb-4 rounded-xl bg-[#0B4118] shadow-lg">
+        x-transition:enter="transition ease-out duration-200"
+        x-transition:enter-start="opacity-0 translate-y-2 scale-95"
+        x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+        x-transition:leave="transition ease-in duration-150"
+        x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+        x-transition:leave-end="opacity-0 translate-y-2 scale-95"
+        @click.away="openProfile = false"
+        class="absolute bottom-full right-5 mb-3 w-[170px] rounded-2xl bg-[#0B4118] shadow-2xl z-50 overflow-hidden">
 
-        <form
-            method="POST"
-            action="{{ route('logout') }}">
-
+        <form method="POST" action="{{ route('logout') }}">
             @csrf
 
             <button
                 type="submit"
-                class="flex w-full items-center gap-3 rounded-xl px-4 py-3 transition hover:bg-green-800">
+                class="flex w-full items-center gap-3 px-5 py-4 transition hover:bg-green-800">
 
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -399,7 +346,9 @@
 
                 </svg>
 
-                Logout
+                <span class="font-medium">
+                    Logout
+                </span>
 
             </button>
 
@@ -407,7 +356,54 @@
 
     </div>
 
-</div>
+    <!-- Profile Button -->
+    <button
+        @click="!sidebarMini && (openProfile = !openProfile)"
+        class="flex w-full transition-all duration-300 hover:bg-green-800"
+        :class="sidebarMini
+            ? 'justify-center items-center py-5'
+            : 'items-center justify-between px-5 py-4'">
+
+        <!-- Left -->
+        <div
+            class="flex items-center"
+            :class="sidebarMini ? 'justify-center' : 'gap-4'">
+
+            <img
+                src="{{ asset('Icon-User.svg') }}"
+                class="h-10 w-10 shrink-0"
+                alt="User">
+
+            <span
+                x-show="!sidebarMini"
+                x-transition.opacity.duration.200ms
+                class="text-base font-medium whitespace-nowrap">
+
+                {{ auth()->user()->name }}
+
+            </span>
+
+        </div>
+
+        <!-- Arrow -->
+        <svg
+            x-show="!sidebarMini"
+            x-transition.opacity
+            class="h-5 w-5 transition-transform duration-300"
+            :class="{ 'rotate-180': openProfile }"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24">
+
+            <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M19 9l-7 7-7-7"/>
+
+        </svg>
+
+    </button>
 
 </div>
 
