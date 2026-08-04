@@ -23,13 +23,26 @@
         </button>
 
         <!-- Page Title -->
-        <h1 class="text-3xl font-semibold text-[#1F2937]">
-            @if(request()->routeIs('users.*'))
-                User Management
-            @else
-                @yield('navbar-title', 'Dashboard Utama')
-            @endif
-        </h1>
+            <div class="flex flex-col">
+
+                <h1 class="text-3xl font-semibold leading-tight text-[#1F2937]">
+                    @if(request()->routeIs('users.*'))
+                        User Management
+                    @else
+                        @yield('navbar-title', 'Dashboard Utama')
+                    @endif
+                </h1>
+
+            @if(request()->routeIs('dashboard'))
+                <span class="mt-1 text-[12px] font-medium text-[#6B7280]">
+                    Last updated data:
+                <span class="font-semibold text-[#16B33A]">
+                    {{ $lastUpdatedData }}
+                </span>
+        </span>
+    @endif
+
+    </div>
 
     </div>
 
@@ -107,75 +120,7 @@
 
             </div>
 
-            <!-- ========================= -->
-            <!-- Status -->
-            <!-- ========================= -->
 
-            <div class="relative">
-
-                <button
-                    @click="openStatus = !openStatus"
-                    type="button"
-                    class="flex h-11 min-w-[230px] items-center justify-between rounded-xl border border-gray-300 bg-white px-4 shadow-sm transition hover:border-green-600">
-
-
-                    <div class="flex items-center gap-2">
-
-                        <img
-                            src="{{ asset('Icon-Stats-Navbar.svg') }}"
-                            class="h-4 w-4"
-                            alt="Status">
-
-                        <span class="text-sm font-medium text-gray-700">
-                        Status
-                        </span>
-
-                    </div>
-
-                    <svg
-                        class="h-4 w-4 text-gray-600 transition duration-200"
-                        :class="{ 'rotate-180': openStatus }"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        viewBox="0 0 24 24">
-
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M19 9l-7 7-7-7"/>
-
-                    </svg>
-
-                </button>
-
-                <!-- Dropdown Status -->
-                <div
-                    x-show="openStatus"
-                    @click.outside="openStatus = false"
-                    x-cloak
-                    x-transition
-                    class="absolute right-0 z-50 mt-2 w-full overflow-hidden rounded-xl border border-gray-100 bg-white shadow-xl">
-
-                    <a
-                        href="#"
-                        class="block px-4 py-2.5 text-sm text-gray-700 transition hover:bg-gray-100">
-
-                        Bantuan Sudah Diterima
-
-                    </a>
-
-                    <a
-                        href="#"
-                        class="block px-4 py-2.5 text-sm text-gray-700 transition hover:bg-gray-100">
-
-                        Bantuan Dalam Proses
-
-                    </a>
-
-                </div>
-
-            </div>
 
             <!-- ========================= -->
             <!-- Update Data -->

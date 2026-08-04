@@ -92,6 +92,7 @@ class DashboardController extends Controller
                     'Durian',
                 ]);
             })
+            ->where('status', 'Bantuan Sudah Diterima')
             ->with('komoditas')
             ->groupBy('komoditas_id')
             ->get()
@@ -142,14 +143,13 @@ class DashboardController extends Controller
             )
             ->where('tahun', $tahun)
 
-            
-
             ->when($provinsiId, function ($q) use ($provinsiId) {
                 $q->where('provinsi_id', $provinsiId);
             })
             ->when($kabupatenId, function ($q) use ($kabupatenId) {
                 $q->where('kabupaten_id', $kabupatenId);
             })
+            ->where('status', 'Bantuan Sudah Diterima')
             ->with('komoditas')
             ->groupBy('komoditas_id')
             ->get();
@@ -377,9 +377,6 @@ class DashboardController extends Controller
         DB::raw('SUM(target) as total_target')
     )
         ->where('tahun', $tahun)
-
-        
-
         ->when($provinsiId, function ($q) use ($provinsiId) {
             $q->where('provinsi_id', $provinsiId);
         })
@@ -397,6 +394,7 @@ class DashboardController extends Controller
             ->when($provinsiId, function ($q) use ($provinsiId) {
                 $q->where('provinsi_id', $provinsiId);
             })
+            ->where('status', 'Bantuan Sudah Diterima')
             
             ->groupBy('provinsi_id')
             ->get()
