@@ -16,52 +16,80 @@
 
     </div>
 
-    <button
-        id="btnTambahTarget"
-        type="button"
-        class="flex h-[52px] items-center justify-center gap-3 rounded-xl bg-[#15803D] px-6 text-[15px] font-semibold text-white transition hover:bg-[#166534]">
+    <div class="flex gap-3">
 
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="2">
+        <button
+            id="btnExportExcel"
+            type="button"
+            class="flex h-[52px] items-center justify-center gap-3 rounded-xl border-2 border-[#15803D] px-6 text-[15px] font-semibold text-[#15803D] transition hover:bg-[#F0FFF4]">
 
-            <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M12 4v16m8-8H4" />
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2">
 
-        </svg>
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3" />
 
-        Tambah Target
+            </svg>
 
-    </button>
+            Export Excel
 
-    <button
-        id="btnTambahRealisasi"
-        type="button"
-        class="hidden h-[52px] items-center justify-center gap-3 rounded-xl bg-[#15803D] px-6 text-[15px] font-semibold text-white transition hover:bg-[#166534]">
+        </button>
 
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="2">
+        <button
+            id="btnTambahTarget"
+            type="button"
+            class="flex h-[52px] items-center justify-center gap-3 rounded-xl bg-[#15803D] px-6 text-[15px] font-semibold text-white transition hover:bg-[#166534]">
 
-            <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M12 4v16m8-8H4" />
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2">
 
-        </svg>
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M12 4v16m8-8H4" />
 
-        Tambah Realisasi
+            </svg>
 
-    </button>
+            Tambah Target
+
+        </button>
+
+        <button
+            id="btnTambahRealisasi"
+            type="button"
+            class="hidden h-[52px] items-center justify-center gap-3 rounded-xl bg-[#15803D] px-6 text-[15px] font-semibold text-white transition hover:bg-[#166534]">
+
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2">
+
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M12 4v16m8-8H4" />
+
+            </svg>
+
+            Tambah Realisasi
+
+        </button>
+
+    </div>
 
 </div>

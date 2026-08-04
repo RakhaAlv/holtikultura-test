@@ -31,7 +31,8 @@
     class="h-11 w-[200px] rounded-xl border border-gray-200 px-4">
 
 @php
-    $defaultKomoditas = $komoditas->firstWhere('nama', 'Bawang Merah')->id;
+    $defaultKomoditas = $komoditas->firstWhere('nama', 'Bawang Merah')?->id
+        ?? $komoditas->first()?->id;
 @endphp
 
 @foreach($komoditas as $item)

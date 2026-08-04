@@ -11,6 +11,7 @@ use App\Http\Controllers\KomoditasController;
 use App\Http\Controllers\ManagementController;
 use App\Http\Controllers\ManagementTargetController;
 use App\Http\Controllers\ManagementRealisasiController;
+use App\Http\Controllers\ManagementExportController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -195,6 +196,9 @@ Route::middleware('auth')->group(function () {
 
             Route::delete('/realisasi/{realisasi}', [ManagementRealisasiController::class, 'destroy'])
                 ->name('management.realisasi.destroy');
+
+            Route::get('/export', [ManagementExportController::class, 'export'])
+                ->name('management.export');
 
         });
 
