@@ -120,6 +120,32 @@ function toggleTambahButton(active){
 
 
 // ===============================
+// EXPORT EXCEL (ikut filter yang sedang aktif)
+// ===============================
+
+document.addEventListener('click', function(e){
+
+    if(!e.target.closest('#btnExportExcel')) return;
+
+    // Ambil filter dari form yang sedang aktif (Target atau Realisasi)
+    const activeForm =
+        document.getElementById('formFilterTarget') ||
+        document.getElementById('formFilterRealisasi');
+
+    let params = '';
+
+    if(activeForm){
+        params = new URLSearchParams(new FormData(activeForm)).toString();
+    }
+
+    const url = "{{ route('management.export') }}" + (params ? '?' + params : '');
+
+    window.location.href = url;
+
+});
+
+
+// ===============================
 // FILTER TARGET (AJAX, submit & reset)
 // ===============================
 
@@ -241,6 +267,9 @@ function resetFormRealisasi(){
 
 // ===============================
 // CASCADING WILAYAH (modal Realisasi)
+// Asumsi endpoint tersedia: /dashboard/get-kabupaten?provinsi=
+// dan endpoint serupa untuk kecamatan & desa.
+// Sesuaikan URL berikut jika nama route Anda berbeda.
 // ===============================
 
 document.addEventListener('change', function(e){
