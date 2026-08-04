@@ -28,7 +28,8 @@ class Realisasi extends Model
             'desa_id'       => 'integer',
         ];
     }
-
+    
+    
     protected static function booted(): void
     {
         // Proteksi RBAC Isolation (Aman untuk CLI / Background Jobs)
