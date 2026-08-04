@@ -39,9 +39,9 @@
 
         <!-- Ilustrasi -->
             <img
-                src="{{ asset('ilustrasi-petani-login.png') }}"
+                src="{{ asset('Background-Login-Page-V2.png') }}"
                 alt="Ilustrasi Login Page"
-                class="absolute bottom-0 -right-23 w-[1000px] max-w-none opacity-80">
+                class="absolute bottom-0 -right-23 w-[850px] max-w-none opacity-80">
 
         </div>
 
