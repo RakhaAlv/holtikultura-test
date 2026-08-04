@@ -25,7 +25,7 @@ return new class extends Migration
             $table->year('tahun');
             
             $table->decimal('jumlah_output', 15, 2)->default(0);
-            $table->decimal('anggaran', 15, 2)->default(0);
+            $table->decimal('anggaran', 15, 2)->nullable();
 
             $table->enum('status', [
                 'Usulan CPCL',
