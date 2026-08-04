@@ -162,31 +162,63 @@ const maxAxis = interval * splitNumber;
             containLabel:true
         },
 
-        tooltip: {
+tooltip: {
     trigger: 'axis',
     axisPointer: {
         type: 'shadow'
     },
-formatter: function (params) {
 
-    let html = `<b>${params[0].axisValue}</b><br><br>`;
+    formatter: function (params) {
 
-    params.forEach(item => {
+        const target = Number(params[0].value);
+        const realisasi = Number(params[1].value);
 
-        const nilai = Number(item.value).toLocaleString('id-ID');
+        const progress = target > 0
+            ? (realisasi / target) * 100
+            : 0;
+
+        let progressColor = "#16B33A";
+
+        if (progress < 50) {
+            progressColor = "#EF4444"; // merah
+        } else if (progress < 75) {
+            progressColor = "#FACC15"; // kuning
+        }
+
+        let html = `<b>${params[0].axisValue}</b><br><br>`;
 
         html += `
-            ${item.marker}
-            ${item.seriesName} :
-            <b>${nilai}${tampilSatuan ? ' ' + satuan : ''}</b><br>
+            ${params[0].marker}
+            Target :
+            <b>${target.toLocaleString('id-ID')}
+            ${tampilSatuan ? ' ' + satuan : ''}</b><br>
         `;
 
-    });
+        html += `
+            ${params[1].marker}
+            Realisasi :
+            <b>${realisasi.toLocaleString('id-ID')}
+            ${tampilSatuan ? ' ' + satuan : ''}</b><br>
+        `;
 
-    return html;
-}
+        html += `
+            <span style="
+                display:inline-block;
+                width:10px;
+                height:10px;
+                border-radius:50%;
+                background:${progressColor};
+                margin-right:6px;">
+            </span>
+            Pencapaian :
+            <b style="color:${progressColor}">
+                ${Math.round(progress)}%
+            </b>
+        `;
+
+        return html;
+    }
 },
-
         legend:{
             show: false,
             bottom: 10,

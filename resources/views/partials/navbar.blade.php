@@ -23,13 +23,26 @@
         </button>
 
         <!-- Page Title -->
-        <h1 class="text-3xl font-semibold text-[#1F2937]">
-            @if(request()->routeIs('users.*'))
-                User Management
-            @else
-                @yield('navbar-title', 'Dashboard Utama')
-            @endif
-        </h1>
+            <div class="flex flex-col">
+
+                <h1 class="text-3xl font-semibold leading-tight text-[#1F2937]">
+                    @if(request()->routeIs('users.*'))
+                        User Management
+                    @else
+                        @yield('navbar-title', 'Dashboard Utama')
+                    @endif
+                </h1>
+
+            @if(request()->routeIs('dashboard'))
+                <span class="mt-1 text-[12px] font-medium text-[#6B7280]">
+                    Last updated data:
+                <span class="font-semibold text-[#16B33A]">
+                    04 Agustus 2026 • 08:30 WIB
+                </span>
+        </span>
+    @endif
+
+    </div>
 
     </div>
 
