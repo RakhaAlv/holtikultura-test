@@ -17,14 +17,12 @@ class TargetSeeder extends Seeder
         DB::table('targets')->truncate();
         Schema::enableForeignKeyConstraints();
 
-        // 1. Path Tunggal (Single Source of Truth)
         $path = database_path('data/target.csv');
         if (!file_exists($path)) {
             throw new RuntimeException("File data target tidak ditemukan pada path: {$path}");
         }
 
-        // In-Memory Lookup Caches (Mencegah N+1 Kueri)
-        $kegiatanMap    = DB::table('kegiatans')->pluck('id', 'kode_kegiatan')->toArray();
+        $kegiatanMap    = DB::table('kegiatans')->pluck('id', 'kode_rincian_output')->toArray();
         $provinsiCache  = DB::table('provinsis')->pluck('id')->toArray();
         $kabupatenCache = DB::table('kabupatens')->pluck('id')->toArray();
         $komoditasCache = DB::table('komoditas')->pluck('id')->toArray();
@@ -57,7 +55,7 @@ class TargetSeeder extends Seeder
             $targetVal = $this->sanitizeDecimal($row[16] ?? '0');
 
             $direktoratId   = !empty($row[1]) ? (int) $row[1] : 1;
-            $kodeKegiatan   = trim(preg_replace('/[^\x20-\x7E]/', '', $row[3] ?? ''));
+            $kodeKegiatan   = trim(preg_replace('/[^\x20-\x7E]/', '', $row[5] ?? ''));
             $kegiatanId     = $kegiatanMap[$kodeKegiatan] ?? $defaultKegiatanId;
 
             $rawKomoditasId = !empty($row[8]) ? (int) $row[8] : 0;

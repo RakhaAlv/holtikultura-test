@@ -27,19 +27,16 @@
 
 <script>
 
-//ECharts otomatis menyesuaikan ukurannya
-
+// ECharts otomatis menyesuaikan ukurannya
 window.addEventListener("load", function () {
 
     const chartDom = document.getElementById('commodityChart');
-
     const chart = echarts.init(chartDom);
 
     const observer = new ResizeObserver(() => {
-    chart.resize();
+        chart.resize();
     });
 
-    // observe parent container chart
     observer.observe(chartDom.parentElement);
 
     const option = {
@@ -58,45 +55,68 @@ window.addEventListener("load", function () {
 
             trigger:'axis',
 
-                axisPointer:{
-            type:'shadow'
+            axisPointer:{
+                type:'shadow'
+            },
+
+            formatter:function(params){
+
+                const target = Number(params[0].value);
+                const realisasi = Number(params[1].value);
+
+                const progress = target > 0
+                    ? (realisasi / target) * 100
+                    : 0;
+
+                let progressColor = "#16B33A";
+
+                if(progress < 50){
+                    progressColor = "#EF4444"; // merah
+                }else if(progress < 75){
+                    progressColor = "#FACC15"; // kuning
+                }
+
+                let html = `<b>${params[0].name}</b><br><br>`;
+
+                html += `
+                    ${params[0].marker}
+                    Target :
+                    <b>${target.toLocaleString('id-ID')} Ha</b><br>
+                `;
+
+                html += `
+                    ${params[1].marker}
+                    Realisasi :
+                    <b>${realisasi.toLocaleString('id-ID')} Ha</b><br>
+                `;
+
+                html += `
+                    <span style="
+                        display:inline-block;
+                        width:10px;
+                        height:10px;
+                        border-radius:50%;
+                        background:${progressColor};
+                        margin-right:6px;">
+                    </span>
+                    Pencapaian :
+                    <b style="color:${progressColor}">
+                        ${Math.round(progress)}%
+                    </b>
+                `;
+
+                return html;
+            },
+
+            backgroundColor:'#fff',
+            borderColor:'#E5E7EB',
+            borderWidth:1,
+
+            textStyle:{
+                color:'#222'
+            }
+
         },
-
-        formatter:function(params){
-
-        let html = params[0].name + "<br>";
-
-        params.forEach(item=>{
-
-            html +=
-                item.marker +
-                " " +
-                item.seriesName +
-                ": <b>" +
-                Number(item.value).toLocaleString('id-ID', {
-                maximumFractionDigits: 0
-                }) +
-                " Ha</b><br>";
-
-        });
-
-        return html;
-
-    },
-
-    backgroundColor:'#fff',
-
-    borderColor:'#E5E7EB',
-
-    borderWidth:1,
-
-    textStyle:{
-        color:'#222'
-    }
-
-},
-
-        
 
         legend:{
 
@@ -133,39 +153,39 @@ window.addEventListener("load", function () {
                 color:'#555'
             },
 
-            data: @json($chartData->pluck('komoditas'))
+            data:@json($chartData->pluck('komoditas'))
 
         },
 
         yAxis:{
 
-    type:'value',
+            type:'value',
 
-    min:0,
+            min:0,
 
-    axisLine:{
-        show:false
-    },
+            axisLine:{
+                show:false
+            },
 
-    axisTick:{
-        show:false
-    },
+            axisTick:{
+                show:false
+            },
 
-    axisLabel:{
-    color:'#777',
-    fontSize:14,
-    formatter:function(value){
-        return value.toLocaleString('id-ID');
-    }
-},
+            axisLabel:{
+                color:'#777',
+                fontSize:14,
+                formatter:function(value){
+                    return value.toLocaleString('id-ID');
+                }
+            },
 
-    splitLine:{
-        lineStyle:{
-            color:'#ECECEC'
-        }
-    }
+            splitLine:{
+                lineStyle:{
+                    color:'#ECECEC'
+                }
+            }
 
-},
+        },
 
         series:[
 
@@ -174,9 +194,8 @@ window.addEventListener("load", function () {
                 name:'Target',
 
                 type:'bar',
-                
-                
-                data: @json($chartData->pluck('target')),
+
+                data:@json($chartData->pluck('target')),
 
                 barWidth:50,
 
@@ -184,26 +203,20 @@ window.addEventListener("load", function () {
 
                 barCategoryGap:'60%',
 
-                label: {
-                    show: true,
-                    position: 'top',
-                    color: '#6B7280',
-                    fontSize: 13,
-                    fontWeight: '600',
-                    formatter: function(params) {
-                    return Number(params.value).toLocaleString('id-ID', {
-                    maximumFractionDigits: 0
-                    }) + ' Ha';
-                }
+                label:{
+                    show:true,
+                    position:'top',
+                    color:'#6B7280',
+                    fontSize:13,
+                    fontWeight:'600',
+                    formatter:function(params){
+                        return Number(params.value).toLocaleString('id-ID') + ' Ha';
+                    }
                 },
 
-
                 itemStyle:{
-
                     color:'#7DC9F8',
-
                     borderRadius:[10,10,0,0]
-
                 }
 
             },
@@ -214,29 +227,24 @@ window.addEventListener("load", function () {
 
                 type:'bar',
 
-                data: @json($chartData->pluck('realisasi')),
+                data:@json($chartData->pluck('realisasi')),
 
                 barWidth:50,
 
-                label: {
-                    show: true,
-                    position: 'top',
-                    color: '#16B33A',
-                    fontSize: 13,
-                    fontWeight: '700',
-                    formatter: function(params) {
-                    return Number(params.value).toLocaleString('id-ID', {
-                    maximumFractionDigits: 0
-                    }) + ' Ha';
+                label:{
+                    show:true,
+                    position:'top',
+                    color:'#16B33A',
+                    fontSize:13,
+                    fontWeight:'700',
+                    formatter:function(params){
+                        return Number(params.value).toLocaleString('id-ID') + ' Ha';
                     }
                 },
 
                 itemStyle:{
-
                     color:'#27C74A',
-
                     borderRadius:[10,10,0,0]
-
                 }
 
             }
@@ -245,7 +253,6 @@ window.addEventListener("load", function () {
 
     };
 
-    //supaya kalau mini sidebar aktif dia mengikuti ukuran layar
     chart.setOption(option);
 
     setTimeout(() => {
@@ -257,9 +264,7 @@ window.addEventListener("load", function () {
     }, 600);
 
     window.addEventListener('resize', () => {
-
         chart.resize();
-
     });
 
 });

@@ -41,7 +41,7 @@
                     <option value="">Semua Kegiatan</option>
                     @foreach($kegiatans as $item)
                         <option value="{{ $item->id }}" @selected(request('kegiatan_id') == $item->id)>
-                            {{ $item->nama_kegiatan }}
+                            {{ $item->nama_rincian_output }}
                         </option>
                     @endforeach
                 </select>
@@ -195,7 +195,7 @@
                         {{ $loop->iteration + ($realisasi->currentPage() - 1) * $realisasi->perPage() }}
                     </td>
 
-                    <td class="px-3 py-3">{{ $item->kegiatan?->nama_kegiatan }}</td>
+                    <td class="px-3 py-3">{{ $item->kegiatan?->nama_rincian_output }}</td>
                     <td class="px-3 py-3">{{ $item->komoditas?->nama }}</td>
                     <td class="px-3 py-3">{{ $item->nama_kelompok }}</td>
                     <td class="px-3 py-3">{{ $item->desa?->nama }}</td>
@@ -225,22 +225,34 @@
                     </td>
 
                     <td class="px-3 py-3">
-                        <div class="flex justify-center gap-1.5">
+            <div class="flex justify-center gap-1.5">
 
-                            <button
-                                class="btnEditRealisasi flex h-7 w-7 items-center justify-center rounded-md border border-[#16A34A] text-[#16A34A]"
-                                data-id="{{ $item->id }}">
-                                ✏️
-                            </button>
+                {{-- Edit --}}
+                <button
+                    class="btnEditRealisasi flex h-8 w-8 items-center justify-center rounded-md transition hover:scale-110"
+                    data-id="{{ $item->id }}">
 
-                            <button
-                                class="btnDeleteRealisasi flex h-7 w-7 items-center justify-center rounded-md border border-[#EF4444] text-[#EF4444]"
-                                data-id="{{ $item->id }}">
-                                🗑️
-                            </button>
+                    <img
+                        src="{{ asset('Icon-Edit-Realisasi.svg') }}"
+                        alt="Edit"
+                        class="h-5 w-5">
 
-                        </div>
-                    </td>
+                </button>
+
+                {{-- Delete --}}
+                <button
+                    class="btnDeleteRealisasi flex h-8 w-8 items-center justify-center rounded-md transition hover:scale-110"
+                    data-id="{{ $item->id }}">
+
+                    <img
+                        src="{{ asset('Icon-Trash-Realisasi.svg') }}"
+                        alt="Delete"
+                        class="h-5 w-5">
+
+                </button>
+
+            </div>
+        </td>
 
                 </tr>
 

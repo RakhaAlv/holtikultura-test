@@ -30,7 +30,7 @@
             <select
                 id="provinsiSelectKomoditas"
                 name="provinsi"
-                class="h-[44px] w-full rounded-[10px] border-2 border-[#2D2D2D] bg-white px-4 text-[15px] outline-none">
+                class="h-[46px] w-full rounded-xl border border-[#D4D4D4] bg-white px-4 text-[15px] text-[#222] shadow-sm transition focus:border-[#16B33A] focus:outline-none">
 
                 <option value="">Semua Provinsi</option>
 
@@ -54,7 +54,7 @@
             <select
                 id="kabupatenSelectKomoditas"
                 name="kabupaten"
-                class="h-[44px] w-full rounded-[10px] border-2 border-[#2D2D2D] bg-white px-4 text-[15px] outline-none">
+                class="h-[46px] w-full rounded-xl border border-[#D4D4D4] bg-white px-4 text-[15px] text-[#222] shadow-sm transition focus:border-[#16B33A] focus:outline-none">
 
                 <option value="">Semua Kabupaten/Kota</option>
 
@@ -78,7 +78,7 @@
             <select
                 id="kecamatanSelectKomoditas"
                 name="kecamatan"
-                class="h-[44px] w-full rounded-[10px] border-2 border-[#2D2D2D] bg-white px-4 text-[15px] outline-none">
+                class="h-[46px] w-full rounded-xl border border-[#D4D4D4] bg-white px-4 text-[15px] text-[#222] shadow-sm transition focus:border-[#16B33A] focus:outline-none">
 
                 <option value="">Semua Kecamatan</option>
 
@@ -101,7 +101,7 @@
 
                 <a
                     href="{{ route('komoditas.show', $komoditas) }}"
-                    class="flex flex-1 items-center justify-center rounded-[10px] border-2 border-[#2D2D2D] bg-white text-[15px] font-semibold text-[#222] transition hover:bg-gray-100">
+                    class="flex flex-1 items-center justify-center rounded-[10px] border border-[#D4D4D4] bg-white text-[15px] font-semibold text-[#222] transition hover:bg-gray-100">
                     Reset
                 </a>
 

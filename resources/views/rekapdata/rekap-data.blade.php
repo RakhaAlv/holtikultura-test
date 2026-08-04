@@ -12,7 +12,7 @@
 
 @include('rekapdata.partials.table', [
     'wilayahRows' => $wilayahRows
-])
+    ])
 
 </div>
 

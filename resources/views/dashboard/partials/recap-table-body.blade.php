@@ -79,9 +79,9 @@
                             <td class="px-6 py-5 text-center align-middle">
 
                                  @php
-                                    if ($row['progress'] >= 100) {
+                                    if ($row['progress'] >= 75) {
                                         $badge = 'bg-green-100 text-green-700';
-                                    } elseif ($row['progress'] >= 80) {
+                                    } elseif ($row['progress'] >= 50) {
                                         $badge = 'bg-yellow-100 text-yellow-700';
                                     } else {
                                         $badge = 'bg-red-100 text-red-700';
@@ -170,9 +170,9 @@
             <td class="px-6 py-4 text-center">
 
         @php
-            if($provinsi['progress'] >= 100){
+            if($provinsi['progress'] >= 75){
                 $badge = 'bg-green-100 text-green-700';
-            }elseif($provinsi['progress'] >= 80){
+            }elseif($provinsi['progress'] >= 50){
                 $badge = 'bg-yellow-100 text-yellow-700';
             }else{
                 $badge = 'bg-red-100 text-red-700';
@@ -257,9 +257,9 @@
     <td class="px-6 py-3 text-center">
 
         @php
-            if($kabupaten['progress'] >= 100){
+            if($kabupaten['progress'] >= 75){
                 $badge = 'bg-green-100 text-green-700';
-            }elseif($kabupaten['progress'] >= 80){
+            }elseif($kabupaten['progress'] >= 50){
                 $badge = 'bg-yellow-100 text-yellow-700';
             }else{
                 $badge = 'bg-red-100 text-red-700';

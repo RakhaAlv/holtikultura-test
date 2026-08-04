@@ -60,15 +60,15 @@ class Realisasi extends Model
     public function scopeRekapPerDirektorat(Builder $query, int $tahun): Builder
     {
         return $query->where('tahun', $tahun)
-                     ->selectRaw('direktorat_id, SUM(anggaran) as total_anggaran, SUM(jumlah_output) as total_output, COUNT(id) as total_kegiatan')
-                     ->groupBy('direktorat_id');
+                    ->selectRaw('direktorat_id, COALESCE(SUM(anggaran), 0) as total_anggaran, COALESCE(SUM(jumlah_output), 0) as total_output, COUNT(id) as total_kegiatan')
+                    ->groupBy('direktorat_id');
     }
 
     public function scopeRekapPerProvinsi(Builder $query, int $tahun): Builder
     {
         return $query->where('tahun', $tahun)
-                     ->selectRaw('provinsi_id, SUM(anggaran) as total_anggaran, SUM(jumlah_output) as total_output')
-                     ->groupBy('provinsi_id');
+                    ->selectRaw('provinsi_id, COALESCE(SUM(anggaran), 0) as total_anggaran, COALESCE(SUM(jumlah_output), 0) as total_output')
+                    ->groupBy('provinsi_id');
     }
 
     public function direktorat(): BelongsTo { return $this->belongsTo(Direktorat::class); }

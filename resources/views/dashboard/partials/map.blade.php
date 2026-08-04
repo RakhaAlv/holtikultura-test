@@ -26,23 +26,23 @@
             </label>
 
             <select
-                id="komoditasFilter"
-                name="komoditas"
-                class="h-11 w-[200px] rounded-xl border border-gray-200 px-4">
+    id="komoditasFilter"
+    name="komoditas"
+    class="h-11 w-[200px] rounded-xl border border-gray-200 px-4">
 
-                @foreach($komoditas as $item)
+@php
+    $defaultKomoditas = $komoditas->firstWhere('nama', 'Bawang Merah')->id;
+@endphp
 
-                    <option
-                        value="{{ $item->id }}"
-                        {{ request('komoditas') == $item->id ? 'selected' : '' }}>
+@foreach($komoditas as $item)
+    <option
+        value="{{ $item->id }}"
+        {{ $item->id == $defaultKomoditas ? 'selected' : '' }}>
+        {{ $item->nama }}
+    </option>
+@endforeach
 
-                        {{ $item->nama }}
-
-                    </option>
-
-                @endforeach
-
-            </select>
+</select>
 
         </div>
 
@@ -110,76 +110,66 @@
 
 
 <script>
-
 window.addEventListener('load', async function () {
 
     const chartDom = document.getElementById('indonesiaMap');
-
     const chart = echarts.init(chartDom);
 
-    const observer = new ResizeObserver(() => {
-    chart.resize();
-    });
+    new ResizeObserver(() => {
+        chart.resize();
+    }).observe(chartDom);
 
-    
-
-    observer.observe(chartDom);
-
+    // ==========================
+    // Load GeoJSON
+    // ==========================
     const geoJson = await fetch('/geojson/indonesia-provinsi.json')
         .then(res => res.json());
 
     geoJson.features.forEach(feature => {
+        feature.properties.name =
+            feature.properties.PROVINSI.toUpperCase();
+    });
 
-    feature.properties.name =
-        feature.properties.PROVINSI.toUpperCase();
-
-});
-
-    echarts.registerMap(
-    'Indonesia',
-    geoJson,
-    {
+    echarts.registerMap('Indonesia', geoJson, {
         nameProperty: 'PROVINSI'
-    }
-);
-    console.log(geoJson.features[0].properties);
+    });
 
-    console.log(@json($mapData));
+    // ==========================
+    // Chart Awal
+    // ==========================
     chart.setOption({
 
-    tooltip: {
-        trigger: 'item',
+        tooltip: {
+            trigger: 'item',
 
-        formatter: function (params) {
+            formatter: function (params) {
 
-            const value = Array.isArray(params.value)
-                ? params.value[2]
-                : params.value;
+                const value = Array.isArray(params.value)
+                    ? params.value[2]
+                    : params.value;
 
-            if (
-                value === null ||
-                value === undefined ||
-                value === '-' ||
-                isNaN(value)
-        ) {
+                if (
+                    value === undefined ||
+                    value === null ||
+                    value === '-' ||
+                    isNaN(value)
+                ) {
+                    return `
+                        <b>${params.name}</b><br>
+                        Progress : <b>Tidak Ada Data</b>
+                    `;
+                }
 
-            return `
-                <b>${params.name}</b><br>
-                Progress : <b>Tidak Ada Data</b>
-            `;
-
-        }
-
-            return `
-                <b>${params.name}</b><br>
-                Progress : <b>${Number(value).toLocaleString('id-ID', {
-                    minimumFractionDigits: 0,
-                    maximumFractionDigits: 2
-                })}%</b>
-            `;
-
-        }
-},
+                return `
+                    <b>${params.name}</b><br>
+                    Progress :
+                    <b>${Number(value).toLocaleString('id-ID', {
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 2
+                    })}%</b>
+                `;
+            }
+        },
 
         visualMap: {
             min: 0,
@@ -196,78 +186,106 @@ window.addEventListener('load', async function () {
             }
         },
 
-        series: [
+        series: [{
+            type: 'map',
+            map: 'Indonesia',
 
-            {
+            roam: false,
 
-                type: 'map',
+            zoom: 1.20,
 
-                map: 'Indonesia',
+            scaleLimit: {
+                min: 1.20,
+                max: 1.20
+            },
 
-                roam: false,
+            selectedMode: false,
 
-                zoom: 1.20,
-
-                scaleLimit:{
-                min:1.20,
-                max:1.20
+            emphasis: {
+                label: {
+                    show: false
                 },
+                itemStyle: {
+                    areaColor: '#16B33A'
+                }
+            },
 
-                selectedMode: false,  // tidak bisa dipilih
+            itemStyle: {
+                areaColor: '#D1D5DB',
+                borderColor: '#FFFFFF'
+            },
 
-                emphasis: {
+            data: []
+        }]
+    });
 
-                    label: {
-                        show: false
+    window.addEventListener('resize', () => {
+        chart.resize();
+    });
+
+    // ==========================
+    // Dropdown
+    // ==========================
+    const komoditasFilter = document.getElementById('komoditasFilter');
+
+    async function loadMapData() {
+
+        const komoditas = komoditasFilter.value;
+        const tahun = document.querySelector('input[name="tahun"]').value;
+
+        try {
+
+            const response = await fetch(
+                `/dashboard/map-data?komoditas=${komoditas}&tahun=${tahun}`
+            );
+
+            const data = await response.json();
+
+            chart.setOption({
+                series: [{
+                    type: 'map',
+                    map: 'Indonesia',
+
+                    roam: false,
+
+                    zoom: 1.20,
+
+                    scaleLimit: {
+                        min: 1.20,
+                        max: 1.20
+                    },
+
+                    selectedMode: false,
+
+                    emphasis: {
+                        label: {
+                            show: false
+                        },
+                        itemStyle: {
+                            areaColor: '#16B33A'
+                        }
                     },
 
                     itemStyle: {
-                        areaColor: '#16B33A'
-                    }
+                        borderColor: '#FFFFFF'
+                    },
 
-                },
+                    data: data
+                }]
+            });
 
-                data: @json($mapData)
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
-            }
+    // Saat dropdown berubah
+    komoditasFilter.addEventListener('change', loadMapData);
 
-        ]
-
-    });
-
-    window.addEventListener('resize', () => chart.resize());
-
-    const komoditasFilter = document.getElementById('komoditasFilter');
-
-    komoditasFilter.addEventListener('change', async function () {
-
-    const komoditas = this.value;
-
-    const tahun =
-    document.querySelector('input[name="tahun"]').value;
-
-    const response = await fetch(
-    `/dashboard/map-data?komoditas=${komoditas}&tahun=${tahun}`
-    );
-
-    const data = await response.json();
-
-    chart.setOption({
-
-    series: [{
-
-        type: 'map',
-
-        map: 'Indonesia',
-
-        data: data
-
-    }]
-
-    });
+    // ==========================
+    // LOAD PERTAMA KALI
+    // ==========================
+    await loadMapData();
 
 });
-
-});
-
 </script>

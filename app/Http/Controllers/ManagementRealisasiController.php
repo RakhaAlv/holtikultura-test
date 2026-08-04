@@ -33,7 +33,7 @@ class ManagementRealisasiController extends Controller
 
             $query->where(function ($q) use ($search) {
                 $q->where('nama_kelompok', 'like', "%{$search}%")
-                  ->orWhereHas('kegiatan', fn ($q2) => $q2->where('nama_kegiatan', 'like', "%{$search}%"))
+                  ->orWhereHas('kegiatan', fn ($q2) => $q2->where('nama_rincian_output', 'like', "%{$search}%"))
                   ->orWhereHas('komoditas', fn ($q2) => $q2->where('nama', 'like', "%{$search}%"))
                   ->orWhereHas('provinsi', fn ($q2) => $q2->where('nama', 'like', "%{$search}%"))
                   ->orWhereHas('kabupaten', fn ($q2) => $q2->where('nama', 'like', "%{$search}%"));
@@ -77,7 +77,7 @@ class ManagementRealisasiController extends Controller
         return view('datamanagement.realisasi.table', [
             'realisasi'    => $realisasi,
             'direktorats'  => Direktorat::orderBy('nama')->get(),
-            'kegiatans'    => Kegiatan::orderBy('nama_kegiatan')->get(),
+            'kegiatans'    => Kegiatan::orderBy('nama_rincian_output')->get(),
             'komoditas'    => Komoditas::orderBy('nama')->get(),
             'provinsis'    => Provinsi::orderBy('nama')->get(),
             'kabupatens'   => Kabupaten::orderBy('nama')->get(),
@@ -140,8 +140,8 @@ class ManagementRealisasiController extends Controller
             'kecamatan_id'   => 'required',
             'desa_id'        => 'required',
             'satuan_id'      => 'required',
-            'jumlah_output'  => 'required|numeric',
-            'anggaran'       => 'nullable|numeric',
+            'jumlah_output'  => 'required|numeric|min:0',
+            'anggaran'       => 'nullable|numeric|min:0',
             'status'         => 'required|in:Usulan CPCL,Kontrak/PKS,Pemberkasan Dokumen Pencairan,Distribusi Bantuan,Bantuan Sudah Diterima',
         ]);
 
