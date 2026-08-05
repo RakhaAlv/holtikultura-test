@@ -73,7 +73,7 @@
                     </h3>
 
                     <p class="mt-5 text-sm leading-6 text-gray-600">
-                        Aplikasi ini bertujuan untuk memantau realisasi bantuan pemerintah
+                        Website ini bertujuan untuk memantau realisasi bantuan pemerintah
                         sub sektor hortikultura.
                     </p>
 
@@ -145,7 +145,7 @@
                         </div>
 
                         <!-- Remember Me -->
-                        <div class="mt-5 flex items-center">
+                        <!-- <div class="mt-5 flex items-center">
                             <input
                                 id="remember"
                                 name="remember"
@@ -155,7 +155,7 @@
                             <label for="remember" class="ml-2 text-sm text-gray-600">
                                 Remember me
                             </label>
-                        </div>
+                        </div> -->
 
                         @error('email')
                             <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
