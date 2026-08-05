@@ -181,7 +181,9 @@
                     <th class="px-3 py-3 text-center text-[12px] font-bold">Tahun</th>
                     <th class="px-3 py-3 text-center text-[12px] font-bold">Realisasi</th>
                     <th class="px-3 py-3 text-center text-[12px] font-bold">Status</th>
-                    <th class="px-3 py-3 text-center text-[12px] font-bold">Aksi</th>
+                    @if(auth()->user()->isSuperAdmin() || auth()->user()->isAdminDirektorat())
+                    <th class="px-3 py-3 text-center">Aksi</th>
+                    @endif
                 </tr>
 
             </thead>
@@ -228,6 +230,7 @@
             <div class="flex justify-center gap-1.5">
 
                 {{-- Edit --}}
+                @if(auth()->user()->isSuperAdmin() || auth()->user()->isAdminDirektorat())
                 <button
                     class="btnEditRealisasi flex h-8 w-8 items-center justify-center rounded-md transition hover:scale-110"
                     data-id="{{ $item->id }}">
@@ -250,7 +253,7 @@
                         class="h-5 w-5">
 
                 </button>
-
+                @endif
             </div>
         </td>
 
@@ -259,7 +262,7 @@
                 @empty
 
                 <tr>
-                    <td colspan="12" class="py-8 text-center text-gray-500">
+                    <td colspan="{{ auth()->user()->isSuperAdmin() || auth()->user()->isAdminDirektorat() ? 12 : 11 }}" class="py-8 text-center text-gray-500">
                         Tidak ada data.
                     </td>
                 </tr>

@@ -9,12 +9,20 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
-use Maatwebsite\Excel\Concerns\WithStyles;
-use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use Maatwebsite\Excel\Concerns\WithColumnFormatting;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Events\AfterSheet;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
 
-class RealisasiSheetExport implements FromQuery, WithHeadings, WithMapping, WithTitle, WithColumnWidths, WithStyles
+class RealisasiSheetExport implements FromQuery, WithHeadings, WithMapping, WithTitle, WithColumnWidths, WithColumnFormatting, WithEvents
 {
     protected Request $request;
+
+    // Instance property, bukan static -> aman dipakai berulang kali
+    // (misal saat berjalan di queue worker / Octane yang me-reuse proses PHP)
+    protected int $number = 0;
 
     public function __construct(Request $request)
     {
@@ -71,11 +79,10 @@ class RealisasiSheetExport implements FromQuery, WithHeadings, WithMapping, With
 
     public function map($item): array
     {
-        static $no = 0;
-        $no++;
+        $this->number++;
 
         return [
-            $no,
+            $this->number,
             $item->direktorat?->nama,
             $item->kegiatan?->nama_kegiatan,
             $item->komoditas?->nama,
@@ -100,7 +107,7 @@ class RealisasiSheetExport implements FromQuery, WithHeadings, WithMapping, With
     public function columnWidths(): array
     {
         return [
-            'A' => 8,
+            'A' => 6,
             'B' => 25,
             'C' => 40,
             'D' => 20,
@@ -109,18 +116,72 @@ class RealisasiSheetExport implements FromQuery, WithHeadings, WithMapping, With
             'G' => 20,
             'H' => 20,
             'I' => 20,
-            'J' => 12,
+            'J' => 10,
             'K' => 15,
             'L' => 15,
-            'M' => 18,
-            'N' => 28,
+            'M' => 20,
+            'N' => 18,
         ];
     }
 
-    public function styles(Worksheet $sheet)
+    public function columnFormats(): array
     {
         return [
-            1 => ['font' => ['bold' => true]],
+            'J' => '0',                  // Tahun: angka biasa, tanpa pemisah ribuan
+            'K' => '#,##0',              // Realisasi: pakai pemisah ribuan
+            'M' => '"Rp" #,##0',         // Anggaran: format Rupiah
+        ];
+    }
+
+    public function registerEvents(): array
+    {
+        return [
+            AfterSheet::class => function (AfterSheet $event) {
+                $sheet = $event->sheet->getDelegate();
+                $highestColumn = $sheet->getHighestColumn(); // N
+                $highestRow = $sheet->getHighestRow();
+
+                // Style header: fill hijau, font putih bold, rata tengah
+                $headerRange = "A1:{$highestColumn}1";
+                $sheet->getStyle($headerRange)->applyFromArray([
+                    'font' => [
+                        'bold' => true,
+                        'color' => ['rgb' => 'FFFFFF'],
+                    ],
+                    'fill' => [
+                        'fillType' => Fill::FILL_SOLID,
+                        'startColor' => ['rgb' => '2E7D32'],
+                    ],
+                    'alignment' => [
+                        'horizontal' => Alignment::HORIZONTAL_CENTER,
+                        'vertical' => Alignment::VERTICAL_CENTER,
+                        'wrapText' => true,
+                    ],
+                ]);
+                $sheet->getRowDimension(1)->setRowHeight(22);
+
+                // Border seluruh tabel (header + data)
+                if ($highestRow >= 1) {
+                    $sheet->getStyle("A1:{$highestColumn}{$highestRow}")->applyFromArray([
+                        'borders' => [
+                            'allBorders' => [
+                                'borderStyle' => Border::BORDER_THIN,
+                                'color' => ['rgb' => 'BFBFBF'],
+                            ],
+                        ],
+                    ]);
+                }
+
+                // Kolom No rata tengah
+                if ($highestRow >= 2) {
+                    $sheet->getStyle("A2:A{$highestRow}")->getAlignment()
+                        ->setHorizontal(Alignment::HORIZONTAL_CENTER);
+                }
+
+                // Freeze header agar tetap terlihat saat scroll, dan aktifkan autofilter
+                $sheet->freezePane('A2');
+                $sheet->setAutoFilter("A1:{$highestColumn}1");
+            },
         ];
     }
 }

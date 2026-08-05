@@ -147,9 +147,48 @@ Route::middleware('auth')->group(function () {
     |--------------------------------------------------------------------------
     */
 
-    Route::middleware('role:Super Admin,Admin Direktorat')
+    Route::middleware('auth')
         ->get('/data-management', [ManagementController::class, 'index'])
         ->name('data-management');
+
+    Route::middleware('auth')
+        ->prefix('data-management')
+        ->group(function () {
+
+            /*
+            |--------------------------
+            | Target (read - semua user login)
+            |--------------------------
+            */
+
+            Route::get('/target', [ManagementTargetController::class, 'table'])
+                ->name('management.target');
+
+            /*
+            |--------------------------
+            | Realisasi (read - semua user login)
+            |--------------------------
+            */
+
+            Route::get('/realisasi', [ManagementRealisasiController::class, 'table'])
+                ->name('management.realisasi');
+
+            /*
+            |--------------------------
+            | Export (read - semua user login)
+            |--------------------------
+            */
+
+            Route::get('/export', [ManagementExportController::class, 'export'])
+                ->name('management.export');
+
+            Route::get('/export/target', [ManagementExportController::class, 'exportTarget'])
+                ->name('management.export.target');
+
+            Route::get('/export/realisasi', [ManagementExportController::class, 'exportRealisasi'])
+                ->name('management.export.realisasi');
+
+        });
 
     Route::middleware('role:Super Admin,Admin Direktorat')
         ->prefix('data-management')
@@ -157,12 +196,9 @@ Route::middleware('auth')->group(function () {
 
             /*
             |--------------------------
-            | Target
+            | Target (write - Super Admin & Admin Direktorat)
             |--------------------------
             */
-
-            Route::get('/target', [ManagementTargetController::class, 'table'])
-                ->name('management.target');
 
             Route::post('/target', [ManagementTargetController::class, 'store'])
                 ->name('management.target.store');
@@ -178,12 +214,9 @@ Route::middleware('auth')->group(function () {
 
             /*
             |--------------------------
-            | Realisasi
+            | Realisasi (write - Super Admin & Admin Direktorat)
             |--------------------------
             */
-
-            Route::get('/realisasi', [ManagementRealisasiController::class, 'table'])
-                ->name('management.realisasi');
 
             Route::post('/realisasi', [ManagementRealisasiController::class, 'store'])
                 ->name('management.realisasi.store');
@@ -196,9 +229,6 @@ Route::middleware('auth')->group(function () {
 
             Route::delete('/realisasi/{realisasi}', [ManagementRealisasiController::class, 'destroy'])
                 ->name('management.realisasi.destroy');
-
-            Route::get('/export', [ManagementExportController::class, 'export'])
-                ->name('management.export');
 
         });
 
