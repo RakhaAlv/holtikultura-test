@@ -2,136 +2,151 @@
     $count = count($summary);
 @endphp
 
-{{-- Cards --}}
-<div
-    class="grid grid-cols-1 gap-6 md:grid-cols-2
-    @if($count == 1)
-        xl:grid-cols-1
-    @elseif($count == 2)
-        xl:grid-cols-2
-    @elseif($count == 3)
-        xl:grid-cols-3
-    @else
-        xl:grid-cols-4
-    @endif
-">
+{{-- ================= Summary Cards ================= --}}
+<div class="overflow-x-auto p-3">
 
-@foreach($summary as $commodity)
+        <div
+        class="grid gap-6 min-w-max
+        @if($count == 1)
+            grid-cols-1
+        @elseif($count == 2)
+            grid-cols-2
+        @elseif($count == 3)
+            grid-cols-3
+        @elseif($count == 4)
+            grid-cols-4
+        @else
+            grid-cols-5
+        @endif
+    ">
 
-    @php
-        $progress = $commodity['progress'];
+        @foreach($summary as $commodity)
 
-        if ($progress < 50) {
-            $progressColor = 'bg-red-500';
-        } elseif ($progress < 75) {
-            $progressColor = 'bg-yellow-400';
-        } else {
-            $progressColor = 'bg-green-500';
-        }
-    @endphp
+            @php
+                $progress = $commodity['progress'];
 
-    <div class="dashboard-card">
+                if ($progress < 50) {
+                    $progressColor = 'bg-red-500';
+                } elseif ($progress < 75) {
+                    $progressColor = 'bg-yellow-400';
+                } else {
+                    $progressColor = 'bg-green-500';
+                }
+            @endphp
 
-        {{-- Header --}}
-        <div class="flex items-center justify-between">
+            <div class="dashboard-card w-[240px]">
 
-            <h2 class="dashboard-card-title">
-                {{ $commodity['name'] }}
-            </h2>
+                {{-- Header --}}
+                <div class="flex items-center justify-between">
 
-            <img
-                src="{{ asset($commodity['icon']) }}"
-                class="h-20 w-20">
+                    <h2 class="dashboard-card-title">
+                        {{ $commodity['name'] }}
+                    </h2>
 
-        </div>
+                    <img
+                        src="{{ asset($commodity['icon']) }}"
+                        class="h-20 w-20">
 
-        {{-- Target --}}
-        <div class="mt-6">
+                </div>
 
-            <p class="dashboard-card-label">
-                Target
-            </p>
+                {{-- Target --}}
+                <div class="mt-6">
 
-            <h3 class="dashboard-card-value">
-                {{ $commodity['target'] }}
-            </h3>
+                    <p class="dashboard-card-label">
+                        Target
+                    </p>
 
-        </div>
+                    <h3 class="dashboard-card-value">
+                        {{ $commodity['target'] }}
+                    </h3>
 
-        {{-- Realisasi --}}
-        <div class="mt-5">
+                </div>
 
-            <p class="dashboard-card-label">
-                Realisasi
-            </p>
+                {{-- Realisasi --}}
+                <div class="mt-5">
 
-            <h3 class="dashboard-card-value-success">
-                {{ $commodity['realisasi'] }}
-            </h3>
+                    <p class="dashboard-card-label">
+                        Realisasi
+                    </p>
 
-        </div>
+                    <h3 class="dashboard-card-value-success">
+                        {{ $commodity['realisasi'] }}
+                    </h3>
 
-        {{-- Progress --}}
-        <div class="mt-6">
+                </div>
 
-            <div class="mb-2 flex justify-between">
+                {{-- Progress --}}
+                <div class="mt-6">
 
-                <span class="dashboard-card-label">
-                    Progress
-                </span>
+                    <div class="mb-2 flex justify-between">
 
-                <span class="font-semibold">
-                    {{ $progress }}%
-                </span>
+                        <span class="dashboard-card-label">
+                            Progress
+                        </span>
 
-            </div>
+                        <span class="font-semibold">
+                            {{ $progress }}%
+                        </span>
 
-            <div class="dashboard-progress">
+                    </div>
 
-                <div
-                    class="dashboard-progress-fill {{ $progressColor }}"
-                    style="width: {{ min($progress, 100) }}%">
+                    <div class="dashboard-progress">
+
+                        <div
+                            class="dashboard-progress-fill {{ $progressColor }}"
+                            style="width: {{ min($progress,100) }}%">
+                        </div>
+
+                    </div>
+
                 </div>
 
             </div>
 
-        </div>
+        @endforeach
 
     </div>
-
-@endforeach
 
 </div>
 
-{{-- Notes + Legend --}}
+{{-- ================= Notes + Legend ================= --}}
 <div class="mt-5 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
 
-    {{-- Catatan --}}
+    {{-- Notes --}}
     <div class="flex-1 rounded-xl border border-[#D3D3D3] bg-[#D3D3D3] px-5 py-4">
+
         <div class="flex items-start gap-3">
 
             <svg xmlns="http://www.w3.org/2000/svg"
-                 class="mt-0.5 h-5 w-5 flex-shrink-0 text-[#000000]"
-                 fill="none"
-                 viewBox="0 0 24 24"
-                 stroke="currentColor"
-                 stroke-width="2">
+                class="mt-0.5 h-5 w-5 flex-shrink-0 text-black"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2">
 
-                <path stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"/>
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"/>
 
             </svg>
 
-            <p class="text-sm font-medium text-[#000000]">
-                <span class="font-bold">Catatan:</span>
-                Target output berdasarkan <strong>Rencana Kerja</strong>.
+            <p class="text-sm font-medium text-black">
+
+                <span class="font-bold">
+                    Catatan:
+                </span>
+
+                Target output berdasarkan
+                <strong>Rencana Kerja</strong>.
+
             </p>
 
         </div>
+
     </div>
 
-    {{-- Legend Progress --}}
+    {{-- Legend --}}
     <div class="rounded-xl border border-gray-200 bg-white px-5 py-4 shadow-sm">
 
         <div class="mb-2 text-sm font-semibold text-gray-700">

@@ -88,6 +88,9 @@ class ManagementRealisasiController extends Controller
 
     public function store(Request $request)
     {
+        if (!(auth()->user()->isSuperAdmin() || auth()->user()->isAdminDirektorat())) {
+            abort(403);
+        }
         $data = $this->validated($request);
 
         $data['direktorat_id'] = $this->resolveDirektoratId($request);
@@ -108,6 +111,9 @@ class ManagementRealisasiController extends Controller
 
     public function update(Request $request, Realisasi $realisasi)
     {
+        if (!(auth()->user()->isSuperAdmin() || auth()->user()->isAdminDirektorat())) {
+            abort(403);
+        }
         $data = $this->validated($request);
 
         $data['direktorat_id'] = $this->resolveDirektoratId($request);
@@ -122,6 +128,9 @@ class ManagementRealisasiController extends Controller
 
     public function destroy(Realisasi $realisasi)
     {
+        if (!(auth()->user()->isSuperAdmin() || auth()->user()->isAdminDirektorat())) {
+            abort(403);
+        }
         $realisasi->delete();
         $this->recordLastRealisasiUpdate();
 

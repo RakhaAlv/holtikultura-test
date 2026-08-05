@@ -120,17 +120,24 @@ function toggleTambahButton(active){
 
 
 // ===============================
-// EXPORT EXCEL (ikut filter yang sedang aktif)
+// EXPORT EXCEL (ikut tab & filter yang sedang aktif)
 // ===============================
 
 document.addEventListener('click', function(e){
 
     if(!e.target.closest('#btnExportExcel')) return;
 
-    // Ambil filter dari form yang sedang aktif (Target atau Realisasi)
-    const activeForm =
-        document.getElementById('formFilterTarget') ||
-        document.getElementById('formFilterRealisasi');
+    // Tentukan tab aktif dari form filter yang sedang ada di DOM
+    const formTarget = document.getElementById('formFilterTarget');
+    const formRealisasi = document.getElementById('formFilterRealisasi');
+
+    const activeForm = formTarget || formRealisasi;
+    const activeTab = formTarget ? 'target' : 'realisasi';
+
+    const routes = {
+        target: "{{ route('management.export.target') }}",
+        realisasi: "{{ route('management.export.realisasi') }}",
+    };
 
     let params = '';
 
@@ -138,7 +145,7 @@ document.addEventListener('click', function(e){
         params = new URLSearchParams(new FormData(activeForm)).toString();
     }
 
-    const url = "{{ route('management.export') }}" + (params ? '?' + params : '');
+    const url = routes[activeTab] + (params ? '?' + params : '');
 
     window.location.href = url;
 
