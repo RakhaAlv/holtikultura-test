@@ -90,6 +90,7 @@ class DashboardController extends Controller
                     'Bawang Merah',
                     'Cabai',
                     'Durian',
+                    'P2B',
                 ]);
             })
             ->where('status', 'Bantuan Sudah Diterima')
@@ -106,7 +107,11 @@ class DashboardController extends Controller
             if ($target > 0) {
                 $progress = round(($item->total_realisasi / $target) * 100, 2);
             }
+            $satuan = $item->komoditas->nama === 'P2B'
+                ? ' Kelompok'
+                : ' Ha';
             return [
+
                 'name' => $item->komoditas->nama,
                     
                 // sementara icon masih hardcode
@@ -115,6 +120,7 @@ class DashboardController extends Controller
                     'Bawang Merah' => 'Bawang-Merah-Card.svg',
                     'Cabai' => 'Cabai-Card.svg',
                     'Durian' => 'Durian-Card.svg',
+                    'P2B' => 'P2B-Card.svg',
                     default => 'default.svg',
                 },
 
@@ -123,14 +129,14 @@ class DashboardController extends Controller
                     0,
                     ',',
                     '.'
-                ) . ' Ha',
+                ) . $satuan,
                
                 'realisasi' => number_format(
                     $item->total_realisasi,
                     0,
                     ',',
                     '.'
-                ) . ' Ha',
+                ) . $satuan,
 
                 'progress' => $progress,
             ];

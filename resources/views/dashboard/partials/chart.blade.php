@@ -99,7 +99,7 @@ window.addEventListener("load", function () {
                         background:${progressColor};
                         margin-right:6px;">
                     </span>
-                    Pencapaian :
+                    Capaian :
                     <b style="color:${progressColor}">
                         ${Math.round(progress)}%
                     </b>
