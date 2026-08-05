@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Realisasi;
+use App\Models\DashboardUpdateState;
 use App\Models\Direktorat;
+use App\Models\Kabupaten;
+use App\Models\Kecamatan;
 use App\Models\Kegiatan;
 use App\Models\Komoditas;
 use App\Models\Provinsi;
-use App\Models\Kabupaten;
-use App\Models\Kecamatan;
-use App\Models\Desa;
+use App\Models\Realisasi;
 use App\Models\Satuan;
 use Illuminate\Http\Request;
 
@@ -33,10 +33,10 @@ class ManagementRealisasiController extends Controller
 
             $query->where(function ($q) use ($search) {
                 $q->where('nama_kelompok', 'like', "%{$search}%")
-                  ->orWhereHas('kegiatan', fn ($q2) => $q2->where('nama_rincian_output', 'like', "%{$search}%"))
-                  ->orWhereHas('komoditas', fn ($q2) => $q2->where('nama', 'like', "%{$search}%"))
-                  ->orWhereHas('provinsi', fn ($q2) => $q2->where('nama', 'like', "%{$search}%"))
-                  ->orWhereHas('kabupaten', fn ($q2) => $q2->where('nama', 'like', "%{$search}%"));
+                    ->orWhereHas('kegiatan', fn ($q2) => $q2->where('nama_rincian_output', 'like', "%{$search}%"))
+                    ->orWhereHas('komoditas', fn ($q2) => $q2->where('nama', 'like', "%{$search}%"))
+                    ->orWhereHas('provinsi', fn ($q2) => $q2->where('nama', 'like', "%{$search}%"))
+                    ->orWhereHas('kabupaten', fn ($q2) => $q2->where('nama', 'like', "%{$search}%"));
             });
         }
 
@@ -75,14 +75,14 @@ class ManagementRealisasiController extends Controller
         $realisasi = $query->latest()->paginate(10)->withQueryString();
 
         return view('datamanagement.realisasi.table', [
-            'realisasi'    => $realisasi,
-            'direktorats'  => Direktorat::orderBy('nama')->get(),
-            'kegiatans'    => Kegiatan::orderBy('nama_rincian_output')->get(),
-            'komoditas'    => Komoditas::orderBy('nama')->get(),
-            'provinsis'    => Provinsi::orderBy('nama')->get(),
-            'kabupatens'   => Kabupaten::orderBy('nama')->get(),
-            'kecamatans'   => Kecamatan::orderBy('nama')->get(),
-            'satuans'      => Satuan::orderBy('nama')->get(),
+            'realisasi' => $realisasi,
+            'direktorats' => Direktorat::orderBy('nama')->get(),
+            'kegiatans' => Kegiatan::orderBy('nama_rincian_output')->get(),
+            'komoditas' => Komoditas::orderBy('nama')->get(),
+            'provinsis' => Provinsi::orderBy('nama')->get(),
+            'kabupatens' => Kabupaten::orderBy('nama')->get(),
+            'kecamatans' => Kecamatan::orderBy('nama')->get(),
+            'satuans' => Satuan::orderBy('nama')->get(),
         ]);
     }
 
@@ -94,9 +94,10 @@ class ManagementRealisasiController extends Controller
         $data = $this->validated($request);
 
         $data['direktorat_id'] = $this->resolveDirektoratId($request);
-        $data['created_by']    = auth()->id();
+        $data['created_by'] = auth()->id();
 
         Realisasi::create($data);
+        $this->recordLastRealisasiUpdate();
 
         return redirect()
             ->back()
@@ -118,6 +119,7 @@ class ManagementRealisasiController extends Controller
         $data['direktorat_id'] = $this->resolveDirektoratId($request);
 
         $realisasi->update($data);
+        $this->recordLastRealisasiUpdate();
 
         return redirect()
             ->back()
@@ -130,6 +132,7 @@ class ManagementRealisasiController extends Controller
             abort(403);
         }
         $realisasi->delete();
+        $this->recordLastRealisasiUpdate();
 
         return response()->json([
             'success' => true,
@@ -140,18 +143,18 @@ class ManagementRealisasiController extends Controller
     private function validated(Request $request): array
     {
         $request->validate([
-            'tahun'          => 'required|integer',
-            'kegiatan_id'    => 'required',
-            'komoditas_id'   => 'required',
-            'nama_kelompok'  => 'required|string|max:255',
-            'provinsi_id'    => 'required',
-            'kabupaten_id'   => 'required',
-            'kecamatan_id'   => 'required',
-            'desa_id'        => 'required',
-            'satuan_id'      => 'required',
-            'jumlah_output'  => 'required|numeric|min:0',
-            'anggaran'       => 'nullable|numeric|min:0',
-            'status'         => 'required|in:Usulan CPCL,Kontrak/PKS,Pemberkasan Dokumen Pencairan,Distribusi Bantuan,Bantuan Sudah Diterima',
+            'tahun' => 'required|integer',
+            'kegiatan_id' => 'required',
+            'komoditas_id' => 'required',
+            'nama_kelompok' => 'required|string|max:255',
+            'provinsi_id' => 'required',
+            'kabupaten_id' => 'required',
+            'kecamatan_id' => 'required',
+            'desa_id' => 'required',
+            'satuan_id' => 'required',
+            'jumlah_output' => 'required|numeric|min:0',
+            'anggaran' => 'nullable|numeric|min:0',
+            'status' => 'required|in:Usulan CPCL,Kontrak/PKS,Pemberkasan Dokumen Pencairan,Distribusi Bantuan,Bantuan Sudah Diterima',
         ]);
 
         return $request->only([
@@ -181,5 +184,13 @@ class ManagementRealisasiController extends Controller
         }
 
         return auth()->user()->direktorat_id;
+    }
+
+    private function recordLastRealisasiUpdate(): void
+    {
+        DashboardUpdateState::query()->updateOrCreate(
+            ['id' => 1],
+            ['last_realisasi_change_at' => now()]
+        );
     }
 }
