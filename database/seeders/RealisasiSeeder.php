@@ -9,14 +9,15 @@ use RuntimeException;
 
 class RealisasiSeeder extends Seeder
 {
+
     private array $statusMap = [
-        'usulan cpcl'                   => 'Usulan CPCL',
-        'kontrak/pks'                   => 'Kontrak/PKS',
-        'kontrak / pks'                 => 'Kontrak/PKS',
+        'usulan cpcl'                 => 'Usulan CPCL',
+        'kontrak/pks'                 => 'Kontrak/PKS',
+        'kontrak / pks'               => 'Kontrak/PKS',
         'pemberkasan dokumen pencairan' => 'Pemberkasan Dokumen Pencairan',
-        'distribusi bantuan'            => 'Distribusi Bantuan',
-        'bantuan sudah diterima'        => 'Bantuan Sudah Diterima',
-        'belum ditentukan'              => 'Usulan CPCL',
+        'distribusi bantuan'          => 'Distribusi Bantuan',
+        'bantuan sudah diterima'      => 'Bantuan Sudah Diterima',
+        'belum ditentukan'            => 'Usulan CPCL',
     ];
 
     public function run(): void
@@ -32,14 +33,13 @@ class RealisasiSeeder extends Seeder
             throw new RuntimeException("File data banper tidak ditemukan pada path: {$path}");
         }
 
-        // In-Memory Lookup Caches
         $kegiatanMap    = DB::table('kegiatans')->pluck('id', 'kode_rincian_output')->toArray();
-        $desaCache      = DB::table('desas')->pluck('id')->toArray();
-        $komoditasCache = DB::table('komoditas')->pluck('id')->toArray();
-        $satuanCache    = DB::table('satuans')->pluck('id')->toArray();
-        $provinsiCache  = DB::table('provinsis')->pluck('id')->toArray();
-        $kabupatenCache = DB::table('kabupatens')->pluck('id')->toArray();
-        $kecamatanCache = DB::table('kecamatans')->pluck('id')->toArray();
+        $desaCache      = DB::table('desas')->pluck('id', 'id')->toArray();
+        $komoditasCache = DB::table('komoditas')->pluck('id', 'id')->toArray();
+        $satuanCache    = DB::table('satuans')->pluck('id', 'id')->toArray();
+        $provinsiCache  = DB::table('provinsis')->pluck('id', 'id')->toArray();
+        $kabupatenCache = DB::table('kabupatens')->pluck('id', 'id')->toArray();
+        $kecamatanCache = DB::table('kecamatans')->pluck('id', 'id')->toArray();
 
         $defaultKegiatanId  = DB::table('kegiatans')->value('id') ?? 1;
         $defaultKomoditasId = 1;
@@ -47,7 +47,7 @@ class RealisasiSeeder extends Seeder
         $defaultUserId      = 1;
 
         $file = fopen($path, 'r');
-        fgetcsv($file, 0, ';'); // Skip Header
+        fgetcsv($file, 0, ';'); // Skip Header Row
 
         $data = [];
         $chunkSize = 1000;
@@ -55,7 +55,7 @@ class RealisasiSeeder extends Seeder
         while (($row = fgetcsv($file, 0, ';')) !== false) {
             $kodeDesa = (int) preg_replace('/[^0-9]/', '', $row[16] ?? '');
 
-            if ($kodeDesa < 1000000000 || !in_array($kodeDesa, $desaCache, true)) {
+            if ($kodeDesa < 1000000000 || !isset($desaCache[$kodeDesa])) {
                 continue;
             }
 
@@ -63,19 +63,15 @@ class RealisasiSeeder extends Seeder
             $kabupatenId = !empty($row[12]) ? (int) $row[12] : 0;
             $kecamatanId = !empty($row[14]) ? (int) $row[14] : 0;
 
-            if (
-                !in_array($provinsiId, $provinsiCache, true)
-                || !in_array($kabupatenId, $kabupatenCache, true)
-                || !in_array($kecamatanId, $kecamatanCache, true)
-            ) {
+            if (!isset($provinsiCache[$provinsiId]) || !isset($kabupatenCache[$kabupatenId]) || !isset($kecamatanCache[$kecamatanId])) {
                 continue;
             }
 
             $rawKomoditasId = !empty($row[7]) ? (int) $row[7] : 0;
-            $komoditasId    = in_array($rawKomoditasId, $komoditasCache, true) ? $rawKomoditasId : $defaultKomoditasId;
+            $komoditasId    = isset($komoditasCache[$rawKomoditasId]) ? $rawKomoditasId : $defaultKomoditasId;
 
             $rawSatuanId = !empty($row[20]) ? (int) $row[20] : 0;
-            $satuanId    = in_array($rawSatuanId, $satuanCache, true) ? $rawSatuanId : $defaultSatuanId;
+            $satuanId    = isset($satuanCache[$rawSatuanId]) ? $rawSatuanId : $defaultSatuanId;
 
             $direktoratId = !empty($row[1]) ? (int) $row[1] : 1;
             $kodeKegiatan = trim(preg_replace('/[^\x20-\x7E]/', '', $row[5] ?? ''));
@@ -83,6 +79,13 @@ class RealisasiSeeder extends Seeder
 
             $namaKelompok = trim(preg_replace('/[^\x20-\x7E]/', '', $row[17] ?? ''));
             $rawStatus    = trim(preg_replace('/[^\x20-\x7E]/', '', $row[24] ?? ''));
+            $tahun        = !empty($row[8]) ? (int) $row[8] : 2025;
+
+            if ($tahun <= 2025) {
+                $status = 'Bantuan Sudah Diterima';
+            } else {
+                $status = $this->normalizeStatus($rawStatus);
+            }
 
             $data[] = [
                 'direktorat_id' => $direktoratId,
@@ -94,10 +97,10 @@ class RealisasiSeeder extends Seeder
                 'kecamatan_id'  => $kecamatanId,
                 'desa_id'       => $kodeDesa,
                 'nama_kelompok' => $namaKelompok ?: '-',
-                'tahun'         => !empty($row[8]) ? (int) $row[8] : 2025,
+                'tahun'         => $tahun,
                 'jumlah_output' => $this->sanitizeDecimal($row[21] ?? '0'),
                 'anggaran'      => $this->sanitizeDecimal($row[23] ?? '0'),
-                'status'        => $this->normalizeStatus($rawStatus),
+                'status'        => $status,
                 'created_by'    => $defaultUserId,
                 'created_at'    => now(),
                 'updated_at'    => now(),
@@ -119,7 +122,9 @@ class RealisasiSeeder extends Seeder
     private function sanitizeDecimal(?string $value): float
     {
         if (empty($value)) return 0.0;
-        $value = trim($value);
+        
+        // Bersihkan non-breaking space & whitespace
+        $value = trim(preg_replace('/[^\x20-\x7E]/', '', $value));
 
         if (strpos($value, '.') !== false && strpos($value, ',') !== false) {
             $value = str_replace('.', '', $value);
