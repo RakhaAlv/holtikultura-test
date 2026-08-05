@@ -235,7 +235,7 @@
             {{-- Super Admin & Admin Direktorat --}}
             {{-- ========================================== --}}
 
-            @if(auth()->user()->isSuperAdmin() || auth()->user()->isAdminDirektorat())
+            @if(auth()->check())
 
         <hr class="mx-5 mt-4 border-green-700">
 

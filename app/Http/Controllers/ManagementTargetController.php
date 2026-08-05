@@ -76,6 +76,11 @@ class ManagementTargetController extends Controller
 
     public function store(Request $request)
 {
+    abort_unless(
+        auth()->user()->isSuperAdmin() ||
+        auth()->user()->isAdminDirektorat(),
+            403
+    );
     $request->validate([
         'tahun'         => 'required',
         'kegiatan_id'   => 'required',
@@ -132,6 +137,11 @@ public function show(Target $target)
 
 public function update(Request $request, Target $target)
 {
+    abort_unless(
+        auth()->user()->isSuperAdmin() ||
+        auth()->user()->isAdminDirektorat(),
+        403
+    );
     $request->validate([
         'tahun'         => 'required',
         'kegiatan_id'   => 'required',
@@ -181,6 +191,11 @@ public function update(Request $request, Target $target)
 
 public function destroy(Target $target)
 {
+    abort_unless(
+        auth()->user()->isSuperAdmin() ||
+        auth()->user()->isAdminDirektorat(),
+        403
+    );
     $target->delete();
 
     return response()->json([
