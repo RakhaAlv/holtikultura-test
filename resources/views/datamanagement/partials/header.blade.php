@@ -42,6 +42,8 @@
 
         </button>
 
+        @if(auth()->user()->isSuperAdmin() || auth()->user()->isAdminDirektorat())
+        
         <button
             id="btnTambahTarget"
             type="button"
@@ -65,7 +67,9 @@
             Tambah Target
 
         </button>
+        @endif
 
+        @if(auth()->user()->isSuperAdmin() || auth()->user()->isAdminDirektorat())
         <button
             id="btnTambahRealisasi"
             type="button"
@@ -89,6 +93,7 @@
             Tambah Realisasi
 
         </button>
+        @endif
 
     </div>
 

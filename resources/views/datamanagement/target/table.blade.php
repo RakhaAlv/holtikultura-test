@@ -119,7 +119,9 @@
                     <th class="px-3 py-3 text-center">Tahun</th>
                     <th class="px-3 py-3 text-center">Target</th>
                     <th class="px-3 py-3 text-center">Satuan</th>
+                    @if(auth()->user()->isSuperAdmin() || auth()->user()->isAdminDirektorat())
                     <th class="px-3 py-3 text-center">Aksi</th>
+                    @endif
                 </tr>
 
             </thead>
@@ -168,6 +170,8 @@
 
                     <td class="px-3 py-3">
 
+                    @if(auth()->user()->isSuperAdmin() || auth()->user()->isAdminDirektorat())
+
                         <div class="flex justify-center gap-2">
 
                             <button
@@ -183,7 +187,9 @@
                             </button>
 
                         </div>
-
+                    @else
+                    
+                    @endif
                     </td>
 
                 </tr>
@@ -192,7 +198,7 @@
 
                 <tr>
 
-                    <td colspan="10" class="py-8 text-center text-gray-500">
+                    <td colspan="{{ auth()->user()->isSuperAdmin() || auth()->user()->isAdminDirektorat() ? 10 : 9 }}">
 
                         Tidak ada data.
 
