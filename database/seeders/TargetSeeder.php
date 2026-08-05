@@ -90,19 +90,19 @@ class TargetSeeder extends Seeder
 
         fclose($file);
 
-        //Auto-Generate Target 2025 dari Data Realisasi 2025
-        DB::statement("
-            INSERT INTO targets (
-                direktorat_id, kegiatan_id, komoditas_id, satuan_id, 
-                provinsi_id, kabupaten_id, tahun, target, created_by, created_at, updated_at
-            )
-            SELECT 
-                direktorat_id, kegiatan_id, komoditas_id, satuan_id, 
-                provinsi_id, kabupaten_id, 2025, SUM(jumlah_output), ?, NOW(), NOW()
-            FROM realisasis
-            WHERE tahun = 2025
-            GROUP BY direktorat_id, kegiatan_id, komoditas_id, satuan_id, provinsi_id, kabupaten_id
-        ", [$defaultUserId]);
+    // Auto-Generate Target 2025 dari Data Realisasi 2025 (Filter khusus status Bantuan Sudah Diterima)
+            DB::statement("
+                INSERT INTO targets (
+                    direktorat_id, kegiatan_id, komoditas_id, satuan_id, 
+                    provinsi_id, kabupaten_id, tahun, target, created_by, created_at, updated_at
+                )
+                SELECT 
+                    direktorat_id, kegiatan_id, komoditas_id, satuan_id, 
+                    provinsi_id, kabupaten_id, 2025, SUM(jumlah_output), ?, NOW(), NOW()
+                FROM realisasis
+                WHERE tahun = 2025 AND status = 'Bantuan Sudah Diterima'
+                GROUP BY direktorat_id, kegiatan_id, komoditas_id, satuan_id, provinsi_id, kabupaten_id
+            ", [$defaultUserId]);
     }
 
     private function sanitizeDecimal(?string $value): float

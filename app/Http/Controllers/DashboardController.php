@@ -100,12 +100,17 @@ class DashboardController extends Controller
             ->map(function ($item) use ($targets) {
                 
             // day 7 progress, Hitung progress berdasarkan rumus: Progress = (Realisasi / Target) × 100
-        $target = $targets[$item->komoditas_id] ?? 0;
+            $target = $targets[$item->komoditas_id] ?? 0;
 
-        $progress = 0;
+            $progress = 0;
 
             if ($target > 0) {
-                $progress = round(($item->total_realisasi / $target) * 100, 2);
+                // Jika realisasi >= target atau selisih pembulatan < 0.01, set otomatis 100%
+                if ($item->total_realisasi >= $target || abs($item->total_realisasi - $target) < 0.01) {
+                    $progress = 100;
+                } else {
+                    $progress = round(($item->total_realisasi / $target) * 100, 2);
+                }
             }
             $satuan = $item->komoditas->nama === 'P2B'
                 ? ' Kelompok'
