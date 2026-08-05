@@ -54,7 +54,7 @@
     <!-- Background -->
     <img
     src="{{ asset('ilustrasi-petani-login.png') }}"
-    class="absolute -bottom-10 -right-52 w-[1000px] max-w-none"
+    class="absolute -bottom-10 -right-22 w-[1000px] max-w-none"
 >
 
 </div>
