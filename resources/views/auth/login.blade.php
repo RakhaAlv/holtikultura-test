@@ -18,14 +18,12 @@
 
 <!-- ================= LEFT SIDE ================= -->
 <div class="relative w-1/2 bg-white">
-
     <!-- Logo + Tulisan -->
-    <div class="absolute top-12 left-12 z-20 flex items-center gap-5">
+    <div class="absolute top-12 left-12 z-30 flex items-center gap-5">
         <img
             src="{{ asset('logo-kementrian-pertanian.png') }}"
             alt="Logo Kementerian Pertanian"
-            class="w-14 h-14 object-contain"
-        >
+            class="h-14 w-14 object-contain">
 
         <div>
             <h1 class="text-[22px] font-bold uppercase leading-tight text-gray-900">
@@ -37,26 +35,61 @@
         </div>
     </div>
 
-<!-- Logo SIMERAH -->
-<div class="relative z-10 flex flex-col items-center pt-56">
+    <!-- Content -->
+    <div class="relative z-20 flex flex-col items-center pt-56">
+
+        <!-- Logo -->
+        <img
+            src="{{ asset('Logo-SIMERAH.png') }}"
+            alt="Logo SIMERAH"
+            class="relative top-6 w-[450px]">
+
+        <!-- Subtitle -->
+        <p class="mt-4 text-left text-[18px] font-semibold uppercase tracking-wide text-gray-500 leading-relaxed">
+            Sistem Informasi Monitoring dan Evaluasi <br>
+            Realisasi Hortikultura
+        </p>
+
+        <!-- Notes -->
+        <div class="mt-28 w-[520px] rounded-2xl border border-green-200 bg-green-50 p-5 shadow-md">
+
+            <div class="flex items-start gap-4">
+
+        <!-- Icon -->
+        <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-green-100">
+
+            <img
+                src="{{ asset('Icon-Tanda-Seru-Login.svg') }}"
+                alt="Informasi"
+                class="h-6 w-6">
+
+        </div>
+
+                <!-- Text -->
+                <div>
+
+                    <h3 class="mt-2 text-sm font-semibold uppercase tracking-wider text-green-800">
+                        Informasi
+                    </h3>
+
+                    <p class="mt-5 text-sm leading-6 text-gray-600">
+                        Aplikasi ini bertujuan untuk memantau realisasi bantuan pemerintah
+                        sub sektor hortikultura.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Ilustrasi -->
     <img
-        src="{{ asset('Logo-SIMERAH.png') }}"
-        alt="Logo SIMERAH"
-        class="w-[450px]"
-    >
-
-    <p class="mt-4 text-left text-[18px] font-semibold uppercase tracking-wide text-gray-500 leading-relaxed">
-        Sistem Informasi Monitoring dan Evaluasi <br>
-        Realisasi Hortikultura
-    </p>
-</div>
-
-    <!-- Background -->
-    <img
-    src="{{ asset('ilustrasi-petani-login.png') }}"
-    class="absolute -bottom-10 -right-22 w-[1000px] max-w-none"
->
-
+        src="{{ asset('ilustrasi-petani-login.png') }}"
+        alt="Ilustrasi Petani"
+        class="absolute -bottom-10 -right-22 w-[1000px] max-w-none" >
 </div>
 
         <!-- ================= RIGHT SIDE ================= -->
