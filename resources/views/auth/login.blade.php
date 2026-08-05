@@ -14,36 +14,50 @@
 <body class="bg-white-100 font-['Poppins']">
 
     <!-- Container Utama -->
-    <div class="flex min-h-screen">
+<div class="flex min-h-screen overflow-hidden">
 
-        <!-- ================= LEFT SIDE ================= -->
-        <div class="relative w-1/2 bg-white">
+<!-- ================= LEFT SIDE ================= -->
+<div class="relative w-1/2 bg-white">
 
-        <!-- Bagian atas  -->
-         <div class="relative z-10 flex flex-col items-center pt-20">
+    <!-- Logo + Tulisan -->
+    <div class="absolute top-12 left-12 z-20 flex items-center gap-5">
+        <img
+            src="{{ asset('logo-kementrian-pertanian.png') }}"
+            alt="Logo Kementerian Pertanian"
+            class="w-14 h-14 object-contain"
+        >
 
-         <!-- Judul -->
-
-            <h1 class="text-center text-[44px] font-bold uppercase leading-tight text-black">
-                 Direktorat Jenderal<br>
-                 Hortikultura
+        <div>
+            <h1 class="text-[22px] font-bold uppercase leading-tight text-gray-900">
+                Direktorat Jenderal
             </h1>
-            
-        <!-- Logo  -->
-            <img
-                src="{{ asset('logo-kementrian-pertanian.png') }}"
-                alt="Logo Kementrian Pertanian"
-                class="mx-auto mt-[140px] w-44">
-
-        </div>  
-
-        <!-- Ilustrasi -->
-            <img
-                src="{{ asset('Background-Login-Page-V2.png') }}"
-                alt="Ilustrasi Login Page"
-                class="absolute bottom-0 -right-23 w-[850px] max-w-none opacity-80">
-
+            <h1 class="text-[22px] font-bold uppercase leading-tight text-gray-900">
+                Hortikultura
+            </h1>
         </div>
+    </div>
+
+<!-- Logo SIMERAH -->
+<div class="relative z-10 flex flex-col items-center pt-56">
+    <img
+        src="{{ asset('Logo-SIMERAH.png') }}"
+        alt="Logo SIMERAH"
+        class="w-[450px]"
+    >
+
+    <p class="mt-4 text-left text-[18px] font-semibold uppercase tracking-wide text-gray-500 leading-relaxed">
+        Sistem Informasi Monitoring dan Evaluasi <br>
+        Realisasi Hortikultura
+    </p>
+</div>
+
+    <!-- Background -->
+    <img
+    src="{{ asset('ilustrasi-petani-login.png') }}"
+    class="absolute -bottom-10 -right-22 w-[1000px] max-w-none"
+>
+
+</div>
 
         <!-- ================= RIGHT SIDE ================= -->
         <div class="relative z-10 w-1/2 bg-green-700 rounded-l-[40px] overflow-hidden shadow-[0_0_40px_rgba(0,0,0,0.18)]">
@@ -56,11 +70,6 @@
             <!-- Container Isi -->
             <div class="flex flex-col items-center pt-24">
 
-                <!-- Judul -->
-                <h1 class="text-center text-white text-2xl font-bold uppercase leading-tight">
-                    Sistem Informasi <br>
-                    Pemantauan Komoditas
-                </h1>
 
                 <!-- Login Card -->
                 <div class="mt-12 w-[430px] rounded-[32px] bg-white p-12 shadow-2xl">
