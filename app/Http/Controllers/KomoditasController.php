@@ -22,81 +22,92 @@ class KomoditasController extends Controller
         $kabupatenId = $request->kabupaten;
         $kecamatanId = $request->kecamatan;
 
+        $isAjax = $request->ajax();
+
         // ===============================
         // Dropdown filter
+        // (tidak dibutuhkan untuk response AJAX yang hanya mengembalikan tabel)
         // ===============================
 
-        $provinsis = Provinsi::orderBy('nama')->get();
+        if (!$isAjax) {
+            $provinsis = Provinsi::orderBy('nama')->get();
 
-        $kabupatens = Kabupaten::query()
-            ->when($provinsiId, fn ($q) => $q->where('provinsi_id', $provinsiId))
-            ->orderBy('nama')
-            ->get();
+            $kabupatens = Kabupaten::query()
+                ->when($provinsiId, fn ($q) => $q->where('provinsi_id', $provinsiId))
+                ->orderBy('nama')
+                ->get();
 
-        $kecamatans = Kecamatan::query()
-            ->when($kabupatenId, fn ($q) => $q->where('kabupaten_id', $kabupatenId))
-            ->orderBy('nama')
-            ->get();
+            $kecamatans = Kecamatan::query()
+                ->when($kabupatenId, fn ($q) => $q->where('kabupaten_id', $kabupatenId))
+                ->orderBy('nama')
+                ->get();
+        }
 
         // ===============================
         // Summary Cards
+        // (tidak dibutuhkan untuk response AJAX)
         // ===============================
 
-        $totalTarget = Target::where('komoditas_id', $komoditas->id)
-            ->where('tahun', $tahun)
-            ->when($provinsiId, fn ($q) => $q->where('provinsi_id', $provinsiId))
-            ->when($kabupatenId, fn ($q) => $q->where('kabupaten_id', $kabupatenId))
-            ->sum('target');
+        if (!$isAjax) {
+            $totalTarget = Target::where('komoditas_id', $komoditas->id)
+                ->where('tahun', $tahun)
+                ->when($provinsiId, fn ($q) => $q->where('provinsi_id', $provinsiId))
+                ->when($kabupatenId, fn ($q) => $q->where('kabupaten_id', $kabupatenId))
+                ->sum('target');
 
-        // Catatan: tabel targets tidak punya kolom kecamatan_id, jadi filter
-        // kecamatan hanya berlaku untuk Realisasi, bukan Target.
-        $totalRealisasi = Realisasi::where('komoditas_id', $komoditas->id)
-            ->where('tahun', $tahun)
-            ->when($provinsiId, fn ($q) => $q->where('provinsi_id', $provinsiId))
-            ->when($kabupatenId, fn ($q) => $q->where('kabupaten_id', $kabupatenId))
-            ->when($kecamatanId, fn ($q) => $q->where('kecamatan_id', $kecamatanId))
-            ->sum('jumlah_output');
+            // Catatan: tabel targets tidak punya kolom kecamatan_id, jadi filter
+            // kecamatan hanya berlaku untuk Realisasi, bukan Target.
+            $totalRealisasi = Realisasi::where('komoditas_id', $komoditas->id)
+                ->where('tahun', $tahun)
+                ->when($provinsiId, fn ($q) => $q->where('provinsi_id', $provinsiId))
+                ->when($kabupatenId, fn ($q) => $q->where('kabupaten_id', $kabupatenId))
+                ->when($kecamatanId, fn ($q) => $q->where('kecamatan_id', $kecamatanId))
+                ->where('status', 'Bantuan Sudah Diterima')
+                ->sum('jumlah_output');
 
-        $progress = $totalTarget > 0
-            ? round(($totalRealisasi / $totalTarget) * 100, 2)
-            : 0;
+            $progress = $totalTarget > 0
+                ? round(($totalRealisasi / $totalTarget) * 100, 2)
+                : 0;
 
-        // ===============================
-        // Chart per provinsi
-        // ===============================
+            // ===============================
+            // Chart per provinsi
+            // (tidak dibutuhkan untuk response AJAX)
+            // ===============================
 
-        $targetProvinsi = Target::select(
-                'provinsi_id',
-                DB::raw('SUM(target) as target')
-            )
-            ->where('komoditas_id', $komoditas->id)
-            ->where('tahun', $tahun)
-            ->when($provinsiId, fn ($q) => $q->where('provinsi_id', $provinsiId))
-            ->when($kabupatenId, fn ($q) => $q->where('kabupaten_id', $kabupatenId))
-            ->groupBy('provinsi_id')
-            ->pluck('target', 'provinsi_id');
+            $targetProvinsi = Target::select(
+                    'provinsi_id',
+                    DB::raw('SUM(target) as target')
+                )
+                ->where('komoditas_id', $komoditas->id)
+                ->where('tahun', $tahun)
+                ->when($provinsiId, fn ($q) => $q->where('provinsi_id', $provinsiId))
+                ->when($kabupatenId, fn ($q) => $q->where('kabupaten_id', $kabupatenId))
+                ->groupBy('provinsi_id')
+                ->pluck('target', 'provinsi_id');
 
-        $chartData = Realisasi::select(
-                'provinsi_id',
-                DB::raw('SUM(jumlah_output) as realisasi')
-            )
-            ->with('provinsi')
-            ->where('komoditas_id', $komoditas->id)
-            ->where('tahun', $tahun)
-            ->when($provinsiId, fn ($q) => $q->where('provinsi_id', $provinsiId))
-            ->when($kabupatenId, fn ($q) => $q->where('kabupaten_id', $kabupatenId))
-            ->when($kecamatanId, fn ($q) => $q->where('kecamatan_id', $kecamatanId))
-            ->groupBy('provinsi_id')
-            ->get()
-            ->map(function ($item) use ($targetProvinsi) {
+            $chartData = Realisasi::select(
+                    'provinsi_id',
+                    DB::raw('SUM(jumlah_output) as realisasi')
+                )
+                ->with('provinsi')
+                ->where('komoditas_id', $komoditas->id)
+                ->where('tahun', $tahun)
+                ->when($provinsiId, fn ($q) => $q->where('provinsi_id', $provinsiId))
+                ->when($kabupatenId, fn ($q) => $q->where('kabupaten_id', $kabupatenId))
+                ->when($kecamatanId, fn ($q) => $q->where('kecamatan_id', $kecamatanId))
+                ->where('status', 'Bantuan Sudah Diterima')
+                ->groupBy('provinsi_id')
+                ->get()
+                ->map(function ($item) use ($targetProvinsi) {
 
-                return [
-                    'provinsi'  => $item->provinsi->nama,
-                    'target'    => $targetProvinsi[$item->provinsi_id] ?? 0,
-                    'realisasi' => $item->realisasi,
-                ];
+                    return [
+                        'provinsi'  => $item->provinsi->nama,
+                        'target'    => $targetProvinsi[$item->provinsi_id] ?? 0,
+                        'realisasi' => $item->realisasi,
+                    ];
 
-            });
+                });
+        }
 
         // ===============================
         // Tabel Provinsi -> Kabupaten
@@ -117,6 +128,7 @@ class KomoditasController extends Controller
             ->when($provinsiId, fn ($q) => $q->where('provinsi_id', $provinsiId))
             ->when($kabupatenId, fn ($q) => $q->where('kabupaten_id', $kabupatenId))
             ->when($kecamatanId, fn ($q) => $q->where('kecamatan_id', $kecamatanId))
+            ->where('status', 'Bantuan Sudah Diterima')
             ->select('provinsi_id', 'kabupaten_id', DB::raw('SUM(jumlah_output) as realisasi'))
             ->groupBy('provinsi_id', 'kabupaten_id')
             ->get();
@@ -202,6 +214,14 @@ class KomoditasController extends Controller
             });
         }
         unset($provData);
+
+        // ===============================
+        // Response AJAX: hanya kembalikan partial tabel
+        // ===============================
+
+        if ($isAjax) {
+            return view('komoditas.partials.table', compact('tableData'));
+        }
 
         return view('komoditas.show', compact(
             'komoditas',

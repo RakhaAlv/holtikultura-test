@@ -27,6 +27,11 @@
 
 <script>
 
+// Satuan mengikuti komoditas: P2B pakai "Kelompok", selain itu pakai "Ha"
+function getSatuan(namaKomoditas){
+    return namaKomoditas === 'P2B' ? 'Kel' : 'Ha';
+}
+
 // ECharts otomatis menyesuaikan ukurannya
 window.addEventListener("load", function () {
 
@@ -63,6 +68,7 @@ window.addEventListener("load", function () {
 
                 const target = Number(params[0].value);
                 const realisasi = Number(params[1].value);
+                const satuan = getSatuan(params[0].name);
 
                 const progress = target > 0
                     ? (realisasi / target) * 100
@@ -81,13 +87,13 @@ window.addEventListener("load", function () {
                 html += `
                     ${params[0].marker}
                     Target :
-                    <b>${target.toLocaleString('id-ID')} Ha</b><br>
+                    <b>${target.toLocaleString('id-ID')} ${satuan}</b><br>
                 `;
 
                 html += `
                     ${params[1].marker}
                     Realisasi :
-                    <b>${realisasi.toLocaleString('id-ID')} Ha</b><br>
+                    <b>${realisasi.toLocaleString('id-ID')} ${satuan}</b><br>
                 `;
 
                 html += `
@@ -210,7 +216,8 @@ window.addEventListener("load", function () {
                     fontSize:13,
                     fontWeight:'600',
                     formatter:function(params){
-                        return Number(params.value).toLocaleString('id-ID') + ' Ha';
+                        const satuan = getSatuan(params.name);
+                        return Number(params.value).toLocaleString('id-ID') + ' ' + satuan;
                     }
                 },
 
@@ -238,7 +245,8 @@ window.addEventListener("load", function () {
                     fontSize:13,
                     fontWeight:'700',
                     formatter:function(params){
-                        return Number(params.value).toLocaleString('id-ID') + ' Ha';
+                        const satuan = getSatuan(params.name);
+                        return Number(params.value).toLocaleString('id-ID') + ' ' + satuan;
                     }
                 },
 
