@@ -218,11 +218,12 @@
                 <span class="font-bold">
                     Catatan:
                 </span>
-
+                
                 Target output berdasarkan
                 <strong>Rencana Kerja</strong>.
 
             </p>
+            
 
         </div>
 
