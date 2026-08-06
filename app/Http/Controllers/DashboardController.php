@@ -193,6 +193,7 @@ class DashboardController extends Controller
             ->when($provinsiId, function ($q) use ($provinsiId) {
                 $q->where('provinsi_id', $provinsiId);
             })
+            ->where('status', 'Bantuan Sudah Diterima')
             ->with([
                 'komoditas',
                 'provinsi'
@@ -243,6 +244,7 @@ class DashboardController extends Controller
             ->when($kabupatenId, function ($q) use ($kabupatenId) {
                 $q->where('kabupaten_id', $kabupatenId);
             })
+            ->where('status', 'Bantuan Sudah Diterima')
             ->with([
                 'provinsi',
                 'kabupaten',
@@ -490,6 +492,7 @@ return [
             $q->where('provinsi_id', $provinsiId);
         })
 
+        ->where('status', 'Bantuan Sudah Diterima')
         ->groupBy('provinsi_id')
         ->get()
         ->map(function ($item) use ($mapTargets) {
@@ -578,6 +581,7 @@ public function filterTable(Request $request)
         ->where('tahun', $tahun)
         ->when($provinsiId, fn($q) => $q->where('provinsi_id', $provinsiId))
         ->when($kabupatenId, fn($q) => $q->where('kabupaten_id', $kabupatenId))
+        ->where('status', 'Bantuan Sudah Diterima')
         ->with('komoditas')
         ->groupBy('komoditas_id')
         ->get();
@@ -590,6 +594,7 @@ public function filterTable(Request $request)
         )
         ->where('tahun', $tahun)
         ->when($provinsiId, fn($q) => $q->where('provinsi_id', $provinsiId))
+        ->where('status', 'Bantuan Sudah Diterima')
         ->with(['komoditas', 'provinsi'])
         ->groupBy('komoditas_id', 'provinsi_id')
         ->get();
@@ -617,6 +622,7 @@ public function filterTable(Request $request)
         ->where('tahun', $tahun)
         ->when($provinsiId, fn($q) => $q->where('provinsi_id', $provinsiId))
         ->when($kabupatenId, fn($q) => $q->where('kabupaten_id', $kabupatenId))
+        ->where('status', 'Bantuan Sudah Diterima')
         ->with(['provinsi', 'kabupaten'])
         ->groupBy('komoditas_id', 'provinsi_id', 'kabupaten_id')
         ->get();

@@ -1,4 +1,5 @@
 <div
+    id="komoditasTableWrapper"
     x-data="{ openProvinces: {} }"
     class="rounded-[18px] bg-white shadow-[0_6px_18px_rgba(0,0,0,0.08)]">
 

@@ -99,11 +99,12 @@
 
             <div class="flex h-[44px] gap-2">
 
-                <a
-                    href="{{ route('komoditas.show', $komoditas) }}"
+                <button
+                    type="button"
+                    id="btnResetFilterKomoditas"
                     class="flex flex-1 items-center justify-center rounded-[10px] border border-[#D4D4D4] bg-white text-[15px] font-semibold text-[#222] transition hover:bg-gray-100">
                     Reset
-                </a>
+                </button>
 
                 <button
                     type="submit"
@@ -173,6 +174,79 @@ document.addEventListener('change', function(e){
             });
 
     }
+
+});
+
+
+// ===============================
+// RENDER ULANG TABEL (hasil AJAX) + re-init Alpine
+// ===============================
+
+function renderKomoditasTable(html){
+
+    const oldEl = document.getElementById('komoditasTableWrapper');
+
+    if(!oldEl) return;
+
+    oldEl.outerHTML = html;
+
+    const newEl = document.getElementById('komoditasTableWrapper');
+
+    if(window.Alpine && newEl){
+        window.Alpine.initTree(newEl);
+    }
+
+}
+
+
+// ===============================
+// SUBMIT FILTER (AJAX, hanya update tabel)
+// ===============================
+
+document.addEventListener('submit', function(e){
+
+    if(e.target.id !== 'formFilterKomoditas') return;
+
+    e.preventDefault();
+
+    const params = new URLSearchParams(new FormData(e.target)).toString();
+
+    const url = "{{ route('komoditas.show', $komoditas) }}" + (params ? '?' + params : '');
+
+    fetch(url, {
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+        }
+    })
+        .then(response => response.text())
+        .then(html => {
+            renderKomoditasTable(html);
+        });
+
+});
+
+
+// ===============================
+// RESET FILTER (AJAX, hanya update tabel)
+// ===============================
+
+document.addEventListener('click', function(e){
+
+    if(!e.target.closest('#btnResetFilterKomoditas')) return;
+
+    document.getElementById('provinsiSelectKomoditas').value = '';
+    document.getElementById('kabupatenSelectKomoditas').innerHTML = `<option value="">Semua Kabupaten/Kota</option>`;
+    document.getElementById('kecamatanSelectKomoditas').innerHTML = `<option value="">Semua Kecamatan</option>`;
+
+    fetch("{{ route('komoditas.show', $komoditas) }}", {
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+        }
+    })
+        .then(response => response.text())
+        .then(html => {
+            renderKomoditasTable(html);
+        });
 
 });
 
