@@ -142,20 +142,15 @@ Sistem ini menyediakan dashboard interaktif untuk memantau perkembangan target d
 
 ---
 
-# 📂 Struktur Folder
+<div align="center">
 
-```text
-app/
-bootstrap/
-config/
-database/
-public/
-resources/
-│
-├── css/
-├── js/
-└── views/
-routes/
-storage/
-tests/
-vendor/
+# 🌱 SIMERAH
+
+### Sistem Informasi Monitoring dan Evaluasi Realisasi Hortikultura
+
+Direktorat Jenderal Hortikultura  
+Kementerian Pertanian Republik Indonesia
+
+**© 2026 Direktorat Jenderal Hortikultura. All Rights Reserved.**
+
+</div>
