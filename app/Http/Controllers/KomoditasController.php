@@ -16,7 +16,7 @@ class KomoditasController extends Controller
 
     public function show(Komoditas $komoditas, Request $request)
     {
-        $tahun = session('tahun', 2025);
+        $tahun = session('tahun') ?? 2025;
 
         $provinsiId = $request->provinsi;
         $kabupatenId = $request->kabupaten;

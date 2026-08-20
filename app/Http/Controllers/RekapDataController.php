@@ -16,7 +16,7 @@ class RekapDataController extends Controller
 {
     public function index(Request $request)
     {
-        $tahun = session('tahun', 2025);
+        $tahun = session('tahun') ?? 2025;
 
         $provinsiId = $request->provinsi;
         $kabupatenId = $request->kabupaten;
@@ -229,7 +229,7 @@ class RekapDataController extends Controller
      */
     public function getKecamatanRows(Request $request)
     {
-        $tahun = $request->tahun ?? session('tahun', 2025);
+        $tahun = $request->tahun ?? session('tahun') ?? 2025;
         $kabupatenId = $request->kabupaten_id;
         $komoditasIds = [1, 2, 3, 5, 7];
 
@@ -281,7 +281,7 @@ class RekapDataController extends Controller
      */
     public function getDesaRows(Request $request)
     {
-        $tahun = $request->tahun ?? session('tahun', 2025);
+        $tahun = $request->tahun ?? session('tahun') ?? 2025;
         $kecamatanId = $request->kecamatan_id;
         $komoditasIds = [1, 2, 3, 5, 7];
 

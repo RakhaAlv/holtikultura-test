@@ -20,7 +20,7 @@ class SetTahunSession
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->has('tahun')) {
+        if ($request->filled('tahun')) {
             session(['tahun' => $request->tahun]);
         }
 

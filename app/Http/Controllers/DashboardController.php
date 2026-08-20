@@ -26,11 +26,11 @@ class DashboardController extends Controller
 
     public function index()
     {
-        if (request()->has('tahun')) {
+        if (request()->filled('tahun')) {
             session(['tahun' => request('tahun')]);
         }
 
-        $tahun       = session('tahun', date('Y'));
+        $tahun       = session('tahun') ?? date('Y');
         $provinsiId  = request('provinsi');
         $kabupatenId = request('kabupaten');
 
@@ -71,7 +71,7 @@ class DashboardController extends Controller
 
     public function mapData()
     {
-        $tahun       = session('tahun', date('Y'));
+        $tahun       = session('tahun') ?? date('Y');
         $komoditasId = request('komoditas');
         $provinsiId  = request('provinsi');
 
@@ -109,7 +109,7 @@ class DashboardController extends Controller
 
     public function filterTable(Request $request)
     {
-        $tahun       = session('tahun', date('Y'));
+        $tahun       = session('tahun') ?? date('Y');
         $provinsiId  = $request->provinsi;
         $kabupatenId = $request->kabupaten;
 
