@@ -6,11 +6,11 @@
 <div class="overflow-x-auto py-3">
 
     <div
-        class="grid grid-flow-col gap-8 min-w-full"
+        class="grid gap-8"
         style="
-            grid-auto-columns: minmax(
-                calc((100% - 8rem) / 5),
-                calc((100% - 8rem) / 5)
+            grid-template-columns: repeat(
+                {{ $count }},
+                minmax(0, 1fr)
             );
         "
     >
@@ -46,10 +46,8 @@
 
                 </div>
 
-
                 {{-- Target --}}
                 <div class="mt-6">
-
                     <p class="dashboard-card-label">
                         Target
                     </p>
@@ -57,13 +55,10 @@
                     <h3 class="dashboard-card-value">
                         {{ $commodity['target'] }}
                     </h3>
-
                 </div>
-
 
                 {{-- Realisasi --}}
                 <div class="mt-5">
-
                     <p class="dashboard-card-label">
                         Realisasi
                     </p>
@@ -71,9 +66,7 @@
                     <h3 class="dashboard-card-value-success">
                         {{ $commodity['realisasi'] }}
                     </h3>
-
                 </div>
-
 
                 {{-- Progress --}}
                 <div class="mt-6">
@@ -89,7 +82,6 @@
                         </span>
 
                     </div>
-
 
                     <div class="dashboard-progress">
 
